@@ -17,9 +17,9 @@ namespace POP_SF7.Windows
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class LanguageCourseTypeAddEdit : Window
     {
-        public Window1()
+        public LanguageCourseTypeAddEdit()
         {
             InitializeComponent();
         }
