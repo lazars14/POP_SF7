@@ -1,0 +1,27 @@
+﻿<Window x:Class="POP_SF7.Windows.PaymentAddEdit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POP_SF7.Windows"
+        mc:Ignorable="d"
+        Title="PaymentAddEdit" Height="300" Width="309.221">
+    <Grid>
+        <Label x:Name="paymentIdlbl" Content="Id uplate" HorizontalAlignment="Left" Height="25" Margin="13,11,0,0" VerticalAlignment="Top" Width="74"/>
+        <TextBox x:Name="paymentIdtb" HorizontalAlignment="Left" Height="25" Margin="92,11,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="193"/>
+        <Label x:Name="paymentCourselbl" Content="Id kursa" HorizontalAlignment="Left" Height="25" Margin="12,45,0,0" VerticalAlignment="Top" Width="74"/>
+        <TextBox x:Name="paymentCoursetb" HorizontalAlignment="Left" Height="25" Margin="91,45,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="163"/>
+        <Button x:Name="paymentCoursebtn" Content="..." HorizontalAlignment="Left" Height="25" Margin="261,45,0,0" VerticalAlignment="Top" Width="24"/>
+        <Label x:Name="paymentStudentIdlbl" Content="Id ucenika" HorizontalAlignment="Left" Height="25" Margin="12,82,0,0" VerticalAlignment="Top" Width="74"/>
+        <TextBox x:Name="paymentStudentIdtb" HorizontalAlignment="Left" Height="25" Margin="91,82,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="163"/>
+        <Button x:Name="paymentStudentIdbtn" Content="..." HorizontalAlignment="Left" Height="25" Margin="261,82,0,0" VerticalAlignment="Top" Width="24"/>
+        <Label x:Name="paymentAmountlbl" Content="Iznos uplate" HorizontalAlignment="Left" Height="25" Margin="13,121,0,0" VerticalAlignment="Top" Width="74"/>
+        <TextBox x:Name="paymentAmounttb" HorizontalAlignment="Left" Height="25" Margin="92,121,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="193"/>
+        <Label x:Name="paymentDeletedlbl" Content="Obrisana" HorizontalAlignment="Left" Height="25" Margin="12,154,0,0" VerticalAlignment="Top" Width="74"/>
+        <CheckBox x:Name="paymentDeletedcb" Content="" HorizontalAlignment="Left" Height="17" Margin="91,162,0,0" VerticalAlignment="Top" Width="184" Checked="checkBox_Checked"/>
+        <Button x:Name="okbtn" Content="OK" HorizontalAlignment="Left" Height="25" Margin="50,192,0,0" VerticalAlignment="Top" Width="93"/>
+        <Button x:Name="cancelbtn" Content="Cancel" HorizontalAlignment="Left" Height="25" Margin="161,192,0,0" VerticalAlignment="Top" Width="93"/>
+        
+
+    </Grid>
+</Window>

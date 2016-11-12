@@ -67,11 +67,11 @@
     <Compile Include="School\Language.cs" />
     <Compile Include="School\Payment.cs" />
     <Compile Include="School\School.cs" />
-    <Compile Include="Windows\LanguageAddEdit.xaml.cs">
-      <DependentUpon>LanguageAddEdit.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows\LanguageCourseTypeAddEdit.xaml.cs">
       <DependentUpon>LanguageCourseTypeAddEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\PaymentAddEdit.xaml.cs">
+      <DependentUpon>PaymentAddEdit.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -88,11 +88,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Windows\LanguageAddEdit.xaml">
+    <Page Include="Windows\LanguageCourseTypeAddEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\LanguageCourseTypeAddEdit.xaml">
+    <Page Include="Windows\PaymentAddEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
