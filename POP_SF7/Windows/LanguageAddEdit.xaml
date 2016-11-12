@@ -1,0 +1,17 @@
+﻿<Window x:Class="POP_SF7.Windows.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POP_SF7.Windows"
+        mc:Ignorable="d"
+        Title="LanguageAddEdit" Height="152.942" Width="300">
+    <Grid>
+        <Label x:Name="languageNamelbl" Content="Naziv jezika" HorizontalAlignment="Left" Height="25" Margin="10,10,0,0" VerticalAlignment="Top" Width="74"/>
+        <TextBox x:Name="languageNametb" HorizontalAlignment="Left" Height="25" Margin="89,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="193"/>
+        <Label x:Name="languageDeletedlbl" Content="Obrisan" HorizontalAlignment="Left" Height="25" Margin="10,49,0,0" VerticalAlignment="Top" Width="74"/>
+        <CheckBox x:Name="languageDeletedcb" Content="" HorizontalAlignment="Left" Height="17" Margin="89,57,0,0" VerticalAlignment="Top" Width="184" Checked="checkBox_Checked"/>
+        <Button x:Name="okbtn" Content="OK" HorizontalAlignment="Left" Height="25" Margin="48,87,0,0" VerticalAlignment="Top" Width="93"/>
+        <Button x:Name="cancelbtn" Content="Cancel" HorizontalAlignment="Left" Height="25" Margin="159,87,0,0" VerticalAlignment="Top" Width="93"/>
+    </Grid>
+</Window>
