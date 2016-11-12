@@ -55,6 +55,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\Search.cs" />
+    <Compile Include="Data\StudentCRUD.cs" />
+    <Compile Include="Data\TeacherCRUD.cs" />
+    <Compile Include="Data\UserCRUD.cs" />
+    <Compile Include="People\Student.cs" />
+    <Compile Include="People\Teacher.cs" />
+    <Compile Include="People\User.cs" />
+    <Compile Include="School\Course.cs" />
+    <Compile Include="School\CourseType.cs" />
+    <Compile Include="School\Language.cs" />
+    <Compile Include="School\Payment.cs" />
+    <Compile Include="School\School.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -63,12 +75,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Data\CourseCRUD.cs" />
+    <Compile Include="Data\CourseTypeCRUD.cs" />
+    <Compile Include="Data\LanguageCRUD.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\PaymentCRUD.cs" />
+    <Compile Include="People\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
