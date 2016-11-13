@@ -17,11 +17,11 @@
         <Button x:Name="paymentStudentIdbtn" Content="..." HorizontalAlignment="Left" Height="25" Margin="261,82,0,0" VerticalAlignment="Top" Width="24"/>
         <Label x:Name="paymentAmountlbl" Content="Iznos uplate" HorizontalAlignment="Left" Height="25" Margin="13,121,0,0" VerticalAlignment="Top" Width="74"/>
         <TextBox x:Name="paymentAmounttb" HorizontalAlignment="Left" Height="25" Margin="92,121,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="193"/>
-        <Label x:Name="paymentDeletedlbl" Content="Obrisana" HorizontalAlignment="Left" Height="25" Margin="12,154,0,0" VerticalAlignment="Top" Width="74"/>
-        <CheckBox x:Name="paymentDeletedcb" Content="" HorizontalAlignment="Left" Height="17" Margin="91,162,0,0" VerticalAlignment="Top" Width="184" Checked="checkBox_Checked"/>
-        <Button x:Name="okbtn" Content="OK" HorizontalAlignment="Left" Height="25" Margin="50,192,0,0" VerticalAlignment="Top" Width="93"/>
-        <Button x:Name="cancelbtn" Content="Cancel" HorizontalAlignment="Left" Height="25" Margin="161,192,0,0" VerticalAlignment="Top" Width="93"/>
-        
-
+        <Label x:Name="paymentDatelbl" Content="Datum" HorizontalAlignment="Left" Height="25" Margin="13,159,0,0" VerticalAlignment="Top" Width="74"/>
+        <DatePicker HorizontalAlignment="Left" Height="25" Margin="91,159,0,0" VerticalAlignment="Top" Width="194"/>
+        <Label x:Name="paymentDeletedlbl" Content="Obrisana" HorizontalAlignment="Left" Height="25" Margin="13,196,0,0" VerticalAlignment="Top" Width="74"/>
+        <CheckBox x:Name="paymentDeletedcb" Content="" HorizontalAlignment="Left" Height="17" Margin="91,204,0,0" VerticalAlignment="Top" Width="184" Checked="checkBox_Checked"/>
+        <Button x:Name="okbtn" Content="OK" HorizontalAlignment="Left" Height="25" Margin="50,234,0,0" VerticalAlignment="Top" Width="93"/>
+        <Button x:Name="cancelbtn" Content="Cancel" HorizontalAlignment="Left" Height="25" Margin="161,234,0,0" VerticalAlignment="Top" Width="93"/>
     </Grid>
 </Window>

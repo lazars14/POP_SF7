@@ -67,6 +67,9 @@
     <Compile Include="School\Language.cs" />
     <Compile Include="School\Payment.cs" />
     <Compile Include="School\School.cs" />
+    <Compile Include="Windows\CourseAddEdit.xaml.cs">
+      <DependentUpon>CourseAddEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\LanguageCourseTypeAddEdit.xaml.cs">
       <DependentUpon>LanguageCourseTypeAddEdit.xaml</DependentUpon>
     </Compile>
@@ -88,6 +91,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\CourseAddEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\LanguageCourseTypeAddEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
