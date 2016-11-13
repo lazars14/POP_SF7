@@ -76,6 +76,12 @@
     <Compile Include="Windows\PaymentAddEdit.xaml.cs">
       <DependentUpon>PaymentAddEdit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\PersonAddEdit.xaml.cs">
+      <DependentUpon>PersonAddEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SchoolEdit.xaml.cs">
+      <DependentUpon>SchoolEdit.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -100,6 +106,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\PaymentAddEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\PersonAddEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\SchoolEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
