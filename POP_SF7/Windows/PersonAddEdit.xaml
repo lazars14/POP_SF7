@@ -5,41 +5,80 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF7.Windows"
         mc:Ignorable="d"
-        Title="PersonAddEdit" Height="431.933" Width="321.008">
+        Title="PersonAddEdit" Height="845.933" Width="329.008">
     <Grid>
-        <Label x:Name="idlbl" Content="Id" HorizontalAlignment="Left" Height="25" Margin="13,11,0,0" VerticalAlignment="Top" Width="74"/>
-        <TextBox x:Name="idtb" HorizontalAlignment="Left" Height="25" Margin="110,11,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="193"/>
-        <Label x:Name="namelbl" Content="Ime" HorizontalAlignment="Left" Height="25" Margin="13,41,0,0" VerticalAlignment="Top" Width="74"/>
-        <TextBox x:Name="nametb" HorizontalAlignment="Left" Height="25" Margin="110,41,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="193"/>
-        <Label x:Name="lastnamelbl" Content="Prezime" HorizontalAlignment="Left" Height="25" Margin="13,71,0,0" VerticalAlignment="Top" Width="74"/>
-        <TextBox x:Name="lastnametb" HorizontalAlignment="Left" Height="25" Margin="110,71,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="193"/>
-        <Label x:Name="jmbglbl" Content="JMBG" HorizontalAlignment="Left" Height="25" Margin="13,101,0,0" VerticalAlignment="Top" Width="74"/>
-        <TextBox x:Name="jmbgtb" HorizontalAlignment="Left" Height="25" Margin="110,101,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="193"/>
-        <Label x:Name="addresslbl" Content="Adresa" HorizontalAlignment="Left" Height="25" Margin="13,131,0,0" VerticalAlignment="Top" Width="74"/>
-        <TextBox x:Name="addresstb" HorizontalAlignment="Left" Height="25" Margin="110,131,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="193"/>
-        <Label x:Name="deletedlbl" Content="Obrisan" HorizontalAlignment="Left" Height="25" Margin="13,166,0,0" VerticalAlignment="Top" Width="74"/>
-        <CheckBox x:Name="deletedcb" Content="" HorizontalAlignment="Left" Height="17" Margin="109,174,0,0" VerticalAlignment="Top" Width="184"/>
-        <Button x:Name="okbtn" Content="OK" HorizontalAlignment="Left" Height="25" Margin="42,366,0,0" VerticalAlignment="Top" Width="93"/>
-        <Button x:Name="cancelbtn" Content="Cancel" HorizontalAlignment="Left" Height="25" Margin="153,366,0,0" VerticalAlignment="Top" Width="93"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="210"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="110"/>
+            <RowDefinition Height="110"/>
+            <RowDefinition Height="110"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="descriptionlbl" Text="Izmena podataka o skoli" TextAlignment="Center" Grid.ColumnSpan="2" Grid.Row="0" Margin="10, 15, 5, 10"/>
+
+        <Label x:Name="idlbl" Content="Id" Grid.Row="1" Grid.Column="0" Margin="10,0,0,10"/>
+        <TextBox x:Name="idtb" IsReadOnly="True" Grid.Row="1" Grid.Column="1" Margin="10,2,0,8"/>
+
+        <Label x:Name="namelbl" Content="Ime" Grid.Row="2" Grid.Column="0" Margin="10,0,0,10"/>
+        <TextBox x:Name="nametb" Grid.Row="2" Grid.Column="1" Margin="10,0,0,10"/>
+
+        <Label x:Name="lastnamelbl" Content="Prezime" Grid.Row="3" Grid.Column="0" Margin="10,0,0,10"/>
+        <TextBox x:Name="lastnametb" Grid.Row="3" Grid.Column="1" Margin="10,0,0,10"/>
+
+        <Label x:Name="jmbglbl" Content="JMBG" Grid.Row="4" Grid.Column="0" Margin="10,0,0,10"/>
+        <TextBox x:Name="jmbgtb" Grid.Row="4" Grid.Column="1" Margin="10,0,0,10"/>
+
+        <Label x:Name="addresslbl" Content="Adresa" Grid.Row="5" Grid.Column="0" Margin="10,0,0,10"/>
+        <TextBox x:Name="addresstb" Grid.Row="5" Grid.Column="1" Margin="10,0,0,10"/>
+
+        <Label x:Name="deletedlbl" Content="Obrisan" Grid.Row="6" Grid.Column="0" Margin="10,0,0,10"/>
+        <CheckBox x:Name="deletedcb" Grid.Row="6" Grid.Column="1" Margin="10,7,0,10"/>
 
         <!-- User -->
-        <Label x:Name="usernamelbl" Content="Korisnicko ime" HorizontalAlignment="Left" Height="25" Margin="13,199,0,0" VerticalAlignment="Top" Width="92"/>
-        <TextBox x:Name="usernametb" HorizontalAlignment="Left" Height="25" Margin="110,199,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="193"/>
-        <Label x:Name="passwordlbl" Content="Lozinka" HorizontalAlignment="Left" Height="25" Margin="13,229,0,0" VerticalAlignment="Top" Width="74"/>
-        <TextBox x:Name="passwordtb" HorizontalAlignment="Left" Height="25" Margin="110,229,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="193"/>
-        <Label x:Name="rolelbl" Content="Uloga" HorizontalAlignment="Left" Height="29" Margin="13,259,0,0" VerticalAlignment="Top" Width="74"/>
-        <RadioButton x:Name="administratorrb" Content="Administrator" HorizontalAlignment="Left" Height="16" Margin="109,265,0,0" VerticalAlignment="Top" Width="90"/>
-        <RadioButton x:Name="employeerb" Content="Zaposleni" HorizontalAlignment="Left" Height="16" Margin="212,265,0,0" VerticalAlignment="Top" Width="91"/>
-        
-        <!-- Teacher and Student -->
-        <!-- Ovde ubacujem listu sa kursevima, potrebno je i za ucenika i ucitelja, samo cu popuniti podatke po switch-u -->
-        
-        <!-- Teacher -->
+        <Label x:Name="usernamelbl" Content="Korisnicko ime" Grid.Row="7" Grid.Column="0" Margin="10,0,0,10"/>
+        <TextBox x:Name="usernametb" Grid.Row="7" Grid.Column="1" Margin="10,0,0,10"/>
 
+        <Label x:Name="passwordlbl" Content="Lozinka" Grid.Row="8" Grid.Column="0" Margin="10,0,0,10"/>
+        <TextBox x:Name="passwordtb" Grid.Row="8" Grid.Column="1" Margin="10,0,0,10"/>
+
+        <Label x:Name="rolelbl" Content="Uloga" Grid.Row="9" Grid.Column="0" Margin="10,0,0,10"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="9" Grid.Column="1" Margin="10,7,0,10">
+            <RadioButton x:Name="administratorrb" Content="Administrator"/>
+            <RadioButton x:Name="employeerb" Content="Zaposleni" Margin="15,0,0,0"/>
+        </StackPanel>
+
+        <!-- Teacher and Student -->
+        <GroupBox Header="Kursevi" Grid.Row="10" Grid.ColumnSpan="2" Margin="10,0,0,10">
+            <DataGrid x:Name="coursesdg" HorizontalAlignment="Left" Height="69" Margin="52,6,-2,0" VerticalAlignment="Top" Width="225"/>
+        </GroupBox>
+
+        <!-- Teacher -->
+        <GroupBox Header="Jezici" Grid.Row="11" Grid.ColumnSpan="2" Margin="10,0,0,10">
+
+        </GroupBox>
 
         <!-- Student -->
+        <GroupBox Header="Uplate" Grid.Row="12" Grid.ColumnSpan="2" Margin="10,0,0,10">
 
+        </GroupBox>
 
+        <StackPanel Orientation="Horizontal" Grid.Row="13" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,10,0,0">
+            <Button x:Name="okbtn" Content="OK" Width="70" Height="30"/>
+            <Button x:Name="cancelbtn" Content="Cancel" Width="70" Height="30" Margin="30,0,0,0"/>
+        </StackPanel>
 
     </Grid>
 </Window>

@@ -19,6 +19,9 @@ namespace POP_SF7.Windows
     /// </summary>
     public partial class PaymentAddEdit : Window
     {
+        public string labelAddPayment = "Dodavanje nove uplate";
+        public string labelEditPayment = "Izmena postojece uplate";
+
         public PaymentAddEdit()
         {
             InitializeComponent();

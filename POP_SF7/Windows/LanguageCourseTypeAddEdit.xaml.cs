@@ -19,6 +19,11 @@ namespace POP_SF7.Windows
     /// </summary>
     public partial class LanguageCourseTypeAddEdit : Window
     {
+        public string labelAddLanguage = "Dodavanje novog jezika";
+        public string labelEditLanguage = "Izmena postojeceg jezika";
+        public string labelAddCourseType = "Dodavanje novog tipa kursa";
+        public string labelEditCourseType = "Izmena postojeceg tipa kursa";
+
         public LanguageCourseTypeAddEdit()
         {
             InitializeComponent();

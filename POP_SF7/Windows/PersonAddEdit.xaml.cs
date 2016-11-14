@@ -19,9 +19,17 @@ namespace POP_SF7.Windows
     /// </summary>
     public partial class PersonAddEdit : Window
     {
+        public string labelAddStudent = "Dodavanje novog ucenika";
+        public string labelEditStudent = "Izmena postojeceg ucenika";
+        public string labelAddTeacher = "Dodavanje novog nastavnika";
+        public string labelAddTeacher = "Izmena postojeceg nastavnika";
+        public string labelAddUser = "Dodavanje novog korisnika";
+        public string labelAddUser = "Izmena postojeceg korisnika";
+
         public PersonAddEdit()
         {
             InitializeComponent();
         }
+
     }
 }
