@@ -84,7 +84,7 @@ namespace POP_SF7
                         }
                         break;
                     case "Jmbg":
-                        if (param.Equals(teacher.JMBG))
+                        if (param.Equals(teacher.Jmbg))
                         {
                             results.Add(teacher.ToString());
                         }

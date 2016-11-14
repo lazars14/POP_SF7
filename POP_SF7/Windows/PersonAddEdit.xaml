@@ -18,7 +18,7 @@
         <Label x:Name="addresslbl" Content="Adresa" HorizontalAlignment="Left" Height="25" Margin="13,131,0,0" VerticalAlignment="Top" Width="74"/>
         <TextBox x:Name="addresstb" HorizontalAlignment="Left" Height="25" Margin="110,131,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="193"/>
         <Label x:Name="deletedlbl" Content="Obrisan" HorizontalAlignment="Left" Height="25" Margin="13,166,0,0" VerticalAlignment="Top" Width="74"/>
-        <CheckBox x:Name="deletedcb" Content="" HorizontalAlignment="Left" Height="17" Margin="109,174,0,0" VerticalAlignment="Top" Width="184" Checked="checkBox_Checked"/>
+        <CheckBox x:Name="deletedcb" Content="" HorizontalAlignment="Left" Height="17" Margin="109,174,0,0" VerticalAlignment="Top" Width="184"/>
         <Button x:Name="okbtn" Content="OK" HorizontalAlignment="Left" Height="25" Margin="42,366,0,0" VerticalAlignment="Top" Width="93"/>
         <Button x:Name="cancelbtn" Content="Cancel" HorizontalAlignment="Left" Height="25" Margin="153,366,0,0" VerticalAlignment="Top" Width="93"/>
 

@@ -1,0 +1,29 @@
+﻿<Window x:Class="POP_SF7.Windows.MainMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POP_SF7.Windows"
+        mc:Ignorable="d"
+        Icon="../Images/logoIcon16.png"
+        Title="Skola jezika " Height="300" Width="300">
+    <Grid>
+        <Menu x:Name="mainMenu" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="292">
+            <MenuItem x:Name="schoolMenu" Header="Skola">
+                <MenuItem x:Name="editSchoolData" Header="Izmena podataka o skoli"/>
+                <MenuItem x:Name="payments" Header="Evidencija uplata"/>
+            </MenuItem>
+            <MenuItem x:Name="coursesMenu" Header="Kursevi">
+                <MenuItem x:Name="languages" Header="Evidencija jezika"/>
+                <MenuItem x:Name="courseTypes" Header="Evidencija tipova kurseva"/>
+                <MenuItem x:Name="courses" Header="Evidencija kurseva"/>
+            </MenuItem>
+            <MenuItem x:Name="peopleMenu" Header="Osobe">
+                <MenuItem x:Name="students" Header="Evidencija ucenika"/>
+                <MenuItem x:Name="teachers" Header="Evidencija nastavnika"/>
+                <MenuItem x:Name="users" Header="Evidencija korisnika"/>
+            </MenuItem>
+        </Menu>
+        <Image x:Name="logoimg" Source="../Images/logo.png" HorizontalAlignment="Left" Width="250" Margin="17,36,0,19"/>
+    </Grid>
+</Window>

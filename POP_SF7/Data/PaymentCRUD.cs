@@ -70,16 +70,16 @@ namespace POP_SF7
                 switch (param)
                 {
                     case "Kurs":
-                        if(payment.CourseId == userInput)
+                        /*if(payment.CourseId == userInput)
                         {
                             results.Add(payment.ToString());
-                        }
+                        }*/
                         break;
                     case "Ucenik":
-                        if(payment.StudentId == userInput)
+                        /*if(payment.Student == userInput)
                         {
                             results.Add(payment.ToString());
-                        }
+                        }*/
                         break;
                 }
             }

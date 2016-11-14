@@ -12,7 +12,7 @@
         <Label x:Name="languageNamelbl" Content="Naziv jezika" HorizontalAlignment="Left" Height="25" Margin="9,50,0,0" VerticalAlignment="Top" Width="74"/>
         <TextBox x:Name="languageNametb" HorizontalAlignment="Left" Height="25" Margin="88,50,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="193"/>
         <Label x:Name="languageDeletedlbl" Content="Obrisan" HorizontalAlignment="Left" Height="25" Margin="9,89,0,0" VerticalAlignment="Top" Width="74"/>
-        <CheckBox x:Name="languageDeletedcb" Content="" HorizontalAlignment="Left" Height="17" Margin="88,97,0,0" VerticalAlignment="Top" Width="184" Checked="checkBox_Checked"/>
+        <CheckBox x:Name="languageDeletedcb" Content="" HorizontalAlignment="Left" Height="17" Margin="88,97,0,0" VerticalAlignment="Top" Width="184"/>
         <Button x:Name="okbtn" Content="OK" HorizontalAlignment="Left" Height="25" Margin="47,127,0,0" VerticalAlignment="Top" Width="93"/>
         <Button x:Name="cancelbtn" Content="Cancel" HorizontalAlignment="Left" Height="25" Margin="158,127,0,0" VerticalAlignment="Top" Width="93"/>
     </Grid>

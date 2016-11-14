@@ -20,7 +20,7 @@
         <Label x:Name="paymentDatelbl" Content="Datum" HorizontalAlignment="Left" Height="25" Margin="13,159,0,0" VerticalAlignment="Top" Width="74"/>
         <DatePicker HorizontalAlignment="Left" Height="25" Margin="91,159,0,0" VerticalAlignment="Top" Width="194"/>
         <Label x:Name="paymentDeletedlbl" Content="Obrisana" HorizontalAlignment="Left" Height="25" Margin="13,196,0,0" VerticalAlignment="Top" Width="74"/>
-        <CheckBox x:Name="paymentDeletedcb" Content="" HorizontalAlignment="Left" Height="17" Margin="91,204,0,0" VerticalAlignment="Top" Width="184" Checked="checkBox_Checked"/>
+        <CheckBox x:Name="paymentDeletedcb" Content="" HorizontalAlignment="Left" Height="17" Margin="91,204,0,0" VerticalAlignment="Top" Width="184"/>
         <Button x:Name="okbtn" Content="OK" HorizontalAlignment="Left" Height="25" Margin="50,234,0,0" VerticalAlignment="Top" Width="93"/>
         <Button x:Name="cancelbtn" Content="Cancel" HorizontalAlignment="Left" Height="25" Margin="161,234,0,0" VerticalAlignment="Top" Width="93"/>
     </Grid>
