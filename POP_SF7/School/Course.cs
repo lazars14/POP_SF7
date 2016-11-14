@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 
 namespace POP_SF7
 {
@@ -12,9 +13,11 @@ namespace POP_SF7
         public double Price { get; set; }
         public List<Student> ListOfStudents { get; set; }
         public Teacher Teacher { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public bool Deleted { get; set; }
 
-        public Course(int courseId, Language language, CourseType courseType, double price, List<Student> listOfStudents, Teacher teacher, bool deleted)
+        public Course(int courseId, Language language, CourseType courseType, double price, List<Student> listOfStudents, Teacher teacher, DateTime startDate, DateTime endDate, bool deleted)
         {
             Id = courseId;
             Language = language;
@@ -22,6 +25,8 @@ namespace POP_SF7
             Price = price;
             ListOfStudents = listOfStudents;
             Teacher = teacher;
+            StartDate = startDate;
+            EndDate = endDate;
             Deleted = deleted;
         }
     }
