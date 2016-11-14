@@ -5,15 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF7.Windows"
         mc:Ignorable="d"
-        Title="LanguageCourseTypeAddEdit" Height="199.18" Width="300">
+        Title="LanguageCourseTypeAddEdit" Height="262.444" Width="309.557">
     <Grid>
-        <Label x:Name="languageIdlbl" Content="id jezika" HorizontalAlignment="Left" Height="25" Margin="10,16,0,0" VerticalAlignment="Top" Width="74"/>
-        <TextBox x:Name="languageIdtb" HorizontalAlignment="Left" Height="25" Margin="89,16,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="193"/>
-        <Label x:Name="languageNamelbl" Content="Naziv jezika" HorizontalAlignment="Left" Height="25" Margin="9,50,0,0" VerticalAlignment="Top" Width="74"/>
-        <TextBox x:Name="languageNametb" HorizontalAlignment="Left" Height="25" Margin="88,50,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="193"/>
-        <Label x:Name="languageDeletedlbl" Content="Obrisan" HorizontalAlignment="Left" Height="25" Margin="9,89,0,0" VerticalAlignment="Top" Width="74"/>
-        <CheckBox x:Name="languageDeletedcb" Content="" HorizontalAlignment="Left" Height="17" Margin="88,97,0,0" VerticalAlignment="Top" Width="184"/>
-        <Button x:Name="okbtn" Content="OK" HorizontalAlignment="Left" Height="25" Margin="47,127,0,0" VerticalAlignment="Top" Width="93"/>
-        <Button x:Name="cancelbtn" Content="Cancel" HorizontalAlignment="Left" Height="25" Margin="158,127,0,0" VerticalAlignment="Top" Width="93"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="75"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="descriptionlbl" Text="popuniti" TextAlignment="Center" Grid.ColumnSpan="2" Grid.Row="0" Margin="10, 15, 5, 10"/>
+        <Label x:Name="languageIdlbl" Content="Id" Grid.Row="1" Grid.Column="0" Margin="10,0,0,10"/>
+        <TextBox x:Name="languageIdtb" Grid.Row="1" Grid.Column="1" Margin="0,0,0,10"/>
+        <Label x:Name="languageNamelbl" Content="Naziv" Grid.Row="2" Grid.Column="0" Margin="10,0,0,10"/>
+        <TextBox x:Name="languageNametb" Grid.Row="2" Grid.Column="1" Margin="0,0,0,10"/>
+        <Label x:Name="languageDeletedlbl" Content="Obrisano" Grid.Row="3" Grid.Column="0" Margin="10,0,0,10"/>
+        <CheckBox x:Name="languageDeletedcb" Content="" Grid.Row="3" Grid.Column="1" Margin="0,7,0,0"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
+            <Button x:Name="okbtn" Content="OK" Width="70" Height="30"/>
+            <Button x:Name="cancelbtn" Content="Cancel" Width="70" Height="30" Margin="30,0,0,0"/>
+        </StackPanel>
     </Grid>
 </Window>
