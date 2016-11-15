@@ -3,8 +3,6 @@ using System;
 
 namespace POP_SF7
 {
-    public enum CourseLevel { Begginer, Intermediate, Advanced }
-
     class Course
     {
         public int Id { get; set; }

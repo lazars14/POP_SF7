@@ -38,6 +38,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -63,6 +64,11 @@
     <Compile Include="People\Student.cs" />
     <Compile Include="People\Teacher.cs" />
     <Compile Include="People\User.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="School\Course.cs" />
     <Compile Include="School\CourseType.cs" />
     <Compile Include="School\Language.cs" />
@@ -73,6 +79,9 @@
     </Compile>
     <Compile Include="Windows\LanguageCourseTypeAddEdit.xaml.cs">
       <DependentUpon>LanguageCourseTypeAddEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\LanguagesCourseTypesMenu.xaml.cs">
+      <DependentUpon>LanguagesCourseTypesMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
@@ -109,6 +118,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\LanguagesCourseTypesMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\MainMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -132,18 +145,13 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
@@ -157,12 +165,8 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\logoIcon32.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\logoIcon16.png" />
+    <Resource Include="Images\logoIcon32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

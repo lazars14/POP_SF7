@@ -15,14 +15,14 @@ using System.Windows.Shapes;
 namespace POP_SF7.Windows
 {
     /// <summary>
-    /// Interaction logic for CourseAddEdit.xaml
+    /// Interaction logic for LanguagesCourseTypesMenu.xaml
     /// </summary>
-    public partial class CourseAddEdit : Window
+    public partial class LanguagesCourseTypesMenu : Window
     {
-        public string labelCourseAdd = "Dodavanje novog kursa";
-        public string labelCourseEdit = "Izmena postojeceg kursa";
+        public string languagesLabel = "Jezici";
+        public string courseTypesLabel = "Tipovi kurseva";
 
-        public CourseAddEdit()
+        public LanguagesCourseTypesMenu()
         {
             InitializeComponent();
         }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF7.Windows"
         mc:Ignorable="d"
-        Title="SchoolEdit" Height="471.4" Width="320">
+        Title="@{POP_SF7.Properties.Resources.WindowsTitle}" Height="471.4" Width="320" Icon="/POP_SF7;component/Images/logoIcon16.png">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="85"/>
