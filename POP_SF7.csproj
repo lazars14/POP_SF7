@@ -92,6 +92,9 @@
     <Compile Include="Windows\PaymentAddEdit.xaml.cs">
       <DependentUpon>PaymentAddEdit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\PaymentMenu.xaml.cs">
+      <DependentUpon>PaymentMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\PersonAddEdit.xaml.cs">
       <DependentUpon>PersonAddEdit.xaml</DependentUpon>
     </Compile>
@@ -134,6 +137,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\PaymentAddEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\PaymentMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

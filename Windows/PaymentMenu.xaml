@@ -1,39 +1,41 @@
-﻿<Window x:Class="POP_SF7.Windows.CourseMenu"
+﻿<Window x:Class="POP_SF7.Windows.PaymentMenu"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF7.Windows"
         mc:Ignorable="d"
-        Title="CourseMenu" Height="460.184" Width="817.867">
+        Title="PaymentMenu" Height="401.681" Width="773.109">
     <Grid>
-        <TextBox x:Name="coursestb" HorizontalAlignment="Left" Height="23" Margin="9,10,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="Kursevi" VerticalAlignment="Top" Width="791"/>
-        <DataGrid x:Name="coursesdg" HorizontalAlignment="Left" Height="149" Margin="9,38,0,0" VerticalAlignment="Top" Width="717"/>
-        <StackPanel HorizontalAlignment="Left" Height="149" Margin="742,38,0,0" VerticalAlignment="Top" Width="58">
+        <TextBox x:Name="paymentstb" HorizontalAlignment="Left" Height="23" Margin="9,10,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="Uplate" VerticalAlignment="Top" Width="739"/>
+        <DataGrid x:Name="paymentsdg" HorizontalAlignment="Left" Height="149" Margin="9,38,0,0" VerticalAlignment="Top" Width="666"/>
+        <StackPanel HorizontalAlignment="Left" Height="149" Margin="690,38,0,0" VerticalAlignment="Top" Width="58">
             <Button x:Name="addbtn" Content="Dodaj" Height="30" Margin="0,20,0,0"/>
             <Button x:Name="editbtn" Content="Izmeni" Height="30" Margin="0,10"/>
             <Button x:Name="deletebtn" Content="Obrisi" Height="30"/>
         </StackPanel>
 
-        <GroupBox Header="Sortiranje" HorizontalAlignment="Left" Height="49" Margin="12,202,0,0" VerticalAlignment="Top" Width="788">
+        <GroupBox Header="Sortiranje" HorizontalAlignment="Left" Height="123" Margin="332,204,0,0" VerticalAlignment="Top" Width="320">
             <Grid>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Redosled"/>
                     <RadioButton x:Name="sortAscrb" GroupName="sortOrder" Content="Rastuci" Margin="5,7,5,0"/>
                     <RadioButton x:Name="sortDescrb" GroupName="sortOrder" Content="Opadajuci" Margin="5,7,5,0"/>
-
-                    <Label Content="Kriterijum" Margin="30,0,0,0"/>
-                    <RadioButton x:Name="idrb" GroupName="sortCriteria" Content="Id" Margin="5,7,5,0"/>
-                    <RadioButton x:Name="pricerb" GroupName="sortCriteria" Content="Cena" Margin="5,7,5,0"/>
-                    <RadioButton x:Name="numberOfStudentsrb" GroupName="sortCriteria" Content="Broj ucenika" Margin="5,7,5,0"/>
-                    <RadioButton x:Name="startDaterb" GroupName="sortCriteria" Content="Pocetni datum" Margin="5,7,5,0"/>
-                    <RadioButton x:Name="endDaterb" GroupName="sortCriteria" Content="Zavrsni datum" Margin="5,7,5,0"/>
-                    <Button x:Name="sortbtn" Content="Sortiraj" Width="60" Margin="15,2,0,2"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
+                    <Label Content="Kriterijum"/>
+                    <RadioButton x:Name="idrb" GroupName="sortCriteria" Content="Id" Margin="3,7,5,0"/>
+                    <RadioButton x:Name="amountrb" GroupName="sortCriteria" Content="Cena" Margin="5,7,5,0"/>
+                    <RadioButton x:Name="studentidrb" GroupName="sortCriteria" Content="Id ucenika" Margin="5,7,5,0"/>
+                    <RadioButton x:Name="daterb" GroupName="sortCriteria" Content="Datum" Margin="5,7,5,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,60,0,0">
+                    <Button x:Name="sortbtn" Content="Sortiraj" Width="60" Margin="120,10,0,5"/>
                 </StackPanel>
             </Grid>
         </GroupBox>
 
-        <GroupBox x:Name="coursesgb" Header="Pretraga" HorizontalAlignment="Left" Height="151" Margin="10,270,0,0" VerticalAlignment="Top" Width="302">
+        <GroupBox x:Name="coursesgb" Header="Pretraga" HorizontalAlignment="Left" Height="151" Margin="10,204,0,0" VerticalAlignment="Top" Width="302">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
@@ -53,13 +55,5 @@
                 <Button x:Name="searchbtn" Content="Pretrazi" Grid.Row="2" Grid.Column="1" Margin="25,10,0,0"/>
             </Grid>
         </GroupBox>
-
-        <GroupBox Header="Ucenici" HorizontalAlignment="Left" Height="151" Margin="326,270,0,0" VerticalAlignment="Top" Width="474">
-            <Grid>
-                <DataGrid x:Name="studentsdg" HorizontalAlignment="Left" Height="114" Margin="10,10,0,0" VerticalAlignment="Top" Width="442"/>
-
-            </Grid>
-        </GroupBox>
-
     </Grid>
 </Window>
