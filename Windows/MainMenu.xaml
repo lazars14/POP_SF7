@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:POP_SF7.Windows"
         mc:Ignorable="d"
         Icon="/POP_SF7;component/Images/logoIcon16.png"
-        Title="@{POP_SF7.Properties.Resources.WindowsTitle}" Height="300" Width="300">
+        Title="@{POP_SF7.Properties.Resources.WindowsTitle}" Height="357.172" Width="562.5">
     <Grid>
-        <Menu x:Name="mainMenu" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="292">
+        <Menu x:Name="mainMenu" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="569">
             <MenuItem x:Name="schoolMenu" Header="Skola">
                 <MenuItem x:Name="editSchoolData" Header="Izmena podataka o skoli"/>
                 <MenuItem x:Name="payments" Header="Evidencija uplata"/>
@@ -24,6 +24,48 @@
                 <MenuItem x:Name="users" Header="Evidencija korisnika"/>
             </MenuItem>
         </Menu>
-        <Image x:Name="logoimg" Source="../Images/logo.png" HorizontalAlignment="Left" Width="250" Margin="17,36,0,19"/>
+        <Image x:Name="logoimg" Source="../Images/logo.png" HorizontalAlignment="Left" Width="250" Margin="17,36,0,10"/>
+        <GroupBox Header="Podaci" HorizontalAlignment="Left" Height="280" Margin="272,36,0,0" VerticalAlignment="Top" Width="272">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+                
+                <Label x:Name="namelbl" Content="Naziv" Grid.Row="0" Grid.Column="0" Margin="10,8,0,0"/>
+                <TextBox x:Name="nametb" Grid.Row="0" Grid.Column="1" Margin="0,10,0,5"/>
+
+                <Label x:Name="addresslbl" Content="Adresa" Grid.Row="1" Grid.Column="0" Margin="10,0,0,0"/>
+                <TextBox x:Name="addresstb" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5"/>
+
+                <Label x:Name="phonelbl" Content="Telefon" Grid.Row="2" Grid.Column="0" Margin="10,0,0,0"/>
+                <TextBox x:Name="phonetb" Grid.Row="2" Grid.Column="1" Margin="0,0,0,5"/>
+
+                <Label x:Name="emaillbl" Content="Email" Grid.Row="3" Grid.Column="0" Margin="10,0,0,0"/>
+                <TextBox x:Name="emailtb" Grid.Row="3" Grid.Column="1" Margin="0,0,0,5"/>
+
+                <Label x:Name="websitelbl" Content="Web sajt" Grid.Row="4" Grid.Column="0" Margin="10,0,0,0"/>
+                <TextBox x:Name="websitetb" Grid.Row="4" Grid.Column="1" Margin="0,0,0,5"/>
+
+                <Label x:Name="piblbl" Content="PIB" Grid.Row="5" Grid.Column="0" Margin="10,0,0,0"/>
+                <TextBox x:Name="pibtb" Grid.Row="5" Grid.Column="1" Margin="0,0,0,5"/>
+
+                <Label x:Name="idnumberlbl" Content="Maticni broj" Grid.Row="6" Grid.Column="0" Margin="10,0,0,0"/>
+                <TextBox x:Name="idnumbertb" Grid.Row="6" Grid.Column="1" Margin="0,0,0,5"/>
+
+                <Label x:Name="accountlbl" Content="Racun" Grid.Row="7" Grid.Column="0" Margin="10,0,0,0"/>
+                <TextBox x:Name="accounttb" Grid.Row="7" Grid.Column="1" Margin="0,0,0,15"/>
+            </Grid>
+        </GroupBox>
     </Grid>
 </Window>

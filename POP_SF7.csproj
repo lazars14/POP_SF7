@@ -101,6 +101,9 @@
     <Compile Include="Windows\SchoolEdit.xaml.cs">
       <DependentUpon>SchoolEdit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\UserMenu.xaml.cs">
+      <DependentUpon>UserMenu.xaml</DependentUpon>
+    </Compile>
     <Page Include="LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -149,6 +152,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\SchoolEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\UserMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
