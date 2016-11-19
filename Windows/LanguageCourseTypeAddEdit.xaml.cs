@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace POP_SF7.Windows
+namespace POP_SF7
 {
     /// <summary>
     /// Interaction logic for LanguageCourseTypeAddEdit.xaml
@@ -24,9 +24,17 @@ namespace POP_SF7.Windows
         public string labelAddCourseType = "Dodavanje novog tipa kursa";
         public string labelEditCourseType = "Izmena postojeceg tipa kursa";
 
-        public LanguageCourseTypeAddEdit()
+        public LanguageCourseTypeAddEdit(string type, string action)
         {
             InitializeComponent();
+            if(type.Equals("Jezik"))
+            {
+                descriptionlbl.Text = (action.Equals("Dodavanje")) ? labelAddLanguage : labelEditLanguage;
+            }
+            else
+            {
+                descriptionlbl.Text = (action.Equals("Dodavanje")) ? labelAddCourseType : labelEditCourseType;
+            }
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace POP_SF7
 {
-    class Teacher : Person
+    public class Teacher : Person
     {
         public List<Language> ListOfLanguages { get; set; }
         public List<Course> ListOfCourses { get; set; }

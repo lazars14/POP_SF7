@@ -2,7 +2,7 @@
 {
     public enum Role { Administrator, Employee }
 
-    class User : Person
+    public class User : Person
     {
         public string UserName { get; set; }
         public string Password { get; set; }

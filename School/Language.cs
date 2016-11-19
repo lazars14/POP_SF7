@@ -1,6 +1,6 @@
 ﻿namespace POP_SF7
 {
-    class Language
+    public class Language
     {
         public int Id { get; set; }
         public string LanguageName { get; set; }

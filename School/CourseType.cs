@@ -1,6 +1,6 @@
 ﻿namespace POP_SF7
 {
-    class CourseType
+    public class CourseType
     {
         public int Id { get; set; }
         public string Name { get; set; }

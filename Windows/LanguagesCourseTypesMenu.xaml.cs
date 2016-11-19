@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace POP_SF7.Windows
+namespace POP_SF7
 {
     /// <summary>
     /// Interaction logic for LanguagesCourseTypesMenu.xaml
@@ -22,9 +22,10 @@ namespace POP_SF7.Windows
         public string languagesLabel = "Jezici";
         public string courseTypesLabel = "Tipovi kurseva";
 
-        public LanguagesCourseTypesMenu()
+        public LanguagesCourseTypesMenu(string type)
         {
             InitializeComponent();
+            descriptionlbl.Text = (type.Equals("Jezik")) ? languagesLabel : courseTypesLabel;
         }
     }
 }

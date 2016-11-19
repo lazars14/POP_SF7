@@ -12,16 +12,31 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace POP_SF7.Windows
+namespace POP_SF7
 {
     /// <summary>
     /// Interaction logic for MainMenu.xaml
     /// </summary>
     public partial class MainMenu : Window
     {
-        public MainMenu()
+        public MainMenu(Role role)
         {
             InitializeComponent();
+
+            if(role == Role.Administrator)
+            {
+                payments.Visibility = Visibility.Collapsed;
+                students.Visibility = Visibility.Collapsed;
+                courses.Visibility = Visibility.Collapsed;
+            }
+            else if(role == Role.Employee)
+            {
+                editSchoolData.Visibility = Visibility.Collapsed;
+                teachers.Visibility = Visibility.Collapsed;
+                users.Visibility = Visibility.Collapsed;
+                languages.Visibility = Visibility.Collapsed;
+                courseTypes.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

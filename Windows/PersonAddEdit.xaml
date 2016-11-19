@@ -1,4 +1,4 @@
-﻿<Window x:Class="POP_SF7.Windows.PersonAddEdit"
+﻿<Window x:Class="POP_SF7.PersonAddEdit"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -44,7 +44,7 @@
         <CheckBox x:Name="deletedcb" Grid.Row="6" Grid.Column="1" Margin="10,7,0,10"/>
 
         <!-- User -->
-        <GroupBox Header="Korisnik" Grid.Row="7" Grid.ColumnSpan="2">
+        <GroupBox x:Name="usergb" Header="Korisnik" Grid.Row="7" Grid.ColumnSpan="2">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>

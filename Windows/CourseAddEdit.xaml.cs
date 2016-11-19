@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace POP_SF7.Windows
+namespace POP_SF7
 {
     /// <summary>
     /// Interaction logic for CourseAddEdit.xaml
@@ -22,9 +22,14 @@ namespace POP_SF7.Windows
         public string labelCourseAdd = "Dodavanje novog kursa";
         public string labelCourseEdit = "Izmena postojeceg kursa";
 
-        public CourseAddEdit()
+        public CourseAddEdit(Course course, string action)
         {
             InitializeComponent();
+            if(action.Equals("Izmena"))
+            {
+                // fill fields with course data
+            }
+            descriptionlbl.Text = (action.Equals("Dodavanje")) ? labelCourseAdd : labelCourseEdit;
         }
     }
 }

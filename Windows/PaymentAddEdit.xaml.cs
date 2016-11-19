@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace POP_SF7.Windows
+namespace POP_SF7
 {
     /// <summary>
     /// Interaction logic for PaymentAddEdit.xaml
@@ -22,9 +22,14 @@ namespace POP_SF7.Windows
         public string labelAddPayment = "Dodavanje nove uplate";
         public string labelEditPayment = "Izmena postojece uplate";
 
-        public PaymentAddEdit()
+        public PaymentAddEdit(Payment payment, string action)
         {
             InitializeComponent();
+            if(action.Equals("Izmena"))
+            {
+                // fill fields with payment data
+            }
+            descriptionlbl.Text = (action.Equals("Dodavanje")) ? labelAddPayment : labelEditPayment;
         }
     }
 }

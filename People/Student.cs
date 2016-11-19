@@ -2,7 +2,7 @@
 
 namespace POP_SF7
 {
-    class Student : Person
+    public class Student : Person
     {
         public List<Payment> ListOfPayments { get; set; }
         public List<Course> ListOfCourses { get; set; }

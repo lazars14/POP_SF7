@@ -3,7 +3,7 @@ using System;
 
 namespace POP_SF7
 {
-    class Course
+    public class Course
     {
         public int Id { get; set; }
         public Language Language { get; set; }
