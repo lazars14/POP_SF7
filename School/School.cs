@@ -1,17 +1,66 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace POP_SF7
 {
-    public class School
+    public class School : INotifyPropertyChanged
     {
-        public string Name { get; set; }
-        public string Address { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Email { get; set; }
-        public string WebSite { get; set; }
-        public string Pib { get; set; }
-        public string IdentificationNumber { get; set; }
-        public string AccountNumber { get; set; }
+        private string name;
+        public string Name
+        {
+            get { return name; }
+            set { name = value; OnPropertyChanged("Name"); }
+        }
+
+        private string address;
+        public string Address
+        {
+            get { return address; }
+            set { address = value; OnPropertyChanged("Address"); }
+        }
+
+        private string phoneNumber;
+        public string PhoneNumber
+        {
+            get { return phoneNumber; }
+            set { phoneNumber = value; OnPropertyChanged("PhoneNumber"); }
+        }
+
+        private string email;
+        public string Email
+        {
+            get { return email; }
+            set { email = value; OnPropertyChanged("Email"); }
+        }
+
+        private string webSite;
+        public string WebSite
+        {
+            get { return webSite; }
+            set { webSite = value; OnPropertyChanged("WebSite"); }
+        }
+
+        private string pib;
+        public string Pib
+        {
+            get { return pib; }
+            set { pib = value; OnPropertyChanged("Pib"); }
+        }
+
+        private string identificationNumber;
+        public string IdentificationNumber
+        {
+            get { return identificationNumber; }
+            set { identificationNumber = value; OnPropertyChanged("IdentificationNumber"); }
+        }
+
+        private string accountNumber;
+        public string AccountNumber
+        {
+            get { return accountNumber; }
+            set { accountNumber = value; OnPropertyChanged("AccountNumber"); }
+        }
+
         public List<Course> ListOfCourses { get; set; }
         public List<CourseType> ListOfCourseTypes { get; set; }
         public List<Language> ListOfLanguages { get; set; }
@@ -37,6 +86,17 @@ namespace POP_SF7
             ListOfUsers = new List<User>();
             ListOfTeachers = new List<Teacher>();
             ListOfStudents = new List<Student>();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }
