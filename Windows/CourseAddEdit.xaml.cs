@@ -22,14 +22,14 @@ namespace POP_SF7
         public string labelCourseAdd = "Dodavanje novog kursa";
         public string labelCourseEdit = "Izmena postojeceg kursa";
 
-        public CourseAddEdit(Course course, string action)
+        public CourseAddEdit(Course course)
         {
             InitializeComponent();
-            if(action.Equals("Izmena"))
+            if(course != null)
             {
                 // fill fields with course data
             }
-            descriptionlbl.Text = (action.Equals("Dodavanje")) ? labelCourseAdd : labelCourseEdit;
+            descriptionlbl.Text = (course == null) ? labelCourseAdd : labelCourseEdit;
         }
     }
 }

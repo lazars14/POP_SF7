@@ -22,14 +22,14 @@ namespace POP_SF7
         public string labelAddPayment = "Dodavanje nove uplate";
         public string labelEditPayment = "Izmena postojece uplate";
 
-        public PaymentAddEdit(Payment payment, string action)
+        public PaymentAddEdit(Payment payment)
         {
             InitializeComponent();
-            if(action.Equals("Izmena"))
+            if(payment != null)
             {
                 // fill fields with payment data
             }
-            descriptionlbl.Text = (action.Equals("Dodavanje")) ? labelAddPayment : labelEditPayment;
+            descriptionlbl.Text = (payment == null) ? labelAddPayment : labelEditPayment;
         }
     }
 }

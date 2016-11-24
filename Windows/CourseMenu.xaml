@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF7.Windows"
         mc:Ignorable="d"
-        Title="CourseMenu" Height="460.184" Width="817.867">
+        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="460.184" Width="817.867">
     <Grid>
         <TextBox x:Name="coursestb" HorizontalAlignment="Left" Height="23" Margin="9,10,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="Kursevi" VerticalAlignment="Top" Width="791"/>
         <DataGrid x:Name="coursesdg" HorizontalAlignment="Left" Height="149" Margin="9,38,0,0" VerticalAlignment="Top" Width="717"/>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF7"
         mc:Ignorable="d"
-        Title="@{POP_SF7.Properties.Resources.WindowsTitle}" Height="220.902" Width="333.504" Icon="Images/logoIcon16.png">
+        Title="The Language School" Icon="Images/logoIcon16.png" Height="220.902" Width="333.504">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
