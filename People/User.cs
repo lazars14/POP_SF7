@@ -1,10 +1,11 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace POP_SF7
 {
     public enum Role { Administrator, Employee }
 
-    public class User : Person, INotifyPropertyChanged
+    public class User : Person, INotifyPropertyChanged, ICloneable
     {
         private string userName;
         public string UserName
@@ -27,6 +28,8 @@ namespace POP_SF7
             set { userRole = value; OnPropertyChanged("UserRole"); }
         }
 
+        public User() { }
+
         public User(int id, string firstName, string lastName, string jmbg, string personAddress, string userName, string password, Role userRole, bool deleted) : base(id, firstName, lastName, jmbg, personAddress, deleted)
         {
             UserName = userName;
@@ -43,6 +46,22 @@ namespace POP_SF7
             {
                 handler(this, new PropertyChangedEventArgs(name));
             }
+        }
+
+        public object Clone()
+        {
+            User userCopy = new User();
+            userCopy.Id = Id;
+            userCopy.FirstName = FirstName;
+            userCopy.LastName = LastName;
+            userCopy.Jmbg = Jmbg;
+            userCopy.Address = Address;
+            userCopy.Deleted = Deleted;
+            userCopy.UserName = UserName;
+            userCopy.Password = Password;
+            userCopy.UserRole = UserRole;
+
+            return userCopy;
         }
     }
 }

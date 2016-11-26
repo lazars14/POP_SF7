@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace POP_SF7
 {
-    public class Course : INotifyPropertyChanged
+    public class Course : INotifyPropertyChanged, ICloneable
     {
         private int id;
         public int Id
@@ -13,8 +14,19 @@ namespace POP_SF7
             set { id = value; OnPropertyChanged("Id"); }
         }
 
-        public Language Language { get; set; }
-        public CourseType CourseType { get; set; }
+        private Language language;
+        public Language Language
+        {
+            get { return language; }
+            set { language = value; OnPropertyChanged("Language"); }
+        }
+
+        private CourseType courseType;
+        public CourseType CourseType
+        {
+            get { return courseType; }
+            set { courseType = value; OnPropertyChanged("CourseType"); }
+        }
 
         private double price;
         public double Price
@@ -23,8 +35,14 @@ namespace POP_SF7
             set { price = value; OnPropertyChanged("Price"); }
         }
 
-        public List<Student> ListOfStudents { get; set; }
-        public Teacher Teacher { get; set; }
+        public ObservableCollection<Student> ListOfStudents { get; set; }
+
+        private Teacher teacher;
+        public Teacher Teacher
+        {
+            get { return teacher; }
+            set { teacher = value; OnPropertyChanged("Teacher"); }
+        }
 
         private DateTime startDate;
         public DateTime StartDate
@@ -47,13 +65,15 @@ namespace POP_SF7
             set { deleted = value; OnPropertyChanged("Deleted"); }
         }
 
-        public Course(int id, Language language, CourseType courseType, double price, List<Student> listOfStudents, Teacher teacher, DateTime startDate, DateTime endDate, bool deleted)
+        public Course() { }
+
+        public Course(int id, Language language, CourseType courseType, double price, Teacher teacher, DateTime startDate, DateTime endDate, bool deleted)
         {
             Id = id;
             Language = language;
             CourseType = courseType;
             Price = price;
-            ListOfStudents = listOfStudents;
+            ListOfStudents = new ObservableCollection<Student>();
             Teacher = teacher;
             StartDate = startDate;
             EndDate = endDate;
@@ -69,6 +89,22 @@ namespace POP_SF7
             {
                 handler(this, new PropertyChangedEventArgs(name));
             }
+        }
+
+        public object Clone()
+        {
+            Course courseCopy = new Course();
+            courseCopy.Id = Id;
+            courseCopy.Language = Language;
+            courseCopy.CourseType = CourseType;
+            courseCopy.Price = Price;
+            courseCopy.ListOfStudents = new ObservableCollection<Student>(ListOfStudents);
+            courseCopy.Teacher = Teacher;
+            courseCopy.StartDate = StartDate;
+            courseCopy.EndDate = EndDate;
+            courseCopy.Deleted = Deleted;
+
+            return courseCopy;
         }
     }
 }

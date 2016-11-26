@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:POP_SF7.Windows"
+        xmlns:local="clr-namespace:POP_SF7"
         mc:Ignorable="d"
         Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="388.179" Width="773.109">
     <Grid Margin="0,0,0,1">

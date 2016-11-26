@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace POP_SF7
 {
-    public class School : INotifyPropertyChanged
+    public class School : INotifyPropertyChanged, ICloneable
     {
         private string name;
         public string Name
@@ -69,6 +70,8 @@ namespace POP_SF7
         public List<Teacher> ListOfTeachers { get; set; }
         public List<Student> ListOfStudents { get; set; }
 
+        public School() { }
+
         public School(string name, string address, string phoneNumber, string email, string webSite, string PIB, string identificationNumber, string accountNumber)
         {
             Name = name;
@@ -97,6 +100,21 @@ namespace POP_SF7
             {
                 handler(this, new PropertyChangedEventArgs(name));
             }
+        }
+
+        public object Clone()
+        {
+            School schoolCopy = new School();
+            schoolCopy.Name = Name;
+            schoolCopy.Address = Address;
+            schoolCopy.PhoneNumber = PhoneNumber;
+            schoolCopy.Email = Email;
+            schoolCopy.WebSite = WebSite;
+            schoolCopy.Pib = Pib;
+            schoolCopy.IdentificationNumber = IdentificationNumber;
+            schoolCopy.AccountNumber = AccountNumber;
+
+            return schoolCopy;
         }
     }
 }

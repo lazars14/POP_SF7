@@ -1,8 +1,10 @@
-﻿using System.ComponentModel;
+﻿
+using System;
+using System.ComponentModel;
 
 namespace POP_SF7
 {
-    public class CourseType : INotifyPropertyChanged
+    public class CourseType : INotifyPropertyChanged, ICloneable
     {
         private int id;
         public int Id
@@ -24,7 +26,9 @@ namespace POP_SF7
             get { return deleted; }
             set { deleted = value; OnPropertyChanged("Deleted"); }
         }
-        
+
+        public CourseType() { }
+
         public CourseType(int id, string name, bool deleted)
         {
             Id = id;
@@ -41,6 +45,16 @@ namespace POP_SF7
             {
                 handler(this, new PropertyChangedEventArgs(name));
             }
+        }
+
+        public object Clone()
+        {
+            CourseType courseCopy = new CourseType();
+            courseCopy.Id = Id;
+            courseCopy.Name = Name;
+            courseCopy.Deleted = Deleted;
+
+            return courseCopy;
         }
     }
 }

@@ -1,17 +1,36 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace POP_SF7
 {
-    public class Teacher : Person
+    public class Teacher : Person, ICloneable
     {
-        public List<Language> ListOfLanguages { get; set; }
-        public List<Course> ListOfCourses { get; set; }
+        public ObservableCollection<Language> ListOfLanguages { get; set; }
+        public ObservableCollection<Course> ListOfCourses { get; set; }
 
-        public Teacher(int id, string firstName, string lastName, string jmbg, string personAddress, bool deleted, List<Language> listOfLanguages, List<Course> listOfCourses)
-            : base(id, firstName, lastName, jmbg, personAddress, deleted)
+        public Teacher() { }
+
+        public Teacher(int id, string firstName, string lastName, string jmbg, string personAddress, bool deleted) : base(id, firstName, lastName, jmbg, personAddress, deleted)
         {
-            ListOfLanguages = listOfLanguages;
-            ListOfCourses = listOfCourses;
+            ListOfLanguages = new ObservableCollection<Language>();
+            ListOfCourses = new ObservableCollection<Course>();
+        }
+
+        public object Clone()
+        {
+            Teacher teacherCopy = new Teacher();
+            teacherCopy.Id = Id;
+            teacherCopy.FirstName = FirstName;
+            teacherCopy.LastName = LastName;
+            teacherCopy.Jmbg = Jmbg;
+            teacherCopy.Address = Address;
+            teacherCopy.Deleted = Deleted;
+            teacherCopy.ListOfLanguages = ListOfLanguages;
+            teacherCopy.ListOfCourses = ListOfCourses;
+
+            return teacherCopy;
         }
     }
 }

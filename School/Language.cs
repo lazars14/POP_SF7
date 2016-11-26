@@ -1,8 +1,10 @@
-﻿using System.ComponentModel;
+﻿
+using System;
+using System.ComponentModel;
 
 namespace POP_SF7
 {
-    public class Language : INotifyPropertyChanged
+    public class Language : INotifyPropertyChanged, ICloneable
     {
         private int id;
         public int Id
@@ -25,6 +27,8 @@ namespace POP_SF7
             set { deleted = value; OnPropertyChanged("Deleted"); }
         }
 
+        public Language() { }
+
         public Language(int id, string name, bool deleted)
         {
             Id = id;
@@ -41,6 +45,16 @@ namespace POP_SF7
             {
                 handler(this, new PropertyChangedEventArgs(name));
             }
+        }
+
+        public object Clone()
+        {
+            Language languageCopy = new Language();
+            languageCopy.Id = Id;
+            languageCopy.Name = Name;
+            languageCopy.Deleted = Deleted;
+
+            return languageCopy;
         }
     }
 }

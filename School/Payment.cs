@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace POP_SF7
 {
-    public class Payment : INotifyPropertyChanged
+    public class Payment : INotifyPropertyChanged, ICloneable
     {
         private int id;
         public int Id
@@ -12,8 +12,19 @@ namespace POP_SF7
             set { id = value; OnPropertyChanged("Id"); }
         }
 
-        public Course Course { get; set; }
-        public Student Student { get; set; }
+        private Course course;
+        public Course Course
+        {
+            get { return course; }
+            set { course = value; OnPropertyChanged("Course"); }
+        }
+
+        private Student student;
+        public Student Student
+        {
+            get { return student; }
+            set { student = value; OnPropertyChanged("Student"); }
+        }
 
         private double amount;
         public double Amount
@@ -36,6 +47,8 @@ namespace POP_SF7
             set { deleted = value; OnPropertyChanged("Deleted"); }
         }
 
+        public Payment() { }
+
         public Payment(int id, Course course, Student student, double amount, DateTime date, bool deleted)
         {
             Id = id;
@@ -55,6 +68,19 @@ namespace POP_SF7
             {
                 handler(this, new PropertyChangedEventArgs(name));
             }
+        }
+
+        public object Clone()
+        {
+            Payment paymentCopy = new Payment();
+            paymentCopy.Id = Id;
+            paymentCopy.Course = Course;
+            paymentCopy.Student = Student;
+            paymentCopy.Amount = Amount;
+            paymentCopy.Date = Date;
+            paymentCopy.Deleted = Deleted;
+
+            return paymentCopy;
         }
     }
 }

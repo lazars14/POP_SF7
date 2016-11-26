@@ -27,29 +27,29 @@
         <TextBlock x:Name="descriptionlbl" Text="popuniti dinamicki" TextAlignment="Center" Grid.ColumnSpan="2" Grid.Row="0" Margin="10, 15, 5, 10"/>
 
         <Label x:Name="idlbl" Content="Id" Grid.Row="1" Grid.Column="0" Margin="10,0,0,10"/>
-        <TextBox x:Name="idtb" Grid.Row="1" Grid.Column="1" Margin="10,0,0,10"/>
+        <TextBox x:Name="idtb" Text="{Binding Path=Id}" Grid.Row="1" Grid.Column="1" Margin="10,0,0,10"/>
 
         <Label x:Name="languagelbl" Content="Id nastavnika" Grid.Row="2" Grid.Column="0" Margin="10,0,0,10"/>
-        <ComboBox x:Name="languagetb" Grid.Row="2" Grid.Column="1" Margin="10,0,0,10"/>
+        <ComboBox x:Name="languagetb" Text="{Binding Path=Language}" Grid.Row="2" Grid.Column="1" Margin="10,0,0,10"/>
 
         <Label x:Name="courseTypelbl" Content="Id tipa kursa" Grid.Row="3" Grid.Column="0" Margin="10,0,0,10"/>
-        <ComboBox x:Name="courseTypetb" Grid.Row="3" Grid.Column="1" Margin="10,0,0,10"/>
+        <ComboBox x:Name="courseTypetb" Text="{Binding Path=CourseType}" Grid.Row="3" Grid.Column="1" Margin="10,0,0,10"/>
 
         <Label x:Name="pricelbl" Content="Cena kursa" Grid.Row="4" Grid.Column="0" Margin="10,0,0,10"/>
-        <TextBox x:Name="pricetb" Grid.Row="4" Grid.Column="1" Margin="10,0,0,10"/>
+        <TextBox x:Name="pricetb" Text="{Binding Path=Price}" Grid.Row="4" Grid.Column="1" Margin="10,0,0,10"/>
 
         <Label x:Name="beginDatelbl" Content="Pocetni datum" Grid.Row="5" Grid.Column="0" Margin="10,0,0,10"/>
-        <DatePicker x:Name="beginDatedpc" Grid.Row="5" Grid.Column="1" Margin="10,0,0,10"/>
+        <DatePicker x:Name="beginDatedpc" SelectedDate="{Binding Path=StartDate}" Grid.Row="5" Grid.Column="1" Margin="10,0,0,10"/>
 
         <Label x:Name="endDatelbl" Content="Zavrsni datum" Grid.Row="6" Grid.Column="0" Margin="10,0,0,10"/>
-        <DatePicker x:Name="endDatedpc" Grid.Row="6" Grid.Column="1" Margin="10,0,0,10"/>
+        <DatePicker x:Name="endDatedpc" SelectedDate="{Binding Path=EndDate}" Grid.Row="6" Grid.Column="1" Margin="10,0,0,10"/>
 
         <Label x:Name="deletedlbl" Content="Obrisan" Grid.Row="7" Grid.Column="0" Margin="10,0,0,10"/>
-        <CheckBox x:Name="deletedcb" Grid.Row="7" Grid.Column="1" Margin="10,7,0,10"/>
+        <CheckBox x:Name="deletedcb" IsChecked="{Binding Path=Deleted}" Grid.Row="7" Grid.Column="1" Margin="10,7,0,10"/>
 
         <Label x:Name="teacherlbl" Content="Id ucitelja" Grid.Row="8" Grid.Column="0" Margin="10,0,0,10"/>
         <StackPanel Orientation="Horizontal" Grid.Row="8" Grid.Column="1" Margin="10,0,0,10">
-            <TextBox x:Name="teachertb" Width="150"/>
+            <TextBox x:Name="teachertb" Text="{Binding Path=Id}" Width="150"/>
             <Button x:Name="teacherbtn" Content="..." Width="30" Margin="10,0,0,0"/>
         </StackPanel>
 
