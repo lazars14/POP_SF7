@@ -19,32 +19,78 @@ namespace POP_SF7
     /// </summary>
     public partial class PersonAddEdit : Window
     {
-        public string labelAddStudent = "Dodavanje novog ucenika";
-        public string labelEditStudent = "Izmena postojeceg ucenika";
-        public string labelAddTeacher = "Dodavanje novog nastavnika";
-        public string labelEditTeacher = "Izmena postojeceg nastavnika";
+        public User UserU { get; set; }
+        public Teacher TeacherT { get; set; }
+        public Student StudentS { get; set; }
+        public PeopleDecider Decider { get; set; }
+
         public string labelAddUser = "Dodavanje novog korisnika";
         public string labelEditUser = "Izmena postojeceg korisnika";
-
-        public PersonAddEdit(string role, string action)
+        public string labelAddTeacher = "Dodavanje novog nastavnika";
+        public string labelEditTeacher = "Izmena postojeceg nastavnika";
+        public string labelAddStudent = "Dodavanje novog ucenika";
+        public string labelEditStudent = "Izmena postojeceg ucenika";
+        
+        // add
+        public PersonAddEdit(PeopleDecider decider)
         {
             InitializeComponent();
-            switch (role)
+
+            Decider = decider;
+
+            setupWindow();
+        }
+
+        // edit user
+        public PersonAddEdit(User selectedUser, PeopleDecider decider)
+        {
+            InitializeComponent();
+
+            Decider = decider;
+            UserU = selectedUser;
+
+            setupWindow();
+        }
+
+        // edit teacher
+        public PersonAddEdit(Teacher selectedTeacher, PeopleDecider decider)
+        {
+            InitializeComponent();
+
+            Decider = decider;
+            TeacherT = selectedTeacher;
+
+            setupWindow();
+        }
+
+        // edit student
+        public PersonAddEdit(Student selectedStudent, PeopleDecider decider)
+        {
+            InitializeComponent();
+
+            Decider = decider;
+            StudentS = selectedStudent;
+
+            setupWindow();
+        }
+
+        public void setupWindow()
+        {
+            switch (Decider)
             {
-                case "Korisnik":
-                    descriptionlbl.Text = (action.Equals("Dodavanje")) ? labelAddUser : labelEditUser;
+                case PeopleDecider.User:
+                    descriptionlbl.Text = (UserU == null) ? labelAddUser : labelEditUser;
                     tabControl.Visibility = Visibility.Collapsed;
                     break;
-                case "Nastavnik":
-                    descriptionlbl.Text = (action.Equals("Dodavanje")) ? labelAddTeacher : labelEditTeacher;
+                case PeopleDecider.Teacher:
+                    descriptionlbl.Text = (TeacherT == null) ? labelAddTeacher : labelEditTeacher;
                     usergb.Visibility = Visibility.Collapsed;
                     break;
-                case "Ucenik":
-                    descriptionlbl.Text = (action.Equals("Dodavanje")) ? labelAddStudent : labelEditStudent;
+                case PeopleDecider.Student:
+                    descriptionlbl.Text = (StudentS == null) ? labelAddStudent : labelEditStudent;
                     usergb.Visibility = Visibility.Collapsed;
                     break;
             }
         }
-
     }
 }

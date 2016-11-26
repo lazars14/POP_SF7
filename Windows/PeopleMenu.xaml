@@ -1,4 +1,4 @@
-﻿<Window x:Class="POP_SF7.UserMenu"
+﻿<Window x:Class="POP_SF7.PeopleMenu"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,11 +8,11 @@
         Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="486.871" Width="799.725">
     <Grid>
         <TextBox x:Name="userstb" HorizontalAlignment="Left" Height="23" Margin="9,10,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="Popuniti dinamicki" VerticalAlignment="Top" Width="770"/>
-        <DataGrid x:Name="usersdg" HorizontalAlignment="Left" Height="149" Margin="9,38,0,0" VerticalAlignment="Top" Width="697"/>
+        <DataGrid x:Name="usersdg" HorizontalAlignment="Left" Height="149" Margin="9,38,0,0" VerticalAlignment="Top" Width="697" SelectionChanged="usersdg_SelectionChanged"/>
         <StackPanel HorizontalAlignment="Left" Height="149" Margin="721,46,0,0" VerticalAlignment="Top" Width="58">
-            <Button x:Name="addbtn" Content="Dodaj" Height="30" Margin="0,20,0,0"/>
-            <Button x:Name="editbtn" Content="Izmeni" Height="30" Margin="0,10"/>
-            <Button x:Name="deletebtn" Content="Obrisi" Height="30"/>
+            <Button x:Name="addbtn" Content="Dodaj" Height="30" Margin="0,20,0,0" Click="addbtn_Click"/>
+            <Button x:Name="editbtn" Content="Izmeni" Height="30" Margin="0,10" Click="editbtn_Click"/>
+            <Button x:Name="deletebtn" Content="Obrisi" Height="30" Click="deletebtn_Click"/>
         </StackPanel>
 
         <GroupBox Header="Pretraga" HorizontalAlignment="Left" Height="93" Margin="9,200,0,0" VerticalAlignment="Top" Width="415">
@@ -36,7 +36,7 @@
                 <TextBox x:Name="firstnamecb" Grid.Row="1" Grid.Column="1" Margin="5"/>
                 <TextBox x:Name="lastnamecb" Grid.Row="1" Grid.Column="2" Margin="5"/>
                 <TextBox x:Name="usernamecb" Grid.Row="1" Grid.Column="3" Margin="5"/>
-                <Button x:Name="searchbtn" Content="Pretrazi" Grid.Row="1" Grid.Column="0" Margin="5"/>
+                <Button x:Name="searchbtn" Content="Pretrazi" Grid.Row="1" Grid.Column="0" Margin="5" Click="searchbtn_Click"/>
             </Grid>
         </GroupBox>
 
@@ -54,12 +54,12 @@
                     <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="Redosled" Grid.Row="0" Grid.Column="0"/>
-                <RadioButton x:Name="sortAscrb1" GroupName="sortOrder" Content="Rastuci" Grid.Row="0" Grid.Column="1" Margin="0,5"/>
-                <RadioButton x:Name="sortDescrb1" GroupName="sortOrder" Content="Opadajuci" Grid.Row="0" Grid.Column="2" Margin="0,5"/>
-                <Button x:Name="sortbtn" Content="Sortiraj" Grid.Row="0" Grid.Column="3" Margin="5,2,2,5"/>
+                <RadioButton x:Name="sortAscrb" GroupName="sortOrder" Content="Rastuci" Grid.Row="0" Grid.Column="1" Margin="0,5"/>
+                <RadioButton x:Name="sortDescrb" GroupName="sortOrder" Content="Opadajuci" Grid.Row="0" Grid.Column="2" Margin="0,5"/>
+                <Button x:Name="sortbtn" Content="Sortiraj" Grid.Row="0" Grid.Column="3" Margin="5,2,2,5" Click="sortbtn_Click"/>
 
                 <Label Content="Kriterijum" Grid.Row="1" Grid.Column="0"/>
-                <RadioButton x:Name="idrb1" GroupName="sortCriteria" Content="Id" Grid.Row="1" Grid.Column="1" Margin="0,5"/>
+                <RadioButton x:Name="idrb" GroupName="sortCriteria" Content="Id" Grid.Row="1" Grid.Column="1" Margin="0,5"/>
                 <RadioButton x:Name="lastnamerb" GroupName="sortCriteria" Content="Prezime" Grid.Row="1" Grid.Column="2" Margin="0,5"/>
                 <RadioButton x:Name="usernamerb" GroupName="sortCriteria" Content="Ime" Grid.Row="1" Grid.Column="3" Margin="0,5"/>
             </Grid>

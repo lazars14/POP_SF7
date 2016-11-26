@@ -26,22 +26,22 @@
         <TextBlock x:Name="descriptionlbl" Text="Izmena podataka o skoli" TextAlignment="Center" Grid.ColumnSpan="2" Grid.Row="0" Margin="10, 15, 5, 10"/>
 
         <Label x:Name="idlbl" Content="Id" Grid.Row="1" Grid.Column="0" Margin="10,0,0,10"/>
-        <TextBox x:Name="idtb" IsReadOnly="True" Grid.Row="1" Grid.Column="1" Margin="10,2,0,8"/>
+        <TextBox x:Name="idtb" Text="{Binding Path=Id}" IsReadOnly="True" Grid.Row="1" Grid.Column="1" Margin="10,2,0,8"/>
 
         <Label x:Name="namelbl" Content="Ime" Grid.Row="2" Grid.Column="0" Margin="10,0,0,10"/>
-        <TextBox x:Name="nametb" Grid.Row="2" Grid.Column="1" Margin="10,0,0,10"/>
+        <TextBox x:Name="nametb" Text="{Binding Path=FirstName}" Grid.Row="2" Grid.Column="1" Margin="10,0,0,10"/>
 
         <Label x:Name="lastnamelbl" Content="Prezime" Grid.Row="3" Grid.Column="0" Margin="10,0,0,10"/>
-        <TextBox x:Name="lastnametb" Grid.Row="3" Grid.Column="1" Margin="10,0,0,10"/>
+        <TextBox x:Name="lastnametb" Text="{Binding Path=LastName}" Grid.Row="3" Grid.Column="1" Margin="10,0,0,10"/>
 
         <Label x:Name="jmbglbl" Content="JMBG" Grid.Row="4" Grid.Column="0" Margin="10,0,0,10"/>
-        <TextBox x:Name="jmbgtb" Grid.Row="4" Grid.Column="1" Margin="10,0,0,10"/>
+        <TextBox x:Name="jmbgtb" Text="{Binding Path=Jmbg}" Grid.Row="4" Grid.Column="1" Margin="10,0,0,10"/>
 
         <Label x:Name="addresslbl" Content="Adresa" Grid.Row="5" Grid.Column="0" Margin="10,0,0,10"/>
-        <TextBox x:Name="addresstb" Grid.Row="5" Grid.Column="1" Margin="10,0,0,10"/>
+        <TextBox x:Name="addresstb" Text="{Binding Path=Address}" Grid.Row="5" Grid.Column="1" Margin="10,0,0,10"/>
 
         <Label x:Name="deletedlbl" Content="Obrisan" Grid.Row="6" Grid.Column="0" Margin="10,0,0,10"/>
-        <CheckBox x:Name="deletedcb" Grid.Row="6" Grid.Column="1" Margin="10,7,0,10"/>
+        <CheckBox x:Name="deletedcb" IsChecked="{Binding Path=Deleted}" Grid.Row="6" Grid.Column="1" Margin="10,7,0,10"/>
 
         <!-- User -->
         <GroupBox x:Name="usergb" Header="Korisnik" Grid.Row="7" Grid.ColumnSpan="2">
@@ -56,10 +56,10 @@
                     <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
                 <Label x:Name="usernamelbl" Content="Korisnicko ime" Grid.Row="0" Grid.Column="0" Margin="5"/>
-                <TextBox x:Name="usernametb" Grid.Row="0" Grid.Column="1" Margin="5"/>
+                <TextBox x:Name="usernametb" Text="{Binding Path=UserName}" Grid.Row="0" Grid.Column="1" Margin="5"/>
 
                 <Label x:Name="passwordlbl" Content="Lozinka" Grid.Row="1" Grid.Column="0" Margin="5"/>
-                <TextBox x:Name="passwordtb" Grid.Row="1" Grid.Column="1" Margin="5"/>
+                <TextBox x:Name="passwordtb" Text="{Binding Path=Password}" Grid.Row="1" Grid.Column="1" Margin="5"/>
 
                 <Label x:Name="rolelbl" Content="Uloga" Grid.Row="2" Grid.ColumnSpan="2" Margin="5"/>
                 <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" Margin="5,10,5,5">

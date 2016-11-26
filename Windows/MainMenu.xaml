@@ -7,20 +7,20 @@
         mc:Ignorable="d"
         Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="357.172" Width="562.5">
     <Grid>
-        <Menu x:Name="mainMenu" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="569">
+        <Menu x:Name="mainMenu" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="554">
             <MenuItem x:Name="schoolMenu" Header="Skola">
-                <MenuItem x:Name="editSchoolData" Header="Izmena podataka o skoli"/>
-                <MenuItem x:Name="payments" Header="Evidencija uplata"/>
+                <MenuItem x:Name="editSchoolData" Header="Izmena podataka o skoli" Click="menuItem_Click"/>
+                <MenuItem x:Name="payments" Header="Evidencija uplata" Click="menuItem_Click"/>
             </MenuItem>
             <MenuItem x:Name="coursesMenu" Header="Kursevi">
-                <MenuItem x:Name="languages" Header="Evidencija jezika"/>
-                <MenuItem x:Name="courseTypes" Header="Evidencija tipova kurseva"/>
-                <MenuItem x:Name="courses" Header="Evidencija kurseva"/>
+                <MenuItem x:Name="languages" Header="Evidencija jezika" Click="menuItem_Click"/>
+                <MenuItem x:Name="courseTypes" Header="Evidencija tipova kurseva" Click="menuItem_Click"/>
+                <MenuItem x:Name="courses" Header="Evidencija kurseva" Click="menuItem_Click"/>
             </MenuItem>
             <MenuItem x:Name="peopleMenu" Header="Osobe">
-                <MenuItem x:Name="students" Header="Evidencija ucenika"/>
-                <MenuItem x:Name="teachers" Header="Evidencija nastavnika"/>
-                <MenuItem x:Name="users" Header="Evidencija korisnika"/>
+                <MenuItem x:Name="users" Header="Evidencija korisnika" Click="menuItem_Click"/>
+                <MenuItem x:Name="teachers" Header="Evidencija nastavnika" Click="menuItem_Click"/>
+                <MenuItem x:Name="students" Header="Evidencija ucenika" Click="menuItem_Click"/>
             </MenuItem>
         </Menu>
         <Image x:Name="logoimg" Source="../Images/logo.png" HorizontalAlignment="Left" Width="250" Margin="17,36,0,10"/>

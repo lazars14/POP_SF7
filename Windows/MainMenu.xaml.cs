@@ -38,5 +38,49 @@ namespace POP_SF7
                 courseTypes.Visibility = Visibility.Collapsed;
             }
         }
+
+        private void menuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem menuItem = (MenuItem)sender;
+            string menuItemName = menuItem.Name;
+
+            switch(menuItemName)
+            {
+                case "editSchoolData":
+                    SchoolEdit schoolEdit = new SchoolEdit();
+                    schoolEdit.Show();
+                    break;
+                case "payments":
+                    PaymentMenu payments = new PaymentMenu();
+                    payments.Show();
+                    break;
+                case "languages":
+                    LanguagesCourseTypesMenu languages = new LanguagesCourseTypesMenu(DeciderLanguageCourseType.Language);
+                    languages.Show();
+                    break;
+                case "courseTypes":
+                    LanguagesCourseTypesMenu courseTypes = new LanguagesCourseTypesMenu(DeciderLanguageCourseType.CourseType);
+                    courseTypes.Show();
+                    break;
+                case "courses":
+                    CourseMenu courses = new CourseMenu();
+                    courses.Show();
+                    break;
+                case "users":
+                    PeopleMenu users = new PeopleMenu(PeopleDecider.User);
+                    users.Show();
+                    break;
+                case "teachers":
+                    PeopleMenu teachers = new PeopleMenu(PeopleDecider.Teacher);
+                    teachers.Show();
+                    break;
+                case "students":
+                    PeopleMenu students = new PeopleMenu(PeopleDecider.Student);
+                    students.Show();
+                    break;
+            }
+        }
+
+        
     }
 }

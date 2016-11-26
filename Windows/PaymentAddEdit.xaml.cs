@@ -19,16 +19,15 @@ namespace POP_SF7
     /// </summary>
     public partial class PaymentAddEdit : Window
     {
+        public Payment SelectedPayment { get; set; }
+
         public string labelAddPayment = "Dodavanje nove uplate";
         public string labelEditPayment = "Izmena postojece uplate";
 
         public PaymentAddEdit(Payment payment)
         {
             InitializeComponent();
-            if(payment != null)
-            {
-                // fill fields with payment data
-            }
+            SelectedPayment = payment;
             descriptionlbl.Text = (payment == null) ? labelAddPayment : labelEditPayment;
         }
     }

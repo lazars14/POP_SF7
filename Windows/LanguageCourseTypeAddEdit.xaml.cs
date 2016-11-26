@@ -19,21 +19,53 @@ namespace POP_SF7
     /// </summary>
     public partial class LanguageCourseTypeAddEdit : Window
     {
+        public Language LanguageL { get; set; }
+        public CourseType CourseTypeC { get; set; }
+        public DeciderLanguageCourseType Decider { get; set; }
+
         public string labelAddLanguage = "Dodavanje novog jezika";
         public string labelEditLanguage = "Izmena postojeceg jezika";
         public string labelAddCourseType = "Dodavanje novog tipa kursa";
         public string labelEditCourseType = "Izmena postojeceg tipa kursa";
 
-        public LanguageCourseTypeAddEdit(string type, string action)
+        // edit language
+        public LanguageCourseTypeAddEdit(Language language, DeciderLanguageCourseType decider)
         {
             InitializeComponent();
-            if(type.Equals("Jezik"))
+
+            LanguageL = language;
+            Decider = decider;
+
+            setLabel();
+        }
+
+        // edit courseType
+        public LanguageCourseTypeAddEdit(CourseType courseType, DeciderLanguageCourseType decider)
+        {
+            InitializeComponent();
+
+            CourseTypeC = courseType;
+            Decider = decider;
+
+            setLabel();
+        }
+
+        // add language or courseType
+        public LanguageCourseTypeAddEdit(DeciderLanguageCourseType decider)
+        {
+            InitializeComponent();
+            setLabel();
+        }
+
+        public void setLabel()
+        {
+            if (Decider == DeciderLanguageCourseType.Language)
             {
-                descriptionlbl.Text = (action.Equals("Dodavanje")) ? labelAddLanguage : labelEditLanguage;
+                descriptionlbl.Text = (LanguageL == null) ? labelAddLanguage : labelEditLanguage;
             }
             else
             {
-                descriptionlbl.Text = (action.Equals("Dodavanje")) ? labelAddCourseType : labelEditCourseType;
+                descriptionlbl.Text = (CourseTypeC == null) ? labelAddCourseType : labelEditCourseType;
             }
         }
     }

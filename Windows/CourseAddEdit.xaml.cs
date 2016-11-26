@@ -25,10 +25,6 @@ namespace POP_SF7
         public CourseAddEdit(Course course)
         {
             InitializeComponent();
-            if(course != null)
-            {
-                // fill fields with course data
-            }
             descriptionlbl.Text = (course == null) ? labelCourseAdd : labelCourseEdit;
         }
     }
