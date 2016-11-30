@@ -36,6 +36,8 @@ namespace POP_SF7
             Deleted = deleted;
         }
 
+        #region INotifyPropertyChanged
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string name)
@@ -47,6 +49,10 @@ namespace POP_SF7
             }
         }
 
+        #endregion
+
+        #region ICloneable
+
         public object Clone()
         {
             Language languageCopy = new Language();
@@ -56,5 +62,7 @@ namespace POP_SF7
 
             return languageCopy;
         }
+
+        #endregion
     }
 }

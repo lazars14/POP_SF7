@@ -80,6 +80,8 @@ namespace POP_SF7
             Deleted = deleted;
         }
 
+        #region INotifyPropertyChanged
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string name)
@@ -90,6 +92,10 @@ namespace POP_SF7
                 handler(this, new PropertyChangedEventArgs(name));
             }
         }
+
+        #endregion
+
+        #region ICloneable
 
         public object Clone()
         {
@@ -106,5 +112,7 @@ namespace POP_SF7
 
             return courseCopy;
         }
+
+        #endregion
     }
 }

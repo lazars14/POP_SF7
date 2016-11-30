@@ -18,6 +18,8 @@ namespace POP_SF7
             ListOfCourses = new ObservableCollection<Course>();
         }
 
+        #region ICloneable
+
         public object Clone()
         {
             Teacher teacherCopy = new Teacher();
@@ -32,5 +34,8 @@ namespace POP_SF7
 
             return teacherCopy;
         }
+
+        #endregion
+
     }
 }

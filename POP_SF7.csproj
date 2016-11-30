@@ -74,6 +74,7 @@
     <Compile Include="School\Language.cs" />
     <Compile Include="School\Payment.cs" />
     <Compile Include="School\School.cs" />
+    <Compile Include="Validations\EMailValidationRule.cs" />
     <Compile Include="Windows\CourseAddEdit.xaml.cs">
       <DependentUpon>CourseAddEdit.xaml</DependentUpon>
     </Compile>
@@ -189,6 +190,7 @@
     <Resource Include="Images\logoIcon16.png" />
     <Resource Include="Images\logoIcon32.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
