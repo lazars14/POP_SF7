@@ -61,51 +61,51 @@
     <Compile Include="Data\StudentCRUD.cs" />
     <Compile Include="Data\TeacherCRUD.cs" />
     <Compile Include="Data\UserCRUD.cs" />
-    <Compile Include="People\Student.cs" />
-    <Compile Include="People\Teacher.cs" />
-    <Compile Include="People\User.cs" />
+    <Compile Include="Models\People\Student.cs" />
+    <Compile Include="Models\People\Teacher.cs" />
+    <Compile Include="Models\People\User.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="School\Course.cs" />
-    <Compile Include="School\CourseType.cs" />
-    <Compile Include="School\Language.cs" />
-    <Compile Include="School\Payment.cs" />
-    <Compile Include="School\School.cs" />
-    <Compile Include="Validations\EMailValidationRule.cs" />
-    <Compile Include="Windows\CourseAddEdit.xaml.cs">
+    <Compile Include="Models\Courses\Course.cs" />
+    <Compile Include="Models\Courses\CourseType.cs" />
+    <Compile Include="Models\Courses\Language.cs" />
+    <Compile Include="Models\School\Payment.cs" />
+    <Compile Include="Models\School\School.cs" />
+    <Compile Include="Models\Validations\EMailValidationRule.cs" />
+    <Compile Include="Views\CourseAddEdit.xaml.cs">
       <DependentUpon>CourseAddEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\CourseMenu.xaml.cs">
+    <Compile Include="Views\CourseMenu.xaml.cs">
       <DependentUpon>CourseMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\LanguageCourseTypeAddEdit.xaml.cs">
+    <Compile Include="Views\LanguageCourseTypeAddEdit.xaml.cs">
       <DependentUpon>LanguageCourseTypeAddEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\LanguagesCourseTypesMenu.xaml.cs">
+    <Compile Include="Views\LanguagesCourseTypesMenu.xaml.cs">
       <DependentUpon>LanguagesCourseTypesMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\MainMenu.xaml.cs">
+    <Compile Include="Views\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\PaymentAddEdit.xaml.cs">
+    <Compile Include="Views\PaymentAddEdit.xaml.cs">
       <DependentUpon>PaymentAddEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\PaymentMenu.xaml.cs">
+    <Compile Include="Views\PaymentMenu.xaml.cs">
       <DependentUpon>PaymentMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\PersonAddEdit.xaml.cs">
+    <Compile Include="Views\PersonAddEdit.xaml.cs">
       <DependentUpon>PersonAddEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\SchoolEdit.xaml.cs">
+    <Compile Include="Views\SchoolEdit.xaml.cs">
       <DependentUpon>SchoolEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\PeopleMenu.xaml.cs">
+    <Compile Include="Views\PeopleMenu.xaml.cs">
       <DependentUpon>PeopleMenu.xaml</DependentUpon>
     </Compile>
-    <Page Include="LoginWindow.xaml">
+    <Page Include="Views\LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -116,54 +116,54 @@
     <Compile Include="Data\CourseCRUD.cs" />
     <Compile Include="Data\CourseTypeCRUD.cs" />
     <Compile Include="Data\LanguageCRUD.cs" />
-    <Compile Include="LoginWindow.xaml.cs">
+    <Compile Include="Views\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Windows\CourseAddEdit.xaml">
+    <Page Include="Views\CourseAddEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\CourseMenu.xaml">
+    <Page Include="Views\CourseMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\LanguageCourseTypeAddEdit.xaml">
+    <Page Include="Views\LanguageCourseTypeAddEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\LanguagesCourseTypesMenu.xaml">
+    <Page Include="Views\LanguagesCourseTypesMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\MainMenu.xaml">
+    <Page Include="Views\MainMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\PaymentAddEdit.xaml">
+    <Page Include="Views\PaymentAddEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\PaymentMenu.xaml">
+    <Page Include="Views\PaymentMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\PersonAddEdit.xaml">
+    <Page Include="Views\PersonAddEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\SchoolEdit.xaml">
+    <Page Include="Views\SchoolEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\PeopleMenu.xaml">
+    <Page Include="Views\PeopleMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\PaymentCRUD.cs" />
-    <Compile Include="People\Person.cs" />
+    <Compile Include="Models\People\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -190,7 +190,9 @@
     <Resource Include="Images\logoIcon16.png" />
     <Resource Include="Images\logoIcon32.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ViewModels\Commands\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
