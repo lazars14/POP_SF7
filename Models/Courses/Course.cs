@@ -3,7 +3,7 @@ using System;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 
-namespace POP_SF7
+namespace POP_SF7.Models.Courses
 {
     public class Course : INotifyPropertyChanged, ICloneable
     {

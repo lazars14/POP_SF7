@@ -1,8 +1,10 @@
-﻿using System;
+﻿using POP_SF7.Models.Courses;
+using POP_SF7.Models.People;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace POP_SF7
+namespace POP_SF7.Models.School
 {
     public class School : INotifyPropertyChanged, ICloneable
     {

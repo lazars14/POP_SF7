@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace POP_SF7
+namespace POP_SF7.Models.People
 {
     public class Student : Person, ICloneable
     {

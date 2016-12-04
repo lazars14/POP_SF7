@@ -1,4 +1,5 @@
-﻿using System;
+﻿using POP_SF7.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace POP_SF7
         public SchoolEdit()
         {
             InitializeComponent();
+            DataContext = new SchoolViewModel(null); // koristim singleton pattern, tako da ovo u principu nije potrebno
         }
     }
 }

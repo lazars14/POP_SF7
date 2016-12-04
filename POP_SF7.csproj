@@ -75,6 +75,12 @@
     <Compile Include="Models\School\Payment.cs" />
     <Compile Include="Models\School\School.cs" />
     <Compile Include="Models\Validations\EMailValidationRule.cs" />
+    <Compile Include="ViewModels\Commands\SchoolUpdateCommand.cs" />
+    <Compile Include="ViewModels\CourseViewModel.cs" />
+    <Compile Include="ViewModels\LanguageCourseTypeViewModel.cs" />
+    <Compile Include="ViewModels\PaymentViewModel.cs" />
+    <Compile Include="ViewModels\PeopleViewModel.cs" />
+    <Compile Include="ViewModels\SchoolViewModel.cs" />
     <Compile Include="Views\CourseAddEdit.xaml.cs">
       <DependentUpon>CourseAddEdit.xaml</DependentUpon>
     </Compile>
@@ -190,9 +196,7 @@
     <Resource Include="Images\logoIcon16.png" />
     <Resource Include="Images\logoIcon32.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\Commands\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

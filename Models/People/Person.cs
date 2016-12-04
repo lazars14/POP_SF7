@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace POP_SF7
+namespace POP_SF7.Models.People
 {
     public class Person : INotifyPropertyChanged
     {

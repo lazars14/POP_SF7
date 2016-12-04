@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
-namespace POP_SF7
+namespace POP_SF7.Models.People
 {
     public class Teacher : Person, ICloneable
     {
