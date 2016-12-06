@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace POP_SF7
 {
     /// <summary>
-    /// Interaction logic for PaymentAddEdit.xaml
+    /// Interaction logic for LanguageCourseTypeAddEdit.xaml
     /// </summary>
-    public partial class PaymentAddEdit : Window
+    public partial class LanguageAddEdit : Window
     {
-        public PaymentAddEdit()
+        public LanguageAddEdit()
         {
             InitializeComponent();
         }

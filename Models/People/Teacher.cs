@@ -1,4 +1,5 @@
-﻿using System;
+﻿using POP_SF7.Models.Courses;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;

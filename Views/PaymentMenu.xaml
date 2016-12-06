@@ -10,27 +10,27 @@
         <TextBox x:Name="paymentstb" HorizontalAlignment="Left" Height="23" Margin="9,10,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="Uplate" VerticalAlignment="Top" Width="739"/>
         <DataGrid x:Name="paymentsdg" HorizontalAlignment="Left" Height="149" Margin="9,38,0,0" VerticalAlignment="Top" Width="666"/>
         <StackPanel HorizontalAlignment="Left" Height="149" Margin="690,38,0,0" VerticalAlignment="Top" Width="58">
-            <Button x:Name="addbtn" Content="Dodaj" Height="30" Margin="0,20,0,0" Click="addbtn_Click"/>
-            <Button x:Name="editbtn" Content="Izmeni" Height="30" Margin="0,10" Click="editbtn_Click"/>
-            <Button x:Name="deletebtn" Content="Obrisi" Height="30" Click="deletebtn_Click"/>
+            <Button x:Name="addbtn" Content="Dodaj" Height="30" Margin="0,20,0,0"/>
+            <Button x:Name="editbtn" Content="Izmeni" Height="30" Margin="0,10"/>
+            <Button x:Name="deletebtn" Content="Obrisi" Height="30"/>
         </StackPanel>
 
         <GroupBox Header="Sortiranje" HorizontalAlignment="Left" Height="123" Margin="332,204,0,0" VerticalAlignment="Top" Width="320">
             <Grid>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Redosled"/>
-                    <RadioButton x:Name="sortAscrb" GroupName="sortOrder" Content="Rastuci" Margin="5,7,5,0"/>
+                    <RadioButton x:Name="sortAscrb" GroupName="sortOrder" Content="Rastuci" Margin="5,7,5,0" IsChecked="True"/>
                     <RadioButton x:Name="sortDescrb" GroupName="sortOrder" Content="Opadajuci" Margin="5,7,5,0"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
                     <Label Content="Kriterijum"/>
-                    <RadioButton x:Name="idrb" GroupName="sortCriteria" Content="Id" Margin="3,7,5,0"/>
+                    <RadioButton x:Name="idrb" GroupName="sortCriteria" Content="Id" Margin="3,7,5,0" IsChecked="True"/>
                     <RadioButton x:Name="amountrb" GroupName="sortCriteria" Content="Cena" Margin="5,7,5,0"/>
                     <RadioButton x:Name="studentidrb" GroupName="sortCriteria" Content="Id ucenika" Margin="5,7,5,0"/>
                     <RadioButton x:Name="daterb" GroupName="sortCriteria" Content="Datum" Margin="5,7,5,0"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,60,0,0">
-                    <Button x:Name="sortbtn" Content="Sortiraj" Width="60" Margin="120,10,0,5" Click="sortbtn_Click"/>
+                    <Button x:Name="sortbtn" Content="Sortiraj" Width="60" Margin="120,10,0,5"/>
                 </StackPanel>
             </Grid>
         </GroupBox>
@@ -49,7 +49,7 @@
                 <Label Content="Kriterijum" Grid.Row="0" Grid.Column="0"/>
                 <CheckBox x:Name="coursechb" Content="Kurs" Grid.Row="0" Grid.Column="1" Margin="0,7,116,0"/>
                 <CheckBox x:Name="studentchb" Content="Ucenik" Grid.Row="0" Grid.Column="1" Margin="60,7,45,0"/>
-                <Button x:Name="searchbtn" Content="Pretrazi" Grid.Row="0" Grid.Column="1" Width="50" Margin="139,0,-18,10" Click="searchbtn_Click"/>
+                <Button x:Name="searchbtn" Content="Pretrazi" Grid.Row="0" Grid.Column="1" Width="50" Margin="139,0,-18,10"/>
 
                 <Label Content="Kurs" Grid.Row="1" Grid.Column="0"/>
                 <TextBox x:Name="coursetb" Grid.Row="1" Grid.Column="2" Margin="0,0,25,10"/>

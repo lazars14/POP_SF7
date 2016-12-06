@@ -19,13 +19,9 @@ namespace POP_SF7
     /// </summary>
     public partial class CourseAddEdit : Window
     {
-        public string labelCourseAdd = "Dodavanje novog kursa";
-        public string labelCourseEdit = "Izmena postojeceg kursa";
-
-        public CourseAddEdit(Course course)
+        public CourseAddEdit()
         {
             InitializeComponent();
-            descriptionlbl.Text = (course == null) ? labelCourseAdd : labelCourseEdit;
         }
     }
 }

@@ -57,10 +57,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Data\Search.cs" />
-    <Compile Include="Data\StudentCRUD.cs" />
-    <Compile Include="Data\TeacherCRUD.cs" />
-    <Compile Include="Data\UserCRUD.cs" />
     <Compile Include="Models\People\Student.cs" />
     <Compile Include="Models\People\Teacher.cs" />
     <Compile Include="Models\People\User.cs" />
@@ -75,23 +71,47 @@
     <Compile Include="Models\School\Payment.cs" />
     <Compile Include="Models\School\School.cs" />
     <Compile Include="Models\Validations\EMailValidationRule.cs" />
+    <Compile Include="ViewModels\Commands\CourseAddCommand.cs" />
+    <Compile Include="ViewModels\Commands\CourseDeleteCommand.cs" />
+    <Compile Include="ViewModels\Commands\CourseEditCommand.cs" />
+    <Compile Include="ViewModels\Commands\CourseSearchCommand.cs" />
+    <Compile Include="ViewModels\Commands\CourseSortCommand.cs" />
+    <Compile Include="ViewModels\Commands\LoginCommand.cs" />
     <Compile Include="ViewModels\Commands\SchoolUpdateCommand.cs" />
-    <Compile Include="ViewModels\CourseViewModel.cs" />
-    <Compile Include="ViewModels\LanguageCourseTypeViewModel.cs" />
-    <Compile Include="ViewModels\PaymentViewModel.cs" />
-    <Compile Include="ViewModels\PeopleViewModel.cs" />
-    <Compile Include="ViewModels\SchoolViewModel.cs" />
+    <Compile Include="ViewModels\CourseAddEditViewModel.cs" />
+    <Compile Include="ViewModels\CourseMenuViewModel.cs" />
+    <Compile Include="ViewModels\CourseTypeAddEditViewModel.cs" />
+    <Compile Include="ViewModels\CourseTypeMenuViewModel.cs" />
+    <Compile Include="ViewModels\LanguageMenuViewModel.cs" />
+    <Compile Include="ViewModels\LoginWindowViewModel.cs" />
+    <Compile Include="ViewModels\MainMenuViewModel.cs" />
+    <Compile Include="ViewModels\PaymentAddEditViewModel.cs" />
+    <Compile Include="ViewModels\PaymentMenuViewModel.cs" />
+    <Compile Include="ViewModels\SchoolEditViewModel.cs" />
+    <Compile Include="ViewModels\StudentAddEditViewModel.cs" />
+    <Compile Include="ViewModels\StudentMenuViewModel.cs" />
+    <Compile Include="ViewModels\TeacherAddEditViewModel.cs" />
+    <Compile Include="ViewModels\TeacherMenuViewModel.cs" />
+    <Compile Include="ViewModels\UserAddEditModelView.cs" />
+    <Compile Include="ViewModels\UserMenuViewModel.cs" />
     <Compile Include="Views\CourseAddEdit.xaml.cs">
       <DependentUpon>CourseAddEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CourseMenu.xaml.cs">
       <DependentUpon>CourseMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\LanguageCourseTypeAddEdit.xaml.cs">
-      <DependentUpon>LanguageCourseTypeAddEdit.xaml</DependentUpon>
+    <Compile Include="ViewModels\LanguageAddEditViewModel.cs" />
+    <Compile Include="Views\CourseTypeAddEdit.xaml.cs">
+      <DependentUpon>CourseTypeAddEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\LanguagesCourseTypesMenu.xaml.cs">
-      <DependentUpon>LanguagesCourseTypesMenu.xaml</DependentUpon>
+    <Compile Include="Views\CourseTypeMenu.xaml.cs">
+      <DependentUpon>CourseTypeMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LanguageAddEdit.xaml.cs">
+      <DependentUpon>LanguageAddEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LanguageMenu.xaml.cs">
+      <DependentUpon>LanguageMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
@@ -102,16 +122,36 @@
     <Compile Include="Views\PaymentMenu.xaml.cs">
       <DependentUpon>PaymentMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PersonAddEdit.xaml.cs">
-      <DependentUpon>PersonAddEdit.xaml</DependentUpon>
+    <Compile Include="Views\StudentAddEdit.xaml.cs">
+      <DependentUpon>StudentAddEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SchoolEdit.xaml.cs">
       <DependentUpon>SchoolEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PeopleMenu.xaml.cs">
-      <DependentUpon>PeopleMenu.xaml</DependentUpon>
+    <Compile Include="Views\StudentMenu.xaml.cs">
+      <DependentUpon>StudentMenu.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\LoginWindow.xaml">
+    <Compile Include="Views\TeacherAddEdit.xaml.cs">
+      <DependentUpon>TeacherAddEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TeacherMenu.xaml.cs">
+      <DependentUpon>TeacherMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserAddEdit.xaml.cs">
+      <DependentUpon>UserAddEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserMenu.xaml.cs">
+      <DependentUpon>UserMenu.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\CourseTypeAddEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CourseTypeMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -119,10 +159,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Data\CourseCRUD.cs" />
-    <Compile Include="Data\CourseTypeCRUD.cs" />
-    <Compile Include="Data\LanguageCRUD.cs" />
-    <Compile Include="Views\LoginWindow.xaml.cs">
+    <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -134,11 +171,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\LanguageCourseTypeAddEdit.xaml">
+    <Page Include="Views\LanguageAddEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\LanguagesCourseTypesMenu.xaml">
+    <Page Include="Views\LanguageMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -154,7 +191,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\PersonAddEdit.xaml">
+    <Page Include="Views\StudentAddEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -162,13 +199,28 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\PeopleMenu.xaml">
+    <Page Include="Views\StudentMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TeacherAddEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TeacherMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserAddEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\PaymentCRUD.cs" />
     <Compile Include="Models\People\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -194,7 +246,6 @@
   <ItemGroup>
     <Resource Include="Images\logo.png" />
     <Resource Include="Images\logoIcon16.png" />
-    <Resource Include="Images\logoIcon32.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DB\POPDBScheme.sql" />

@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using POP_SF7.Models.People;
 
 namespace POP_SF7.Models.Courses
 {

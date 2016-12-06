@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace POP_SF7
+namespace POP_SF7.Views
 {
     /// <summary>
-    /// Interaction logic for PaymentAddEdit.xaml
+    /// Interaction logic for TeacherAddEdit.xaml
     /// </summary>
-    public partial class PaymentAddEdit : Window
+    public partial class TeacherAddEdit : Window
     {
-        public PaymentAddEdit()
+        public TeacherAddEdit()
         {
             InitializeComponent();
         }

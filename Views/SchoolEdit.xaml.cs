@@ -23,7 +23,7 @@ namespace POP_SF7
         public SchoolEdit()
         {
             InitializeComponent();
-            DataContext = new SchoolViewModel(null); // koristim singleton pattern, tako da ovo u principu nije potrebno
+            DataContext = new SchoolEditViewModel();
         }
     }
 }

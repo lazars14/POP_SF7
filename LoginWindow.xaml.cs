@@ -1,4 +1,5 @@
-﻿using System;
+﻿using POP_SF7.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,18 +11,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace POP_SF7
 {
     /// <summary>
-    /// Interaction logic for PaymentAddEdit.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class PaymentAddEdit : Window
+    public partial class MainWindow : Window
     {
-        public PaymentAddEdit()
+        public MainWindow()
         {
             InitializeComponent();
+            DataContext = new LoginWindowViewModel();
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using POP_SF7.Models.Courses;
+using POP_SF7.Models.People;
+using System;
 using System.ComponentModel;
 
 namespace POP_SF7.Models.School
