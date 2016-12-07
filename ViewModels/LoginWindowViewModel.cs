@@ -9,23 +9,10 @@ using System.Threading.Tasks;
 
 namespace POP_SF7.ViewModels
 {
-    class LoginWindowViewModel : INotifyPropertyChanged
+    class LoginWindowViewModel
     {
         public List<User> ListOfUsers { get; set; }
-
-        private string username;
-        public string Username
-        {
-            get { return username; }
-            set { username = value; OnPropertyChanged("Username"); }
-        }
-
-        private string password;
-        public string Password
-        {
-            get { return password; }
-            set { password = value; OnPropertyChanged("Password"); }
-        }
+        public User User { get; set; }
 
         public LoginCommand LoginCommand { get; set; }
 
@@ -33,21 +20,8 @@ namespace POP_SF7.ViewModels
         {
             ListOfUsers = new List<User>(); // ucitavanje iz baze
             LoginCommand = new LoginCommand(this);
+            User = new User();
         }
-
-        #region
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string name)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(name));
-            }
-        }
-
-        #endregion
 
         public void Login()
         {

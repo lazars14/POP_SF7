@@ -1,4 +1,5 @@
-﻿using System;
+﻿using POP_SF7.Models.People;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,10 +21,19 @@ namespace POP_SF7.ViewModels.Commands
 
         public bool CanExecute(object parameter)
         {
-            if (String.IsNullOrEmpty(ViewModel.Username) || String.IsNullOrEmpty(ViewModel.Password))
+            try
             {
-                return false;
+                User user = parameter as User;
+                if (String.IsNullOrEmpty(user.UserName) || String.IsNullOrEmpty(user.Password))
+                {
+                    return false;
+                }   
             }
+            catch (NullReferenceException)
+            {
+                Console.WriteLine("Object is null");
+            }
+
             return true;
         }
 
