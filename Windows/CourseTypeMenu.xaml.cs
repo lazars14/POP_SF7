@@ -21,7 +21,7 @@ namespace POP_SF7
 
     public enum DeciderLanguageCourseType { Language, CourseType }
 
-    public partial class LanguagesCourseTypesMenu : Window
+    public partial class CourseTypeMenu : Window
     {
         DeciderLanguageCourseType Decider { get; set; }
         public string languagesLabel = "Jezici";

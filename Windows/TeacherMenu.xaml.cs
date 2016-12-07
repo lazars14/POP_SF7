@@ -20,7 +20,7 @@ namespace POP_SF7
     
     public enum PeopleDecider { User, Teacher, Student}
 
-    public partial class PeopleMenu : Window
+    public partial class TeacherMenu : Window
     {
         public PeopleDecider Decider { get; set; }
 
@@ -28,7 +28,7 @@ namespace POP_SF7
         public string labelTeachers = "Nastavnici";
         public string labelStudents = "Ucenici";
 
-        public PeopleMenu(PeopleDecider decider)
+        public TeacherMenu(PeopleDecider decider)
         {
             InitializeComponent();
             Decider = decider;

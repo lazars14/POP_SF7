@@ -17,19 +17,17 @@ namespace POP_SF7
     /// <summary>
     /// Interaction logic for LanguageCourseTypeAddEdit.xaml
     /// </summary>
-    public partial class LanguageCourseTypeAddEdit : Window
+    public partial class CourseTypeAddEdit : Window
     {
         public Language LanguageL { get; set; }
         public CourseType CourseTypeC { get; set; }
         public DeciderLanguageCourseType Decider { get; set; }
 
-        public string labelAddLanguage = "Dodavanje novog jezika";
-        public string labelEditLanguage = "Izmena postojeceg jezika";
         public string labelAddCourseType = "Dodavanje novog tipa kursa";
         public string labelEditCourseType = "Izmena postojeceg tipa kursa";
 
         // edit language
-        public LanguageCourseTypeAddEdit(Language language, DeciderLanguageCourseType decider)
+        public CourseTypeAddEdit(Language language, DeciderLanguageCourseType decider)
         {
             InitializeComponent();
 

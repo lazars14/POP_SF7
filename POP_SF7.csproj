@@ -70,6 +70,12 @@
     <Compile Include="School\Language.cs" />
     <Compile Include="School\Payment.cs" />
     <Compile Include="School\School.cs" />
+    <Compile Include="UserControls\LanguageCourseTypeUserControl.xaml.cs">
+      <DependentUpon>LanguageCourseTypeUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PersonUserControl.xaml.cs">
+      <DependentUpon>PersonUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Validations\EMailValidationRule.cs" />
     <Compile Include="Windows\CourseAddEdit.xaml.cs">
       <DependentUpon>CourseAddEdit.xaml</DependentUpon>
@@ -77,11 +83,17 @@
     <Compile Include="Windows\CourseMenu.xaml.cs">
       <DependentUpon>CourseMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\LanguageCourseTypeAddEdit.xaml.cs">
-      <DependentUpon>LanguageCourseTypeAddEdit.xaml</DependentUpon>
+    <Compile Include="Windows\LanguageAddEdit.xaml.cs">
+      <DependentUpon>LanguageAddEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\LanguagesCourseTypesMenu.xaml.cs">
-      <DependentUpon>LanguagesCourseTypesMenu.xaml</DependentUpon>
+    <Compile Include="Windows\CourseTypeAddEdit.xaml.cs">
+      <DependentUpon>CourseTypeAddEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\LanguageMenu.xaml.cs">
+      <DependentUpon>LanguageMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\CourseTypeMenu.xaml.cs">
+      <DependentUpon>CourseTypeMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
@@ -92,14 +104,26 @@
     <Compile Include="Windows\PaymentMenu.xaml.cs">
       <DependentUpon>PaymentMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\PersonAddEdit.xaml.cs">
-      <DependentUpon>PersonAddEdit.xaml</DependentUpon>
+    <Compile Include="Windows\StudentAddEdit.xaml.cs">
+      <DependentUpon>StudentAddEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\TeacherAddEdit.xaml.cs">
+      <DependentUpon>TeacherAddEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\StudentMenu.xaml.cs">
+      <DependentUpon>StudentMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\UserMenu.xaml.cs">
+      <DependentUpon>UserMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\UserAddEdit.xaml.cs">
+      <DependentUpon>UserAddEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\SchoolEdit.xaml.cs">
       <DependentUpon>SchoolEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\PeopleMenu.xaml.cs">
-      <DependentUpon>PeopleMenu.xaml</DependentUpon>
+    <Compile Include="Windows\TeacherMenu.xaml.cs">
+      <DependentUpon>TeacherMenu.xaml</DependentUpon>
     </Compile>
     <Page Include="LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -113,6 +137,14 @@
       <DependentUpon>LoginWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UserControls\LanguageCourseTypeUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\PersonUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\CourseAddEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -121,11 +153,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\LanguageCourseTypeAddEdit.xaml">
+    <Page Include="Windows\LanguageAddEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\LanguagesCourseTypesMenu.xaml">
+    <Page Include="Windows\CourseTypeAddEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\LanguageMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\CourseTypeMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -141,7 +181,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\PersonAddEdit.xaml">
+    <Page Include="Windows\StudentAddEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\TeacherAddEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\StudentMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\UserMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\UserAddEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -149,7 +205,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\PeopleMenu.xaml">
+    <Page Include="Windows\TeacherMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -181,9 +237,7 @@
     <Resource Include="Images\logo.png" />
     <Resource Include="Images\logoIcon16.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UserControls\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

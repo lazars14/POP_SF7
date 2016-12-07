@@ -19,12 +19,12 @@
             <Grid>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Redosled"/>
-                    <RadioButton x:Name="sortAscrb" GroupName="sortOrder" Content="Rastuci" Margin="5,7,5,0"/>
+                    <RadioButton x:Name="sortAscrb" GroupName="sortOrder" Content="Rastuci" Margin="5,7,5,0" IsChecked="True"/>
                     <RadioButton x:Name="sortDescrb" GroupName="sortOrder" Content="Opadajuci" Margin="5,7,5,0"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
                     <Label Content="Kriterijum"/>
-                    <RadioButton x:Name="idrb" GroupName="sortCriteria" Content="Id" Margin="3,7,5,0"/>
+                    <RadioButton x:Name="idrb" GroupName="sortCriteria" Content="Id" Margin="3,7,5,0" IsChecked="True"/>
                     <RadioButton x:Name="amountrb" GroupName="sortCriteria" Content="Cena" Margin="5,7,5,0"/>
                     <RadioButton x:Name="studentidrb" GroupName="sortCriteria" Content="Id ucenika" Margin="5,7,5,0"/>
                     <RadioButton x:Name="daterb" GroupName="sortCriteria" Content="Datum" Margin="5,7,5,0"/>

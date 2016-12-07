@@ -17,7 +17,7 @@ namespace POP_SF7
     /// <summary>
     /// Interaction logic for PersonAddEdit.xaml
     /// </summary>
-    public partial class PersonAddEdit : Window
+    public partial class StudentAddEdit : Window
     {
         public User UserU { get; set; }
         public Teacher TeacherT { get; set; }
