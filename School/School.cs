@@ -61,15 +61,7 @@ namespace POP_SF7
             get { return accountNumber; }
             set { accountNumber = value; OnPropertyChanged("AccountNumber"); }
         }
-
-        public List<Course> ListOfCourses { get; set; }
-        public List<CourseType> ListOfCourseTypes { get; set; }
-        public List<Language> ListOfLanguages { get; set; }
-        public List<Payment> ListOfPayments { get; set; }
-        public List<User> ListOfUsers { get; set; }
-        public List<Teacher> ListOfTeachers { get; set; }
-        public List<Student> ListOfStudents { get; set; }
-
+        
         public School() { }
 
         public School(string name, string address, string phoneNumber, string email, string webSite, string PIB, string identificationNumber, string accountNumber)
@@ -82,13 +74,6 @@ namespace POP_SF7
             Pib = PIB;
             IdentificationNumber = identificationNumber;
             AccountNumber = accountNumber;
-            ListOfCourses = new List<Course>();
-            ListOfCourseTypes = new List<CourseType>();
-            ListOfLanguages = new List<Language>();
-            ListOfPayments = new List<Payment>();
-            ListOfUsers = new List<User>();
-            ListOfTeachers = new List<Teacher>();
-            ListOfStudents = new List<Student>();
         }
 
         #region INotifyPropertyChanged

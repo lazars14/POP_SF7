@@ -57,10 +57,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Data\Search.cs" />
-    <Compile Include="Data\StudentCRUD.cs" />
-    <Compile Include="Data\TeacherCRUD.cs" />
-    <Compile Include="Data\UserCRUD.cs" />
     <Compile Include="People\Student.cs" />
     <Compile Include="People\Teacher.cs" />
     <Compile Include="People\User.cs" />
@@ -113,9 +109,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Data\CourseCRUD.cs" />
-    <Compile Include="Data\CourseTypeCRUD.cs" />
-    <Compile Include="Data\LanguageCRUD.cs" />
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -162,7 +155,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\PaymentCRUD.cs" />
     <Compile Include="People\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -188,9 +180,10 @@
   <ItemGroup>
     <Resource Include="Images\logo.png" />
     <Resource Include="Images\logoIcon16.png" />
-    <Resource Include="Images\logoIcon32.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="UserControls\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
