@@ -1,5 +1,7 @@
-﻿using System;
+﻿using POP_SF7.Windows;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,78 +21,36 @@ namespace POP_SF7
     /// </summary>
     public partial class TeacherAddEdit : Window
     {
-        public User UserU { get; set; }
         public Teacher TeacherT { get; set; }
-        public Student StudentS { get; set; }
-        public PeopleDecider Decider { get; set; }
+        public Decider Decider { get; set; }
+        public ObservableCollection<Teacher> ListOfTeachers { get; set; }
 
-        public string labelAddUser = "Dodavanje novog korisnika";
-        public string labelEditUser = "Izmena postojeceg korisnika";
         public string labelAddTeacher = "Dodavanje novog nastavnika";
         public string labelEditTeacher = "Izmena postojeceg nastavnika";
-        public string labelAddStudent = "Dodavanje novog ucenika";
-        public string labelEditStudent = "Izmena postojeceg ucenika";
-        
-        // add
-        public TeacherAddEdit(PeopleDecider decider)
+
+        public TeacherAddEdit(Teacher teacher, Decider decider, ObservableCollection<Teacher> listOfTeachers)
         {
             InitializeComponent();
-
+            TeacherT = teacher;
             Decider = decider;
+            ListOfTeachers = listOfTeachers;
 
-            setupWindow();
+            DataContext = TeacherT;
+            descriptionlbl.Text = (Decider == Decider.ADD) ? labelAddTeacher : labelEditTeacher;
         }
 
-        // edit user
-        public PersonAddEdit(User selectedUser, PeopleDecider decider)
+        private void okbtn_Click(object sender, RoutedEventArgs e)
         {
-            InitializeComponent();
-
-            Decider = decider;
-            UserU = selectedUser;
-
-            setupWindow();
-        }
-
-        // edit teacher
-        public PersonAddEdit(Teacher selectedTeacher, PeopleDecider decider)
-        {
-            InitializeComponent();
-
-            Decider = decider;
-            TeacherT = selectedTeacher;
-
-            setupWindow();
-        }
-
-        // edit student
-        public PersonAddEdit(Student selectedStudent, PeopleDecider decider)
-        {
-            InitializeComponent();
-
-            Decider = decider;
-            StudentS = selectedStudent;
-
-            setupWindow();
-        }
-
-        public void setupWindow()
-        {
-            switch (Decider)
+            if(Decider == Decider.ADD)
             {
-                case PeopleDecider.User:
-                    descriptionlbl.Text = (UserU == null) ? labelAddUser : labelEditUser;
-                    tabControl.Visibility = Visibility.Collapsed;
-                    break;
-                case PeopleDecider.Teacher:
-                    descriptionlbl.Text = (TeacherT == null) ? labelAddTeacher : labelEditTeacher;
-                    usergb.Visibility = Visibility.Collapsed;
-                    break;
-                case PeopleDecider.Student:
-                    descriptionlbl.Text = (StudentS == null) ? labelAddStudent : labelEditStudent;
-                    usergb.Visibility = Visibility.Collapsed;
-                    break;
+                // dodavanje u bazi
+                ListOfTeachers.Add(TeacherT);
             }
+            else
+            {
+                // izmena u bazi
+            }
+            Close();
         }
     }
 }

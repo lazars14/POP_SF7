@@ -1,5 +1,8 @@
-﻿using System;
+﻿using POP_SF7.Windows;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,88 +23,72 @@ namespace POP_SF7
     
     public partial class StudentMenu : Window
     {
-        public string labelUsers = "Korisnici";
-        public string labelTeachers = "Nastavnici";
-        public string labelStudents = "Ucenici";
+        public ICollectionView StudentsView { get; set; }
+        public ICollectionView CoursesView { get; set; }
+        public ICollectionView PaymentsView { get; set; }
+
+        public ObservableCollection<Student> ListOfStudents { get; set; }
+        public ObservableCollection<Course> ListOfCourses { get; set; }
+        public ObservableCollection<Payment> ListOfPayments { get; set; }
+
 
         public StudentMenu()
         {
             InitializeComponent();
-            setupWindow();
-        }
+            // ucitavanje iz baze
+            ListOfStudents = new ObservableCollection<Student>();
+            ListOfCourses = new ObservableCollection<Course>();
+            ListOfPayments = new ObservableCollection<Payment>();
 
-        public void setupWindow()
-        {
-            switch (Decider)
-            {
-                case PeopleDecider.User:
-                    userstb.Text = labelUsers;
-                    jmbgchb.Content = "Korisnicko ime";
-                    coursesgb.Visibility = Visibility.Collapsed;
-                    dynamicgp.Visibility = Visibility.Collapsed;
-                    break;
-                case PeopleDecider.Teacher:
-                    userstb.Text = labelTeachers;
-                    dynamicgp.Header = "Jezici";
-                    break;
-                case PeopleDecider.Student:
-                    userstb.Text = labelStudents;
-                    dynamicgp.Header = "Uplate";
-                    break;
-            }
+            StudentsView = CollectionViewSource.GetDefaultView(ListOfStudents);
+
+            studentsdg.ItemsSource = StudentsView;
+            studentsdg.IsSynchronizedWithCurrentItem = true;
         }
 
         private void addbtn_Click(object sender, RoutedEventArgs e)
         {
-            PersonAddEdit addUser = new PersonAddEdit(Decider);
+            Student newStudent = new Student();
+            StudentAddEdit addUser = new StudentAddEdit(newStudent, Decider.ADD, ListOfStudents);
             addUser.Show();
         }
 
         private void editbtn_Click(object sender, RoutedEventArgs e)
         {
-            // provera da li je selektovana osoba, ako nije message box sa upozorenjem
-            switch (Decider)
+            Student selectedStudent = StudentsView.CurrentItem as Student;
+            if (selectedStudent == null)
             {
-                case PeopleDecider.User:
-                    User selectedUser = (User)usersdg.SelectedItem;
-                    PersonAddEdit addUser = new PersonAddEdit(selectedUser, Decider);
-                    addUser.Show();
-                    break;
-                case PeopleDecider.Teacher:
-                    Teacher selectedTeacher = (Teacher)usersdg.SelectedItem;
-                    PersonAddEdit addTeacher = new PersonAddEdit(selectedTeacher, Decider);
-                    addTeacher.Show();
-                    break;
-                case PeopleDecider.Student:
-                    Student selectedStudent = (Student)usersdg.SelectedItem;
-                    PersonAddEdit addStudent = new PersonAddEdit(selectedStudent, Decider);
-                    addStudent.Show();
-                    break;
+                MessageBox.Show("Morate da selektujete nekog ucenika kako biste ga izmenili!");
+            }
+            else
+            {
+                Student backup = (Student)selectedStudent.Clone();
+                StudentAddEdit edit = new StudentAddEdit(selectedStudent, Decider.EDIT, ListOfStudents);
+                if (edit.ShowDialog() != true)
+                {
+                    int index = ListOfStudents.IndexOf(selectedStudent);
+                    ListOfStudents[index] = backup;
+                }
             }
         }
 
         private void deletebtn_Click(object sender, RoutedEventArgs e)
         {
-            // provera da li je selektovana osoba, ako nije message box sa upozorenjem
-            switch (Decider)
+            Student selectedStudent = StudentsView.CurrentItem as Student;
+            if (selectedStudent == null)
             {
-                case PeopleDecider.User:
-                    User selectedUser = (User)usersdg.SelectedItem;
-                    // message dialog da li ste sigurni da hocete da obrisete ovu osobu?
-                    // funkcija za brisanje
-                    break;
-                case PeopleDecider.Teacher:
-                    Teacher selectedTeacher = (Teacher)usersdg.SelectedItem;
-                    // message dialog da li ste sigurni da hocete da obrisete ovu osobu?
-                    // funkcija za brisanje
-                    break;
-                case PeopleDecider.Student:
-                    Student selectedStudent = (Student)usersdg.SelectedItem;
-                    // message dialog da li ste sigurni da hocete da obrisete ovu osobu?
-                    // funkcija za brisanje
-                    break;
+                MessageBox.Show("Morate da selektujete nekog ucenika kako biste ga obrisali!");
             }
-            
+            else
+            {
+                var result = MessageBox.Show("Da li ste sigurni da hocete da obrisete ovog ucenika?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.Yes)
+                {
+                    // komanda za brisanje iz baze
+                    selectedStudent = StudentsView.CurrentItem as Student;
+                    ListOfStudents.Remove(selectedStudent);
+                }
+            }
         }
 
         private void sortbtn_Click(object sender, RoutedEventArgs e)
@@ -111,79 +98,39 @@ namespace POP_SF7
 
             if (idrb.IsChecked ?? false) ; //funkcija za sortiranje
             else if (lastnamerb.IsChecked ?? false) ; //funkcija za sortiranje
-            else if (usernamerb.IsChecked ?? false) ; //funkcija za sortiranje
+            else if (firstnamerb.IsChecked ?? false) ; //funkcija za sortiranje
         }
 
         private void searchbtn_Click(object sender, RoutedEventArgs e)
         {
             bool firstName = firstnamechb.IsChecked ?? false;
             bool lastName = lastnamechb.IsChecked ?? false;
-            bool jmbgOrUsername = jmbgchb.IsChecked ?? false;
-            if (firstName && lastName && jmbgOrUsername)
+            bool jmbg = jmbgchb.IsChecked ?? false;
+            if (firstName && lastName && jmbg)
             {
-                if (jmbgchb.Content.Equals("Korisnicko ime"))
-                {
-                    // pretrazi po username-u, ne po jmbg-u
-                }
-                else
-                {
-                    // pretrazi po jmbg-u
-                }
-                // pokupi podatke iz sva tri textboxa
-                // funkcija
+
             }
             else if (firstName && lastName)
             {
-                // pokupi podatke iz textboxa za ime i prezime
-                // funkcija
+                
             }
-            else if (firstName && jmbgOrUsername)
+            else if (firstName && jmbg)
             {
-                // provera da li je u pitanju user ili jedan od ova dva
-                if(jmbgchb.Content.Equals("Korisnicko ime"))
-                {
-                    // pretrazi po username-u, ne po jmbg-u
-                }
-                else
-                {
-                    // pretrazi po jmbg-u
-                }
-                // pokupi podatke iz textboxa za ime i jmbg(username)
-                // funkcija
+                
             }
-            else if (lastName && jmbgOrUsername)
+            else if (lastName && jmbg)
             {
-                if (jmbgchb.Content.Equals("Korisnicko ime"))
-                {
-                    // pretrazi po username-u, ne po jmbg-u
-                }
-                else
-                {
-                    // pretrazi po jmbg-u
-                }
-                // pokupi podatke iz textboxa za prezime i jmbg(username)
-                // funkcija
+                
             }
             else
             {
-                // MessageBox koji kaze da mora da se selektuje nesto od ta tri ili sve
+                MessageBox.Show("Morate da otkacite makar jedan kriterijum kako biste pretrazili ucenike!");
             }
         }
 
         private void usersdg_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(Decider == PeopleDecider.Teacher)
-            {
-                Teacher selectedTeacher = (Teacher)usersdg.SelectedItem;
-                coursesdg.ItemsSource = selectedTeacher.ListOfCourses;
-                dynamicdg.ItemsSource = selectedTeacher.ListOfLanguages;
-            }
-            else if (Decider == PeopleDecider.Student)
-            {
-                Student selectedTeacher = (Student)usersdg.SelectedItem;
-                coursesdg.ItemsSource = selectedTeacher.ListOfCourses;
-                dynamicdg.ItemsSource = selectedTeacher.ListOfPayments;
-            }
+            
         }
     }
 }

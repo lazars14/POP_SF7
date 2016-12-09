@@ -1,5 +1,7 @@
-﻿using System;
+﻿using POP_SF7.Windows;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,13 +21,36 @@ namespace POP_SF7
     /// </summary>
     public partial class CourseAddEdit : Window
     {
+        public Course Course { get; set; }
+        public ObservableCollection<Course> ListOfCourses { get; set; }
+        public Decider Decider { get; set; }
+
         public string labelCourseAdd = "Dodavanje novog kursa";
         public string labelCourseEdit = "Izmena postojeceg kursa";
 
-        public CourseAddEdit(Course course)
+        public CourseAddEdit(Course course, Decider decider, ObservableCollection<Course> listOfCourses)
         {
             InitializeComponent();
-            descriptionlbl.Text = (course == null) ? labelCourseAdd : labelCourseEdit;
+            Course = course;
+            Decider = decider;
+            ListOfCourses = listOfCourses;
+
+            DataContext = Course;
+            descriptionlbl.Text = (Decider == Decider.ADD) ? labelCourseAdd : labelCourseEdit;
+        }
+
+        private void okbtn_Click(object sender, RoutedEventArgs e)
+        {
+            if(Decider == Decider.ADD)
+            {
+                // dodavanje u bazi
+                ListOfCourses.Add(Course);
+            }
+            else
+            {
+                // izmena u bazi
+            }
+            Close();
         }
     }
 }

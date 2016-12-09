@@ -42,28 +42,28 @@
                 </Grid.ColumnDefinitions>
                 
                 <Label x:Name="namelbl" Content="Naziv" Grid.Row="0" Grid.Column="0" Margin="10,8,0,0"/>
-                <TextBox x:Name="nametb" Text="{Binding Name}" Grid.Row="0" Grid.Column="1" Margin="0,10,0,5"/>
+                <TextBox x:Name="nametb" IsReadOnly="True" Text="{Binding Name}" Grid.Row="0" Grid.Column="1" Margin="0,10,0,5"/>
 
                 <Label x:Name="addresslbl" Content="Adresa" Grid.Row="1" Grid.Column="0" Margin="10,0,0,0"/>
-                <TextBox x:Name="addresstb" Text="{Binding Address}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5"/>
+                <TextBox x:Name="addresstb" IsReadOnly="True" Text="{Binding Address}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5"/>
 
                 <Label x:Name="phonelbl" Content="Telefon" Grid.Row="2" Grid.Column="0" Margin="10,0,0,0"/>
-                <TextBox x:Name="phonetb" Text="{Binding PhoneNumber}" Grid.Row="2" Grid.Column="1" Margin="0,0,0,5"/>
+                <TextBox x:Name="phonetb" IsReadOnly="True" Text="{Binding PhoneNumber}" Grid.Row="2" Grid.Column="1" Margin="0,0,0,5"/>
 
                 <Label x:Name="emaillbl" Content="Email" Grid.Row="3" Grid.Column="0" Margin="10,0,0,0"/>
-                <TextBox x:Name="emailtb" Text="{Binding Email}" Grid.Row="3" Grid.Column="1" Margin="0,0,0,5"/>
+                <TextBox x:Name="emailtb" IsReadOnly="True" Text="{Binding Email}" Grid.Row="3" Grid.Column="1" Margin="0,0,0,5"/>
 
                 <Label x:Name="websitelbl" Content="Web sajt" Grid.Row="4" Grid.Column="0" Margin="10,0,0,0"/>
-                <TextBox x:Name="websitetb" Text="{Binding WebSite}" Grid.Row="4" Grid.Column="1" Margin="0,0,0,5"/>
+                <TextBox x:Name="websitetb" IsReadOnly="True" Text="{Binding WebSite}" Grid.Row="4" Grid.Column="1" Margin="0,0,0,5"/>
 
                 <Label x:Name="piblbl" Content="PIB" Grid.Row="5" Grid.Column="0" Margin="10,0,0,0"/>
-                <TextBox x:Name="pibtb" Text="{Binding Pib}" Grid.Row="5" Grid.Column="1" Margin="0,0,0,5"/>
+                <TextBox x:Name="pibtb" IsReadOnly="True" Text="{Binding Pib}" Grid.Row="5" Grid.Column="1" Margin="0,0,0,5"/>
 
                 <Label x:Name="idnumberlbl" Content="Maticni broj" Grid.Row="6" Grid.Column="0" Margin="10,0,0,0"/>
-                <TextBox x:Name="idnumbertb" Text="{Binding IdentificationNumber}" Grid.Row="6" Grid.Column="1" Margin="0,0,0,5"/>
+                <TextBox x:Name="idnumbertb" IsReadOnly="True" Text="{Binding IdentificationNumber}" Grid.Row="6" Grid.Column="1" Margin="0,0,0,5"/>
 
                 <Label x:Name="accountlbl" Content="Racun" Grid.Row="7" Grid.Column="0" Margin="10,0,0,0"/>
-                <TextBox x:Name="accounttb" Text="{Binding AccountNumber}" Grid.Row="7" Grid.Column="1" Margin="0,0,0,15"/>
+                <TextBox x:Name="accounttb" IsReadOnly="True" Text="{Binding AccountNumber}" Grid.Row="7" Grid.Column="1" Margin="0,0,0,15"/>
             </Grid>
         </GroupBox>
     </Grid>

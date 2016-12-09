@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF7"
         mc:Ignorable="d"
-        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="741.933" Width="329.008">
+        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="589.933" Width="329.008">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
@@ -19,7 +19,6 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="150"/>
             <RowDefinition Height="200"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
@@ -43,35 +42,7 @@
         <Label x:Name="deletedlbl" Content="Obrisan" Grid.Row="6" Grid.Column="0" Margin="10,0,0,10"/>
         <CheckBox x:Name="deletedcb" IsChecked="{Binding Path=Deleted}" Grid.Row="6" Grid.Column="1" Margin="10,7,0,10"/>
 
-        <!-- User -->
-        <GroupBox x:Name="usergb" Header="Korisnik" Grid.Row="7" Grid.ColumnSpan="2">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="40"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="200"/>
-                </Grid.ColumnDefinitions>
-                <Label x:Name="usernamelbl" Content="Korisnicko ime" Grid.Row="0" Grid.Column="0" Margin="5"/>
-                <TextBox x:Name="usernametb" Text="{Binding Path=UserName}" Grid.Row="0" Grid.Column="1" Margin="5"/>
-
-                <Label x:Name="passwordlbl" Content="Lozinka" Grid.Row="1" Grid.Column="0" Margin="5"/>
-                <TextBox x:Name="passwordtb" Text="{Binding Path=Password}" Grid.Row="1" Grid.Column="1" Margin="5"/>
-
-                <Label x:Name="rolelbl" Content="Uloga" Grid.Row="2" Grid.ColumnSpan="2" Margin="5"/>
-                <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" Margin="5,10,5,5">
-                    <RadioButton x:Name="administratorrb" Content="Administrator"/>
-                    <RadioButton x:Name="employeerb" Content="Zaposleni" Margin="15,0,0,0"/>
-                </StackPanel>
-            </Grid>
-        </GroupBox>
-
-
-        <TabControl x:Name="tabControl" TabStripPlacement="Top" Grid.Row="8" Grid.ColumnSpan="2" Margin="10,10,1,10">
-            <!-- Teacher and Student -->
+        <TabControl x:Name="tabControl" TabStripPlacement="Top" Grid.Row="7" Grid.ColumnSpan="2" Margin="10,10,1,10">
             <TabItem x:Name="coursesTabItem" Header="Kursevi" IsSelected="True">
                 <Grid>
                     <DataGrid x:Name="coursesdg" HorizontalAlignment="Left" Height="110" Margin="10,10,0,0" VerticalAlignment="Top" Width="275"/>
@@ -81,17 +52,7 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
-            <!-- Teacher -->
-            <TabItem x:Name="languagesTabItem" Header="Jezici" >
-                <Grid>
-                    <DataGrid x:Name="languagesdg" HorizontalAlignment="Left" Height="110" Margin="10,10,0,0" VerticalAlignment="Top" Width="275"/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="33" Margin="10,120,0,0" VerticalAlignment="Center" Width="275">
-                        <Button x:Name="addLanguagebtn" Content="Dodaj" Width="75" Margin="55,5,5,5" HorizontalAlignment="Center"/>
-                        <Button x:Name="deleteLanguagebtn" Content="Obrisi" Width="75" Margin="5"/>
-                    </StackPanel>
-                </Grid>
-            </TabItem>
-            <!-- Student -->
+            
             <TabItem x:Name="paymentsTabItem" Header="Uplate" >
                 <Grid>
                     <DataGrid x:Name="paymentsdg" HorizontalAlignment="Left" Height="110" Margin="10,10,0,0" VerticalAlignment="Top" Width="275"/>
@@ -104,9 +65,9 @@
         </TabControl>
 
 
-        <StackPanel Orientation="Horizontal" Grid.Row="9" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,10,0,0">
-            <Button x:Name="okbtn" Content="OK" Width="70" Height="30"/>
-            <Button x:Name="cancelbtn" Content="Cancel" Width="70" Height="30" Margin="30,0,0,0"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="8" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,10,0,0">
+            <Button x:Name="okbtn" Content="OK" Width="70" Height="30" Click="okbtn_Click"/>
+            <Button x:Name="cancelbtn" IsCancel="True" Content="Cancel" Width="70" Height="30" Margin="30,0,0,0"/>
         </StackPanel>
 
     </Grid>

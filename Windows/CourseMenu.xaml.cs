@@ -1,5 +1,8 @@
-﻿using System;
+﻿using POP_SF7.Windows;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,31 +22,72 @@ namespace POP_SF7
     /// </summary>
     public partial class CourseMenu : Window
     {
+        public ICollectionView CoursesView { get; set; }
+        public ICollectionView StudentsView { get; set; }
+        public ObservableCollection<Course> ListOfCourses { get; set; }
+        public ObservableCollection<Student> ListOfStudents { get; set; }
+
+        public List<Language> ListOfLanguages { get; set; }
+        public List<CourseType> ListOfCourseTypes { get; set; }
+
         public CourseMenu()
         {
             InitializeComponent();
+            // ucitavanje svih podataka iz baze
+            ListOfCourses = new ObservableCollection<Course>();
+            ListOfStudents = new ObservableCollection<Student>();
+            ListOfLanguages = new List<Language>();
+            ListOfCourseTypes = new List<CourseType>();
+
+            CoursesView = CollectionViewSource.GetDefaultView(ListOfCourses);
+
+            coursesdg.ItemsSource = CoursesView;
+            coursesdg.IsSynchronizedWithCurrentItem = true;
         }
 
         private void addbtn_Click(object sender, RoutedEventArgs e)
         {
-            CourseAddEdit addCourse = new CourseAddEdit(null);
-            addCourse.Show();
+            Course newCourse = new Course();
+            CourseAddEdit add = new CourseAddEdit(newCourse, Decider.ADD, ListOfCourses);
+            add.Show();
         }
 
         private void editbtn_Click(object sender, RoutedEventArgs e)
         {
-            // provera da li je selektovan kurs, ako nije message box sa upozorenjem
-            Course selectedCourse = (Course) coursesdg.SelectedItem;
-            CourseAddEdit editCourse = new CourseAddEdit(selectedCourse);
-            editCourse.Show();
+            Course selectedCourse = CoursesView.CurrentItem as Course;
+            if(selectedCourse == null)
+            {
+                MessageBox.Show("Morate da selektujete neki kurs da biste ga izmenili!");
+            }
+            else
+            {
+                Course backup = (Course)selectedCourse.Clone();
+                CourseAddEdit edit = new CourseAddEdit(selectedCourse, Decider.EDIT, ListOfCourses);
+                if(edit.ShowDialog() != true)
+                {
+                    int index = ListOfCourses.IndexOf(selectedCourse);
+                    ListOfCourses[index] = backup;
+                }
+            }
         }
 
         private void deletebtn_Click(object sender, RoutedEventArgs e)
         {
-            // provera da li je selektovan kurs, ako nije message box sa upozorenjem
-            Course selectedCourse = (Course)coursesdg.SelectedItem;
-            // message dialog da li ste sigurni da hocete da obrisete ovaj kurs?
-            // funkcija za brisanje
+            Course selectedCourse = CoursesView.CurrentItem as Course;
+            if(selectedCourse == null)
+            {
+                MessageBox.Show("Morate da selektujete neki kurs da biste ga obrisali!");
+            }
+            else
+            {
+                var result = MessageBox.Show("Da li ste sigurni da hocete da obrisete ovog korisnika?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.Yes)
+                {
+                    // komanda za brisanje iz baze
+                    selectedCourse = CoursesView.CurrentItem as Course;
+                    ListOfCourses.Remove(selectedCourse);
+                }
+            }
         }
 
         private void sortbtn_Click(object sender, RoutedEventArgs e)
@@ -62,6 +106,8 @@ namespace POP_SF7
         {
             bool language = languagechb.IsChecked ?? false;
             bool courseType = courseTypechb.IsChecked ?? false;
+
+
             if (language && courseType)
             {
                 // pokupi podatke iz oba comboboxa
@@ -79,14 +125,13 @@ namespace POP_SF7
             }
             else
             {
-                // MessageBox koji kaze da mora da se selektuje nesto od ta dva ili oba
+                MessageBox.Show("Morate da otkacite makar jedan kriterijum da biste pretrazili kurs!");
             }
         }
 
         private void coursesdg_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Course selectedCourse = (Course) coursesdg.SelectedItem;
-            studentsdg.ItemsSource = selectedCourse.ListOfStudents;
+            
         }
     }
 }

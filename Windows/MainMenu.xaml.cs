@@ -1,4 +1,5 @@
-﻿using System;
+﻿using POP_SF7.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,10 +20,13 @@ namespace POP_SF7
     /// </summary>
     public partial class MainMenu : Window
     {
+        public School School { get; set; }
+
         public MainMenu(Role role)
         {
             InitializeComponent();
-
+            // ucitavanje skole iz baze
+            School = new School();
             if(role == Role.Administrator)
             {
                 payments.Visibility = Visibility.Collapsed;
@@ -47,19 +51,23 @@ namespace POP_SF7
             switch(menuItemName)
             {
                 case "editSchoolData":
-                    SchoolEdit schoolEdit = new SchoolEdit();
-                    schoolEdit.Show();
+                    School backup = (School) School.Clone();
+                    SchoolEdit schoolEdit = new SchoolEdit(School);
+                    if(schoolEdit.ShowDialog() != true)
+                    {
+                        School = backup;
+                    }
                     break;
                 case "payments":
                     PaymentMenu payments = new PaymentMenu();
                     payments.Show();
                     break;
                 case "languages":
-                    LanguagesCourseTypesMenu languages = new LanguagesCourseTypesMenu(DeciderLanguageCourseType.Language);
+                    LanguageMenu languages = new LanguageMenu();
                     languages.Show();
                     break;
                 case "courseTypes":
-                    LanguagesCourseTypesMenu courseTypes = new LanguagesCourseTypesMenu(DeciderLanguageCourseType.CourseType);
+                    CourseTypeMenu courseTypes = new CourseTypeMenu();
                     courseTypes.Show();
                     break;
                 case "courses":
@@ -67,15 +75,15 @@ namespace POP_SF7
                     courses.Show();
                     break;
                 case "users":
-                    PeopleMenu users = new PeopleMenu(PeopleDecider.User);
+                    UserMenu users = new UserMenu();
                     users.Show();
                     break;
                 case "teachers":
-                    PeopleMenu teachers = new PeopleMenu(PeopleDecider.Teacher);
+                    TeacherMenu teachers = new TeacherMenu();
                     teachers.Show();
                     break;
                 case "students":
-                    PeopleMenu students = new PeopleMenu(PeopleDecider.Student);
+                    StudentMenu students = new StudentMenu();
                     students.Show();
                     break;
             }

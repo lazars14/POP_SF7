@@ -1,5 +1,8 @@
-﻿using System;
+﻿using POP_SF7.Windows;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,31 +22,65 @@ namespace POP_SF7
     /// </summary>
     public partial class PaymentMenu : Window
     {
+        public ICollectionView view { get; set; }
+        public ObservableCollection<Payment> ListOfPayments { get; set; }
+
+        public List<Course> ListOfCourses { get; set; }
+        public List<Student> ListOfStudents { get; set; }
+
         public PaymentMenu()
         {
             InitializeComponent();
+            // ucitavanje uplata iz baze
+            view = CollectionViewSource.GetDefaultView(ListOfPayments);
+
+            paymentsdg.ItemsSource = view;
+            paymentsdg.IsSynchronizedWithCurrentItem = true;
         }
 
         private void addbtn_Click(object sender, RoutedEventArgs e)
         {
-            PaymentAddEdit addPayment = new PaymentAddEdit(null);
+            Payment newPayment = new Payment();
+            PaymentAddEdit addPayment = new PaymentAddEdit(newPayment, Decider.ADD, ListOfPayments);
             addPayment.Show();
         }
 
         private void editbtn_Click(object sender, RoutedEventArgs e)
         {
-            // provera da li je selektovana uplata, ako nije message box sa upozorenjem
-            Payment selectedPayment = (Payment)paymentsdg.SelectedItem;
-            PaymentAddEdit editPayment = new PaymentAddEdit(selectedPayment);
-            editPayment.Show();
+            Payment selectedPayment = view.CurrentItem as Payment;
+            if(selectedPayment == null)
+            {
+                MessageBox.Show("Morate da selektujete jednu uplatu da biste je izmenili!");
+            }
+            else
+            {
+                Payment backup = (Payment)selectedPayment.Clone();
+                PaymentAddEdit edit = new PaymentAddEdit(selectedPayment, Decider.EDIT, ListOfPayments);
+                if(edit.ShowDialog() != true)
+                {
+                    int index = ListOfPayments.IndexOf(selectedPayment);
+                    ListOfPayments[index] = backup;
+                }
+            }
         }
 
         private void deletebtn_Click(object sender, RoutedEventArgs e)
         {
-            // provera da li je selektovana uplata, ako nije message box sa upozorenjem
-            Payment selectedPayment = (Payment)paymentsdg.SelectedItem;
-            // message dialog da li ste sigurni da hocete da obrisete ovaj kurs?
-            // funkcija za brisanje
+            Payment selectedPayment = view.CurrentItem as Payment;
+            if (selectedPayment == null)
+            {
+                MessageBox.Show("Morate da selektujete jednu uplatu da biste je izmenili!");
+            }
+            else
+            {
+                var result = MessageBox.Show("Da li ste sigurni da hocete da obrisete ovu uplatu?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.Yes)
+                {
+                    // komanda za brisanje iz baze
+                    selectedPayment = view.CurrentItem as Payment;
+                    ListOfPayments.Remove(selectedPayment);
+                }
+            }
         }
 
         private void sortbtn_Click(object sender, RoutedEventArgs e)
@@ -61,6 +98,7 @@ namespace POP_SF7
         {
             bool course = coursechb.IsChecked ?? false;
             bool student = studentchb.IsChecked ?? false;
+
             if (course && student)
             {
                 // pokupi podatke iz oba textboxa
@@ -78,7 +116,7 @@ namespace POP_SF7
             }
             else
             {
-                // MessageBox koji kaze da mora da se selektuje nesto od ta dva ili oba
+                MessageBox.Show("Morate da otkacite jedan ili oba kriterijuma da biste pretrazili kurseve!");
             }
         }
     }

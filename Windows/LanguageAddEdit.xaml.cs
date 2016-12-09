@@ -40,7 +40,7 @@ namespace POP_SF7.Windows
             Decider = decider;
             ListOfLanguages = listOfLanguages;
 
-            descriptionlbl.Text = (language == null) ? labelAddLanguage : labelEditLanguage;
+            descriptionlbl.Text = (decider == Decider.ADD) ? labelAddLanguage : labelEditLanguage;
         }
 
         private void okbtn_Click(object sender, RoutedEventArgs e)

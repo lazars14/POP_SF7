@@ -1,5 +1,8 @@
-﻿using System;
+﻿using POP_SF7.Windows;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,88 +23,63 @@ namespace POP_SF7
     
     public partial class UserMenu : Window
     {
-        public string labelUsers = "Korisnici";
-        public string labelTeachers = "Nastavnici";
-        public string labelStudents = "Ucenici";
+        public ICollectionView view { get; set; }
+        public ObservableCollection<User> ListOfUsers { get; set; }
 
         public UserMenu()
         {
             InitializeComponent();
-            setupWindow();
-        }
+            // ucitavanje korisnika iz baze
+            ListOfUsers = new ObservableCollection<User>();
+            view = CollectionViewSource.GetDefaultView(ListOfUsers);
 
-        public void setupWindow()
-        {
-            switch (Decider)
-            {
-                case PeopleDecider.User:
-                    userstb.Text = labelUsers;
-                    jmbgchb.Content = "Korisnicko ime";
-                    coursesgb.Visibility = Visibility.Collapsed;
-                    dynamicgp.Visibility = Visibility.Collapsed;
-                    break;
-                case PeopleDecider.Teacher:
-                    userstb.Text = labelTeachers;
-                    dynamicgp.Header = "Jezici";
-                    break;
-                case PeopleDecider.Student:
-                    userstb.Text = labelStudents;
-                    dynamicgp.Header = "Uplate";
-                    break;
-            }
+            usersdg.ItemsSource = view;
+            usersdg.IsSynchronizedWithCurrentItem = true;
         }
 
         private void addbtn_Click(object sender, RoutedEventArgs e)
         {
-            PersonAddEdit addUser = new PersonAddEdit(Decider);
+            User newUser = new User();
+            UserAddEdit addUser = new UserAddEdit(newUser, Decider.ADD, ListOfUsers);
             addUser.Show();
         }
 
         private void editbtn_Click(object sender, RoutedEventArgs e)
         {
-            // provera da li je selektovana osoba, ako nije message box sa upozorenjem
-            switch (Decider)
+            User selectedUser = view.CurrentItem as User;
+            if(selectedUser == null)
             {
-                case PeopleDecider.User:
-                    User selectedUser = (User)usersdg.SelectedItem;
-                    PersonAddEdit addUser = new PersonAddEdit(selectedUser, Decider);
-                    addUser.Show();
-                    break;
-                case PeopleDecider.Teacher:
-                    Teacher selectedTeacher = (Teacher)usersdg.SelectedItem;
-                    PersonAddEdit addTeacher = new PersonAddEdit(selectedTeacher, Decider);
-                    addTeacher.Show();
-                    break;
-                case PeopleDecider.Student:
-                    Student selectedStudent = (Student)usersdg.SelectedItem;
-                    PersonAddEdit addStudent = new PersonAddEdit(selectedStudent, Decider);
-                    addStudent.Show();
-                    break;
+                MessageBox.Show("Morate da selektujete nekog korisnika kako biste ga izmenili!");
+            }
+            else
+            {
+                User backup = (User)selectedUser.Clone();
+                UserAddEdit edit = new UserAddEdit(selectedUser, Decider.EDIT, ListOfUsers);
+                if(edit.ShowDialog() != true)
+                {
+                    int index = ListOfUsers.IndexOf(selectedUser);
+                    ListOfUsers[index] = backup;
+                }
             }
         }
 
         private void deletebtn_Click(object sender, RoutedEventArgs e)
         {
-            // provera da li je selektovana osoba, ako nije message box sa upozorenjem
-            switch (Decider)
+            User selectedUser = view.CurrentItem as User;
+            if (selectedUser == null)
             {
-                case PeopleDecider.User:
-                    User selectedUser = (User)usersdg.SelectedItem;
-                    // message dialog da li ste sigurni da hocete da obrisete ovu osobu?
-                    // funkcija za brisanje
-                    break;
-                case PeopleDecider.Teacher:
-                    Teacher selectedTeacher = (Teacher)usersdg.SelectedItem;
-                    // message dialog da li ste sigurni da hocete da obrisete ovu osobu?
-                    // funkcija za brisanje
-                    break;
-                case PeopleDecider.Student:
-                    Student selectedStudent = (Student)usersdg.SelectedItem;
-                    // message dialog da li ste sigurni da hocete da obrisete ovu osobu?
-                    // funkcija za brisanje
-                    break;
+                MessageBox.Show("Morate da selektujete nekog korisnika kako biste ga obrisali!");
             }
-            
+            else
+            {
+                var result = MessageBox.Show("Da li ste sigurni da hocete da obrisete ovog korisnika?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.Yes)
+                {
+                    // komanda za brisanje iz baze
+                    selectedUser = view.CurrentItem as User;
+                    ListOfUsers.Remove(selectedUser);
+                }
+            }
         }
 
         private void sortbtn_Click(object sender, RoutedEventArgs e)
@@ -119,70 +97,30 @@ namespace POP_SF7
             bool firstName = firstnamechb.IsChecked ?? false;
             bool lastName = lastnamechb.IsChecked ?? false;
             bool jmbgOrUsername = jmbgchb.IsChecked ?? false;
+
+            string firstNameStr = firstnametb.Text;
+            string lastNameStr = firstnametb.Text;
+            string userNameStr = firstnametb.Text;
+
             if (firstName && lastName && jmbgOrUsername)
             {
-                if (jmbgchb.Content.Equals("Korisnicko ime"))
-                {
-                    // pretrazi po username-u, ne po jmbg-u
-                }
-                else
-                {
-                    // pretrazi po jmbg-u
-                }
-                // pokupi podatke iz sva tri textboxa
-                // funkcija
+                // f-ja za pretragu u bazi
             }
             else if (firstName && lastName)
             {
-                // pokupi podatke iz textboxa za ime i prezime
-                // funkcija
+                // f-ja za pretragu u bazi
             }
             else if (firstName && jmbgOrUsername)
             {
-                // provera da li je u pitanju user ili jedan od ova dva
-                if(jmbgchb.Content.Equals("Korisnicko ime"))
-                {
-                    // pretrazi po username-u, ne po jmbg-u
-                }
-                else
-                {
-                    // pretrazi po jmbg-u
-                }
-                // pokupi podatke iz textboxa za ime i jmbg(username)
-                // funkcija
+                // f-ja za pretragu u bazi
             }
             else if (lastName && jmbgOrUsername)
             {
-                if (jmbgchb.Content.Equals("Korisnicko ime"))
-                {
-                    // pretrazi po username-u, ne po jmbg-u
-                }
-                else
-                {
-                    // pretrazi po jmbg-u
-                }
-                // pokupi podatke iz textboxa za prezime i jmbg(username)
-                // funkcija
+                // f-ja za pretragu u bazi
             }
             else
             {
-                // MessageBox koji kaze da mora da se selektuje nesto od ta tri ili sve
-            }
-        }
-
-        private void usersdg_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if(Decider == PeopleDecider.Teacher)
-            {
-                Teacher selectedTeacher = (Teacher)usersdg.SelectedItem;
-                coursesdg.ItemsSource = selectedTeacher.ListOfCourses;
-                dynamicdg.ItemsSource = selectedTeacher.ListOfLanguages;
-            }
-            else if (Decider == PeopleDecider.Student)
-            {
-                Student selectedTeacher = (Student)usersdg.SelectedItem;
-                coursesdg.ItemsSource = selectedTeacher.ListOfCourses;
-                dynamicdg.ItemsSource = selectedTeacher.ListOfPayments;
+                MessageBox.Show("Morate da otkacite jedan ili vise kriterijuma za pretragu!");
             }
         }
     }

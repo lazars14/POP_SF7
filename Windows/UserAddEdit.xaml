@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF7"
         mc:Ignorable="d"
-        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="741.933" Width="329.008">
+        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="533.266" Width="329.008">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
@@ -20,7 +20,6 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="150"/>
-            <RowDefinition Height="200"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         <TextBlock x:Name="descriptionlbl" Text="Izmena podataka o skoli" TextAlignment="Center" Grid.ColumnSpan="2" Grid.Row="0" Margin="10, 15, 5, 10"/>
@@ -70,43 +69,9 @@
         </GroupBox>
 
 
-        <TabControl x:Name="tabControl" TabStripPlacement="Top" Grid.Row="8" Grid.ColumnSpan="2" Margin="10,10,1,10">
-            <!-- Teacher and Student -->
-            <TabItem x:Name="coursesTabItem" Header="Kursevi" IsSelected="True">
-                <Grid>
-                    <DataGrid x:Name="coursesdg" HorizontalAlignment="Left" Height="110" Margin="10,10,0,0" VerticalAlignment="Top" Width="275"/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="33" Margin="10,120,0,0" VerticalAlignment="Center" Width="275">
-                        <Button x:Name="addCoursebtn" Content="Dodaj" Width="75" Margin="55,5,5,5" HorizontalAlignment="Center"/>
-                        <Button x:Name="deleteCoursebtn" Content="Obrisi" Width="75" Margin="5"/>
-                    </StackPanel>
-                </Grid>
-            </TabItem>
-            <!-- Teacher -->
-            <TabItem x:Name="languagesTabItem" Header="Jezici" >
-                <Grid>
-                    <DataGrid x:Name="languagesdg" HorizontalAlignment="Left" Height="110" Margin="10,10,0,0" VerticalAlignment="Top" Width="275"/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="33" Margin="10,120,0,0" VerticalAlignment="Center" Width="275">
-                        <Button x:Name="addLanguagebtn" Content="Dodaj" Width="75" Margin="55,5,5,5" HorizontalAlignment="Center"/>
-                        <Button x:Name="deleteLanguagebtn" Content="Obrisi" Width="75" Margin="5"/>
-                    </StackPanel>
-                </Grid>
-            </TabItem>
-            <!-- Student -->
-            <TabItem x:Name="paymentsTabItem" Header="Uplate" >
-                <Grid>
-                    <DataGrid x:Name="paymentsdg" HorizontalAlignment="Left" Height="110" Margin="10,10,0,0" VerticalAlignment="Top" Width="275"/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="33" Margin="10,120,0,0" VerticalAlignment="Center" Width="275">
-                        <Button x:Name="addPaymentbtn" Content="Dodaj" Width="75" Margin="55,5,5,5" HorizontalAlignment="Center"/>
-                        <Button x:Name="deletePaymentbtn" Content="Obrisi" Width="75" Margin="5"/>
-                    </StackPanel>
-                </Grid>
-            </TabItem>
-        </TabControl>
-
-
         <StackPanel Orientation="Horizontal" Grid.Row="9" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,10,0,0">
-            <Button x:Name="okbtn" Content="OK" Width="70" Height="30"/>
-            <Button x:Name="cancelbtn" Content="Cancel" Width="70" Height="30" Margin="30,0,0,0"/>
+            <Button x:Name="okbtn" Content="OK" Width="70" Height="30" Click="okbtn_Click"/>
+            <Button x:Name="cancelbtn" IsCancel="True" Content="Cancel" Width="70" Height="30" Margin="30,0,0,0"/>
         </StackPanel>
 
     </Grid>
