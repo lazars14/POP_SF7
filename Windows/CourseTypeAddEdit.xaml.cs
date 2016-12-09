@@ -1,5 +1,7 @@
-﻿using System;
+﻿using POP_SF7.Windows;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,51 +21,36 @@ namespace POP_SF7
     /// </summary>
     public partial class CourseTypeAddEdit : Window
     {
-        public Language LanguageL { get; set; }
         public CourseType CourseTypeC { get; set; }
-        public DeciderLanguageCourseType Decider { get; set; }
+        public Decider Decider { get; set; }
+        public ObservableCollection<CourseType> ListOfCourseTypes { get; set; }
 
         public string labelAddCourseType = "Dodavanje novog tipa kursa";
         public string labelEditCourseType = "Izmena postojeceg tipa kursa";
 
-        // edit language
-        public CourseTypeAddEdit(Language language, DeciderLanguageCourseType decider)
-        {
-            InitializeComponent();
-
-            LanguageL = language;
-            Decider = decider;
-
-            setLabel();
-        }
-
-        // edit courseType
-        public LanguageCourseTypeAddEdit(CourseType courseType, DeciderLanguageCourseType decider)
+        public CourseTypeAddEdit(CourseType courseType, Decider decider, ObservableCollection<CourseType> listOfCourseTypes)
         {
             InitializeComponent();
 
             CourseTypeC = courseType;
             Decider = decider;
+            ListOfCourseTypes = listOfCourseTypes;
 
-            setLabel();
+            DataContext = CourseTypeC;
+
+            descriptionlbl.Text = (courseType == null) ? labelAddCourseType : labelEditCourseType;
         }
 
-        // add language or courseType
-        public LanguageCourseTypeAddEdit(DeciderLanguageCourseType decider)
+        private void okbtn_Click(object sender, RoutedEventArgs e)
         {
-            InitializeComponent();
-            setLabel();
-        }
-
-        public void setLabel()
-        {
-            if (Decider == DeciderLanguageCourseType.Language)
+            if (Decider == Decider.ADD)
             {
-                descriptionlbl.Text = (LanguageL == null) ? labelAddLanguage : labelEditLanguage;
+                // dodavanje u bazi
+                ListOfCourseTypes.Add(CourseTypeC);
             }
             else
             {
-                descriptionlbl.Text = (CourseTypeC == null) ? labelAddCourseType : labelEditCourseType;
+                // izmena u bazi
             }
         }
     }

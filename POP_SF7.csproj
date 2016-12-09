@@ -65,9 +65,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="School\Course.cs" />
-    <Compile Include="School\CourseType.cs" />
-    <Compile Include="School\Language.cs" />
+    <Compile Include="Course\Course.cs" />
+    <Compile Include="Course\CourseType.cs" />
+    <Compile Include="Course\Language.cs" />
     <Compile Include="School\Payment.cs" />
     <Compile Include="School\School.cs" />
     <Compile Include="UserControls\LanguageCourseTypeUserControl.xaml.cs">

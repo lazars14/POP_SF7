@@ -1,5 +1,8 @@
-﻿using System;
+﻿using POP_SF7.Windows;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,65 +22,71 @@ namespace POP_SF7
     /// </summary>
     /// 
 
-    public enum DeciderLanguageCourseType { Language, CourseType }
-
     public partial class CourseTypeMenu : Window
     {
-        DeciderLanguageCourseType Decider { get; set; }
-        public string languagesLabel = "Jezici";
-        public string courseTypesLabel = "Tipovi kurseva";
+        public ICollectionView view{ get; set; }
+        public ObservableCollection<CourseType> ListOfCourseTypes { get; set; }
 
-        public LanguagesCourseTypesMenu(DeciderLanguageCourseType decider)
+        public CourseTypeMenu()
         {
-            Decider = decider;
             InitializeComponent();
-            descriptionlbl.Text = (decider == DeciderLanguageCourseType.Language) ? languagesLabel : courseTypesLabel;
+            // ucitavanje tipova kurseva iz baze u listu
+            ListOfCourseTypes = new ObservableCollection<CourseType>();
+            view = CollectionViewSource.GetDefaultView(ListOfCourseTypes);
+
+            dynamicdg.ItemsSource = view;
+            dynamicdg.IsSynchronizedWithCurrentItem = true;
         }
 
         private void addbtn_Click(object sender, RoutedEventArgs e)
         {
-            LanguageCourseTypeAddEdit add = new LanguageCourseTypeAddEdit(Decider);
+            CourseType newCourseType = new CourseType();
+            CourseTypeAddEdit add = new CourseTypeAddEdit(newCourseType, Decider.ADD, ListOfCourseTypes);
             add.Show();
         }
 
         private void editbtn_Click(object sender, RoutedEventArgs e)
         {
-            // provera da li je selektovan jezik, ako nije message box
-            if(Decider == DeciderLanguageCourseType.Language)
+            CourseType selectedCourseType = (CourseType)dynamicdg.SelectedItem;
+            if(selectedCourseType == null)
             {
-                Language selectedLanguage = (Language) dynamicdg.SelectedItem;
-                LanguageCourseTypeAddEdit edit = new LanguageCourseTypeAddEdit(selectedLanguage, Decider);
-                edit.Show();
+                MessageBox.Show("Morate da selektujete red u tabeli kako bi izmenili tip kursa!");
             }
             else
             {
-                CourseType selectedCourseType = (CourseType)dynamicdg.SelectedItem;
-                LanguageCourseTypeAddEdit edit = new LanguageCourseTypeAddEdit(selectedCourseType, Decider);
-                edit.Show();
+                CourseType backup = (CourseType)selectedCourseType.Clone();
+           
+                CourseTypeAddEdit edit = new CourseTypeAddEdit(selectedCourseType, Decider.EDIT, ListOfCourseTypes);
+                if(edit.ShowDialog() != true)
+                {
+                    int index = ListOfCourseTypes.IndexOf(selectedCourseType);
+                    ListOfCourseTypes[index] = backup;
+                }
             }
-
         }
 
         private void deletebtn_Click(object sender, RoutedEventArgs e)
         {
-            // provera da li je selektovan jezik, ako nije message box
-            if (Decider == DeciderLanguageCourseType.Language)
+            CourseType selectedCourseType = (CourseType)dynamicdg.SelectedItem;
+            if (selectedCourseType == null)
             {
-                Language selectedLanguage = (Language)dynamicdg.SelectedItem;
-                // message box da li ste sigurni
-                // f-ja za brisanje
+                MessageBox.Show("Morate da selektujete red u tabeli kako bi izmenili tip kursa!");
             }
             else
             {
-                CourseType selectedCourseType = (CourseType)dynamicdg.SelectedItem;
-                // message box da li ste sigurni
-                // f-ja za brisanje
+                var result = MessageBox.Show("Da li ste sigurni da hocete da obrisete ovaj tip kursa?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if(result == MessageBoxResult.Yes)
+                {
+                    // komanda za brisanje iz baze
+                    selectedCourseType = view.CurrentItem as CourseType;
+                    ListOfCourseTypes.Remove(selectedCourseType);
+                }
             }
         }
 
         private void closebtn_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }
