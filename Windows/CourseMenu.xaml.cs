@@ -96,6 +96,7 @@ namespace POP_SF7
             bool ascending = sortAscrb.IsChecked ?? false;
             ListSortDirection direction = (ascending == true) ? ListSortDirection.Ascending : ListSortDirection.Descending;
 
+            CoursesView.SortDescriptions.Clear();
             if (idrb.IsChecked ?? false)
             {
                 CoursesView.SortDescriptions.Add(new SortDescription(("Id"), direction));
@@ -113,6 +114,7 @@ namespace POP_SF7
             {
                 CoursesView.SortDescriptions.Add(new SortDescription(("EndDate"), direction));
             }
+            CoursesView.Refresh();
         }
 
         private void searchbtn_Click(object sender, RoutedEventArgs e)

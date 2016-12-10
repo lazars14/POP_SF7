@@ -95,6 +95,7 @@ namespace POP_SF7
             bool ascending = sortAscrb.IsChecked ?? false;
             ListSortDirection direction = (ascending == true) ? ListSortDirection.Ascending : ListSortDirection.Descending;
 
+            TeachersView.SortDescriptions.Clear();
             if (idrb.IsChecked ?? false)
             {
                 TeachersView.SortDescriptions.Add(new SortDescription("Id", direction));
@@ -107,6 +108,7 @@ namespace POP_SF7
             {
                 TeachersView.SortDescriptions.Add(new SortDescription("FirstName", direction));
             }
+            TeachersView.Refresh();
         }
 
         private void searchbtn_Click(object sender, RoutedEventArgs e)
