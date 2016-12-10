@@ -87,11 +87,21 @@ namespace POP_SF7
         {
             // problem oko bool? (moze da bude i null) i bool
             bool ascending = sortAscrb.IsChecked ?? false;
+            ListSortDirection direction = (ascending == true) ? ListSortDirection.Ascending : ListSortDirection.Descending;
 
-            if (idrb.IsChecked ?? false) ; //funkcija za sortiranje
-            else if (amountrb.IsChecked ?? false) ; //funkcija za sortiranje
-            else if (studentidrb.IsChecked ?? false) ; //funkcija za sortiranje
-            else if (daterb.IsChecked ?? false) ; //funkcija za sortiranje
+            if (idrb.IsChecked ?? false)
+            {
+                view.SortDescriptions.Add(new SortDescription(("Id"), direction));
+            }
+            else if (amountrb.IsChecked ?? false)
+            {
+                view.SortDescriptions.Add(new SortDescription(("Amount"), direction));
+            }
+            else if (studentidrb.IsChecked ?? false) ;
+            else if (daterb.IsChecked ?? false)
+            {
+                view.SortDescriptions.Add(new SortDescription(("Date"), direction));
+            }
         }
 
         private void searchbtn_Click(object sender, RoutedEventArgs e)
