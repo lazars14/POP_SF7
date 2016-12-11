@@ -116,14 +116,18 @@ namespace POP_SF7
             bool firstName = firstnamechb.IsChecked ?? false;
             bool lastName = lastnamechb.IsChecked ?? false;
             bool jmbg = jmbgchb.IsChecked ?? false;
+
+            string firstNameStr = firstnametb.Text;
+            string lastNameStr = lastnametb.Text;
+            string jmbgStr = jmbgtb.Text;
+
             if (firstName && lastName && jmbg)
             {
                   
             }
             else if (firstName && lastName)
             {
-                // pokupi podatke iz textboxa za ime i prezime
-                // funkcija
+                
             }
             else if (firstName && jmbg)
             {
@@ -142,6 +146,11 @@ namespace POP_SF7
         private void usersdg_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             
+        }
+
+        private void cancelSearchbtn_Click(object sender, RoutedEventArgs e)
+        {
+            TeachersView.Filter = null;
         }
     }
 }

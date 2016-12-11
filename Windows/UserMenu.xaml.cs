@@ -108,13 +108,13 @@ namespace POP_SF7
         {
             bool firstName = firstnamechb.IsChecked ?? false;
             bool lastName = lastnamechb.IsChecked ?? false;
-            bool jmbgOrUsername = jmbgchb.IsChecked ?? false;
+            bool username = usernamechb.IsChecked ?? false;
 
             string firstNameStr = firstnametb.Text;
             string lastNameStr = firstnametb.Text;
             string userNameStr = firstnametb.Text;
 
-            if (firstName && lastName && jmbgOrUsername)
+            if (firstName && lastName && username)
             {
                 // f-ja za pretragu u bazi
             }
@@ -122,11 +122,11 @@ namespace POP_SF7
             {
                 // f-ja za pretragu u bazi
             }
-            else if (firstName && jmbgOrUsername)
+            else if (firstName && username)
             {
                 // f-ja za pretragu u bazi
             }
-            else if (lastName && jmbgOrUsername)
+            else if (lastName && username)
             {
                 // f-ja za pretragu u bazi
             }
@@ -134,6 +134,11 @@ namespace POP_SF7
             {
                 MessageBox.Show("Morate da otkacite jedan ili vise kriterijuma za pretragu!");
             }
+        }
+
+        private void cancelSearchbtn_Click(object sender, RoutedEventArgs e)
+        {
+            view.Filter = null;
         }
     }
 }

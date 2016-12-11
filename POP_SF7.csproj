@@ -104,6 +104,9 @@
     <Compile Include="Windows\PaymentMenu.xaml.cs">
       <DependentUpon>PaymentMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\SelectFromList.xaml.cs">
+      <DependentUpon>SelectFromList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\StudentAddEdit.xaml.cs">
       <DependentUpon>StudentAddEdit.xaml</DependentUpon>
     </Compile>
@@ -178,6 +181,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\PaymentMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\SelectFromList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

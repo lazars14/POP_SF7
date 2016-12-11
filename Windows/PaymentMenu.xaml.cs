@@ -98,7 +98,6 @@ namespace POP_SF7
             {
                 view.SortDescriptions.Add(new SortDescription(("Amount"), direction));
             }
-            else if (studentidrb.IsChecked ?? false) ;
             else if (daterb.IsChecked ?? false)
             {
                 view.SortDescriptions.Add(new SortDescription(("Date"), direction));
@@ -130,6 +129,11 @@ namespace POP_SF7
             {
                 MessageBox.Show("Morate da otkacite jedan ili oba kriterijuma da biste pretrazili kurseve!");
             }
+        }
+
+        private void cancelSearchbtn_Click(object sender, RoutedEventArgs e)
+        {
+            view.Filter = null;
         }
     }
 }

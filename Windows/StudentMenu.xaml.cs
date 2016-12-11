@@ -144,5 +144,10 @@ namespace POP_SF7
         {
             
         }
+
+        private void cancelSearchbtn_Click(object sender, RoutedEventArgs e)
+        {
+            StudentsView.Filter = null;
+        }
     }
 }

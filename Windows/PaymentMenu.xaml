@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF7"
         mc:Ignorable="d"
-        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="388.179" Width="773.109">
+        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="422.974" Width="773.109">
     <Grid Margin="0,0,0,1">
         <TextBox x:Name="paymentstb" HorizontalAlignment="Left" Height="23" Margin="9,10,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="Uplate" VerticalAlignment="Top" Width="739"/>
         <DataGrid x:Name="paymentsdg" HorizontalAlignment="Left" Height="149" Margin="9,38,0,0" VerticalAlignment="Top" Width="666"/>
@@ -15,7 +15,7 @@
             <Button x:Name="deletebtn" Content="Obrisi" Height="30" Click="deletebtn_Click"/>
         </StackPanel>
 
-        <GroupBox Header="Sortiranje" HorizontalAlignment="Left" Height="123" Margin="332,204,0,0" VerticalAlignment="Top" Width="320">
+        <GroupBox Header="Sortiranje" HorizontalAlignment="Left" Height="123" Margin="328,192,0,0" VerticalAlignment="Top" Width="320">
             <Grid>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Redosled"/>
@@ -26,7 +26,6 @@
                     <Label Content="Kriterijum"/>
                     <RadioButton x:Name="idrb" GroupName="sortCriteria" Content="Id" Margin="3,7,5,0" IsChecked="True"/>
                     <RadioButton x:Name="amountrb" GroupName="sortCriteria" Content="Cena" Margin="5,7,5,0"/>
-                    <RadioButton x:Name="studentidrb" GroupName="sortCriteria" Content="Id ucenika" Margin="5,7,5,0"/>
                     <RadioButton x:Name="daterb" GroupName="sortCriteria" Content="Datum" Margin="5,7,5,0"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,60,0,0">
@@ -35,9 +34,10 @@
             </Grid>
         </GroupBox>
 
-        <GroupBox x:Name="coursesgb" Header="Pretraga" HorizontalAlignment="Left" Height="144" Margin="10,204,0,0" VerticalAlignment="Top" Width="302">
+        <GroupBox x:Name="coursesgb" Header="Pretraga" HorizontalAlignment="Left" Height="189" Margin="9,192,0,0" VerticalAlignment="Top" Width="302">
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="40"/>
@@ -49,7 +49,6 @@
                 <Label Content="Kriterijum" Grid.Row="0" Grid.Column="0"/>
                 <CheckBox x:Name="coursechb" Content="Kurs" Grid.Row="0" Grid.Column="1" Margin="0,7,116,0"/>
                 <CheckBox x:Name="studentchb" Content="Ucenik" Grid.Row="0" Grid.Column="1" Margin="60,7,45,0"/>
-                <Button x:Name="searchbtn" Content="Pretrazi" Grid.Row="0" Grid.Column="1" Width="50" Margin="139,0,-18,10" Click="searchbtn_Click"/>
 
                 <Label Content="Kurs" Grid.Row="1" Grid.Column="0"/>
                 <TextBox x:Name="coursetb" Grid.Row="1" Grid.Column="2" Margin="0,0,25,10"/>
@@ -58,6 +57,11 @@
                 <Label Content="Ucenik" Grid.Row="2" Grid.Column="0"/>
                 <TextBox x:Name="studenttb" Grid.Row="2" Grid.Column="2" Margin="0,0,25,10"/>
                 <Button x:Name="studentbtn" Content="..." Grid.Row="2" Grid.Column="1" Width="30" Margin="159,0,-18,10"/>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1">
+                    <Button x:Name="searchbtn" Content="Pretrazi" Margin="5" Width="50" Click="searchbtn_Click"/>
+                    <Button x:Name="cancelSearchbtn" Content="Ponisti" Margin="5" Width="50" Click="cancelSearchbtn_Click"/>
+                </StackPanel>
             </Grid>
         </GroupBox>
     </Grid>

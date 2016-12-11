@@ -105,7 +105,10 @@ namespace POP_SF7
             {
                 CoursesView.SortDescriptions.Add(new SortDescription(("Price"), direction));
             }
-            else if (numberOfStudentsrb.IsChecked ?? false) ;
+            else if (numberOfStudentsrb.IsChecked ?? false)
+            {
+
+            }
             else if (startDaterb.IsChecked ?? false)
             {
                 CoursesView.SortDescriptions.Add(new SortDescription(("StartDate"), direction));
@@ -147,6 +150,11 @@ namespace POP_SF7
         private void coursesdg_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             
+        }
+
+        private void cancelSearchbtn_Click(object sender, RoutedEventArgs e)
+        {
+            CoursesView.Filter = null;
         }
     }
 }
