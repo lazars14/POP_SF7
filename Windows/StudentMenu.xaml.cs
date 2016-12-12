@@ -118,6 +118,7 @@ namespace POP_SF7
             bool firstName = firstnamechb.IsChecked ?? false;
             bool lastName = lastnamechb.IsChecked ?? false;
             bool jmbg = jmbgchb.IsChecked ?? false;
+
             if (firstName && lastName && jmbg)
             {
 
@@ -133,6 +134,18 @@ namespace POP_SF7
             else if (lastName && jmbg)
             {
                 
+            }
+            else if (firstName)
+            {
+
+            }
+            else if (lastName)
+            {
+
+            }
+            else if (jmbg)
+            {
+
             }
             else
             {

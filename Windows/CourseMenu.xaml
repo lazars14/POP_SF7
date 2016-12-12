@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="460.184" Width="817.867">
     <Grid>
-        <TextBox x:Name="coursestb" HorizontalAlignment="Left" Height="23" Margin="9,10,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="Kursevi" VerticalAlignment="Top" Width="791"/>
+        <TextBlock x:Name="coursestb" HorizontalAlignment="Left" Height="23" Margin="9,10,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="Kursevi" VerticalAlignment="Top" Width="791"/>
         <DataGrid x:Name="coursesdg" HorizontalAlignment="Left" Height="149" Margin="9,38,0,0" VerticalAlignment="Top" Width="717" SelectionChanged="coursesdg_SelectionChanged"/>
         <StackPanel HorizontalAlignment="Left" Height="149" Margin="742,38,0,0" VerticalAlignment="Top" Width="58">
             <Button x:Name="addbtn" Content="Dodaj" Height="30" Margin="0,20,0,0" Click="addbtn_Click"/>

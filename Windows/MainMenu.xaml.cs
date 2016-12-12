@@ -86,6 +86,11 @@ namespace POP_SF7
                     StudentMenu students = new StudentMenu();
                     students.Show();
                     break;
+                case "logout":
+                    LoginWindow login = new LoginWindow();
+                    login.Show();
+                    Close();
+                    break;
             }
         }
 

@@ -22,6 +22,7 @@
                 <MenuItem x:Name="teachers" Header="Evidencija nastavnika" Click="menuItem_Click"/>
                 <MenuItem x:Name="students" Header="Evidencija ucenika" Click="menuItem_Click"/>
             </MenuItem>
+            <MenuItem x:Name="logout" Header="Odjava" Click="menuItem_Click"/>
         </Menu>
         <Image x:Name="logoimg" Source="../Images/logo.png" HorizontalAlignment="Left" Width="250" Margin="17,36,0,10"/>
         <GroupBox Header="Podaci" HorizontalAlignment="Left" Height="280" Margin="272,36,0,0" VerticalAlignment="Top" Width="272">
