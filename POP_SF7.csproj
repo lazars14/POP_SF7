@@ -245,7 +245,10 @@
     <Resource Include="Images\logo.png" />
     <Resource Include="Images\logoIcon16.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="DB\POPDBInsert.sql" />
+    <Content Include="DB\POPDBScheme.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
