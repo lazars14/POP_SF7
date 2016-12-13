@@ -1,4 +1,5 @@
-﻿using POP_SF7.Windows;
+﻿using POP_SF7.Helpers;
+using POP_SF7.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -119,33 +120,38 @@ namespace POP_SF7
             bool lastName = lastnamechb.IsChecked ?? false;
             bool jmbg = jmbgchb.IsChecked ?? false;
 
+            Search s = new Search(firstnametb.Text, lastnametb.Text, jmbgtb.Text, PeopleDecider.Student);
+            Predicate<object> firstNamePredicate = new Predicate<object>(s.firstname);
+            Predicate<object> lastNamePredicate = new Predicate<object>(s.lastname);
+            Predicate<object> jmbgPredicate = new Predicate<object>(s.jmbg);
+
             if (firstName && lastName && jmbg)
             {
-
+                StudentsView.Filter = firstNamePredicate + lastNamePredicate + jmbgPredicate;
             }
             else if (firstName && lastName)
             {
-                
+                StudentsView.Filter = firstNamePredicate + lastNamePredicate;
             }
             else if (firstName && jmbg)
             {
-                
+                StudentsView.Filter = firstNamePredicate + jmbgPredicate;
             }
             else if (lastName && jmbg)
             {
-                
+                StudentsView.Filter = lastNamePredicate + jmbgPredicate;
             }
             else if (firstName)
             {
-
+                StudentsView.Filter = firstNamePredicate;
             }
             else if (lastName)
             {
-
+                StudentsView.Filter = lastNamePredicate;
             }
             else if (jmbg)
             {
-
+                StudentsView.Filter = jmbgPredicate;
             }
             else
             {
@@ -161,6 +167,34 @@ namespace POP_SF7
         private void cancelSearchbtn_Click(object sender, RoutedEventArgs e)
         {
             StudentsView.Filter = null;
+        }
+
+        private void studentsdg_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            switch ((string)e.Column.Header)
+            {
+                case "FirstName":
+                    e.Column.Header = "Ime";
+                    break;
+                case "LastName":
+                    e.Column.Header = "Prezime";
+                    break;
+                case "Address":
+                    e.Column.Header = "Adresa";
+                    break;
+                case "Jmbg":
+                    e.Column.Header = "JMBG";
+                    break;
+                case "Deleted":
+                    e.Column.Header = "Obrisan";
+                    break;
+                case "ListOfPayments":
+                    e.Cancel = true;
+                    break;
+                case "ListOfCourses":
+                    e.Cancel = true;
+                    break;
+            }
         }
     }
 }

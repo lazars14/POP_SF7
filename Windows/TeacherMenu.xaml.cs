@@ -1,4 +1,5 @@
-﻿using POP_SF7.Windows;
+﻿using POP_SF7.Helpers;
+using POP_SF7.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -117,29 +118,42 @@ namespace POP_SF7
             bool lastName = lastnamechb.IsChecked ?? false;
             bool jmbg = jmbgchb.IsChecked ?? false;
 
-            string firstNameStr = firstnametb.Text;
-            string lastNameStr = lastnametb.Text;
-            string jmbgStr = jmbgtb.Text;
+            Search s = new Search(firstnametb.Text, lastnametb.Text, jmbgtb.Text, PeopleDecider.Teacher);
+            Predicate<object> firstNamePredicate = new Predicate<object>(s.firstname);
+            Predicate<object> lastNamePredicate = new Predicate<object>(s.lastname);
+            Predicate<object> jmbgPredicate = new Predicate<object>(s.jmbg);
 
             if (firstName && lastName && jmbg)
             {
-                  
+                TeachersView.Filter = firstNamePredicate + lastNamePredicate + jmbgPredicate;
             }
             else if (firstName && lastName)
             {
-                
+                TeachersView.Filter = firstNamePredicate + lastNamePredicate;
             }
             else if (firstName && jmbg)
             {
-                
+                TeachersView.Filter = firstNamePredicate + jmbgPredicate;
             }
             else if (lastName && jmbg)
             {
-                
+                TeachersView.Filter = lastNamePredicate + jmbgPredicate;
+            }
+            else if (firstName)
+            {
+                TeachersView.Filter = firstNamePredicate;
+            }
+            else if (lastName)
+            {
+                TeachersView.Filter = lastNamePredicate;
+            }
+            else if (jmbg)
+            {
+                TeachersView.Filter = jmbgPredicate;
             }
             else
             {
-                MessageBox.Show("Morate da otkacite makar jedan kriterijum pretrage!");
+                MessageBox.Show("Morate da otkacite makar jedan kriterijum kako biste pretrazili ucenike!");
             }
         }
 
@@ -151,6 +165,47 @@ namespace POP_SF7
         private void cancelSearchbtn_Click(object sender, RoutedEventArgs e)
         {
             TeachersView.Filter = null;
+        }
+
+        private void teachersdg_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            switch ((string)e.Column.Header)
+            {
+                case "FirstName":
+                    e.Column.Header = "Ime";
+                    break;
+                case "LastName":
+                    e.Column.Header = "Prezime";
+                    break;
+                case "Address":
+                    e.Column.Header = "Adresa";
+                    break;
+                case "Jmbg":
+                    e.Column.Header = "JMBG";
+                    break;
+                case "Deleted":
+                    e.Column.Header = "Obrisan";
+                    break;
+                case "ListOfLanguages":
+                    e.Cancel = true;
+                    break;
+                case "ListOfCourses":
+                    e.Cancel = true;
+                    break;
+            }
+        }
+
+        private void languagesdg_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            switch ((string)e.Column.Header)
+            {
+                case "Name":
+                    e.Column.Header = "Ime";
+                    break;
+                case "Deleted":
+                    e.Column.Header = "Obrisano";
+                    break;
+            }
         }
     }
 }

@@ -9,19 +9,82 @@ namespace POP_SF7.Helpers
 {
     class Search
     {
-        // sve reference na prozore i tu kupim podatke i preko decider-a
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Jmbg { get; set; }
+        public string UserName { get; set; }
 
-        public Window RandomWindow { get; set; }
+        public PeopleDecider Decider { get; set; }
 
-        public Search(Window randomWindow)
+        public Search() { }
+
+        public Search(string firstName, string lastName, string jmbgOfUsername, PeopleDecider decider)
         {
-            RandomWindow = randomWindow;
+            FirstName = firstName;
+            LastName = lastName;
+            Decider = decider;
+            if(Decider == PeopleDecider.User)
+            {
+                UserName = jmbgOfUsername;
+            }
+            else
+            {
+                Jmbg = jmbgOfUsername;
+            }
         }
-
+        
         public bool firstname(object s)
         {
-            // to do
+            switch(Decider)
+            {
+                case PeopleDecider.Teacher:
+                    Teacher t = s as Teacher;
+                    return t.FirstName == FirstName;
+                case PeopleDecider.User:
+                    User u = s as User;
+                    return u.FirstName == FirstName;
+                case PeopleDecider.Student:
+                    Student ss = s as Student;
+                    return ss.FirstName == FirstName;
+            }
             return false;
+        }
+
+        public bool lastname(object s)
+        {
+            switch (Decider)
+            {
+                case PeopleDecider.Teacher:
+                    Teacher t = s as Teacher;
+                    return t.LastName == LastName;
+                case PeopleDecider.User:
+                    User u = s as User;
+                    return u.LastName == LastName;
+                case PeopleDecider.Student:
+                    Student ss = s as Student;
+                    return ss.LastName == LastName;
+            }
+            return false;
+        }
+
+        public bool jmbg(object s)
+        {
+            switch (Decider)
+            {
+                case PeopleDecider.Teacher:
+                    Teacher t = s as Teacher;
+                    return t.Jmbg == Jmbg;
+                case PeopleDecider.Student:
+                    Student ss = s as Student;
+                    return ss.Jmbg == Jmbg;
+            }
+            return false;
+        }
+
+        public bool username(object s)
+        {
+            User u = s as User; 
+            return u.UserName == UserName;
         }
     }
 }

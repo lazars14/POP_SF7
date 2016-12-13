@@ -1,4 +1,5 @@
-﻿using POP_SF7.Windows;
+﻿using POP_SF7.Helpers;
+using POP_SF7.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -108,37 +109,72 @@ namespace POP_SF7
         {
             bool firstName = firstnamechb.IsChecked ?? false;
             bool lastName = lastnamechb.IsChecked ?? false;
-            bool username = usernamechb.IsChecked ?? false;
+            bool userName = usernamechb.IsChecked ?? false;
 
-            string firstNameStr = firstnametb.Text;
-            string lastNameStr = firstnametb.Text;
-            string userNameStr = firstnametb.Text;
+            Search s = new Search(firstnametb.Text, lastnametb.Text, usernametb.Text, PeopleDecider.Student);
+            Predicate<object> firstNamePredicate = new Predicate<object>(s.firstname);
+            Predicate<object> lastNamePredicate = new Predicate<object>(s.lastname);
+            Predicate<object> userNamePredicate = new Predicate<object>(s.username);
 
-            if (firstName && lastName && username)
+            if (firstName && lastName && userName)
             {
-                // f-ja za pretragu u bazi
+                view.Filter = firstNamePredicate + lastNamePredicate + userNamePredicate;
             }
             else if (firstName && lastName)
             {
-                // f-ja za pretragu u bazi
+                view.Filter = firstNamePredicate + lastNamePredicate;
             }
-            else if (firstName && username)
+            else if (firstName && userName)
             {
-                // f-ja za pretragu u bazi
+                view.Filter = firstNamePredicate + userNamePredicate;
             }
-            else if (lastName && username)
+            else if (lastName && userName)
             {
-                // f-ja za pretragu u bazi
+                view.Filter = lastNamePredicate + userNamePredicate;
+            }
+            else if (firstName)
+            {
+                view.Filter = firstNamePredicate;
+            }
+            else if (lastName)
+            {
+                view.Filter = lastNamePredicate;
+            }
+            else if (userName)
+            {
+                view.Filter = userNamePredicate;
             }
             else
             {
-                MessageBox.Show("Morate da otkacite jedan ili vise kriterijuma za pretragu!");
+                MessageBox.Show("Morate da otkacite makar jedan kriterijum kako biste pretrazili ucenike!");
             }
         }
 
         private void cancelSearchbtn_Click(object sender, RoutedEventArgs e)
         {
             view.Filter = null;
+        }
+
+        private void usersdg_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            switch((string)e.Column.Header)
+            {
+                case "FirstName":
+                    e.Column.Header = "Ime";
+                    break;
+                case "LastName":
+                    e.Column.Header = "Prezime";
+                    break;
+                case "Address":
+                    e.Column.Header = "Adresa";
+                    break;
+                case "Jmbg":
+                    e.Column.Header = "JMBG";
+                    break;
+                case "Deleted":
+                    e.Column.Header = "Obrisan";
+                    break;
+            }
         }
     }
 }

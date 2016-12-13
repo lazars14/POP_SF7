@@ -156,5 +156,38 @@ namespace POP_SF7
         {
             CoursesView.Filter = null;
         }
+
+        private void studentsdg_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            switch ((string)e.Column.Header)
+            {
+                case "FirstName":
+                    e.Column.Header = "Ime";
+                    break;
+                case "LastName":
+                    e.Column.Header = "Prezime";
+                    break;
+                case "Address":
+                    e.Cancel = true;
+                    break;
+                case "Jmbg":
+                    e.Cancel = true;
+                    break;
+                case "Deleted":
+                    e.Column.Header = "Obrisan";
+                    break;
+                case "ListOfPayments":
+                    e.Cancel = true;
+                    break;
+                case "ListOfCourses":
+                    e.Cancel = true;
+                    break;
+            }
+        }
+
+        private void coursesdg_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            
+        }
     }
 }
