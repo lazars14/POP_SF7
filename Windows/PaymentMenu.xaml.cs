@@ -135,5 +135,27 @@ namespace POP_SF7
         {
             view.Filter = null;
         }
+
+        private void paymentsdg_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            switch ((string)e.Column.Header)
+            {
+                case "Course":
+                    e.Cancel = true;
+                    break;
+                case "Student":
+                    e.Cancel = true;
+                    break;
+                case "Amount":
+                    e.Column.Header = "Iznos";
+                    break;
+                case "Date":
+                    e.Column.Header = "Datum";
+                    break;
+                case "Deleted":
+                    e.Column.Header = "Obrisano";
+                    break;
+            }
+        }
     }
 }

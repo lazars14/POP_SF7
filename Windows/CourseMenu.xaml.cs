@@ -187,7 +187,33 @@ namespace POP_SF7
 
         private void coursesdg_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            
+            switch ((string)e.Column.Header)
+            {
+                case "Language":
+                    e.Column.Header = "Obrisan";
+                    break;
+                case "CourseType":
+                    e.Cancel = true;
+                    break;
+                case "Teacher":
+                    e.Cancel = true;
+                    break;
+                case "ListOfStudents":
+                    e.Cancel = true;
+                    break;
+                case "Price":
+                    e.Column.Header = "Cena";
+                    break;
+                case "StartDate":
+                    e.Column.Header = "Datum pocetka";
+                    break;
+                case "EndDate":
+                    e.Column.Header = "Datum kraja";
+                    break;
+                case "Deleted":
+                    e.Column.Header = "Obrisan";
+                    break;
+            }
         }
     }
 }

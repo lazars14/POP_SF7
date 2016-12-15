@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF7"
         mc:Ignorable="d"
-        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="532.871" Width="799.725">
+        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="674.871" Width="799.725">
     <Grid>
         <TextBlock x:Name="teacherstb" HorizontalAlignment="Left" Height="23" Margin="9,10,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="Nastavnici" VerticalAlignment="Top" Width="770"/>
         <DataGrid x:Name="teachersdg" AutoGeneratingColumn="teachersdg_AutoGeneratingColumn" HorizontalAlignment="Left" Height="149" Margin="9,38,0,0" VerticalAlignment="Top" Width="697" SelectionChanged="usersdg_SelectionChanged"/>
@@ -70,12 +70,29 @@
 
         <!-- Teacher and Student -->
         <GroupBox x:Name="coursesgb" Header="Kursevi" HorizontalAlignment="Left" Height="150" Margin="9,337,0,0" VerticalAlignment="Top" Width="414">
-            <DataGrid x:Name="coursesdg" ItemsSource="{Binding ElementName=teachersdg, Path=SelectedItem.ListOfCourses}" Margin="5"/>
+            <DataGrid x:Name="coursesdg" AutoGeneratingColumn="coursesdg_AutoGeneratingColumn" ItemsSource="{Binding ElementName=teachersdg, Path=SelectedItem.ListOfCourses}" Margin="5"/>
         </GroupBox>
         
         <GroupBox x:Name="languagesgb" Header="Jezici" HorizontalAlignment="Left" Height="150" Margin="431,337,0,0" VerticalAlignment="Top" Width="348">
             <DataGrid x:Name="languagesdg" AutoGeneratingColumn="languagesdg_AutoGeneratingColumn" ItemsSource="{Binding ElementName=teachersdg, Path=SelectedItem.ListOfLanguages}" Margin="5"/>
         </GroupBox>
-        
+        <GroupBox x:Name="coursegb_Copy" Header="Selektovani kurs" HorizontalAlignment="Left" Height="144" Margin="10,492,0,0" VerticalAlignment="Top" Width="348">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+                <Label x:Name="courseLanguagelbl1" Content="Jezik" Grid.Row="0" Grid.Column="0" Margin="10,5,0,10"/>
+                <TextBlock x:Name="courseLanguagetb1" Text="{Binding SelectedItem.Course.Language.Name, ElementName=coursesdg}" Grid.Row="0" Grid.Column="1" Margin="0,5,0,5"/>
+
+                <Label x:Name="courseCourseTypelbl1" Content="Tip kursa" Grid.Row="1" Grid.Column="0" Margin="10,5,0,10"/>
+                <TextBlock x:Name="courseCourseTypetb1" Text="{Binding SelectedItem.Course.CourseType.Name, ElementName=coursesdg}" Grid.Row="1" Grid.Column="1" Margin="0,5,0,5"/>
+            </Grid>
+        </GroupBox>
+
     </Grid>
 </Window>

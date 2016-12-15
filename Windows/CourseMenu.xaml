@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF7"
         mc:Ignorable="d"
-        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="460.184" Width="817.867">
+        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="603.184" Width="817.867">
     <Grid>
         <TextBlock x:Name="coursestb" HorizontalAlignment="Left" Height="23" Margin="9,10,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="Kursevi" VerticalAlignment="Top" Width="791"/>
         <DataGrid x:Name="coursesdg" HorizontalAlignment="Left" AutoGeneratingColumn="coursesdg_AutoGeneratingColumn" Height="149" Margin="9,38,0,0" VerticalAlignment="Top" Width="717" SelectionChanged="coursesdg_SelectionChanged"/>
@@ -15,7 +15,7 @@
             <Button x:Name="deletebtn" Content="Obrisi" Height="30" Click="deletebtn_Click"/>
         </StackPanel>
 
-        <GroupBox Header="Sortiranje" HorizontalAlignment="Left" Height="49" Margin="12,202,0,0" VerticalAlignment="Top" Width="788">
+        <GroupBox Header="Sortiranje" HorizontalAlignment="Left" Height="49" Margin="12,341,0,0" VerticalAlignment="Top" Width="788">
             <Grid>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Redosled"/>
@@ -33,7 +33,7 @@
             </Grid>
         </GroupBox>
 
-        <GroupBox x:Name="coursesgb" Header="Pretraga" HorizontalAlignment="Left" Height="151" Margin="10,270,0,0" VerticalAlignment="Top" Width="302">
+        <GroupBox x:Name="coursesgb" Header="Pretraga" HorizontalAlignment="Left" Height="151" Margin="10,409,0,0" VerticalAlignment="Top" Width="302">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
@@ -55,10 +55,49 @@
             </Grid>
         </GroupBox>
 
-        <GroupBox Header="Ucenici" HorizontalAlignment="Left" Height="151" Margin="326,270,0,0" VerticalAlignment="Top" Width="474">
+        <GroupBox Header="Ucenici" HorizontalAlignment="Left" Height="151" Margin="326,409,0,0" VerticalAlignment="Top" Width="474">
             <Grid>
                 <DataGrid x:Name="studentsdg" ItemsSource="{Binding ElementName=coursesdg, Path=SelectedItem.ListOfStudents}" AutoGeneratingColumn="studentsdg_AutoGeneratingColumn" HorizontalAlignment="Left" Height="114" Margin="10,10,0,0" VerticalAlignment="Top" Width="442"/>
 
+            </Grid>
+        </GroupBox>
+        <GroupBox x:Name="teachergb" Header="Nastavnik" HorizontalAlignment="Left" Height="144" Margin="10,192,0,0" VerticalAlignment="Top" Width="280">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+                <Label x:Name="teacheridlbl" Content="Id" Grid.Row="0" Grid.Column="0" Margin="10,5,0,10"/>
+                <TextBlock x:Name="teacheridtb" Text="{Binding ElementName=coursesdg, Path=SelectedItem.Teacher.Id}" Grid.Row="0" Grid.Column="1" Margin="0,5,0,5"/>
+
+                <Label x:Name="teacherLastnamelbl" Content="Prezime" Grid.Row="1" Grid.Column="0" Margin="10,5,0,10"/>
+                <TextBlock x:Name="teacherLastnametb" Text="{Binding ElementName=coursesdg, Path=SelectedItem.Teacher.LastName}" Grid.Row="1" Grid.Column="1" Margin="0,5,0,5"/>
+                
+                <Label x:Name="teacherFirstNamelbl" Content="Ime" Grid.Row="2" Grid.Column="0" Margin="10,5,0,10"/>
+                <TextBlock x:Name="teacherFirstNametb" Text="{Binding ElementName=coursesdg, Path=SelectedItem.Teacher.FirstName}" Grid.Row="2" Grid.Column="1" Margin="0,5,0,5"/>
+            </Grid>
+        </GroupBox>
+        
+        <GroupBox x:Name="coursegb" Header="Opsti podaci o kursu" HorizontalAlignment="Left" Height="144" Margin="326,192,0,0" VerticalAlignment="Top" Width="300">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+                <Label x:Name="courseLanguagelbl" Content="Jezik" Grid.Row="0" Grid.Column="0" Margin="10,5,0,10"/>
+                <TextBlock x:Name="courseLanguagetb" Text="{Binding ElementName=coursesdg, Path=SelectedItem.Language.Name}" Grid.Row="0" Grid.Column="1" Margin="0,5,0,5"/>
+
+                <Label x:Name="courseCourseTypelbl" Content="Tip kursa" Grid.Row="1" Grid.Column="0" Margin="10,5,0,10"/>
+                <TextBlock x:Name="courseCourseTypetb" Text="{Binding ElementName=coursesdg, Path=SelectedItem.CourseType.Name}" Grid.Row="1" Grid.Column="1" Margin="0,5,0,5"/>
             </Grid>
         </GroupBox>
 
