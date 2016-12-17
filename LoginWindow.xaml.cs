@@ -29,6 +29,8 @@ namespace POP_SF7
             ListOfUsers = new List<User>();
             ListOfUsers.Add(new User(1, "ime", "prezime", "jmbg", "adresa", "admin", "admin", Role.Administrator, false));
             ListOfUsers.Add(new User(1, "ime", "prezime", "jmbg", "adresa", "user", "user", Role.Employee, false));
+
+            usernametb.Focus();
         }
 
         private void cancelbtn_Click(object sender, RoutedEventArgs e)
@@ -62,6 +64,14 @@ namespace POP_SF7
                     passwordpb.Password = "";
                     MessageBox.Show("Korisnicko ime ili lozinka nisu ispravni!");
                 }
+            }
+        }
+
+        private void passwordpb_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                okbtn_Click(null, null);
             }
         }
     }

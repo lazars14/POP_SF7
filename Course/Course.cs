@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace POP_SF7
 {
-    public class Course : INotifyPropertyChanged, ICloneable
+    public class Course : INotifyPropertyChanged, ICloneable, IDataErrorInfo
     {
         private int id;
         public int Id
@@ -79,6 +79,38 @@ namespace POP_SF7
             EndDate = endDate;
             Deleted = deleted;
         }
+
+
+        #region IDataErrorInfo
+
+        public string Error
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                switch(columnName)
+                {
+                    case "Price":
+                        double test;
+                        bool isNumeric = double.TryParse(Price.ToString(), out test);
+                        if (!isNumeric) return "Cena mora da se napise u numerickom formatu!";
+                        break;
+                    case "EndDate":
+                        if (EndDate < StartDate) return "Zavrsni datum ne sme biti manji od pocetnog!";
+                        break;
+                }
+                return "";
+            }
+        }
+
+        #endregion
 
         #region INotifyPropertyChanged
 

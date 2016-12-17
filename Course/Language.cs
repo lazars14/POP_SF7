@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace POP_SF7
 {
-    public class Language : INotifyPropertyChanged, ICloneable
+    public class Language : INotifyPropertyChanged, ICloneable, IDataErrorInfo
     {
         private int id;
         public int Id
@@ -35,6 +35,32 @@ namespace POP_SF7
             Name = name;
             Deleted = deleted;
         }
+
+        #region
+
+        public string Error
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                switch(columnName)
+                {
+                    case "Name":
+                        if (string.IsNullOrEmpty(Name)) return "Morate da popunite naziv jezika!";
+                        break;
+                }
+                return "";
+            }
+        }
+
+        #endregion
 
         #region INotifyPropertyChanged
 

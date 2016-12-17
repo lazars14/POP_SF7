@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace POP_SF7
 {
-    public class Person : INotifyPropertyChanged
+    public class Person : INotifyPropertyChanged, IDataErrorInfo
     {
         private int id;
         public int Id
@@ -58,6 +58,44 @@ namespace POP_SF7
             Address = address;
             Deleted = deleted;
         }
+
+        #region IDataErrorInfo
+
+        public virtual string Error
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public virtual string this[string columnName]
+        {
+            get
+            {
+                switch(columnName)
+                {
+                    case "FirstName":
+                        if (string.IsNullOrEmpty(FirstName)) return "Morate da popunite ime!";
+                        break;
+                    case "LastName":
+                        if (string.IsNullOrEmpty(LastName)) return "Morate da popunite prezime!";
+                        break;
+                    case "Jmbg":
+                        int test;
+                        bool isNumeric = int.TryParse(Jmbg, out test);
+                        if (!isNumeric) return "Jmbg mora da se napise u numerickom formatu!";
+                        else if (Jmbg.Length != 13) return "Jmbg mora da sadrzi 13 cifara!";
+                        break;
+                    case "Address":
+                        if (string.IsNullOrEmpty(Address)) return "Morate da popunite adresu!";
+                        break;
+                }
+                return "";
+            }
+        }
+
+        #endregion
 
         #region INotifyPropertyChanged
 

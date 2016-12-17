@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace POP_SF7
 {
-    public class Payment : INotifyPropertyChanged, ICloneable
+    public class Payment : INotifyPropertyChanged, ICloneable, IDataErrorInfo
     {
         private int id;
         public int Id
@@ -58,6 +58,34 @@ namespace POP_SF7
             Date = date;
             Deleted = deleted;
         }
+
+        #region IDataErrorInfo
+
+        public string Error
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                switch(columnName)
+                {
+                    case "Amount":
+                        double test;
+                        bool isNumeric = double.TryParse(Amount.ToString(), out test);
+                        if (!isNumeric) return "Iznos mora da se napise u numerickom formatu!";
+                        break;
+                }
+                return "";
+            }
+        }
+
+        #endregion
 
         #region INotifyPropertyChanged
 

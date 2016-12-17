@@ -1,10 +1,12 @@
-﻿using System;
+﻿using POP_SF7.Validations;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace POP_SF7
 {
-    public class School : INotifyPropertyChanged, ICloneable
+    public class School : INotifyPropertyChanged, ICloneable, IDataErrorInfo
     {
         private string name;
         public string Name
@@ -61,7 +63,7 @@ namespace POP_SF7
             get { return accountNumber; }
             set { accountNumber = value; OnPropertyChanged("AccountNumber"); }
         }
-        
+
         public School() { }
 
         public School(string name, string address, string phoneNumber, string email, string webSite, string PIB, string identificationNumber, string accountNumber)
@@ -75,6 +77,63 @@ namespace POP_SF7
             IdentificationNumber = identificationNumber;
             AccountNumber = accountNumber;
         }
+
+        #region IDataErrorInfo
+
+        public string Error
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                switch(columnName)
+                {
+                    case "Name":
+                        if (string.IsNullOrEmpty(Name)) return "Morate da popunite naziv skole!";
+                        break;
+                    case "Address":
+                        if (string.IsNullOrEmpty(Address)) return "Morate da popunite adresu skole!";
+                        break;
+                    case "PhoneNumber":
+                        EMailValidationRule validator0 = new EMailValidationRule();
+                        if (validator0.Validate(PhoneNumber, null) != ValidationResult.ValidResult) return "Neispravan format broja telefona!";
+                        break;
+                    case "Email":
+                        EMailValidationRule validator = new EMailValidationRule();
+                        if (validator.Validate(Email, null) != ValidationResult.ValidResult) return "Neispravan format e-mail adrese";
+                        break;
+                    case "WebSite":
+                        bool isUri = Uri.IsWellFormedUriString(WebSite, UriKind.RelativeOrAbsolute);
+                        if (!isUri) return "Neispravan format adrese web sajta!";
+                        break;
+                    case "Pib":
+                        int test;
+                        bool isNumeric = int.TryParse(Pib.ToString(), out test);
+                        if (!isNumeric) return "Pib mora da se napise u numerickom formatu!";
+                        else if (Pib.ToString().Length != 9) return "Pib mora da sadrzi 9 cifara!";
+                        break;
+                    case "IdentificationNumber":
+                        int test1;
+                        bool isNumeric1 = int.TryParse(IdentificationNumber.ToString(), out test1);
+                        if (!isNumeric1) return "Maticni broj mora da se napise u numerickom formatu!";
+                        else if (Pib.ToString().Length != 8) return "Maticni broj mora da sadrzi 8 cifara!";
+                        break;
+                    case "AccountNumber":
+                        AccountNumberValidationRule validator1 = new AccountNumberValidationRule();
+                        if (validator1.Validate(AccountNumber, null) != ValidationResult.ValidResult) return "Neispravan format racuna! xxx-xxxxxxxxxxxxx-xx";
+                        break;
+                }
+                return "";
+            }
+        }
+
+        #endregion
 
         #region INotifyPropertyChanged
 
