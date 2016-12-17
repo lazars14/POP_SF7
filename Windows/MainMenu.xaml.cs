@@ -27,6 +27,7 @@ namespace POP_SF7
             InitializeComponent();
             // ucitavanje skole iz baze
             School = new School();
+            DataContext = School;
             if(role == Role.Administrator)
             {
                 payments.Visibility = Visibility.Collapsed;

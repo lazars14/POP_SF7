@@ -5,17 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF7"
         mc:Ignorable="d"
-        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="583.061" Width="773.109">
+        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="555.061" Width="753.109">
     <Grid Margin="0,0,0,1">
         <TextBlock x:Name="paymentstb" HorizontalAlignment="Left" Height="23" Margin="9,10,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="Uplate" VerticalAlignment="Top" Width="739"/>
-        <DataGrid x:Name="paymentsdg" AutoGeneratingColumn="paymentsdg_AutoGeneratingColumn" HorizontalAlignment="Left" Height="149" Margin="9,38,0,0" VerticalAlignment="Top" Width="666"/>
-        <StackPanel HorizontalAlignment="Left" Height="149" Margin="690,38,0,0" VerticalAlignment="Top" Width="58">
+        <DataGrid x:Name="paymentsdg" AutoGeneratingColumn="paymentsdg_AutoGeneratingColumn" HorizontalAlignment="Left" Height="149" Margin="9,38,0,0" VerticalAlignment="Top" Width="639"/>
+        <StackPanel HorizontalAlignment="Left" Height="149" Margin="668,36,0,0" VerticalAlignment="Top" Width="58">
             <Button x:Name="addbtn" Content="Dodaj" Height="30" Margin="0,20,0,0" Click="addbtn_Click"/>
             <Button x:Name="editbtn" Content="Izmeni" Height="30" Margin="0,10" Click="editbtn_Click"/>
             <Button x:Name="deletebtn" Content="Obrisi" Height="30" Click="deletebtn_Click"/>
         </StackPanel>
 
-        <GroupBox Header="Sortiranje" HorizontalAlignment="Left" Height="123" Margin="328,192,0,0" VerticalAlignment="Top" Width="320">
+        <GroupBox Header="Sortiranje" HorizontalAlignment="Left" Height="123" Margin="10,382,0,0" VerticalAlignment="Top" Width="301">
             <Grid>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Redosled"/>
@@ -64,7 +64,7 @@
                 </StackPanel>
             </Grid>
         </GroupBox>
-        <GroupBox x:Name="studentgb" Header="Ucenik" HorizontalAlignment="Left" Height="144" Margin="12,386,0,0" VerticalAlignment="Top" Width="280">
+        <GroupBox x:Name="studentgb" Header="Ucenik" HorizontalAlignment="Left" Height="144" Margin="326,361,0,0" VerticalAlignment="Top" Width="280">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
@@ -85,7 +85,7 @@
                 <TextBlock x:Name="studentfirstnametb" Text="{Binding SelectedItem.Student.FirstName, ElementName=paymentsdg}" Grid.Row="2" Grid.Column="1" Margin="0,5,0,5"/>
             </Grid>
         </GroupBox>
-        <GroupBox x:Name="coursegb" Header="Kurs selektovane uplate" HorizontalAlignment="Left" Height="144" Margin="328,386,0,0" VerticalAlignment="Top" Width="300">
+        <GroupBox x:Name="coursegb" Header="Kurs selektovane uplate" HorizontalAlignment="Left" Height="108" Margin="326,192,0,0" VerticalAlignment="Top" Width="280">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
