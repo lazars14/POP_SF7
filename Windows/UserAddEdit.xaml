@@ -5,71 +5,48 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF7"
         mc:Ignorable="d"
-        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="533.266" Width="329.008">
+        xmlns:userControls="clr-namespace:POP_SF7.UserControls"
+        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="607.933" Width="329.008">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="210"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="150"/>
+            <RowDefinition Height="350"/>
+            <RowDefinition Height="170"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="descriptionlbl" Text="Izmena podataka o skoli" TextAlignment="Center" Grid.ColumnSpan="2" Grid.Row="0" Margin="10, 15, 5, 10"/>
-
-        <Label x:Name="idlbl" Content="Id" Grid.Row="1" Grid.Column="0" Margin="10,0,0,10"/>
-        <TextBox x:Name="idtb" Text="{Binding Path=Id}" IsReadOnly="True" Grid.Row="1" Grid.Column="1" Margin="10,2,0,8"/>
-
-        <Label x:Name="namelbl" Content="Ime" Grid.Row="2" Grid.Column="0" Margin="10,0,0,10"/>
-        <TextBox x:Name="nametb" Text="{Binding Path=FirstName}" Grid.Row="2" Grid.Column="1" Margin="10,0,0,10"/>
-
-        <Label x:Name="lastnamelbl" Content="Prezime" Grid.Row="3" Grid.Column="0" Margin="10,0,0,10"/>
-        <TextBox x:Name="lastnametb" Text="{Binding Path=LastName}" Grid.Row="3" Grid.Column="1" Margin="10,0,0,10"/>
-
-        <Label x:Name="jmbglbl" Content="JMBG" Grid.Row="4" Grid.Column="0" Margin="10,0,0,10"/>
-        <TextBox x:Name="jmbgtb" Text="{Binding Path=Jmbg}" Grid.Row="4" Grid.Column="1" Margin="10,0,0,10"/>
-
-        <Label x:Name="addresslbl" Content="Adresa" Grid.Row="5" Grid.Column="0" Margin="10,0,0,10"/>
-        <TextBox x:Name="addresstb" Text="{Binding Path=Address}" Grid.Row="5" Grid.Column="1" Margin="10,0,0,10"/>
-
-        <Label x:Name="deletedlbl" Content="Obrisan" Grid.Row="6" Grid.Column="0" Margin="10,0,0,10"/>
-        <CheckBox x:Name="deletedcb" IsChecked="{Binding Path=Deleted}" Grid.Row="6" Grid.Column="1" Margin="10,7,0,10"/>
-
-        <!-- User -->
-        <GroupBox x:Name="usergb" Header="Korisnik" Grid.Row="7" Grid.ColumnSpan="2">
+        <userControls:PersonUserControl x:Name="personInfo" Grid.Row="0"/>
+        
+        <!--#region userInfo-->
+        <GroupBox x:Name="usergb" Header="Korisnik" Grid.Row="1">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="25"/>
                     <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100"/>
                     <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
-                <Label x:Name="usernamelbl" Content="Korisnicko ime" Grid.Row="0" Grid.Column="0" Margin="5"/>
-                <TextBox x:Name="usernametb" Text="{Binding Path=UserName}" Grid.Row="0" Grid.Column="1" Margin="5"/>
-
-                <Label x:Name="passwordlbl" Content="Lozinka" Grid.Row="1" Grid.Column="0" Margin="5"/>
-                <TextBox x:Name="passwordtb" Text="{Binding Path=Password}" Grid.Row="1" Grid.Column="1" Margin="5"/>
-
-                <Label x:Name="rolelbl" Content="Uloga" Grid.Row="2" Grid.ColumnSpan="2" Margin="5"/>
-                <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" Margin="5,10,5,5">
+                <Label x:Name="usernamelbl" Content="Korisnicko ime" Grid.Row="0" Grid.Column="0" Margin="5,5,0,0"/>
+                <TextBox x:Name="usernametb" Text="{Binding Path=UserName}" Grid.Row="0" Grid.Column="1" Margin="5,5,0,0"/>
+                <TextBlock x:Name="usernameValidation" Grid.Row="1" Grid.Column="1" Text="{Binding ElementName=usernametb, Path=(Validation.Errors).CurrentItem.ErrorContent}" Margin="5,0,0,5"/>
+                
+                <Label x:Name="passwordlbl" Content="Lozinka" Grid.Row="2" Grid.Column="0" Margin="5,5,0,0"/>
+                <TextBox x:Name="passwordtb" Text="{Binding Path=Password}" Grid.Row="2" Grid.Column="1" Margin="5,5,0,0"/>
+                <TextBlock x:Name="passwordValidation" Grid.Row="3" Grid.Column="1" Text="{Binding ElementName=passwordtb, Path=(Validation.Errors).CurrentItem.ErrorContent}" Margin="5,0,0,5"/>
+                
+                <Label x:Name="rolelbl" Content="Uloga" Grid.Row="4" Grid.ColumnSpan="2" Margin="5"/>
+                <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="1" Margin="5,10,5,5">
                     <RadioButton x:Name="administratorrb" Content="Administrator" IsChecked="True"/>
                     <RadioButton x:Name="employeerb" Content="Zaposleni" Margin="15,0,0,0"/>
                 </StackPanel>
             </Grid>
         </GroupBox>
+        <!--#endregion-->
 
-
-        <StackPanel Orientation="Horizontal" Grid.Row="9" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,10,0,0">
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,10,0,0">
             <Button x:Name="okbtn" Content="OK" Width="70" Height="30" Click="okbtn_Click"/>
             <Button x:Name="cancelbtn" IsCancel="True" Content="Cancel" Width="70" Height="30" Margin="30,0,0,0"/>
         </StackPanel>

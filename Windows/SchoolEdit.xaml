@@ -38,31 +38,31 @@
         <TextBlock x:Name="priceValidation" Grid.Row="2" Grid.Column="1" Text="{Binding ElementName=nametb, Path=(Validation.Errors).CurrentItem.ErrorContent}" Margin="0,0,0,5"/>
         
         <Label x:Name="addresslbl" Content="Adresa"  Grid.Row="3" Grid.Column="0" Margin="10,0,0,0"/>
-        <TextBox x:Name="addresstb" Text="{Binding Address}" Grid.Row="3" Grid.Column="1"/>
+        <TextBox x:Name="addresstb" Text="{Binding Address, ValidatesOnDataErrors=True}" Grid.Row="3" Grid.Column="1"/>
         <TextBlock x:Name="addressValidation" Grid.Row="4" Grid.Column="1" Text="{Binding ElementName=addresstb, Path=(Validation.Errors).CurrentItem.ErrorContent}" Margin="0,0,0,5"/>
         
         <Label x:Name="phonelbl" Content="Telefon"  Grid.Row="5" Grid.Column="0" Margin="10,0,0,0"/>
-        <TextBox x:Name="phonetb" Text="{Binding PhoneNumber}" Grid.Row="5" Grid.Column="1"/>
+        <TextBox x:Name="phonetb" Text="{Binding PhoneNumber, ValidatesOnDataErrors=True}" Grid.Row="5" Grid.Column="1"/>
         <TextBlock x:Name="phoneValidation" Grid.Row="6" Grid.Column="1" Text="{Binding ElementName=phonetb, Path=(Validation.Errors).CurrentItem.ErrorContent}" Margin="0,0,0,5"/>
         
         <Label x:Name="emaillbl" Content="Email"  Grid.Row="7" Grid.Column="0" Margin="10,0,0,0"/>
-        <TextBox x:Name="emailtb" Text="{Binding Email}" Grid.Row="7" Grid.Column="1"/>
+        <TextBox x:Name="emailtb" Text="{Binding Email, ValidatesOnDataErrors=True}" Grid.Row="7" Grid.Column="1"/>
         <TextBlock x:Name="emailValidation" Grid.Row="8" Grid.Column="1" Text="{Binding ElementName=emailtb, Path=(Validation.Errors).CurrentItem.ErrorContent}" Margin="0,0,0,5"/>
         
         <Label x:Name="websitelbl" Content="Website"  Grid.Row="9" Grid.Column="0" Margin="10,0,0,0"/>
-        <TextBox x:Name="websitetb" Text="{Binding WebSite}" Grid.Row="9" Grid.Column="1"/>
+        <TextBox x:Name="websitetb" Text="{Binding WebSite, ValidatesOnDataErrors=True}" Grid.Row="9" Grid.Column="1"/>
         <TextBlock x:Name="websiteValidation" Grid.Row="10" Grid.Column="1" Text="{Binding ElementName=websitetb, Path=(Validation.Errors).CurrentItem.ErrorContent}" Margin="0,0,0,5"/>
         
         <Label x:Name="piblbl" Content="PIB" Grid.Row="11" Grid.Column="0" Margin="10,0,0,0"/>
-        <TextBox x:Name="pibtb" Text="{Binding Pib}" Grid.Row="11" Grid.Column="1"/>
+        <TextBox x:Name="pibtb" Text="{Binding Pib, ValidatesOnDataErrors=True}" Grid.Row="11" Grid.Column="1"/>
         <TextBlock x:Name="pibValidation" Grid.Row="12" Grid.Column="1" Text="{Binding ElementName=pibtb, Path=(Validation.Errors).CurrentItem.ErrorContent}" Margin="0,0,0,5"/>
         
         <Label x:Name="identificationNumberlbl" Content="Maticni broj" Grid.Row="13" Grid.Column="0" Margin="10,0,0,0"/>
-        <TextBox x:Name="identificationNumbertb" Text="{Binding IdentificationNumber}" Grid.Row="13" Grid.Column="1"/>
+        <TextBox x:Name="identificationNumbertb" Text="{Binding IdentificationNumber, ValidatesOnDataErrors=True}" Grid.Row="13" Grid.Column="1"/>
         <TextBlock x:Name="identificationNumberValidation" Grid.Row="14" Grid.Column="1" Text="{Binding ElementName=identificationNumbertb, Path=(Validation.Errors).CurrentItem.ErrorContent}" Margin="0,0,0,5"/>
         
         <Label x:Name="accountNumberlbl" Content="Broj racuna" Grid.Row="15" Grid.Column="0" Margin="10,0,0,0"/>
-        <TextBox x:Name="accountNumbertb" Text="{Binding AccountNumber}" Grid.Row="15" Grid.Column="1"/>
+        <TextBox x:Name="accountNumbertb" Text="{Binding AccountNumber, ValidatesOnDataErrors=True}" Grid.Row="15" Grid.Column="1"/>
         <TextBlock x:Name="accountNumberValidation" Grid.Row="16" Grid.Column="1" Text="{Binding ElementName=accountNumbertb, Path=(Validation.Errors).CurrentItem.ErrorContent}" Margin="0,0,0,5"/>
         
         <StackPanel Orientation="Horizontal" Grid.Row="17" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">

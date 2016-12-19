@@ -36,7 +36,7 @@ namespace POP_SF7
             ListOfUsers = listOfUsers;
             DataContext = UserU;
 
-            descriptionlbl.Text = (decider == Decider.ADD) ? labelAddUser : labelEditUser;
+            personInfo.descriptionlbl.Text = (decider == Decider.ADD) ? labelAddUser : labelEditUser;
         }
 
         private void okbtn_Click(object sender, RoutedEventArgs e)

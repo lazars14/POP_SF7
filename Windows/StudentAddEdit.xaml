@@ -5,44 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF7"
         mc:Ignorable="d"
-        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="589.933" Width="329.008">
+        xmlns:userControls="clr-namespace:POP_SF7.UserControls"
+        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="637.933" Width="335.008">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="210"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="350"/>
             <RowDefinition Height="200"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="descriptionlbl" Text="Izmena podataka o skoli" TextAlignment="Center" Grid.ColumnSpan="2" Grid.Row="0" Margin="10, 15, 5, 10"/>
-
-        <Label x:Name="idlbl" Content="Id" Grid.Row="1" Grid.Column="0" Margin="10,0,0,10"/>
-        <TextBox x:Name="idtb" Text="{Binding Path=Id}" IsReadOnly="True" Grid.Row="1" Grid.Column="1" Margin="10,2,0,8"/>
-
-        <Label x:Name="namelbl" Content="Ime" Grid.Row="2" Grid.Column="0" Margin="10,0,0,10"/>
-        <TextBox x:Name="nametb" Text="{Binding Path=FirstName}" Grid.Row="2" Grid.Column="1" Margin="10,0,0,10"/>
-
-        <Label x:Name="lastnamelbl" Content="Prezime" Grid.Row="3" Grid.Column="0" Margin="10,0,0,10"/>
-        <TextBox x:Name="lastnametb" Text="{Binding Path=LastName}" Grid.Row="3" Grid.Column="1" Margin="10,0,0,10"/>
-
-        <Label x:Name="jmbglbl" Content="JMBG" Grid.Row="4" Grid.Column="0" Margin="10,0,0,10"/>
-        <TextBox x:Name="jmbgtb" Text="{Binding Path=Jmbg}" Grid.Row="4" Grid.Column="1" Margin="10,0,0,10"/>
-
-        <Label x:Name="addresslbl" Content="Adresa" Grid.Row="5" Grid.Column="0" Margin="10,0,0,10"/>
-        <TextBox x:Name="addresstb" Text="{Binding Path=Address}" Grid.Row="5" Grid.Column="1" Margin="10,0,0,10"/>
-
-        <Label x:Name="deletedlbl" Content="Obrisan" Grid.Row="6" Grid.Column="0" Margin="10,0,0,10"/>
-        <CheckBox x:Name="deletedcb" IsChecked="{Binding Path=Deleted}" Grid.Row="6" Grid.Column="1" Margin="10,7,0,10"/>
-
-        <TabControl x:Name="tabControl" TabStripPlacement="Top" Grid.Row="7" Grid.ColumnSpan="2" Margin="10,10,1,10">
+        <userControls:PersonUserControl x:Name="personInfo" Grid.Row="0"/>
+        
+        <!--#region Tab-->
+        <TabControl x:Name="tabControl" TabStripPlacement="Top" Grid.Row="1" Margin="10,10,1,10">
             <TabItem x:Name="coursesTabItem" Header="Kursevi" IsSelected="True">
                 <Grid>
                     <DataGrid x:Name="coursesdg" HorizontalAlignment="Left" Height="110" Margin="10,10,0,0" VerticalAlignment="Top" Width="275"/>
@@ -52,7 +26,7 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
-            
+
             <TabItem x:Name="paymentsTabItem" Header="Uplate" >
                 <Grid>
                     <DataGrid x:Name="paymentsdg" HorizontalAlignment="Left" Height="110" Margin="10,10,0,0" VerticalAlignment="Top" Width="275"/>
@@ -63,12 +37,11 @@
                 </Grid>
             </TabItem>
         </TabControl>
+        <!--#endregion-->
 
-
-        <StackPanel Orientation="Horizontal" Grid.Row="8" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,10,0,0">
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,10,0,0">
             <Button x:Name="okbtn" Content="OK" Width="70" Height="30" Click="okbtn_Click"/>
             <Button x:Name="cancelbtn" IsCancel="True" Content="Cancel" Width="70" Height="30" Margin="30,0,0,0"/>
         </StackPanel>
-
     </Grid>
 </Window>

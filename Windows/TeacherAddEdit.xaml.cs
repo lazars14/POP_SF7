@@ -36,7 +36,7 @@ namespace POP_SF7
             ListOfTeachers = listOfTeachers;
 
             DataContext = TeacherT;
-            descriptionlbl.Text = (Decider == Decider.ADD) ? labelAddTeacher : labelEditTeacher;
+            personInfo.descriptionlbl.Text = (Decider == Decider.ADD) ? labelAddTeacher : labelEditTeacher;
         }
 
         private void okbtn_Click(object sender, RoutedEventArgs e)
