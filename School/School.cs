@@ -78,6 +78,20 @@ namespace POP_SF7
             AccountNumber = accountNumber;
         }
 
+        #region DB
+
+        public static School LoadSchool()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void UpdateSchool()
+        {
+
+        }
+
+        #endregion
+
         #region IDataErrorInfo
 
         public string Error

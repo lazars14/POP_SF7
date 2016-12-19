@@ -69,6 +69,7 @@
     <Compile Include="Course\Course.cs" />
     <Compile Include="Course\CourseType.cs" />
     <Compile Include="Course\Language.cs" />
+    <Compile Include="School\ApplicationA.cs" />
     <Compile Include="School\Payment.cs" />
     <Compile Include="School\School.cs" />
     <Compile Include="UserControls\LanguageCourseTypeUserControl.xaml.cs">
