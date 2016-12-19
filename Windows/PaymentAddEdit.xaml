@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF7"
         mc:Ignorable="d"
-        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="392" Width="309.221">
+        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="401.092" Width="315.283">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="85"/>
+            <ColumnDefinition Width="90"/>
             <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -16,9 +16,8 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="25"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
@@ -40,16 +39,17 @@
             <Button x:Name="studentbtn" Content="..." Width="30" Margin="11,0,0,10"/>
         </StackPanel>
 
-        <Label x:Name="amountlbl" Content="Iznos uplate" Grid.Row="4" Grid.Column="0" Margin="10,0,0,10"/>
-        <TextBox x:Name="amounttb" Text="{Binding Path=Amount, ValidatesOnExceptions=True}" Grid.Row="4" Grid.Column="1" Margin="0,0,0,10"/>
+        <Label x:Name="amountlbl" Content="Iznos uplate" Grid.Row="4" Grid.Column="0" Margin="10,0,0,0"/>
+        <TextBox x:Name="amounttb" Text="{Binding Path=Amount, ValidatesOnDataErrors=True}" Grid.Row="4" Grid.Column="1"/>
+        <TextBlock x:Name="amountValidation" Grid.Row="5" Grid.Column="1" Text="{Binding ElementName=amounttb, Path=(Validation.Errors).CurrentItem.ErrorContent}" Margin="0,0,0,5"/>
         
-        <Label x:Name="datelbl" Content="Datum" Grid.Row="5" Grid.Column="0" Margin="10,0,0,10"/>
-        <DatePicker x:Name="datepck" SelectedDate="{Binding Path=Date}" Grid.Row="5" Grid.Column="1" Margin="0,0,0,10"/>
+        <Label x:Name="datelbl" Content="Datum" Grid.Row="6" Grid.Column="0" Margin="10,0,0,10"/>
+        <DatePicker x:Name="datepck" SelectedDate="{Binding Path=Date}" Grid.Row="6" Grid.Column="1" Margin="0,0,0,10"/>
         
-        <Label x:Name="deletedlbl" Content="Obrisana" Grid.Row="6" Grid.Column="0" Margin="10,0,0,10"/>
-        <CheckBox x:Name="deletedcb" IsChecked="{Binding Path=Deleted}" Grid.Row="6" Grid.Column="1" Margin="0,7,0,10"/>
+        <Label x:Name="deletedlbl" Content="Obrisana" Grid.Row="7" Grid.Column="0" Margin="10,0,0,10"/>
+        <CheckBox x:Name="deletedcb" IsChecked="{Binding Path=Deleted}" Grid.Row="7" Grid.Column="1" Margin="0,7,0,10"/>
         
-        <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
+        <StackPanel Orientation="Horizontal" Grid.Row="8" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
             <Button x:Name="okbtn" Content="OK" Width="70" Height="30" Click="okbtn_Click"/>
             <Button x:Name="cancelbtn" IsCancel="True" Content="Cancel" Width="70" Height="30" Margin="30,0,0,0"/>
         </StackPanel>

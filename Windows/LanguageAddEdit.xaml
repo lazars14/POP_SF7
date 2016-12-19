@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF7.Windows"
         mc:Ignorable="d"
-        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="262.444" Width="309.557">
+        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="274.619" Width="309.557">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="75"/>
@@ -14,7 +14,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="25"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
@@ -23,13 +24,14 @@
         <Label x:Name="idlbl" Content="Id" Grid.Row="1" Grid.Column="0" Margin="10,0,0,10"/>
         <TextBox x:Name="idtb" Text ="{Binding Path=Id}" IsReadOnly="True" Grid.Row="1" Grid.Column="1" Margin="0,0,0,10"/>
 
-        <Label x:Name="namelbl" Content="Naziv" Grid.Row="2" Grid.Column="0" Margin="10,0,0,10"/>
-        <TextBox x:Name="nametb" Text="{Binding Path=Name}" Grid.Row="2" Grid.Column="1" Margin="0,0,0,10"/>
+        <Label x:Name="namelbl" Content="Naziv" Grid.Row="2" Grid.Column="0" Margin="10,0,0,0"/>
+        <TextBox x:Name="nametb" Text="{Binding Path=Name, ValidatesOnDataErrors=True}" Grid.Row="2" Grid.Column="1"/>
+        <TextBlock x:Name="priceValidation" Grid.Row="3" Grid.Column="1" Text="{Binding ElementName=nametb, Path=(Validation.Errors).CurrentItem.ErrorContent}" Margin="0,0,0,5"/>
 
-        <Label x:Name="deletedlbl" Content="Obrisano" Grid.Row="3" Grid.Column="0" Margin="10,0,0,10"/>
-        <CheckBox x:Name="deletedcb" IsChecked="{Binding Path=Deleted}" Content="" Grid.Row="3" Grid.Column="1" Margin="0,7,0,0"/>
+        <Label x:Name="deletedlbl" Content="Obrisano" Grid.Row="4" Grid.Column="0" Margin="10,0,0,10"/>
+        <CheckBox x:Name="deletedcb" IsChecked="{Binding Path=Deleted}" Content="" Grid.Row="4" Grid.Column="1" Margin="0,7,0,0"/>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
+        <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
             <Button x:Name="okbtn" Content="OK" Width="70" Height="30" Click="okbtn_Click"/>
             <Button x:Name="cancelbtn" Content="Cancel" IsCancel="True" Width="70" Height="30" Margin="30,0,0,0"/>
         </StackPanel>
