@@ -23,17 +23,15 @@ namespace POP_SF7
     {
         public User UserU { get; set; }
         public Decider Decider { get; set; }
-        public ObservableCollection<User> ListOfUsers { get; set; }
 
         public string labelAddUser = "Dodavanje novog korisnika";
         public string labelEditUser = "Izmena postojeceg korisnika";
         
-        public UserAddEdit(User userU, Decider decider, ObservableCollection<User> listOfUsers)
+        public UserAddEdit(User userU, Decider decider)
         {
             InitializeComponent();
             UserU = userU;
             Decider = decider;
-            ListOfUsers = listOfUsers;
             DataContext = UserU;
 
             personInfo.descriptionlbl.Text = (decider == Decider.ADD) ? labelAddUser : labelEditUser;
@@ -43,12 +41,12 @@ namespace POP_SF7
         {
             if(Decider == Decider.ADD)
             {
-                // dodavanje u bazi
-                ListOfUsers.Add(UserU);
+                User.Add(UserU);
+                ApplicationA.Instance.Users.Add(UserU);
             }
             else
             {
-                // izmena u bazi
+                User.Edit(UserU);
             }
             Close();
         }

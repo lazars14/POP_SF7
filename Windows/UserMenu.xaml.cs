@@ -25,15 +25,12 @@ namespace POP_SF7
     public partial class UserMenu : Window
     {
         public ICollectionView view { get; set; }
-        public ObservableCollection<User> ListOfUsers { get; set; }
 
         public UserMenu()
         {
             InitializeComponent();
-            // ucitavanje korisnika iz baze
-            ListOfUsers = new ObservableCollection<User>();
-            view = CollectionViewSource.GetDefaultView(ListOfUsers);
 
+            view = CollectionViewSource.GetDefaultView(ApplicationA.Instance.Users);
             usersdg.ItemsSource = view;
             usersdg.IsSynchronizedWithCurrentItem = true;
         }
@@ -41,7 +38,7 @@ namespace POP_SF7
         private void addbtn_Click(object sender, RoutedEventArgs e)
         {
             User newUser = new User();
-            UserAddEdit addUser = new UserAddEdit(newUser, Decider.ADD, ListOfUsers);
+            UserAddEdit addUser = new UserAddEdit(newUser, Decider.ADD);
             addUser.Show();
         }
 
@@ -55,11 +52,11 @@ namespace POP_SF7
             else
             {
                 User backup = (User)selectedUser.Clone();
-                UserAddEdit edit = new UserAddEdit(selectedUser, Decider.EDIT, ListOfUsers);
+                UserAddEdit edit = new UserAddEdit(selectedUser, Decider.EDIT);
                 if(edit.ShowDialog() != true)
                 {
-                    int index = ListOfUsers.IndexOf(selectedUser);
-                    ListOfUsers[index] = backup;
+                    int index = ApplicationA.Instance.Users.IndexOf(selectedUser);
+                    ApplicationA.Instance.Users[index] = backup;
                 }
             }
         }
@@ -76,9 +73,9 @@ namespace POP_SF7
                 var result = MessageBox.Show("Da li ste sigurni da hocete da obrisete ovog korisnika?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.Yes)
                 {
-                    // komanda za brisanje iz baze
                     selectedUser = view.CurrentItem as User;
-                    ListOfUsers.Remove(selectedUser);
+                    User.Delete(selectedUser);
+                    ApplicationA.Instance.Users.Remove(selectedUser);
                 }
             }
         }

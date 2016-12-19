@@ -25,23 +25,26 @@ namespace POP_SF7
     public partial class CourseTypeMenu : Window
     {
         public ICollectionView view{ get; set; }
-        public ObservableCollection<CourseType> ListOfCourseTypes { get; set; }
 
         public CourseTypeMenu()
         {
             InitializeComponent();
-            // ucitavanje tipova kurseva iz baze u listu
-            ListOfCourseTypes = new ObservableCollection<CourseType>();
-            view = CollectionViewSource.GetDefaultView(ListOfCourseTypes);
+            loadData();
 
+            view = CollectionViewSource.GetDefaultView(ApplicationA.Instance.CourseTypes);
             dynamicdg.ItemsSource = view;
             dynamicdg.IsSynchronizedWithCurrentItem = true;
+        }
+
+        public void loadData()
+        {
+            if (ApplicationA.Instance.CourseTypes.Count() == 0) CourseType.Load();
         }
 
         private void addbtn_Click(object sender, RoutedEventArgs e)
         {
             CourseType newCourseType = new CourseType();
-            CourseTypeAddEdit add = new CourseTypeAddEdit(newCourseType, Decider.ADD, ListOfCourseTypes);
+            CourseTypeAddEdit add = new CourseTypeAddEdit(newCourseType, Decider.ADD);
             add.Show();
         }
 
@@ -56,11 +59,11 @@ namespace POP_SF7
             {
                 CourseType backup = (CourseType)selectedCourseType.Clone();
            
-                CourseTypeAddEdit edit = new CourseTypeAddEdit(selectedCourseType, Decider.EDIT, ListOfCourseTypes);
+                CourseTypeAddEdit edit = new CourseTypeAddEdit(selectedCourseType, Decider.EDIT);
                 if(edit.ShowDialog() != true)
                 {
-                    int index = ListOfCourseTypes.IndexOf(selectedCourseType);
-                    ListOfCourseTypes[index] = backup;
+                    int index = ApplicationA.Instance.CourseTypes.IndexOf(selectedCourseType);
+                    ApplicationA.Instance.CourseTypes[index] = backup;
                 }
             }
         }
@@ -76,10 +79,10 @@ namespace POP_SF7
             {
                 var result = MessageBox.Show("Da li ste sigurni da hocete da obrisete ovaj tip kursa?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if(result == MessageBoxResult.Yes)
-                {
-                    // komanda za brisanje iz baze
+                {                   
                     selectedCourseType = view.CurrentItem as CourseType;
-                    ListOfCourseTypes.Remove(selectedCourseType);
+                    CourseType.Delete(selectedCourseType);
+                    ApplicationA.Instance.CourseTypes.Remove(selectedCourseType);
                 }
             }
         }

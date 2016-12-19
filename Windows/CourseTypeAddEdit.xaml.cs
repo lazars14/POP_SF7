@@ -23,18 +23,16 @@ namespace POP_SF7
     {
         public CourseType CourseTypeC { get; set; }
         public Decider Decider { get; set; }
-        public ObservableCollection<CourseType> ListOfCourseTypes { get; set; }
 
         public string labelAddCourseType = "Dodavanje novog tipa kursa";
         public string labelEditCourseType = "Izmena postojeceg tipa kursa";
 
-        public CourseTypeAddEdit(CourseType courseType, Decider decider, ObservableCollection<CourseType> listOfCourseTypes)
+        public CourseTypeAddEdit(CourseType courseType, Decider decider)
         {
             InitializeComponent();
 
             CourseTypeC = courseType;
             Decider = decider;
-            ListOfCourseTypes = listOfCourseTypes;
 
             DataContext = CourseTypeC;
 
@@ -45,12 +43,12 @@ namespace POP_SF7
         {
             if (Decider == Decider.ADD)
             {
-                // dodavanje u bazi
-                ListOfCourseTypes.Add(CourseTypeC);
+                CourseType.Add(CourseTypeC);
+                ApplicationA.Instance.CourseTypes.Add(CourseTypeC);
             }
             else
             {
-                // izmena u bazi
+                CourseType.Edit(CourseTypeC);
             }
         }
     }

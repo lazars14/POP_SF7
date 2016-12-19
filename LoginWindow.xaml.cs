@@ -20,17 +20,17 @@ namespace POP_SF7
     /// </summary>
     public partial class LoginWindow : Window
     {
-        public List<User> ListOfUsers { get; set; }
-
         public LoginWindow()
         {
             InitializeComponent();
-            // ucitavanje svih korisnika iz baze
-            ListOfUsers = new List<User>();
-            ListOfUsers.Add(new User(1, "ime", "prezime", "jmbg", "adresa", "admin", "admin", Role.Administrator, false));
-            ListOfUsers.Add(new User(1, "ime", "prezime", "jmbg", "adresa", "user", "user", Role.Employee, false));
+            loadData();
 
             usernametb.Focus();
+        }
+
+        public void loadData()
+        {
+            if (ApplicationA.Instance.Users.Count() == 0) User.Load();
         }
 
         private void cancelbtn_Click(object sender, RoutedEventArgs e)
@@ -48,7 +48,7 @@ namespace POP_SF7
             }
             else
             {
-                foreach(User u in ListOfUsers)
+                foreach(User u in ApplicationA.Instance.Users)
                 {
                     if (u.UserName.Equals(usernametb.Text) && u.Password.Equals(passwordpb.Password) && u.Deleted == false)
                     {

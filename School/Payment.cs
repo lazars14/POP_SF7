@@ -59,6 +59,30 @@ namespace POP_SF7
             Deleted = deleted;
         }
 
+        #region Database operations
+
+        public static void Load()
+        {
+
+        }
+
+        public static void Add(Course course)
+        {
+
+        }
+
+        public static void Edit(Course course)
+        {
+
+        }
+
+        public static void Delete(Course course)
+        {
+
+        }
+
+        #endregion
+
         #region IDataErrorInfo
 
         public string Error

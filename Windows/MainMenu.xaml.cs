@@ -25,16 +25,21 @@ namespace POP_SF7
         public MainMenu(Role role)
         {
             InitializeComponent();
-            // ucitavanje skole iz baze
-            School = new School();
+            School = ApplicationA.Instance.School;
             DataContext = School;
-            if(role == Role.Administrator)
+
+            setVisibilityRole(role);
+        }
+
+        public void setVisibilityRole(Role role)
+        {
+            if (role == Role.Administrator)
             {
                 payments.Visibility = Visibility.Collapsed;
                 students.Visibility = Visibility.Collapsed;
                 courses.Visibility = Visibility.Collapsed;
             }
-            else if(role == Role.Employee)
+            else if (role == Role.Employee)
             {
                 editSchoolData.Visibility = Visibility.Collapsed;
                 teachers.Visibility = Visibility.Collapsed;

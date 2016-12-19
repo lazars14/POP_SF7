@@ -30,7 +30,7 @@ namespace POP_SF7
 
         private void okbtn_Click(object sender, RoutedEventArgs e)
         {
-            // izmena u bazi
+            School.UpdateSchool(School);
         }
     }
 }

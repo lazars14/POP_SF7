@@ -29,16 +29,14 @@ namespace POP_SF7.Windows
 
         public Language LanguageL { get; set; }
         public Decider Decider { get; set; }
-        public ObservableCollection<Language> ListOfLanguages { get; set; }
 
-        public LanguageAddEdit(Language language, Decider decider, ObservableCollection<Language> listOfLanguages)
+        public LanguageAddEdit(Language language, Decider decider)
         {
             InitializeComponent();
             DataContext = LanguageL;
 
             LanguageL = language;
             Decider = decider;
-            ListOfLanguages = listOfLanguages;
 
             descriptionlbl.Text = (decider == Decider.ADD) ? labelAddLanguage : labelEditLanguage;
         }
@@ -47,12 +45,12 @@ namespace POP_SF7.Windows
         {
             if(Decider == Decider.ADD)
             {
-                // dodavanje u bazu
-                ListOfLanguages.Add(LanguageL);   
+                POP_SF7.Language.Add(LanguageL);
+                ApplicationA.Instance.Languages.Add(LanguageL);   
             }
             else
             {
-                // izmena u bazi
+                POP_SF7.Language.Edit(LanguageL);
             }
             Close();
         }
