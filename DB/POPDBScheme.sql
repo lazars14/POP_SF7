@@ -4,19 +4,20 @@ Use TheLanguageSchool
 
 Create Table School
 (
-	School_IdentificationNumber Int Primary Key,
+	School_Id Int Not Null Primary Key,
+	School_IdentificationNumber Char(8),
 	School_Name Varchar(50),
 	School_Address Varchar(100),
-	School_PhoneNumber Varchar(20),
+	School_PhoneNumber Varchar(15),
 	School_Email Varchar(50),
 	School_WebSite Varchar(30),
-	School_Pib Varchar(9),
-	School_AccountNumber Varchar(25)
+	School_Pib Char(9),
+	School_AccountNumber Char(18)
 ) On School;
 
 Create Table LanguageL
 (
-	Language_Id Int Primary Key  Not Null Identity,
+	Language_Id Int Primary Key Not Null Identity,
 	Language_Name Varchar(30),
 	Language_Deleted Bit
 ) On Course;

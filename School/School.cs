@@ -1,7 +1,10 @@
-﻿using POP_SF7.Validations;
+﻿using POP_SF7;
+using POP_SF7.Validations;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
 using System.Windows.Controls;
 
 namespace POP_SF7
@@ -78,16 +81,57 @@ namespace POP_SF7
             AccountNumber = accountNumber;
         }
 
-        #region DB
+        #region Database operations
 
         public static School LoadSchool()
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
+            {
+                connection.Open();
+
+                DataSet dataSet = new DataSet();
+
+                SqlCommand selectSchoolCommand = connection.CreateCommand();
+                selectSchoolCommand.CommandText = @"Select * From School;";
+                SqlDataAdapter dataAdapter = new SqlDataAdapter();
+                dataAdapter.SelectCommand = selectSchoolCommand;
+                dataAdapter.Fill(dataSet, "School");
+
+                DataRow row = dataSet.Tables["School"].Rows[0];
+
+                School school = new School();
+                school.IdentificationNumber = (string)row["School_IdentificationNumber"];
+                school.Name = (string)row["School_Name"];
+                school.Address = (string)row["School_Address"];
+                school.PhoneNumber = (string)row["School_PhoneNumber"];
+                school.Email = (string)row["School_Email"];
+                school.WebSite = (string)row["School_WebSite"];
+                school.Pib = (string)row["School_Pib"];
+                school.AccountNumber = (string)row["School_AccountNumber"];
+
+                return school;
+            }
         }
 
-        public static void UpdateSchool()
+        public static void UpdateSchool(School school)
         {
+            using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
+            {
+                SqlCommand updateCommand = connection.CreateCommand();
+                updateCommand.CommandText = @"Update School Set School_Name=@Name, School_Address=@Address, School_PhoneNumber=@PhoneNumber, School_Email=@Email, School_WebSite=@WebSite, School_Pib=@Pib, School_IdentificationNumber=@IdentificationNumber, School_AccountNumber=@AccountNumber Where School_Id=@Id;";
 
+                updateCommand.Parameters.Add(new SqlParameter("@Name", school.Name));
+                updateCommand.Parameters.Add(new SqlParameter("@Address", school.Address));
+                updateCommand.Parameters.Add(new SqlParameter("@PhoneNumber", school.PhoneNumber));
+                updateCommand.Parameters.Add(new SqlParameter("@Email", school.Email));
+                updateCommand.Parameters.Add(new SqlParameter("@WebSite", school.WebSite));
+                updateCommand.Parameters.Add(new SqlParameter("@Pib", school.Pib));
+                updateCommand.Parameters.Add(new SqlParameter("@IdentificationNumber", school.IdentificationNumber));
+                updateCommand.Parameters.Add(new SqlParameter("@AccountNumber", school.AccountNumber));
+                updateCommand.Parameters.Add(new SqlParameter("@Id", 1));
+
+                updateCommand.ExecuteNonQuery();
+            }
         }
 
         #endregion

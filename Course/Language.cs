@@ -1,6 +1,9 @@
 ﻿
+using POP_SF7;
 using System;
 using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace POP_SF7
 {
@@ -36,7 +39,85 @@ namespace POP_SF7
             Deleted = deleted;
         }
 
-        #region
+        #region Database operations
+
+        public static void Load()
+        {
+            using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
+            {
+                connection.Open();
+
+                DataSet dataSet = new DataSet();
+
+                SqlCommand loadCommand = connection.CreateCommand();
+                loadCommand.CommandText = @"Select * From Language;";
+                SqlDataAdapter dataAdapter = new SqlDataAdapter();
+                dataAdapter.SelectCommand = loadCommand;
+                dataAdapter.Fill(dataSet, "Language");
+
+                foreach (DataRow row in dataSet.Tables["Language"].Rows)
+                {
+                    Language lang = new Language();
+                    lang.Id = (int)row["Language_Id"];
+                    lang.Name = (string)row["Language_Name"];
+                    lang.Deleted = (bool)row["Language_Deleted"];
+
+                    ApplicationA.Instance.Languages.Add(lang);
+                }
+            }
+        }
+
+        public static void Add(Language language)
+        {
+            using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
+            {
+                connection.Open();
+
+                SqlCommand addCommand = connection.CreateCommand();
+                addCommand.CommandText = @"Insert Into Language Values(@Name, @Deleted);";
+
+                addCommand.Parameters.Add(new SqlParameter("@Name", language.Name));
+                addCommand.Parameters.Add(new SqlParameter("@Deleted", language.Deleted));
+
+                addCommand.ExecuteNonQuery();
+            }
+        }
+
+        public static void Edit(Language language)
+        {
+            using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
+            {
+                connection.Open();
+
+                SqlCommand addCommand = connection.CreateCommand();
+                addCommand.CommandText = @"Update Language Set Language_Name=@Name, Language_Deleted=@Deleted Where Language_Id=@Id;";
+
+                addCommand.Parameters.Add(new SqlParameter("@Name", language.Name));
+                addCommand.Parameters.Add(new SqlParameter("@Deleted", language.Deleted));
+                addCommand.Parameters.Add(new SqlParameter("@Id", language.Id));
+
+                addCommand.ExecuteNonQuery();
+            }
+        }
+
+        public static void Delete(Language language)
+        {
+            using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
+            {
+                connection.Open();
+
+                SqlCommand addCommand = connection.CreateCommand();
+                addCommand.CommandText = @"Delete From Language Where Language_Id=@Id;";
+
+                addCommand.Parameters.Add(new SqlParameter("@Id", language.Id));
+
+                addCommand.ExecuteNonQuery();
+            }
+        }
+
+        #endregion
+
+        #region IDataErrorInfo
 
         public string Error
         {

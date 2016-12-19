@@ -8,7 +8,7 @@
         Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="376.84" Width="799.725">
     <Grid>
         <TextBlock x:Name="userstb" HorizontalAlignment="Left" Height="23" Margin="9,10,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="Korisnici" FontSize="16" VerticalAlignment="Top" Width="770"/>
-        <DataGrid x:Name="usersdg" AutoGeneratingColumn="usersdg_AutoGeneratingColumn" HorizontalAlignment="Left" Height="149" Margin="9,38,0,0" VerticalAlignment="Top" Width="697"/>
+        <DataGrid x:Name="usersdg" IsReadOnly="True" AutoGeneratingColumn="usersdg_AutoGeneratingColumn" HorizontalAlignment="Left" Height="149" Margin="9,38,0,0" VerticalAlignment="Top" Width="697"/>
         <StackPanel HorizontalAlignment="Left" Height="149" Margin="721,46,0,0" VerticalAlignment="Top" Width="58">
             <Button x:Name="addbtn" Content="Dodaj" Height="30" Margin="0,20,0,0" Click="addbtn_Click"/>
             <Button x:Name="editbtn" Content="Izmeni" Height="30" Margin="0,10" Click="editbtn_Click"/>

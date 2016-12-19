@@ -1,6 +1,8 @@
 ﻿
 using System;
 using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace POP_SF7
 {
@@ -35,6 +37,84 @@ namespace POP_SF7
             Name = name;
             Deleted = deleted;
         }
+
+        #region Database operations
+
+        public static void Load()
+        {
+            using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
+            {
+                connection.Open();
+
+                DataSet dataSet = new DataSet();
+
+                SqlCommand loadCommand = connection.CreateCommand();
+                loadCommand.CommandText = @"Select * From CourseType;";
+                SqlDataAdapter dataAdapter = new SqlDataAdapter();
+                dataAdapter.SelectCommand = loadCommand;
+                dataAdapter.Fill(dataSet, "CourseType");
+
+                foreach (DataRow row in dataSet.Tables["CourseType"].Rows)
+                {
+                    CourseType type = new CourseType();
+                    type.Id = (int)row["CourseType_Id"];
+                    type.Name = (string)row["CourseType_Name"];
+                    type.Deleted = (bool)row["CourseType_Deleted"];
+
+                    ApplicationA.Instance.CourseTypes.Add(type);
+                }
+            }
+        }
+
+        public static void Add(CourseType type)
+        {
+            using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
+            {
+                connection.Open();
+
+                SqlCommand addCommand = connection.CreateCommand();
+                addCommand.CommandText = @"Insert Into CourseType Values(@Name, @Deleted);";
+
+                addCommand.Parameters.Add(new SqlParameter("@Name", type.Name));
+                addCommand.Parameters.Add(new SqlParameter("@Deleted", type.Deleted));
+
+                addCommand.ExecuteNonQuery();
+            }
+        }
+
+        public static void Edit(CourseType type)
+        {
+            using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
+            {
+                connection.Open();
+
+                SqlCommand addCommand = connection.CreateCommand();
+                addCommand.CommandText = @"Update CourseType Set CourseType_Name=@Name, CourseType_Deleted=@Deleted Where CourseType_Id=@Id;";
+
+                addCommand.Parameters.Add(new SqlParameter("@Name", type.Name));
+                addCommand.Parameters.Add(new SqlParameter("@Deleted", type.Deleted));
+                addCommand.Parameters.Add(new SqlParameter("@Id", type.Id));
+
+                addCommand.ExecuteNonQuery();
+            }
+        }
+
+        public static void Delete(CourseType type)
+        {
+            using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
+            {
+                connection.Open();
+
+                SqlCommand addCommand = connection.CreateCommand();
+                addCommand.CommandText = @"Delete From CourseType Where CourseType_Id=@Id;";
+
+                addCommand.Parameters.Add(new SqlParameter("@Id", type.Id));
+
+                addCommand.ExecuteNonQuery();
+            }
+        }
+
+        #endregion
 
         #region IDataErrorInfo
 

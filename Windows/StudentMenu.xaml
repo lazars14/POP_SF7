@@ -8,7 +8,7 @@
         Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="733.969" Width="799.725">
     <Grid>
         <TextBlock x:Name="studentstb" HorizontalAlignment="Left" Height="23" Margin="9,10,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="Ucenici" VerticalAlignment="Top" Width="770"/>
-        <DataGrid x:Name="studentsdg" AutoGeneratingColumn="studentsdg_AutoGeneratingColumn" HorizontalAlignment="Left" Height="149" Margin="9,38,0,0" VerticalAlignment="Top" Width="697" SelectionChanged="usersdg_SelectionChanged"/>
+        <DataGrid x:Name="studentsdg" IsReadOnly="True" AutoGeneratingColumn="studentsdg_AutoGeneratingColumn" HorizontalAlignment="Left" Height="149" Margin="9,38,0,0" VerticalAlignment="Top" Width="697" SelectionChanged="usersdg_SelectionChanged"/>
         <StackPanel HorizontalAlignment="Left" Height="149" Margin="721,46,0,0" VerticalAlignment="Top" Width="58">
             <Button x:Name="addbtn" Content="Dodaj" Height="30" Margin="0,20,0,0" Click="addbtn_Click"/>
             <Button x:Name="editbtn" Content="Izmeni" Height="30" Margin="0,10" Click="editbtn_Click"/>
@@ -71,11 +71,11 @@
 
         <!-- Teacher and Student -->
         <GroupBox x:Name="coursesgb" Header="Kursevi" HorizontalAlignment="Left" Height="171" Margin="9,339,0,0" VerticalAlignment="Top" Width="414">
-            <DataGrid x:Name="coursesdg" AutoGeneratingColumn="coursesdg_AutoGeneratingColumn" ItemsSource="{Binding ElementName=studentsdg, Path=SelectedItem.ListOfCourses}" Margin="5"/>
+            <DataGrid x:Name="coursesdg" IsReadOnly="True" AutoGeneratingColumn="coursesdg_AutoGeneratingColumn" ItemsSource="{Binding ElementName=studentsdg, Path=SelectedItem.ListOfCourses}" Margin="5"/>
         </GroupBox>
 
         <GroupBox x:Name="paymentsgb" Header="Uplate" HorizontalAlignment="Left" Height="171" Margin="431,339,0,0" VerticalAlignment="Top" Width="348">
-            <DataGrid x:Name="paymentsdg" AutoGeneratingColumn="paymentsdg_AutoGeneratingColumn" ItemsSource="{Binding ElementName=studentsdg, Path=SelectedItem.ListOfPayments}" Margin="5"/>
+            <DataGrid x:Name="paymentsdg" IsReadOnly="True" AutoGeneratingColumn="paymentsdg_AutoGeneratingColumn" ItemsSource="{Binding ElementName=studentsdg, Path=SelectedItem.ListOfPayments}" Margin="5"/>
         </GroupBox>
         <GroupBox x:Name="coursegb" Header="Kurs selektovane uplate" HorizontalAlignment="Left" Height="144" Margin="431,515,0,0" VerticalAlignment="Top" Width="348">
             <Grid>
