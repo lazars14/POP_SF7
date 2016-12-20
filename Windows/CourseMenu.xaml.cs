@@ -78,14 +78,18 @@ namespace POP_SF7
             {
                 MessageBox.Show("Morate da selektujete neki kurs da biste ga obrisali!");
             }
+            else if (selectedCourse.Deleted == true)
+            {
+                MessageBox.Show("Selektovan kurs je vec obrisan!");
+            }
             else
             {
                 var result = MessageBox.Show("Da li ste sigurni da hocete da obrisete ovog korisnika?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.Yes)
                 {
-                    // komanda za brisanje iz baze
                     selectedCourse = CoursesView.CurrentItem as Course;
-                    ListOfCourses.Remove(selectedCourse);
+                    Course.Delete(selectedCourse);
+                    selectedCourse.Deleted = true;
                 }
             }
         }

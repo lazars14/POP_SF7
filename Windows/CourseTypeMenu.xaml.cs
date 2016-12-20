@@ -75,6 +75,10 @@ namespace POP_SF7
             {
                 MessageBox.Show("Morate da selektujete red u tabeli kako bi izmenili tip kursa!");
             }
+            else if(selectedCourseType.Deleted == true)
+            {
+                MessageBox.Show("Selektovani tip kursa je vec obrisan!");
+            }
             else
             {
                 var result = MessageBox.Show("Da li ste sigurni da hocete da obrisete ovaj tip kursa?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
@@ -82,7 +86,7 @@ namespace POP_SF7
                 {                   
                     selectedCourseType = view.CurrentItem as CourseType;
                     CourseType.Delete(selectedCourseType);
-                    ApplicationA.Instance.CourseTypes.Remove(selectedCourseType);
+                    selectedCourseType.Deleted = true;
                 }
             }
         }

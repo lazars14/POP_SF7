@@ -71,14 +71,18 @@ namespace POP_SF7
             {
                 MessageBox.Show("Morate da selektujete jednu uplatu da biste je izmenili!");
             }
+            else if (selectedPayment.Deleted == true)
+            {
+                MessageBox.Show("Selektovana uplata je vec obrisana!");
+            }
             else
             {
                 var result = MessageBox.Show("Da li ste sigurni da hocete da obrisete ovu uplatu?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.Yes)
                 {
-                    // komanda za brisanje iz baze
                     selectedPayment = view.CurrentItem as Payment;
-                    ListOfPayments.Remove(selectedPayment);
+                    Payment.Delete(selectedPayment);
+                    selectedPayment.Deleted = true;
                 }
             }
         }

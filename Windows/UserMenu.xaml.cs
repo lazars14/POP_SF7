@@ -68,6 +68,10 @@ namespace POP_SF7
             {
                 MessageBox.Show("Morate da selektujete nekog korisnika kako biste ga obrisali!");
             }
+            else if (selectedUser.Deleted == true)
+            {
+                MessageBox.Show("Selektovani korisnik je vec obrisan!");
+            }
             else
             {
                 var result = MessageBox.Show("Da li ste sigurni da hocete da obrisete ovog korisnika?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
@@ -75,7 +79,7 @@ namespace POP_SF7
                 {
                     selectedUser = view.CurrentItem as User;
                     User.Delete(selectedUser);
-                    ApplicationA.Instance.Users.Remove(selectedUser);
+                    selectedUser.Deleted = true;
                 }
             }
         }

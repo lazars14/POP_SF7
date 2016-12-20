@@ -71,6 +71,10 @@ namespace POP_SF7.Windows
             {
                 MessageBox.Show("Morate da selektujete red u tabeli kako bi izmenili jezik!");
             }
+            else if (selectedLanguage.Deleted == true)
+            {
+                MessageBox.Show("Selektovani jezik je vec obrisan!");
+            }
             else
             {
                 var result = MessageBox.Show("Da li ste sigurni da hocete da obrisete ovaj jezik?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
@@ -78,7 +82,7 @@ namespace POP_SF7.Windows
                 {
                     selectedLanguage = view.CurrentItem as Language;
                     POP_SF7.Language.Delete(selectedLanguage);
-                    ApplicationA.Instance.Languages.Remove(selectedLanguage);
+                    selectedLanguage.Deleted = true;
                 }
             }
         }

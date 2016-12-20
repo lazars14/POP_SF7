@@ -78,14 +78,18 @@ namespace POP_SF7
             {
                 MessageBox.Show("Morate da selektujete nastavnika u tabeli kako biste ga obrisali!");
             }
+            else if (selectedTeacher.Deleted == true)
+            {
+                MessageBox.Show("Selektovani nastavnik je vec obrisan!");
+            }
             else
             {
                 var result = MessageBox.Show("Da li ste sigurni da hocete da obrisete ovog nastavnika?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.Yes)
                 {
-                    // komanda za brisanje iz baze
                     selectedTeacher = TeachersView.CurrentItem as Teacher;
-                    ListOfTeachers.Remove(selectedTeacher);
+                    Teacher.Delete(selectedTeacher);
+                    selectedTeacher.Deleted = true;
                 }
             }
         }
