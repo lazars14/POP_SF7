@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace POP_SF7
 {
@@ -63,22 +65,83 @@ namespace POP_SF7
 
         public static void Load()
         {
+            using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
+            {
+                connection.Open();
 
+                DataSet dataSet = new DataSet();
+
+                SqlCommand loadCommand = connection.CreateCommand();
+                loadCommand.CommandText = @"Select * From Payment;";
+
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(loadCommand);
+                dataAdapter.Fill(dataSet, "Payment");
+
+                foreach(DataRow row in dataSet.Tables["Payment"].Rows)
+                {
+                    Payment payment = new Payment();
+                    payment.Id = (int)row["Payment_Id"];
+                    payment.Amount = (double)row["Payment_Amount"];
+                    payment.Date = (DateTime)row["Payment_Date"];
+                    payment.Deleted = (bool)row["Payment_Deleted"];
+
+                    ApplicationA.Instance.Payments.Add(payment);
+                }
+            }
         }
 
-        public static void Add(Course course)
+        public static void Add(Payment payment)
         {
+            using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
+            {
+                connection.Open();
 
+                SqlCommand addCommand = connection.CreateCommand();
+                addCommand.CommandText = @"Insert Into Payment Values(@Course,@Student,@Amount,@Date,@Deleted);";
+
+                addCommand.Parameters.Add(new SqlParameter("@Course", payment.Course.Id));
+                addCommand.Parameters.Add(new SqlParameter("@Student", payment.Student.Id));
+                addCommand.Parameters.Add(new SqlParameter("@Amount", payment.Amount));
+                addCommand.Parameters.Add(new SqlParameter("@Date", payment.Date));
+                addCommand.Parameters.Add(new SqlParameter("@Deleted", payment.Deleted));
+
+                addCommand.ExecuteNonQuery();
+            }
         }
 
-        public static void Edit(Course course)
+        public static void Edit(Payment payment)
         {
+            using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
+            {
+                connection.Open();
 
+                SqlCommand addCommand = connection.CreateCommand();
+                addCommand.CommandText = @"Update Payment Set Payment_Course=@Course, Payment_Student=@Student, Payment_Amount=@Amount, Payment_Date=@Date, Payment_Deleted=@Deleted Where Payment_Id=@Id);";
+
+                addCommand.Parameters.Add(new SqlParameter("@Course", payment.Course.Id));
+                addCommand.Parameters.Add(new SqlParameter("@Student", payment.Student.Id));
+                addCommand.Parameters.Add(new SqlParameter("@Amount", payment.Amount));
+                addCommand.Parameters.Add(new SqlParameter("@Date", payment.Date));
+                addCommand.Parameters.Add(new SqlParameter("@Deleted", payment.Deleted));
+                addCommand.Parameters.Add(new SqlParameter("@Id", payment.Id));
+
+                addCommand.ExecuteNonQuery();
+            }
         }
 
-        public static void Delete(Course course)
+        public static void Delete(Payment payment)
         {
+            using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
+            {
+                connection.Open();
 
+                SqlCommand addCommand = connection.CreateCommand();
+                addCommand.CommandText = @"Update Payment Set Payment_Deleted=1 Where Payment_Id=@Id;";
+
+                addCommand.Parameters.Add(new SqlParameter("@Id", payment.Id));
+
+                addCommand.ExecuteNonQuery();
+            }
         }
 
         #endregion

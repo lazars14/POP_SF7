@@ -2,6 +2,8 @@
 using System;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace POP_SF7
 {
@@ -84,22 +86,89 @@ namespace POP_SF7
 
         public static void Load()
         {
-        
+            using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
+            {
+                connection.Open();
+
+                DataSet dataSet = new DataSet();
+
+                SqlCommand loadCommand = connection.CreateCommand();
+                loadCommand.CommandText = @"Select * From Course;";
+
+                SqlDataAdapter dataAdapter = new SqlDataAdapter();
+                dataAdapter.SelectCommand = loadCommand;
+                dataAdapter.Fill(dataSet, "Course");
+
+                foreach(DataRow row in dataSet.Tables["Course"].Rows)
+                {
+                    Course course = new Course();
+                    course.Id = (int)row["Course_Id"];
+                    course.Price = (double)row["Course_Price"];
+                    course.StartDate = (DateTime)row["Course_StartDate"];
+                    course.EndDate = (DateTime)row["Course_EndDate"];
+                    course.Deleted = (bool)row["Deleted"];
+
+                    ApplicationA.Instance.Courses.Add(course);
+                }
+            }
         }
 
         public static void Add(Course course)
         {
+            using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
+            {
+                connection.Open();
 
+                SqlCommand addCommand = connection.CreateCommand();
+                addCommand.CommandText = @"Insert Into Course Values(@Language,@CourseType,@Price,@Teacher,@StartDate,@EndDate,@Deleted);";
+
+                addCommand.Parameters.Add(new SqlParameter("@Language", course.Language.Id));
+                addCommand.Parameters.Add(new SqlParameter("@CourseType", course.CourseType.Id));
+                addCommand.Parameters.Add(new SqlParameter("@Price", course.Price));
+                addCommand.Parameters.Add(new SqlParameter("@Teacher", course.Teacher.Id));
+                addCommand.Parameters.Add(new SqlParameter("@StartDate", course.StartDate));
+                addCommand.Parameters.Add(new SqlParameter("@EndDate", course.EndDate));
+                addCommand.Parameters.Add(new SqlParameter("@Deleted", course.Deleted));
+
+                addCommand.ExecuteNonQuery();
+            }
         }
 
         public static void Edit(Course course)
         {
+            using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
+            {
+                connection.Open();
 
+                SqlCommand addCommand = connection.CreateCommand();
+                addCommand.CommandText = @"Update Course Set Course_Language=@Language, Course_CourseType=@CourseType, Course_Price=@Price, Course_Teacher=@Teacher, Course_StartDate=@StartDate, Course_EndDate=@EndDate, Course_Deleted=@Deleted Where Course_Id=@Id);";
+
+                addCommand.Parameters.Add(new SqlParameter("@Language", course.Language.Id));
+                addCommand.Parameters.Add(new SqlParameter("@CourseType", course.CourseType.Id));
+                addCommand.Parameters.Add(new SqlParameter("@Price", course.Price));
+                addCommand.Parameters.Add(new SqlParameter("@Teacher", course.Teacher.Id));
+                addCommand.Parameters.Add(new SqlParameter("@StartDate", course.StartDate));
+                addCommand.Parameters.Add(new SqlParameter("@EndDate", course.EndDate));
+                addCommand.Parameters.Add(new SqlParameter("@Deleted", course.Deleted));
+                addCommand.Parameters.Add(new SqlParameter("@Id", course.Id));
+
+                addCommand.ExecuteNonQuery();
+            }
         }
 
         public static void Delete(Course course)
         {
+            using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
+            {
+                connection.Open();
 
+                SqlCommand addCommand = connection.CreateCommand();
+                addCommand.CommandText = @"Update Course Set Course_Deleted=1 Where Course_Id=@Id;";
+
+                addCommand.Parameters.Add(new SqlParameter("@Id", course.Id));
+
+                addCommand.ExecuteNonQuery();
+            }
         }
 
         #endregion

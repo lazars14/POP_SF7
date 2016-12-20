@@ -190,7 +190,7 @@ namespace POP_SF7
             switch ((string)e.Column.Header)
             {
                 case "Language":
-                    e.Column.Header = "Obrisan";
+                    e.Cancel = true;
                     break;
                 case "CourseType":
                     e.Cancel = true;

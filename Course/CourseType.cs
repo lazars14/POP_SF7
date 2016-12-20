@@ -106,7 +106,7 @@ namespace POP_SF7
                 connection.Open();
 
                 SqlCommand addCommand = connection.CreateCommand();
-                addCommand.CommandText = @"Delete From CourseType Where CourseType_Id=@Id;";
+                addCommand.CommandText = @"Update CourseType Set CourseType_Deleted=1 Where CourseType_Id=@Id;";
 
                 addCommand.Parameters.Add(new SqlParameter("@Id", type.Id));
 

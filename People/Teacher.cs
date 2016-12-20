@@ -98,7 +98,7 @@ namespace POP_SF7
                 connection.Open();
 
                 SqlCommand addCommand = connection.CreateCommand();
-                addCommand.CommandText = @"Delete From Teacher Where Teacher_Id=@Id;";
+                addCommand.CommandText = @"Update Teacher Set Teacher_Deleted=1 Where Teacher_Id=@Id;";
 
                 addCommand.Parameters.Add(new SqlParameter("@Id", teacher.Id));
 

@@ -107,7 +107,7 @@ namespace POP_SF7
                 connection.Open();
 
                 SqlCommand addCommand = connection.CreateCommand();
-                addCommand.CommandText = @"Delete From Language Where Language_Id=@Id;";
+                addCommand.CommandText = @"Update Language Set Language_Deleted=1 Where Language_Id=@Id;";
 
                 addCommand.Parameters.Add(new SqlParameter("@Id", language.Id));
 
