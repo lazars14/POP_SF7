@@ -144,6 +144,9 @@ namespace POP_SF7
         {
             switch ((string)e.Column.Header)
             {
+                case "Id":
+                    e.Cancel = true;
+                    break;
                 case "Course":
                     e.Cancel = true;
                     break;
@@ -158,6 +161,9 @@ namespace POP_SF7
                     break;
                 case "Deleted":
                     e.Column.Header = "Obrisano";
+                    break;
+                case "Error":
+                    e.Cancel = true;
                     break;
             }
         }

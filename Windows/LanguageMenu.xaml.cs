@@ -48,19 +48,19 @@ namespace POP_SF7.Windows
         private void editbtn_Click(object sender, RoutedEventArgs e)
         {
             Language selectedLanguage = view.CurrentItem as Language;
-            if (selectedLanguage == null)
+            if (selectedLanguage != null)
             {
-                MessageBox.Show("Morate da selektujete red u tabeli kako bi izmenili jezik!");
-            }
-            else
-            {
-                Language backup = (Language) selectedLanguage.Clone();
+                Language backup = (Language)selectedLanguage.Clone();
                 LanguageAddEdit edit = new LanguageAddEdit(selectedLanguage, Decider.EDIT);
-                if(edit.ShowDialog() != true)
+                if (edit.ShowDialog() != true)
                 {
                     int index = ApplicationA.Instance.Languages.IndexOf(selectedLanguage);
                     ApplicationA.Instance.Languages[index] = backup;
                 }
+            }
+            else
+            {
+                MessageBox.Show("Morate da selektujete red u tabeli kako bi izmenili jezik!");
             }
         }
 

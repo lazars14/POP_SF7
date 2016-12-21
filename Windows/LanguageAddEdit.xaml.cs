@@ -35,8 +35,11 @@ namespace POP_SF7.Windows
             InitializeComponent();
             LanguageL = language;
 
-            DataContext = LanguageL;
+            //DataContext = LanguageL;
             Decider = decider;
+
+            nametb.DataContext = LanguageL;
+            deletedcb.DataContext = LanguageL;
 
             descriptionlbl.Text = (decider == Decider.ADD) ? labelAddLanguage : labelEditLanguage;
         }

@@ -175,6 +175,9 @@ namespace POP_SF7
         {
             switch ((string)e.Column.Header)
             {
+                case "Id":
+                    e.Cancel = true;
+                    break;
                 case "FirstName":
                     e.Column.Header = "Ime";
                     break;
@@ -196,6 +199,9 @@ namespace POP_SF7
                 case "ListOfCourses":
                     e.Cancel = true;
                     break;
+                case "Error":
+                    e.Cancel = true;
+                    break;
             }
         }
 
@@ -203,11 +209,17 @@ namespace POP_SF7
         {
             switch ((string)e.Column.Header)
             {
+                case "Id":
+                    e.Cancel = true;
+                    break;
                 case "Name":
                     e.Column.Header = "Ime";
                     break;
                 case "Deleted":
                     e.Column.Header = "Obrisano";
+                    break;
+                case "Error":
+                    e.Cancel = true;
                     break;
             }
         }
@@ -216,8 +228,23 @@ namespace POP_SF7
         {
             switch ((string)e.Column.Header)
             {
+                case "Id":
+                    e.Cancel = true;
+                    break;
+                case "Language":
+                    e.Cancel = true;
+                    break;
+                case "CourseType":
+                    e.Cancel = true;
+                    break;
                 case "Price":
                     e.Column.Header = "Cena";
+                    break;
+                case "ListOfStudents":
+                    e.Cancel = true;
+                    break;
+                case "Teacher":
+                    e.Cancel = true;
                     break;
                 case "StartDate":
                     e.Column.Header = "Datum pocetka";
@@ -227,6 +254,9 @@ namespace POP_SF7
                     break;
                 case "Deleted":
                     e.Column.Header = "Obrisan";
+                    break;
+                case "Error":
+                    e.Cancel = true;
                     break;
             }
         }

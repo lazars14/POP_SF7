@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace POP_SF7
 {
@@ -187,8 +188,7 @@ namespace POP_SF7
                         if (string.IsNullOrEmpty(LastName)) return "Morate da popunite prezime!";
                         break;
                     case "Jmbg":
-                        int test;
-                        bool isNumeric = int.TryParse(Jmbg, out test);
+                        bool isNumeric = Jmbg.All(char.IsDigit);
                         if (!isNumeric) return "Jmbg mora da se napise u numerickom formatu!";
                         else if (Jmbg.Length != 13) return "Jmbg mora da sadrzi 13 cifara!";
                         break;

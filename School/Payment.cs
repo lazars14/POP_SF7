@@ -131,7 +131,7 @@ namespace POP_SF7
                 connection.Open();
 
                 SqlCommand addCommand = connection.CreateCommand();
-                addCommand.CommandText = @"Update Payment Set Payment_Course=@Course, Payment_Student=@Student, Payment_Amount=@Amount, Payment_Date=@Date, Payment_Deleted=@Deleted Where Payment_Id=@Id);";
+                addCommand.CommandText = @"Update Payment Set Payment_Course=@Course, Payment_Student=@Student, Payment_Amount=@Amount, Payment_Date=@Date, Payment_Deleted=@Deleted Where Payment_Id=@Id;";
 
                 addCommand.Parameters.Add(new SqlParameter("@Course", payment.Course.Id));
                 addCommand.Parameters.Add(new SqlParameter("@Student", payment.Student.Id));
