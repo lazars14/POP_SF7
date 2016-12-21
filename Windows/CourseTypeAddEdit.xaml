@@ -22,7 +22,7 @@
 
         <Label x:Name="namelbl" Content="Naziv" Grid.Row="1" Grid.Column="0"/>
         <TextBox x:Name="nametb" Text="{Binding Path=Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1"/>
-        <TextBlock x:Name="priceValidation" Grid.Row="2" Grid.Column="1" Text="{Binding ElementName=nametb, Path=(Validation.Errors).CurrentItem.ErrorContent}" Margin="0,0,0,5"/>
+        <TextBlock x:Name="priceValidation" Grid.Row="2" Grid.Column="1" Foreground="Red" Text="{Binding ElementName=nametb, Path=(Validation.Errors).CurrentItem.ErrorContent}" Margin="0,0,0,5"/>
 
         <Label x:Name="deletedlbl" Content="Obrisano" Grid.Row="3" Grid.Column="0" Margin="0,0,0,10"/>
         <CheckBox x:Name="deletedcb" IsChecked="{Binding Path=Deleted}" Content="" Grid.Row="3" Grid.Column="1" Margin="0,6,0,0"/>

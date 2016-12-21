@@ -1,4 +1,5 @@
 ﻿
+using POP_SF7.Helpers;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -180,7 +181,8 @@ namespace POP_SF7
                 switch (columnName)
                 {
                     case "Name":
-                        if (string.IsNullOrEmpty(Name)) return "Morate da popunite naziv tipa kursa!";
+                        if (ValidationHelper.EmptyField(Name)) return ValidationHelper.Empty;
+                        else if (ValidationHelper.BiggerThanMaxLength(Name, 30)) return ValidationHelper.returnMessageMaxLength(30);
                         break;
                 }
                 return "";

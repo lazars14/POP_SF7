@@ -13,6 +13,8 @@ namespace POP_SF7.Validations
     {
         Regex regex = new Regex(@"[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9]");
 
+        public static string CorrectPattern = " xxx-xxxxxxxxxxxxx-xx";
+
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             String v = value as string;

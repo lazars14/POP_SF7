@@ -1,4 +1,5 @@
-﻿using System;
+﻿using POP_SF7.Helpers;
+using System;
 using System.ComponentModel;
 using System.Linq;
 
@@ -77,18 +78,21 @@ namespace POP_SF7
                 switch(columnName)
                 {
                     case "FirstName":
-                        if (string.IsNullOrEmpty(FirstName)) return "Morate da popunite ime!";
+                        if (ValidationHelper.EmptyField(FirstName)) return ValidationHelper.Empty;
+                        else if (ValidationHelper.BiggerThanMaxLength(FirstName, 30)) return ValidationHelper.returnMessageMaxLength(30);
                         break;
                     case "LastName":
-                        if (string.IsNullOrEmpty(LastName)) return "Morate da popunite prezime!";
+                        if (ValidationHelper.EmptyField(LastName)) return ValidationHelper.Empty;
+                        else if (ValidationHelper.BiggerThanMaxLength(LastName, 30)) return ValidationHelper.returnMessageMaxLength(30);
                         break;
                     case "Jmbg":
-                        bool isNumeric = Jmbg.All(char.IsDigit);
-                        if (!isNumeric) return "Jmbg mora da se napise u numerickom formatu!";
-                        else if (Jmbg.Length != 13) return "Jmbg mora da sadrzi 13 cifara!";
+                        bool isNumeric = ValidationHelper.numeric(Jmbg);
+                        if (!isNumeric) return ValidationHelper.Numeric;
+                        else if (ValidationHelper.containExact(Jmbg, 13)) return ValidationHelper.returnMessageExactLength(13);
                         break;
                     case "Address":
-                        if (string.IsNullOrEmpty(Address)) return "Morate da popunite adresu!";
+                        if (ValidationHelper.EmptyField(Address)) return ValidationHelper.Empty;
+                        else if (ValidationHelper.BiggerThanMaxLength(Address, 50)) return ValidationHelper.returnMessageMaxLength(50);
                         break;
                 }
                 return "";

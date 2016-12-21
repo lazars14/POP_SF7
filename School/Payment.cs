@@ -1,4 +1,5 @@
-﻿using System;
+﻿using POP_SF7.Helpers;
+using System;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
@@ -209,9 +210,8 @@ namespace POP_SF7
                 switch(columnName)
                 {
                     case "Amount":
-                        double test;
-                        bool isNumeric = double.TryParse(Amount.ToString(), out test);
-                        if (!isNumeric) return "Iznos mora da se napise u numerickom formatu!";
+                        bool isDouble = ValidationHelper.isDouble(Amount.ToString());
+                        if (!isDouble) return ValidationHelper.Numeric;
                         break;
                 }
                 return "";

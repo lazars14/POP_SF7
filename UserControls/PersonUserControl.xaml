@@ -26,11 +26,11 @@
 
         <Label x:Name="namelbl" Content="Ime" Grid.Row="1" Grid.Column="0" Margin="10,0,0,0"/>
         <TextBox x:Name="nametb" Text="{Binding Path=FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="10,0,0,0"/>
-        <TextBlock x:Name="nameValidation" Grid.Row="2" Grid.Column="1" Text="{Binding ElementName=nametb, Path=(Validation.Errors).CurrentItem.ErrorContent}" Margin="10,0,0,5"/>
+        <TextBlock x:Name="nameValidation" Grid.Row="2" Grid.Column="1" Foreground="Red" Text="{Binding ElementName=nametb, Path=(Validation.Errors).CurrentItem.ErrorContent}" Margin="10,0,0,5"/>
 
         <Label x:Name="lastnamelbl" Content="Prezime" Grid.Row="3" Grid.Column="0" Margin="10,0,0,0"/>
         <TextBox x:Name="lastnametb" Text="{Binding Path=LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" Margin="10,0,0,0"/>
-        <TextBlock x:Name="lastnameValidation" Grid.Row="4" Grid.Column="1" Text="{Binding ElementName=lastnametb, Path=(Validation.Errors).CurrentItem.ErrorContent}" Margin="10,0,0,5"/>
+        <TextBlock x:Name="lastnameValidation" Grid.Row="4" Grid.Column="1" Foreground="Red" Text="{Binding ElementName=lastnametb, Path=(Validation.Errors).CurrentItem.ErrorContent}" Margin="10,0,0,5"/>
         
         <Label x:Name="jmbglbl" Content="JMBG" Grid.Row="5" Grid.Column="0" Margin="10,0,0,0"/>
         <TextBox x:Name="jmbgtb" Text="{Binding Path=Jmbg, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" Margin="10,0,0,0"/>
@@ -38,7 +38,7 @@
         
         <Label x:Name="addresslbl" Content="Adresa" Grid.Row="7" Grid.Column="0" Margin="10,0,0,0"/>
         <TextBox x:Name="addresstb" Text="{Binding Path=Address, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Grid.Row="7" Grid.Column="1" Margin="10,0,0,0"/>
-        <TextBlock x:Name="addressValidation" Grid.Row="8" Grid.Column="1" Text="{Binding ElementName=addresstb, Path=(Validation.Errors).CurrentItem.ErrorContent}" Margin="10,0,0,5"/>
+        <TextBlock x:Name="addressValidation" Grid.Row="8" Grid.Column="1" Foreground="Red" Text="{Binding ElementName=addresstb, Path=(Validation.Errors).CurrentItem.ErrorContent}" Margin="10,0,0,5"/>
         
         <Label x:Name="deletedlbl" Content="Obrisan" Grid.Row="9" Grid.Column="0" Margin="10,0,0,10"/>
         <CheckBox x:Name="deletedcb" IsChecked="{Binding Path=Deleted}" Grid.Row="10" Grid.Column="1" Margin="10,7,0,10"/>

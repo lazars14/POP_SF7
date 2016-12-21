@@ -1,4 +1,5 @@
 ﻿using POP_SF7;
+using POP_SF7.Helpers;
 using POP_SF7.Validations;
 using System;
 using System.Collections.Generic;
@@ -177,35 +178,39 @@ namespace POP_SF7
                 switch(columnName)
                 {
                     case "Name":
-                        if (string.IsNullOrEmpty(Name)) return "Morate da popunite naziv skole!";
+                        if (ValidationHelper.EmptyField(Name)) return ValidationHelper.Empty;
+                        else if (ValidationHelper.BiggerThanMaxLength(Name, 50)) return ValidationHelper.returnMessageMaxLength(50);
                         break;
                     case "Address":
-                        if (string.IsNullOrEmpty(Address)) return "Morate da popunite adresu skole!";
+                        if (ValidationHelper.EmptyField(Address)) return ValidationHelper.Empty;
+                        else if (ValidationHelper.BiggerThanMaxLength(Address, 100)) return ValidationHelper.returnMessageMaxLength(100);
                         break;
                     case "PhoneNumber":
                         PhoneNumberValidationRule validator0 = new PhoneNumberValidationRule();
-                        if (validator0.Validate(PhoneNumber, null) != ValidationResult.ValidResult) return "Neispravan format broja telefona!";
+                        if (validator0.Validate(PhoneNumber, null) != ValidationResult.ValidResult) return ValidationHelper.Pattern + PhoneNumberValidationRule.CorrectPattern;
                         break;
                     case "Email":
                         EMailValidationRule validator = new EMailValidationRule();
-                        if (validator.Validate(Email, null) != ValidationResult.ValidResult) return "Neispravan format e-mail adrese";
+                        if (validator.Validate(Email, null) != ValidationResult.ValidResult) return ValidationHelper.Pattern + EMailValidationRule.CorrectPattern;
+                        else if (ValidationHelper.BiggerThanMaxLength(Email, 50)) return ValidationHelper.returnMessageMaxLength(50);
                         break;
                     case "WebSite":
-                        if (string.IsNullOrEmpty(WebSite)) return "Morate da popunite website!";
+                        if (ValidationHelper.EmptyField(WebSite)) return ValidationHelper.Empty;
+                        else if (ValidationHelper.BiggerThanMaxLength(WebSite, 30)) return ValidationHelper.returnMessageMaxLength(30);
                         break;
                     case "Pib":
-                        bool isNumeric = Pib.All(char.IsDigit);
-                        if (!isNumeric) return "Pib mora da se napise u numerickom formatu!";
-                        else if (Pib.Length != 9) return "Pib mora da sadrzi 9 cifara!";
+                        bool isNumeric = ValidationHelper.numeric(Pib);
+                        if (!isNumeric) return ValidationHelper.Numeric;
+                        else if (!ValidationHelper.containExact(Pib, 9)) return ValidationHelper.returnMessageExactLength(9);
                         break;
                     case "IdentificationNumber":
-                        bool isNumeric1 = IdentificationNumber.All(char.IsDigit);
-                        if (!isNumeric1) return "Maticni broj mora da se napise u numerickom formatu!";
-                        else if (IdentificationNumber.Length != 8) return "Maticni broj mora da sadrzi 8 cifara!";
+                        bool isNumeric1 = ValidationHelper.numeric(IdentificationNumber);
+                        if (!isNumeric1) return ValidationHelper.Numeric;
+                        else if (!ValidationHelper.containExact(IdentificationNumber, 8)) return ValidationHelper.returnMessageExactLength(8);
                         break;
                     case "AccountNumber":
                         AccountNumberValidationRule validator1 = new AccountNumberValidationRule();
-                        if (validator1.Validate(AccountNumber, null) != ValidationResult.ValidResult) return "Neispravan format racuna! xxx-xxxxxxxxxxxxx-xx";
+                        if (validator1.Validate(AccountNumber, null) != ValidationResult.ValidResult) return ValidationHelper.Pattern + AccountNumberValidationRule.CorrectPattern;
                         break;
                 }
                 return "";

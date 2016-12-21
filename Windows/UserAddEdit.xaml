@@ -30,12 +30,12 @@
                     <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
                 <Label x:Name="usernamelbl" Content="Korisnicko ime" Grid.Row="0" Grid.Column="0" Margin="5,5,0,0"/>
-                <TextBox x:Name="usernametb" Text="{Binding Path=UserName}" Grid.Row="0" Grid.Column="1" Margin="5,5,0,0"/>
-                <TextBlock x:Name="usernameValidation" Grid.Row="1" Grid.Column="1" Text="{Binding ElementName=usernametb, Path=(Validation.Errors).CurrentItem.ErrorContent}" Margin="5,0,0,5"/>
+                <TextBox x:Name="usernametb" Text="{Binding Path=UserName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1" Margin="5,5,0,0"/>
+                <TextBlock x:Name="usernameValidation" Grid.Row="1" Grid.Column="1" Foreground="Red" Text="{Binding ElementName=usernametb, Path=(Validation.Errors).CurrentItem.ErrorContent}" Margin="5,0,0,5"/>
                 
                 <Label x:Name="passwordlbl" Content="Lozinka" Grid.Row="2" Grid.Column="0" Margin="5,5,0,0"/>
-                <TextBox x:Name="passwordtb" Text="{Binding Path=Password}" Grid.Row="2" Grid.Column="1" Margin="5,5,0,0"/>
-                <TextBlock x:Name="passwordValidation" Grid.Row="3" Grid.Column="1" Text="{Binding ElementName=passwordtb, Path=(Validation.Errors).CurrentItem.ErrorContent}" Margin="5,0,0,5"/>
+                <TextBox x:Name="passwordtb" Text="{Binding Path=Password, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Margin="5,5,0,0"/>
+                <TextBlock x:Name="passwordValidation" Grid.Row="3" Grid.Column="1" Foreground="Red" Text="{Binding ElementName=passwordtb, Path=(Validation.Errors).CurrentItem.ErrorContent}" Margin="5,0,0,5"/>
                 
                 <Label x:Name="rolelbl" Content="Uloga" Grid.Row="4" Grid.ColumnSpan="2" Margin="5"/>
                 <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="1" Margin="5,10,5,5">

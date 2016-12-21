@@ -58,6 +58,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Helpers\Search.cs" />
+    <Compile Include="Helpers\ValidationHelper.cs" />
     <Compile Include="People\Student.cs" />
     <Compile Include="People\Teacher.cs" />
     <Compile Include="People\User.cs" />

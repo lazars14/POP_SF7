@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Data;
 using System.Windows;
+using POP_SF7.Helpers;
 
 namespace POP_SF7
 {
@@ -235,9 +236,8 @@ namespace POP_SF7
                 switch(columnName)
                 {
                     case "Price":
-                        double test;
-                        bool isNumeric = double.TryParse(Price.ToString(), out test);
-                        if (!isNumeric) return "Cena mora da se napise u numerickom formatu!";
+                        bool isDouble = ValidationHelper.isDouble(Price.ToString());
+                        if (!isDouble) return ValidationHelper.Numeric;
                         break;
                     case "EndDate":
                         if (EndDate < StartDate) return "Zavrsni datum ne sme biti manji od pocetnog!";

@@ -13,6 +13,8 @@ namespace POP_SF7
     {
         Regex regex = new Regex(@"\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b", RegexOptions.IgnoreCase);
 
+        public static string CorrectPattern = " x@x.xxx";
+
         public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)
         {
             String v = value as string;
