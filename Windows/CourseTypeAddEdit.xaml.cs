@@ -50,6 +50,7 @@ namespace POP_SF7
             {
                 CourseType.Edit(CourseTypeC);
             }
+            Close();
         }
     }
 }

@@ -50,20 +50,28 @@ namespace POP_SF7
                 DataSet dataSet = new DataSet();
 
                 SqlCommand loadCommand = connection.CreateCommand();
-                loadCommand.CommandText = @"Select * From Language;";
-                SqlDataAdapter dataAdapter = new SqlDataAdapter();
-                dataAdapter.SelectCommand = loadCommand;
-                dataAdapter.Fill(dataSet, "Language");
+                loadCommand.CommandText = @"Select * From LanguageL;";
 
-                foreach (DataRow row in dataSet.Tables["Language"].Rows)
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(loadCommand);
+                try
                 {
-                    Language lang = new Language();
-                    lang.Id = (int)row["Language_Id"];
-                    lang.Name = (string)row["Language_Name"];
-                    lang.Deleted = (bool)row["Language_Deleted"];
+                    dataAdapter.Fill(dataSet, "LanguageL");
 
-                    ApplicationA.Instance.Languages.Add(lang);
+                    foreach (DataRow row in dataSet.Tables["LanguageL"].Rows)
+                    {
+                        Language lang = new Language();
+                        lang.Id = (int)row["Language_Id"];
+                        lang.Name = (string)row["Language_Name"];
+                        lang.Deleted = (bool)row["Language_Deleted"];
+
+                        ApplicationA.Instance.Languages.Add(lang);
+                    }
                 }
+                catch(SqlException e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
+                
             }
         }
 
@@ -74,12 +82,19 @@ namespace POP_SF7
                 connection.Open();
 
                 SqlCommand addCommand = connection.CreateCommand();
-                addCommand.CommandText = @"Insert Into Language Values(@Name, @Deleted);";
+                addCommand.CommandText = @"Insert Into LanguageL Values(@Name, @Deleted);";
 
                 addCommand.Parameters.Add(new SqlParameter("@Name", language.Name));
                 addCommand.Parameters.Add(new SqlParameter("@Deleted", language.Deleted));
 
-                addCommand.ExecuteNonQuery();
+                try
+                {
+                    addCommand.ExecuteNonQuery();
+                }
+                catch(SqlException e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
 
@@ -90,13 +105,20 @@ namespace POP_SF7
                 connection.Open();
 
                 SqlCommand addCommand = connection.CreateCommand();
-                addCommand.CommandText = @"Update Language Set Language_Name=@Name, Language_Deleted=@Deleted Where Language_Id=@Id;";
+                addCommand.CommandText = @"Update LanguageL Set Language_Name=@Name, Language_Deleted=@Deleted Where Language_Id=@Id;";
 
                 addCommand.Parameters.Add(new SqlParameter("@Name", language.Name));
                 addCommand.Parameters.Add(new SqlParameter("@Deleted", language.Deleted));
                 addCommand.Parameters.Add(new SqlParameter("@Id", language.Id));
 
-                addCommand.ExecuteNonQuery();
+                try
+                {
+                    addCommand.ExecuteNonQuery();
+                }
+                catch (SqlException e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
 
@@ -107,11 +129,18 @@ namespace POP_SF7
                 connection.Open();
 
                 SqlCommand addCommand = connection.CreateCommand();
-                addCommand.CommandText = @"Update Language Set Language_Deleted=1 Where Language_Id=@Id;";
+                addCommand.CommandText = @"Update LanguageL Set Language_Deleted=1 Where Language_Id=@Id;";
 
                 addCommand.Parameters.Add(new SqlParameter("@Id", language.Id));
 
-                addCommand.ExecuteNonQuery();
+                try
+                {
+                    addCommand.ExecuteNonQuery();
+                }
+                catch (SqlException e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
 
@@ -123,7 +152,7 @@ namespace POP_SF7
         {
             get
             {
-                throw new NotImplementedException();
+                return "";
             }
         }
 

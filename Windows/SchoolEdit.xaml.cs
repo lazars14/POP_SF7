@@ -31,6 +31,7 @@ namespace POP_SF7
         private void okbtn_Click(object sender, RoutedEventArgs e)
         {
             School.UpdateSchool(School);
+            Close();
         }
     }
 }

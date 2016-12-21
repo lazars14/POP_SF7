@@ -65,7 +65,7 @@ namespace POP_SF7
         {
             get
             {
-                throw new NotImplementedException();
+                return "";
             }
         }
 

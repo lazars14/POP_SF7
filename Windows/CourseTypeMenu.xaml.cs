@@ -95,5 +95,24 @@ namespace POP_SF7
         {
             Close();
         }
+
+        private void dynamicdg_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            switch ((string)e.Column.Header)
+            {
+                case "Id":
+                    e.Cancel = true;
+                    break;
+                case "Name":
+                    e.Column.Header = "Naziv";
+                    break;
+                case "Deleted":
+                    e.Column.Header = "Obrisano";
+                    break;
+                case "Error":
+                    e.Cancel = true;
+                    break;
+            }
+        }
     }
 }

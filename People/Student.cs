@@ -32,21 +32,28 @@ namespace POP_SF7
                 SqlCommand loadCommand = connection.CreateCommand();
                 loadCommand.CommandText = @"Select * From Student;";
 
-                SqlDataAdapter dataAdapter = new SqlDataAdapter();
-                dataAdapter.SelectCommand = loadCommand;
-                dataAdapter.Fill(dataSet, "Student");
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(loadCommand);
                 
-                foreach(DataRow row in dataSet.Tables["Student"].Rows)
+                try
                 {
-                    Student student = new Student();
-                    student.Id = (int)row["Student_Id"];
-                    student.FirstName = (string)row["Student_FirstName"];
-                    student.LastName = (string)row["Student_LastName"];
-                    student.Jmbg = (string)row["Student_Jmbg"];
-                    student.Address = (string)row["Student_Address"];
-                    student.Deleted = (bool)row["Student_Deleted"];
+                    dataAdapter.Fill(dataSet, "Student");
 
-                    ApplicationA.Instance.Students.Add(student);
+                    foreach (DataRow row in dataSet.Tables["Student"].Rows)
+                    {
+                        Student student = new Student();
+                        student.Id = (int)row["Student_Id"];
+                        student.FirstName = (string)row["Student_FirstName"];
+                        student.LastName = (string)row["Student_LastName"];
+                        student.Jmbg = (string)row["Student_Jmbg"];
+                        student.Address = (string)row["Student_Address"];
+                        student.Deleted = (bool)row["Student_Deleted"];
+
+                        ApplicationA.Instance.Students.Add(student);
+                    }
+                }
+                catch(SqlException e)
+                {
+                    Console.WriteLine(e.StackTrace);
                 }
             }
         }
@@ -66,7 +73,14 @@ namespace POP_SF7
                 addCommand.Parameters.Add(new SqlParameter("@Address", student.Address));
                 addCommand.Parameters.Add(new SqlParameter("@Deleted", student.Deleted));
 
-                addCommand.ExecuteNonQuery();
+                try
+                {
+                    addCommand.ExecuteNonQuery();
+                }
+                catch(SqlException e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
 
@@ -86,7 +100,14 @@ namespace POP_SF7
                 addCommand.Parameters.Add(new SqlParameter("@Deleted", student.Deleted));
                 addCommand.Parameters.Add(new SqlParameter("@Id", student.Id));
 
-                addCommand.ExecuteNonQuery();
+                try
+                {
+                    addCommand.ExecuteNonQuery();
+                }
+                catch (SqlException e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
 
@@ -101,7 +122,14 @@ namespace POP_SF7
 
                 addCommand.Parameters.Add(new SqlParameter("@Id", student.Id));
 
-                addCommand.ExecuteNonQuery();
+                try
+                {
+                    addCommand.ExecuteNonQuery();
+                }
+                catch (SqlException e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
 

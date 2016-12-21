@@ -33,9 +33,9 @@ namespace POP_SF7.Windows
         public LanguageAddEdit(Language language, Decider decider)
         {
             InitializeComponent();
-            DataContext = LanguageL;
-
             LanguageL = language;
+
+            DataContext = LanguageL;
             Decider = decider;
 
             descriptionlbl.Text = (decider == Decider.ADD) ? labelAddLanguage : labelEditLanguage;

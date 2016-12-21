@@ -12,7 +12,7 @@ Create Table School
 	School_Email Varchar(50),
 	School_WebSite Varchar(30),
 	School_Pib Char(9),
-	School_AccountNumber Char(18)
+	School_AccountNumber Char(20)
 ) On School;
 
 Create Table LanguageL

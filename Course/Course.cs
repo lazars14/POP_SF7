@@ -95,20 +95,27 @@ namespace POP_SF7
                 SqlCommand loadCommand = connection.CreateCommand();
                 loadCommand.CommandText = @"Select * From Course;";
 
-                SqlDataAdapter dataAdapter = new SqlDataAdapter();
-                dataAdapter.SelectCommand = loadCommand;
-                dataAdapter.Fill(dataSet, "Course");
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(loadCommand);
 
-                foreach(DataRow row in dataSet.Tables["Course"].Rows)
+                try
                 {
-                    Course course = new Course();
-                    course.Id = (int)row["Course_Id"];
-                    course.Price = (double)row["Course_Price"];
-                    course.StartDate = (DateTime)row["Course_StartDate"];
-                    course.EndDate = (DateTime)row["Course_EndDate"];
-                    course.Deleted = (bool)row["Deleted"];
+                    dataAdapter.Fill(dataSet, "Course");
 
-                    ApplicationA.Instance.Courses.Add(course);
+                    foreach (DataRow row in dataSet.Tables["Course"].Rows)
+                    {
+                        Course course = new Course();
+                        course.Id = (int)row["Course_Id"];
+                        course.Price = (double)row["Course_Price"];
+                        course.StartDate = (DateTime)row["Course_StartDate"];
+                        course.EndDate = (DateTime)row["Course_EndDate"];
+                        course.Deleted = (bool)row["Deleted"];
+
+                        ApplicationA.Instance.Courses.Add(course);
+                    }
+                }
+                catch(SqlException e)
+                {
+                    Console.WriteLine(e.StackTrace);
                 }
             }
         }
@@ -130,7 +137,14 @@ namespace POP_SF7
                 addCommand.Parameters.Add(new SqlParameter("@EndDate", course.EndDate));
                 addCommand.Parameters.Add(new SqlParameter("@Deleted", course.Deleted));
 
-                addCommand.ExecuteNonQuery();
+                try
+                {
+                    addCommand.ExecuteNonQuery();
+                }
+                catch(SqlException e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
 
@@ -152,7 +166,14 @@ namespace POP_SF7
                 addCommand.Parameters.Add(new SqlParameter("@Deleted", course.Deleted));
                 addCommand.Parameters.Add(new SqlParameter("@Id", course.Id));
 
-                addCommand.ExecuteNonQuery();
+                try
+                {
+                    addCommand.ExecuteNonQuery();
+                }
+                catch (SqlException e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
 
@@ -167,7 +188,14 @@ namespace POP_SF7
 
                 addCommand.Parameters.Add(new SqlParameter("@Id", course.Id));
 
-                addCommand.ExecuteNonQuery();
+                try
+                {
+                    addCommand.ExecuteNonQuery();
+                }
+                catch (SqlException e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
 
@@ -179,7 +207,7 @@ namespace POP_SF7
         {
             get
             {
-                throw new NotImplementedException();
+                return "";
             }
         }
 

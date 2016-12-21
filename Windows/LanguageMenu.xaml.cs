@@ -47,7 +47,7 @@ namespace POP_SF7.Windows
 
         private void editbtn_Click(object sender, RoutedEventArgs e)
         {
-            Language selectedLanguage = (Language)dynamicdg.SelectedItem;
+            Language selectedLanguage = view.CurrentItem as Language;
             if (selectedLanguage == null)
             {
                 MessageBox.Show("Morate da selektujete red u tabeli kako bi izmenili jezik!");
@@ -66,7 +66,7 @@ namespace POP_SF7.Windows
 
         private void deletebtn_Click(object sender, RoutedEventArgs e)
         {
-            Language selectedLanguage = (Language)dynamicdg.SelectedItem;
+            Language selectedLanguage = view.CurrentItem as Language;
             if (selectedLanguage == null)
             {
                 MessageBox.Show("Morate da selektujete red u tabeli kako bi izmenili jezik!");
@@ -90,6 +90,26 @@ namespace POP_SF7.Windows
         private void closebtn_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void dynamicdg_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            switch((string)e.Column.Header)
+            {
+                case "Id":
+                    e.Cancel = true; // visibility.Collapsed
+                    break;
+                case "Name":
+                    e.Column.Header = "Naziv";
+                    break;
+                case "Deleted":
+                    e.Column.Header = "Obrisano";
+                    break;
+                case "Error":
+                    e.Cancel = true;
+                    break;
+
+            }
         }
     }
 }

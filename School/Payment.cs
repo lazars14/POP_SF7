@@ -75,18 +75,26 @@ namespace POP_SF7
                 loadCommand.CommandText = @"Select * From Payment;";
 
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(loadCommand);
-                dataAdapter.Fill(dataSet, "Payment");
 
-                foreach(DataRow row in dataSet.Tables["Payment"].Rows)
+                try
                 {
-                    Payment payment = new Payment();
-                    payment.Id = (int)row["Payment_Id"];
-                    payment.Amount = (double)row["Payment_Amount"];
-                    payment.Date = (DateTime)row["Payment_Date"];
-                    payment.Deleted = (bool)row["Payment_Deleted"];
+                    dataAdapter.Fill(dataSet, "Payment");
 
-                    ApplicationA.Instance.Payments.Add(payment);
+                    foreach (DataRow row in dataSet.Tables["Payment"].Rows)
+                    {
+                        Payment payment = new Payment();
+                        payment.Id = (int)row["Payment_Id"];
+                        payment.Amount = (double)row["Payment_Amount"];
+                        payment.Date = (DateTime)row["Payment_Date"];
+                        payment.Deleted = (bool)row["Payment_Deleted"];
+
+                        ApplicationA.Instance.Payments.Add(payment);
+                    }
                 }
+                catch(SqlException e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                } 
             }
         }
 
@@ -105,7 +113,14 @@ namespace POP_SF7
                 addCommand.Parameters.Add(new SqlParameter("@Date", payment.Date));
                 addCommand.Parameters.Add(new SqlParameter("@Deleted", payment.Deleted));
 
-                addCommand.ExecuteNonQuery();
+                try
+                {
+                    addCommand.ExecuteNonQuery();
+                }
+                catch(SqlException e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
 
@@ -125,7 +140,14 @@ namespace POP_SF7
                 addCommand.Parameters.Add(new SqlParameter("@Deleted", payment.Deleted));
                 addCommand.Parameters.Add(new SqlParameter("@Id", payment.Id));
 
-                addCommand.ExecuteNonQuery();
+                try
+                {
+                    addCommand.ExecuteNonQuery();
+                }
+                catch (SqlException e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
 
@@ -140,7 +162,14 @@ namespace POP_SF7
 
                 addCommand.Parameters.Add(new SqlParameter("@Id", payment.Id));
 
-                addCommand.ExecuteNonQuery();
+                try
+                {
+                    addCommand.ExecuteNonQuery();
+                }
+                catch (SqlException e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
 
@@ -152,7 +181,7 @@ namespace POP_SF7
         {
             get
             {
-                throw new NotImplementedException();
+                return "";
             }
         }
 

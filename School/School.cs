@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Windows.Controls;
 
 namespace POP_SF7
@@ -93,23 +94,31 @@ namespace POP_SF7
 
                 SqlCommand selectSchoolCommand = connection.CreateCommand();
                 selectSchoolCommand.CommandText = @"Select * From School;";
-                SqlDataAdapter dataAdapter = new SqlDataAdapter();
-                dataAdapter.SelectCommand = selectSchoolCommand;
-                dataAdapter.Fill(dataSet, "School");
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(selectSchoolCommand);
 
-                DataRow row = dataSet.Tables["School"].Rows[0];
+                try
+                {
+                    dataAdapter.Fill(dataSet, "School");
 
-                School school = new School();
-                school.IdentificationNumber = (string)row["School_IdentificationNumber"];
-                school.Name = (string)row["School_Name"];
-                school.Address = (string)row["School_Address"];
-                school.PhoneNumber = (string)row["School_PhoneNumber"];
-                school.Email = (string)row["School_Email"];
-                school.WebSite = (string)row["School_WebSite"];
-                school.Pib = (string)row["School_Pib"];
-                school.AccountNumber = (string)row["School_AccountNumber"];
+                    DataRow row = dataSet.Tables["School"].Rows[0];
 
-                return school;
+                    School school = new School();
+                    school.IdentificationNumber = (string)row["School_IdentificationNumber"];
+                    school.Name = (string)row["School_Name"];
+                    school.Address = (string)row["School_Address"];
+                    school.PhoneNumber = (string)row["School_PhoneNumber"];
+                    school.Email = (string)row["School_Email"];
+                    school.WebSite = (string)row["School_WebSite"];
+                    school.Pib = (string)row["School_Pib"];
+                    school.AccountNumber = (string)row["School_AccountNumber"];
+
+                    return school;
+                }
+                catch(SqlException e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
+                return null;
             }
         }
 
@@ -118,7 +127,7 @@ namespace POP_SF7
             using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
             {
                 SqlCommand updateCommand = connection.CreateCommand();
-                updateCommand.CommandText = @"Update School Set School_Name=@Name, School_Address=@Address, School_PhoneNumber=@PhoneNumber, School_Email=@Email, School_WebSite=@WebSite, School_Pib=@Pib, School_IdentificationNumber=@IdentificationNumber, School_AccountNumber=@AccountNumber Where School_Id=@Id;";
+                updateCommand.CommandText = @"Update School Set School_Name=@Name, School_Address=@Address, School_PhoneNumber=@PhoneNumber, School_Email=@Email, School_WebSite=@WebSite, School_Pib=@Pib, School_IdentificationNumber=@IdentificationNumber, School_AccountNumber=@AccountNumber Where School_Id=1;";
 
                 updateCommand.Parameters.Add(new SqlParameter("@Name", school.Name));
                 updateCommand.Parameters.Add(new SqlParameter("@Address", school.Address));
@@ -128,9 +137,19 @@ namespace POP_SF7
                 updateCommand.Parameters.Add(new SqlParameter("@Pib", school.Pib));
                 updateCommand.Parameters.Add(new SqlParameter("@IdentificationNumber", school.IdentificationNumber));
                 updateCommand.Parameters.Add(new SqlParameter("@AccountNumber", school.AccountNumber));
-                updateCommand.Parameters.Add(new SqlParameter("@Id", 1));
 
-                updateCommand.ExecuteNonQuery();
+                try
+                {
+                    updateCommand.ExecuteNonQuery();
+                }
+                catch(SqlException e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
+                catch(InvalidOperationException a)
+                {
+                    Console.WriteLine(a.StackTrace);
+                }
             }
         }
 
@@ -142,7 +161,7 @@ namespace POP_SF7
         {
             get
             {
-                throw new NotImplementedException();
+                return "";
             }
         }
 
@@ -159,7 +178,7 @@ namespace POP_SF7
                         if (string.IsNullOrEmpty(Address)) return "Morate da popunite adresu skole!";
                         break;
                     case "PhoneNumber":
-                        EMailValidationRule validator0 = new EMailValidationRule();
+                        PhoneNumberValidationRule validator0 = new PhoneNumberValidationRule();
                         if (validator0.Validate(PhoneNumber, null) != ValidationResult.ValidResult) return "Neispravan format broja telefona!";
                         break;
                     case "Email":
@@ -167,20 +186,17 @@ namespace POP_SF7
                         if (validator.Validate(Email, null) != ValidationResult.ValidResult) return "Neispravan format e-mail adrese";
                         break;
                     case "WebSite":
-                        bool isUri = Uri.IsWellFormedUriString(WebSite, UriKind.RelativeOrAbsolute);
-                        if (!isUri) return "Neispravan format adrese web sajta!";
+                        if (string.IsNullOrEmpty(WebSite)) return "Morate da popunite website!";
                         break;
                     case "Pib":
-                        int test;
-                        bool isNumeric = int.TryParse(Pib.ToString(), out test);
+                        bool isNumeric = Pib.All(char.IsDigit);
                         if (!isNumeric) return "Pib mora da se napise u numerickom formatu!";
-                        else if (Pib.ToString().Length != 9) return "Pib mora da sadrzi 9 cifara!";
+                        else if (Pib.Length != 9) return "Pib mora da sadrzi 9 cifara!";
                         break;
                     case "IdentificationNumber":
-                        int test1;
-                        bool isNumeric1 = int.TryParse(IdentificationNumber.ToString(), out test1);
+                        bool isNumeric1 = IdentificationNumber.All(char.IsDigit);
                         if (!isNumeric1) return "Maticni broj mora da se napise u numerickom formatu!";
-                        else if (Pib.ToString().Length != 8) return "Maticni broj mora da sadrzi 8 cifara!";
+                        else if (IdentificationNumber.Length != 8) return "Maticni broj mora da sadrzi 8 cifara!";
                         break;
                     case "AccountNumber":
                         AccountNumberValidationRule validator1 = new AccountNumberValidationRule();

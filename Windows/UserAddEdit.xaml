@@ -39,8 +39,8 @@
                 
                 <Label x:Name="rolelbl" Content="Uloga" Grid.Row="4" Grid.ColumnSpan="2" Margin="5"/>
                 <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="1" Margin="5,10,5,5">
-                    <RadioButton x:Name="administratorrb" Content="Administrator" IsChecked="True"/>
-                    <RadioButton x:Name="employeerb" Content="Zaposleni" Margin="15,0,0,0"/>
+                    <RadioButton x:Name="administratorrb" Content="Administrator" IsChecked="True" Checked="administratorrb_Checked"/>
+                    <RadioButton x:Name="employeerb" Content="Zaposleni" Margin="15,0,0,0" Checked="administratorrb_Checked"/>
                 </StackPanel>
             </Grid>
         </GroupBox>

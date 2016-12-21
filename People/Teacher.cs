@@ -33,21 +33,28 @@ namespace POP_SF7
                 SqlCommand loadCommand = connection.CreateCommand();
                 loadCommand.CommandText = @"Select * From Teacher;";
 
-                SqlDataAdapter dataAdapter = new SqlDataAdapter();
-                dataAdapter.SelectCommand = loadCommand;
-                dataAdapter.Fill(dataSet, "Teacher");
-
-                foreach (DataRow row in dataSet.Tables["Teacher"].Rows)
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(loadCommand);
+                
+                try
                 {
-                    Teacher teacher = new Teacher();
-                    teacher.Id = (int)row["Teacher_Id"];
-                    teacher.FirstName = (string)row["Teacher_FirstName"];
-                    teacher.LastName = (string)row["Teacher_LastName"];
-                    teacher.Jmbg = (string)row["Teacher_Jmbg"];
-                    teacher.Address = (string)row["Teacher_Address"];
-                    teacher.Deleted = (bool)row["Teacher_Deleted"];
+                    dataAdapter.Fill(dataSet, "Teacher");
 
-                    ApplicationA.Instance.Teachers.Add(teacher);
+                    foreach (DataRow row in dataSet.Tables["Teacher"].Rows)
+                    {
+                        Teacher teacher = new Teacher();
+                        teacher.Id = (int)row["Teacher_Id"];
+                        teacher.FirstName = (string)row["Teacher_FirstName"];
+                        teacher.LastName = (string)row["Teacher_LastName"];
+                        teacher.Jmbg = (string)row["Teacher_Jmbg"];
+                        teacher.Address = (string)row["Teacher_Address"];
+                        teacher.Deleted = (bool)row["Teacher_Deleted"];
+
+                        ApplicationA.Instance.Teachers.Add(teacher);
+                    }
+                }
+                catch(SqlException e)
+                {
+                    Console.WriteLine(e.StackTrace);
                 }
             }
         }
@@ -67,7 +74,14 @@ namespace POP_SF7
                 addCommand.Parameters.Add(new SqlParameter("@Address", teacher.Address));
                 addCommand.Parameters.Add(new SqlParameter("@Deleted", teacher.Deleted));
 
-                addCommand.ExecuteNonQuery();
+                try
+                {
+                    addCommand.ExecuteNonQuery();
+                }
+                catch(SqlException e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
 
@@ -87,7 +101,14 @@ namespace POP_SF7
                 addCommand.Parameters.Add(new SqlParameter("@Deleted", teacher.Deleted));
                 addCommand.Parameters.Add(new SqlParameter("@Id", teacher.Id));
 
-                addCommand.ExecuteNonQuery();
+                try
+                {
+                    addCommand.ExecuteNonQuery();
+                }
+                catch (SqlException e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
 
@@ -102,7 +123,14 @@ namespace POP_SF7
 
                 addCommand.Parameters.Add(new SqlParameter("@Id", teacher.Id));
 
-                addCommand.ExecuteNonQuery();
+                try
+                {
+                    addCommand.ExecuteNonQuery();
+                }
+                catch (SqlException e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
 

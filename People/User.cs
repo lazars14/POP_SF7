@@ -50,27 +50,33 @@ namespace POP_SF7
                 DataSet dataSet = new DataSet();
 
                 SqlCommand loadCommand = connection.CreateCommand();
-                loadCommand.CommandText = @"Select * From User;";
+                loadCommand.CommandText = @"Select * From UserU;";
 
-                SqlDataAdapter dataAdapter = new SqlDataAdapter();
-                dataAdapter.SelectCommand = loadCommand;
-                dataAdapter.Fill(dataSet, "User");
-
-                foreach (DataRow row in dataSet.Tables["User"].Rows)
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(loadCommand);
+                try
                 {
-                    User user = new User();
-                    user.Id = (int)row["UserU_Id"];
-                    user.FirstName = (string)row["UserU_FirstName"];
-                    user.LastName = (string)row["UserU_LastName"];
-                    user.Jmbg = (string)row["UserU_Jmbg"];
-                    user.Address = (string)row["UserU_Address"];
-                    user.Deleted = (bool)row["UserU_Deleted"];
-                    user.UserName = (string)row["UserU_UserName"];
-                    user.Password = (string)row["UserU_Password"];
-                    string role = (string)row["UserU_UserRole"];
-                    user.UserRole = (role.Equals("ADMINISTRATOR")) ? Role.Administrator : Role.Employee;
+                    dataAdapter.Fill(dataSet, "UserU");
 
-                    ApplicationA.Instance.Users.Add(user);
+                    foreach (DataRow row in dataSet.Tables["UserU"].Rows)
+                    {
+                        User user = new User();
+                        user.Id = (int)row["UserU_Id"];
+                        user.FirstName = (string)row["UserU_FirstName"];
+                        user.LastName = (string)row["UserU_LastName"];
+                        user.Jmbg = (string)row["UserU_Jmbg"];
+                        user.Address = (string)row["UserU_Address"];
+                        user.Deleted = (bool)row["UserU_Deleted"];
+                        user.UserName = (string)row["UserU_UserName"];
+                        user.Password = (string)row["UserU_PasswordP"];
+                        string role = (string)row["UserU_UserRole"];
+                        user.UserRole = (role.Equals("ADMINISTRATOR")) ? Role.Administrator : Role.Employee;
+
+                        ApplicationA.Instance.Users.Add(user);
+                    }
+                }
+                catch(SqlException e)
+                {
+                    Console.WriteLine(e.StackTrace);
                 }
             }
         }
@@ -82,7 +88,7 @@ namespace POP_SF7
                 connection.Open();
 
                 SqlCommand addCommand = connection.CreateCommand();
-                addCommand.CommandText = @"Insert Into User Values(@FirstName,@LastName,@Jmbg,@Address,@Deleted,@UserName,@Password,@Role);";
+                addCommand.CommandText = @"Insert Into UserU Values(@FirstName,@LastName,@Jmbg,@Address,@Deleted,@UserName,@Password,@Role);";
 
                 addCommand.Parameters.Add(new SqlParameter("@FirstName", user.FirstName));
                 addCommand.Parameters.Add(new SqlParameter("@LastName", user.LastName));
@@ -93,7 +99,14 @@ namespace POP_SF7
                 addCommand.Parameters.Add(new SqlParameter("@Password", user.Password));
                 addCommand.Parameters.Add(new SqlParameter("@Role", user.UserRole.ToString()));
 
-                addCommand.ExecuteNonQuery();
+                try
+                {
+                    addCommand.ExecuteNonQuery();
+                }
+                catch(SqlException e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
 
@@ -104,7 +117,7 @@ namespace POP_SF7
                 connection.Open();
 
                 SqlCommand addCommand = connection.CreateCommand();
-                addCommand.CommandText = @"Update User Set UserU_FirstName=@FirstName, UserU_LastName=@LastName, UserU_Jmbg=@Jmbg, UserU_Address=@Address, UserU_Deleted=@Deleted, UserU_UserName=@UserName, UserU_Password=@Password, UserU_UserRole=@Role Where UserU_Id=@Id;";
+                addCommand.CommandText = @"Update UserU Set UserU_FirstName=@FirstName, UserU_LastName=@LastName, UserU_Jmbg=@Jmbg, UserU_Address=@Address, UserU_Deleted=@Deleted, UserU_UserName=@UserName, UserU_Password=@Password, UserU_UserRole=@Role Where UserU_Id=@Id;";
 
                 addCommand.Parameters.Add(new SqlParameter("@FirstName", user.FirstName));
                 addCommand.Parameters.Add(new SqlParameter("@LastName", user.LastName));
@@ -116,7 +129,14 @@ namespace POP_SF7
                 addCommand.Parameters.Add(new SqlParameter("@Password", user.Password));
                 addCommand.Parameters.Add(new SqlParameter("@Role", user.UserRole.ToString()));
 
-                addCommand.ExecuteNonQuery();
+                try
+                {
+                    addCommand.ExecuteNonQuery();
+                }
+                catch (SqlException e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
 
@@ -127,11 +147,18 @@ namespace POP_SF7
                 connection.Open();
 
                 SqlCommand addCommand = connection.CreateCommand();
-                addCommand.CommandText = @"Update User Set User_Deleted=1 Where UserU_Id=@Id;";
+                addCommand.CommandText = @"Update UserU Set UserU_Deleted=1 Where UserU_Id=@Id;";
 
                 addCommand.Parameters.Add(new SqlParameter("@Id", user.Id));
 
-                addCommand.ExecuteNonQuery();
+                try
+                {
+                    addCommand.ExecuteNonQuery();
+                }
+                catch (SqlException e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
         }
 
@@ -143,7 +170,7 @@ namespace POP_SF7
         {
             get
             {
-                throw new NotImplementedException();
+                return "";
             }
         }
 

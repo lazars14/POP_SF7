@@ -9,9 +9,9 @@ namespace POP_SF7
 {
     public class ApplicationA
     {
-        public const string CONNECTION_STRING = @"Integrated Security=true;
-                                          Initial Catalog=Fakultet;
-                                          Data Source=GORAN-PC";
+        public const string CONNECTION_STRING = @"Integrated Security=SSPI;
+                                          Initial Catalog=TheLanguageSchool;
+                                          Data Source=DUSAN\SQLEXPRESS";
 
         public School School { get; set; }
         public ObservableCollection<Language> Languages { get; set; }

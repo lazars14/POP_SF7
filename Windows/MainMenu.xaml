@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF7"
         mc:Ignorable="d"
-        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="357.172" Width="562.5">
+        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="357.172" Width="595.64">
     <Grid>
-        <Menu x:Name="mainMenu" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="554">
+        <Menu x:Name="mainMenu" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="578">
             <MenuItem x:Name="schoolMenu" Header="Skola">
                 <MenuItem x:Name="editSchoolData" Header="Izmena podataka o skoli" Click="menuItem_Click"/>
                 <MenuItem x:Name="payments" Header="Evidencija uplata" Click="menuItem_Click"/>
@@ -25,46 +25,46 @@
             <MenuItem x:Name="logout" Header="Odjava" Click="menuItem_Click"/>
         </Menu>
         <Image x:Name="logoimg" Source="../Images/logo.png" HorizontalAlignment="Left" Width="250" Margin="17,36,0,10"/>
-        <GroupBox Header="Podaci" HorizontalAlignment="Left" Height="280" Margin="272,36,0,0" VerticalAlignment="Top" Width="272">
-            <Grid>
+        <GroupBox Header="Podaci" HorizontalAlignment="Left" Height="280" Margin="272,36,0,0" VerticalAlignment="Top" Width="306">
+            <Grid Margin="10">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="30"/>
-                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="170"/>
                 </Grid.ColumnDefinitions>
                 
-                <Label x:Name="namelbl" Content="Naziv" Grid.Row="0" Grid.Column="0" Margin="10,8,0,0"/>
-                <TextBlock x:Name="nametb" Text="{Binding Name}" Grid.Row="0" Grid.Column="1" Margin="0,10,0,5"/>
+                <Label x:Name="namelbl" Content="Naziv" Grid.Row="0" Grid.Column="0"/>
+                <TextBlock x:Name="nametb" Text="{Binding Name}" Grid.Row="0" Grid.Column="1" Margin="0,5,0,0"/>
 
-                <Label x:Name="addresslbl" Content="Adresa" Grid.Row="1" Grid.Column="0" Margin="10,0,0,0"/>
-                <TextBlock x:Name="addresstb" Text="{Binding Address}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5"/>
+                <Label x:Name="addresslbl" Content="Adresa" Grid.Row="1" Grid.Column="0"/>
+                <TextBlock x:Name="addresstb" Text="{Binding Address}" Grid.Row="1" Grid.Column="1" Margin="0,5,0,0"/>
 
-                <Label x:Name="phonelbl" Content="Telefon" Grid.Row="2" Grid.Column="0" Margin="10,0,0,0"/>
-                <TextBlock x:Name="phonetb" Text="{Binding PhoneNumber}" Grid.Row="2" Grid.Column="1" Margin="0,0,0,5"/>
+                <Label x:Name="phonelbl" Content="Telefon" Grid.Row="2" Grid.Column="0"/>
+                <TextBlock x:Name="phonetb" Text="{Binding PhoneNumber}" Grid.Row="2" Grid.Column="1" Margin="0,5,0,0"/>
 
-                <Label x:Name="emaillbl" Content="Email" Grid.Row="3" Grid.Column="0" Margin="10,0,0,0"/>
-                <TextBlock x:Name="emailtb" Text="{Binding Email}" Grid.Row="3" Grid.Column="1" Margin="0,0,0,5"/>
+                <Label x:Name="emaillbl" Content="Email" Grid.Row="3" Grid.Column="0"/>
+                <TextBlock x:Name="emailtb" Text="{Binding Email}" Grid.Row="3" Grid.Column="1" Margin="0,5,0,0"/>
 
-                <Label x:Name="websitelbl" Content="Web sajt" Grid.Row="4" Grid.Column="0" Margin="10,0,0,0"/>
-                <TextBlock x:Name="websitetb" Text="{Binding WebSite}" Grid.Row="4" Grid.Column="1" Margin="0,0,0,5"/>
+                <Label x:Name="websitelbl" Content="Web sajt" Grid.Row="4" Grid.Column="0"/>
+                <TextBlock x:Name="websitetb" Text="{Binding WebSite}" Grid.Row="4" Grid.Column="1" Margin="0,5,0,0"/>
 
-                <Label x:Name="piblbl" Content="PIB" Grid.Row="5" Grid.Column="0" Margin="10,0,0,0"/>
-                <TextBlock x:Name="pibtb" Text="{Binding Pib}" Grid.Row="5" Grid.Column="1" Margin="0,0,0,5"/>
+                <Label x:Name="piblbl" Content="PIB" Grid.Row="5" Grid.Column="0"/>
+                <TextBlock x:Name="pibtb" Text="{Binding Pib}" Grid.Row="5" Grid.Column="1" Margin="0,5,0,0"/>
 
-                <Label x:Name="idnumberlbl" Content="Maticni broj" Grid.Row="6" Grid.Column="0" Margin="10,0,0,0"/>
-                <TextBlock x:Name="idnumbertb" Text="{Binding IdentificationNumber}" Grid.Row="6" Grid.Column="1" Margin="0,0,0,5"/>
+                <Label x:Name="idnumberlbl" Content="Maticni broj" Grid.Row="6" Grid.Column="0"/>
+                <TextBlock x:Name="idnumbertb" Text="{Binding IdentificationNumber}" Grid.Row="6" Grid.Column="1" Margin="0,5,0,0"/>
 
-                <Label x:Name="accountlbl" Content="Racun" Grid.Row="7" Grid.Column="0" Margin="10,0,0,0"/>
-                <TextBlock x:Name="accounttb" Text="{Binding AccountNumber}" Grid.Row="7" Grid.Column="1" Margin="0,0,0,15"/>
+                <Label x:Name="accountlbl" Content="Racun" Grid.Row="7" Grid.Column="0"/>
+                <TextBlock x:Name="accounttb" Text="{Binding AccountNumber}" Grid.Row="7" Grid.Column="1" Margin="0,5,0,0"/>
             </Grid>
         </GroupBox>
     </Grid>

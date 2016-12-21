@@ -160,6 +160,9 @@ namespace POP_SF7
         {
             switch((string)e.Column.Header)
             {
+                case "Id":
+                    e.Cancel = true;
+                    break;
                 case "FirstName":
                     e.Column.Header = "Ime";
                     break;
@@ -174,6 +177,18 @@ namespace POP_SF7
                     break;
                 case "Deleted":
                     e.Column.Header = "Obrisan";
+                    break;
+                case "UserName":
+                    e.Column.Header = "Korisnicko ime";
+                    break;
+                case "Password":
+                    e.Column.Header = "Lozinka";
+                    break;
+                case "UserRole":
+                    e.Column.Header = "Uloga";
+                    break;
+                case "Error":
+                    e.Cancel = true;
                     break;
             }
         }
