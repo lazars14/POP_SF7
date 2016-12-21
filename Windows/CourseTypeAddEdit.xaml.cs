@@ -44,6 +44,7 @@ namespace POP_SF7
             if (Decider == Decider.ADD)
             {
                 CourseType.Add(CourseTypeC);
+                CourseTypeC.Id = ApplicationA.Instance.CourseTypes.Count() + 1;
                 ApplicationA.Instance.CourseTypes.Add(CourseTypeC);
             }
             else

@@ -13,6 +13,8 @@ namespace POP_SF7
                                           Initial Catalog=TheLanguageSchool;
                                           Data Source=DUSAN\SQLEXPRESS";
 
+        public const string DATABASE_ERROR_MESSAGE = "Doslo je do greske sa bazom!";
+
         public School School { get; set; }
         public ObservableCollection<Language> Languages { get; set; }
         public ObservableCollection<CourseType> CourseTypes { get; set; }

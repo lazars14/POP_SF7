@@ -23,6 +23,7 @@ namespace POP_SF7
     {
         public User UserU { get; set; }
         public Decider Decider { get; set; }
+        public string UserName { get; set; }
 
         public string labelAddUser = "Dodavanje novog korisnika";
         public string labelEditUser = "Izmena postojeceg korisnika";
@@ -35,31 +36,72 @@ namespace POP_SF7
             DataContext = UserU;
 
             personInfo.descriptionlbl.Text = (decider == Decider.ADD) ? labelAddUser : labelEditUser;
+            UserName = (decider == Decider.EDIT) ? UserU.UserName : "";
             setRadioButton();
         }
 
         private void okbtn_Click(object sender, RoutedEventArgs e)
         {
-            if(Decider == Decider.ADD)
+            bool valid = true;
+            string message = "Postoji korisnik sa unetim korisnickim imenom! Unesite neko drugo.";
+            valid = checkUsername();
+            if(valid)
             {
-                // provera da li postoji korisnik sa tim koriscnickim imenom
-                User.Add(UserU);
-                ApplicationA.Instance.Users.Add(UserU);
+                if (Decider == Decider.ADD)
+                {
+                    User.Add(UserU);
+                    UserU.Id = ApplicationA.Instance.Users.Count() + 1;
+                    ApplicationA.Instance.Users.Add(UserU);
+                    Close();
+                }
+                else
+                {
+                    User.Edit(UserU);
+                    Close();
+                }
             }
             else
             {
-                // provera da li postoji korisnik sa tim koriscnickim imenom
-                User.Edit(UserU);
+                MessageBox.Show(message);
             }
-            Close();
+
         }
 
+        public bool checkUsername()
+        {
+            bool valid = true;
+            foreach (User u in ApplicationA.Instance.Users)
+            {
+                if (u.UserName.Equals(UserU.UserName))
+                {
+                    if(Decider == Decider.EDIT)
+                    {
+                        if(!UserU.UserName.Equals(UserName) || UserU.Id != u.Id)
+                        {
+                            valid = false;
+                        }
+                    }
+                    else
+                    {
+                        valid = false;
+                    }
+                }
+            }
+            return valid;
+        }
+        
         public void setRadioButton()
         {
-            if(personInfo.descriptionlbl.Text.Equals(labelEditUser))
+            if(Decider == Decider.EDIT)
             {
-                if (UserU.UserRole == Role.Administrator) administratorrb.IsChecked = true;
-                else employeerb.IsChecked = true;
+                if (UserU.UserRole == Role.Administrator)
+                {
+                    administratorrb.IsChecked = true;
+                }
+                else
+                {
+                    employeerb.IsChecked = true;
+                }
             }
             else
             {
@@ -70,8 +112,14 @@ namespace POP_SF7
         private void administratorrb_Checked(object sender, RoutedEventArgs e)
         {
             RadioButton rb = sender as RadioButton;
-            if (rb.Name.Equals("administratorrb")) UserU.UserRole = Role.Administrator;
-            else UserU.UserRole = Role.Employee;
+            try
+            {
+                UserU.UserRole = (rb.Name.Equals("administratorrb")) ? Role.Administrator : Role.Employee;
+            }
+            catch(NullReferenceException a)
+            {
+                Console.WriteLine(a.StackTrace);
+            }     
         }
     }
 }

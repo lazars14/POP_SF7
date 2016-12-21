@@ -35,7 +35,7 @@ namespace POP_SF7.Windows
             InitializeComponent();
             LanguageL = language;
 
-            //DataContext = LanguageL;
+            DataContext = LanguageL;
             Decider = decider;
 
             nametb.DataContext = LanguageL;
@@ -49,7 +49,9 @@ namespace POP_SF7.Windows
             if(Decider == Decider.ADD)
             {
                 POP_SF7.Language.Add(LanguageL);
-                ApplicationA.Instance.Languages.Add(LanguageL);   
+
+                LanguageL.Id = ApplicationA.Instance.Languages.Count() + 1;
+                ApplicationA.Instance.Languages.Add(LanguageL);
             }
             else
             {

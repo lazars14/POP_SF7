@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace POP_SF7
@@ -114,9 +115,13 @@ namespace POP_SF7
 
                     return school;
                 }
-                catch(SqlException e)
+                catch (SqlException e)
                 {
-                    Console.WriteLine(e.StackTrace);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + e.Number + " u liniji " + e.LineNumber);
+                }
+                catch (InvalidOperationException a)
+                {
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + a.HResult);
                 }
                 return null;
             }
@@ -127,7 +132,7 @@ namespace POP_SF7
             using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
             {
                 SqlCommand updateCommand = connection.CreateCommand();
-                updateCommand.CommandText = @"Update School Set School_Name=@Name, School_Address=@Address, School_PhoneNumber=@PhoneNumber, School_Email=@Email, School_WebSite=@WebSite, School_Pib=@Pib, School_IdentificationNumber=@IdentificationNumber, School_AccountNumber=@AccountNumber Where School_Id=1;";
+                updateCommand.CommandText = @"Update Schoo Set School_Name=@Name, School_Address=@Address, School_PhoneNumber=@PhoneNumber, School_Email=@Email, School_WebSite=@WebSite, School_Pib=@Pib, School_IdentificationNumber=@IdentificationNumber, School_AccountNumber=@AccountNumber Where School_Id=1;";
 
                 updateCommand.Parameters.Add(new SqlParameter("@Name", school.Name));
                 updateCommand.Parameters.Add(new SqlParameter("@Address", school.Address));
@@ -142,13 +147,13 @@ namespace POP_SF7
                 {
                     updateCommand.ExecuteNonQuery();
                 }
-                catch(SqlException e)
+                catch (SqlException e)
                 {
-                    Console.WriteLine(e.StackTrace);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + e.Number + " u liniji " + e.LineNumber);
                 }
-                catch(InvalidOperationException a)
+                catch (InvalidOperationException a)
                 {
-                    Console.WriteLine(a.StackTrace);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + a.HResult);
                 }
             }
         }

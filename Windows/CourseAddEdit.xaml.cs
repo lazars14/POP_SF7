@@ -90,12 +90,13 @@ namespace POP_SF7
         {
             if(Decider == Decider.ADD)
             {
-                // dodavanje u bazi
-                ListOfCourses.Add(Course);
+                Course.Add(Course);
+                Course.Id = ApplicationA.Instance.Courses.Count() + 1;
+                ApplicationA.Instance.Courses.Add(Course);
             }
             else
             {
-                // izmena u bazi
+                Course.Edit(Course);
             }
             Close();
         }

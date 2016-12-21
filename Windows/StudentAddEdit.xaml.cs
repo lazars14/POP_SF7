@@ -44,12 +44,13 @@ namespace POP_SF7
         {
             if(Decider == Decider.ADD)
             {
-                // dodavanje u bazu
-                ListOfStudents.Add(StudentS);
+                Student.Add(StudentS);
+                StudentS.Id = ApplicationA.Instance.Students.Count() + 1;
+                ApplicationA.Instance.Students.Add(StudentS);
             }
             else
             {
-                // izmena u bazi
+                Student.Edit(StudentS);
             }
             Close();
         }

@@ -108,7 +108,6 @@ namespace POP_SF7.Windows
                 case "Error":
                     e.Cancel = true;
                     break;
-
             }
         }
     }

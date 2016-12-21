@@ -3,6 +3,7 @@ using System;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Windows;
 
 namespace POP_SF7
 {
@@ -67,11 +68,15 @@ namespace POP_SF7
                         ApplicationA.Instance.CourseTypes.Add(type);
                     }
                 }
-                catch(SqlException e)
+                catch (SqlException e)
                 {
-                    Console.WriteLine(e.StackTrace);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + e.Number + " u liniji " + e.LineNumber);
                 }
-                
+                catch (InvalidOperationException a)
+                {
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + a.HResult);
+                }
+
             }
         }
 
@@ -91,9 +96,13 @@ namespace POP_SF7
                 {
                     addCommand.ExecuteNonQuery();
                 }
-                catch(SqlException e)
+                catch (SqlException e)
                 {
-                    Console.WriteLine(e.StackTrace);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + e.Number + " u liniji " + e.LineNumber);
+                }
+                catch (InvalidOperationException a)
+                {
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + a.HResult);
                 }
             }
         }
@@ -117,7 +126,11 @@ namespace POP_SF7
                 }
                 catch (SqlException e)
                 {
-                    Console.WriteLine(e.StackTrace);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + e.Number + " u liniji " + e.LineNumber);
+                }
+                catch (InvalidOperationException a)
+                {
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + a.HResult);
                 }
             }
         }
@@ -139,7 +152,11 @@ namespace POP_SF7
                 }
                 catch (SqlException e)
                 {
-                    Console.WriteLine(e.StackTrace);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + e.Number + " u liniji " + e.LineNumber);
+                }
+                catch (InvalidOperationException a)
+                {
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + a.HResult);
                 }
             }
         }

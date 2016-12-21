@@ -43,12 +43,13 @@ namespace POP_SF7
         {
             if(Decider == Decider.ADD)
             {
-                // dodavanje u bazi
-                ListOfPayments.Add(SelectedPayment);
+                Payment.Add(SelectedPayment);
+                SelectedPayment.Id = ApplicationA.Instance.Payments.Count() + 1;
+                ApplicationA.Instance.Payments.Add(SelectedPayment);
             }
             else
             {
-                // izmena u bazi
+                Payment.Edit(SelectedPayment);
             }
             Close();
         }

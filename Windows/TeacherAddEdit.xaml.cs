@@ -43,12 +43,13 @@ namespace POP_SF7
         {
             if(Decider == Decider.ADD)
             {
-                // dodavanje u bazi
+                Teacher.Add(TeacherT);
+                TeacherT.Id = ApplicationA.Instance.Teachers.Count() + 1;
                 ListOfTeachers.Add(TeacherT);
             }
             else
             {
-                // izmena u bazi
+                Teacher.Edit(TeacherT);
             }
             Close();
         }
