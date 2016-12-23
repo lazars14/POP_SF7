@@ -42,10 +42,15 @@ namespace POP_SF7
 
         private void okbtn_Click(object sender, RoutedEventArgs e)
         {
-            bool valid = true;
-            string message = "Postoji korisnik sa unetim korisnickim imenom! Unesite neko drugo.";
-            valid = checkUsername();
-            if(valid)
+            bool valid = checkUsername();
+            bool deletingSelf = checkSelfDeletion();
+
+            if (deletingSelf)
+            {
+                MessageBox.Show("Ne mozete da obrisete sebe!");
+                personInfo.deletedcb.IsChecked = false;
+            }
+            else if(valid)
             {
                 if (Decider == Decider.ADD)
                 {
@@ -55,16 +60,16 @@ namespace POP_SF7
                     Close();
                 }
                 else
-                {
+                {   
                     User.Edit(UserU);
                     Close();
                 }
             }
             else
             {
-                MessageBox.Show(message);
+                MessageBox.Show("Postoji korisnik sa unetim korisnickim imenom! Unesite neko drugo.");
+                usernametb.Text = "";
             }
-
         }
 
         public bool checkUsername()
@@ -89,12 +94,21 @@ namespace POP_SF7
             }
             return valid;
         }
+
+        public bool checkSelfDeletion()
+        {
+            if(UserU.Id == ApplicationA.Instance.UserId && UserU.Deleted == true)
+            {
+                return true;
+            }
+            return false;
+        }
         
         public void setRadioButton()
         {
             if(Decider == Decider.EDIT)
             {
-                if (UserU.UserRole == Role.Administrator)
+                if (UserU.UserRole == Role.ADMINISTRATOR)
                 {
                     administratorrb.IsChecked = true;
                 }
@@ -105,7 +119,7 @@ namespace POP_SF7
             }
             else
             {
-                UserU.UserRole = Role.Administrator;
+                UserU.UserRole = Role.ADMINISTRATOR;
             }
         }
 
@@ -114,7 +128,7 @@ namespace POP_SF7
             RadioButton rb = sender as RadioButton;
             try
             {
-                UserU.UserRole = (rb.Name.Equals("administratorrb")) ? Role.Administrator : Role.Employee;
+                UserU.UserRole = (rb.Name.Equals("administratorrb")) ? Role.ADMINISTRATOR : Role.EMPLOYEE;
             }
             catch(NullReferenceException a)
             {

@@ -69,7 +69,7 @@ namespace POP_SF7
             set { deleted = value; OnPropertyChanged("Deleted"); }
         }
 
-        public Course() { }
+        public Course() { Price = 0; }
 
         public Course(int id, Language language, CourseType courseType, double price, Teacher teacher, DateTime startDate, DateTime endDate, bool deleted)
         {
@@ -94,10 +94,10 @@ namespace POP_SF7
 
                 DataSet dataSet = new DataSet();
 
-                SqlCommand loadCommand = connection.CreateCommand();
-                loadCommand.CommandText = @"Select * From Course;";
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = @"Select * From Course;";
 
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(loadCommand);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
 
                 try
                 {
@@ -117,11 +117,11 @@ namespace POP_SF7
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + e.Number + " u liniji " + e.LineNumber);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + e.GetType());
                 }
                 catch (InvalidOperationException a)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + a.HResult);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
                 }
             }
         }
@@ -132,28 +132,28 @@ namespace POP_SF7
             {
                 connection.Open();
 
-                SqlCommand addCommand = connection.CreateCommand();
-                addCommand.CommandText = @"Insert Into Course Values(@Language,@CourseType,@Price,@Teacher,@StartDate,@EndDate,@Deleted);";
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = @"Insert Into Course Values(@Language,@CourseType,@Price,@Teacher,@StartDate,@EndDate,@Deleted);";
 
-                addCommand.Parameters.Add(new SqlParameter("@Language", course.Language.Id));
-                addCommand.Parameters.Add(new SqlParameter("@CourseType", course.CourseType.Id));
-                addCommand.Parameters.Add(new SqlParameter("@Price", course.Price));
-                addCommand.Parameters.Add(new SqlParameter("@Teacher", course.Teacher.Id));
-                addCommand.Parameters.Add(new SqlParameter("@StartDate", course.StartDate));
-                addCommand.Parameters.Add(new SqlParameter("@EndDate", course.EndDate));
-                addCommand.Parameters.Add(new SqlParameter("@Deleted", course.Deleted));
+                command.Parameters.Add(new SqlParameter("@Language", course.Language.Id));
+                command.Parameters.Add(new SqlParameter("@CourseType", course.CourseType.Id));
+                command.Parameters.Add(new SqlParameter("@Price", course.Price));
+                command.Parameters.Add(new SqlParameter("@Teacher", course.Teacher.Id));
+                command.Parameters.Add(new SqlParameter("@StartDate", course.StartDate));
+                command.Parameters.Add(new SqlParameter("@EndDate", course.EndDate));
+                command.Parameters.Add(new SqlParameter("@Deleted", course.Deleted));
 
                 try
                 {
-                    addCommand.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + e.Number + " u liniji " + e.LineNumber);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + e.GetType());
                 }
                 catch (InvalidOperationException a)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + a.HResult);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
                 }
             }
         }
@@ -164,29 +164,29 @@ namespace POP_SF7
             {
                 connection.Open();
 
-                SqlCommand addCommand = connection.CreateCommand();
-                addCommand.CommandText = @"Update Course Set Course_Language=@Language, Course_CourseType=@CourseType, Course_Price=@Price, Course_Teacher=@Teacher, Course_StartDate=@StartDate, Course_EndDate=@EndDate, Course_Deleted=@Deleted Where Course_Id=@Id);";
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = @"Update Course Set Course_Language=@Language, Course_CourseType=@CourseType, Course_Price=@Price, Course_Teacher=@Teacher, Course_StartDate=@StartDate, Course_EndDate=@EndDate, Course_Deleted=@Deleted Where Course_Id=@Id);";
 
-                addCommand.Parameters.Add(new SqlParameter("@Language", course.Language.Id));
-                addCommand.Parameters.Add(new SqlParameter("@CourseType", course.CourseType.Id));
-                addCommand.Parameters.Add(new SqlParameter("@Price", course.Price));
-                addCommand.Parameters.Add(new SqlParameter("@Teacher", course.Teacher.Id));
-                addCommand.Parameters.Add(new SqlParameter("@StartDate", course.StartDate));
-                addCommand.Parameters.Add(new SqlParameter("@EndDate", course.EndDate));
-                addCommand.Parameters.Add(new SqlParameter("@Deleted", course.Deleted));
-                addCommand.Parameters.Add(new SqlParameter("@Id", course.Id));
+                command.Parameters.Add(new SqlParameter("@Language", course.Language.Id));
+                command.Parameters.Add(new SqlParameter("@CourseType", course.CourseType.Id));
+                command.Parameters.Add(new SqlParameter("@Price", course.Price));
+                command.Parameters.Add(new SqlParameter("@Teacher", course.Teacher.Id));
+                command.Parameters.Add(new SqlParameter("@StartDate", course.StartDate));
+                command.Parameters.Add(new SqlParameter("@EndDate", course.EndDate));
+                command.Parameters.Add(new SqlParameter("@Deleted", course.Deleted));
+                command.Parameters.Add(new SqlParameter("@Id", course.Id));
 
                 try
                 {
-                    addCommand.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + e.Number + " u liniji " + e.LineNumber);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + e.GetType());
                 }
                 catch (InvalidOperationException a)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + a.HResult);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
                 }
             }
         }
@@ -197,22 +197,22 @@ namespace POP_SF7
             {
                 connection.Open();
 
-                SqlCommand addCommand = connection.CreateCommand();
-                addCommand.CommandText = @"Update Course Set Course_Deleted=1 Where Course_Id=@Id;";
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = @"Update Course Set Course_Deleted=1 Where Course_Id=@Id;";
 
-                addCommand.Parameters.Add(new SqlParameter("@Id", course.Id));
+                command.Parameters.Add(new SqlParameter("@Id", course.Id));
 
                 try
                 {
-                    addCommand.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + e.Number + " u liniji " + e.LineNumber);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + e.GetType());
                 }
                 catch (InvalidOperationException a)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + a.HResult);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
                 }
             }
         }

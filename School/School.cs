@@ -94,9 +94,9 @@ namespace POP_SF7
 
                 DataSet dataSet = new DataSet();
 
-                SqlCommand selectSchoolCommand = connection.CreateCommand();
-                selectSchoolCommand.CommandText = @"Select * From School;";
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(selectSchoolCommand);
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = @"Select * From School;";
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
 
                 try
                 {
@@ -118,11 +118,11 @@ namespace POP_SF7
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + e.Number + " u liniji " + e.LineNumber);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + e.GetType());
                 }
                 catch (InvalidOperationException a)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + a.HResult);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
                 }
                 return null;
             }
@@ -132,29 +132,29 @@ namespace POP_SF7
         {
             using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
             {
-                SqlCommand updateCommand = connection.CreateCommand();
-                updateCommand.CommandText = @"Update Schoo Set School_Name=@Name, School_Address=@Address, School_PhoneNumber=@PhoneNumber, School_Email=@Email, School_WebSite=@WebSite, School_Pib=@Pib, School_IdentificationNumber=@IdentificationNumber, School_AccountNumber=@AccountNumber Where School_Id=1;";
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = @"Update School Set School_Name=@Name, School_Address=@Address, School_PhoneNumber=@PhoneNumber, School_Email=@Email, School_WebSite=@WebSite, School_Pib=@Pib, School_IdentificationNumber=@IdentificationNumber, School_AccountNumber=@AccountNumber Where School_Id=1;";
 
-                updateCommand.Parameters.Add(new SqlParameter("@Name", school.Name));
-                updateCommand.Parameters.Add(new SqlParameter("@Address", school.Address));
-                updateCommand.Parameters.Add(new SqlParameter("@PhoneNumber", school.PhoneNumber));
-                updateCommand.Parameters.Add(new SqlParameter("@Email", school.Email));
-                updateCommand.Parameters.Add(new SqlParameter("@WebSite", school.WebSite));
-                updateCommand.Parameters.Add(new SqlParameter("@Pib", school.Pib));
-                updateCommand.Parameters.Add(new SqlParameter("@IdentificationNumber", school.IdentificationNumber));
-                updateCommand.Parameters.Add(new SqlParameter("@AccountNumber", school.AccountNumber));
+                command.Parameters.Add(new SqlParameter("@Name", school.Name));
+                command.Parameters.Add(new SqlParameter("@Address", school.Address));
+                command.Parameters.Add(new SqlParameter("@PhoneNumber", school.PhoneNumber));
+                command.Parameters.Add(new SqlParameter("@Email", school.Email));
+                command.Parameters.Add(new SqlParameter("@WebSite", school.WebSite));
+                command.Parameters.Add(new SqlParameter("@Pib", school.Pib));
+                command.Parameters.Add(new SqlParameter("@IdentificationNumber", school.IdentificationNumber));
+                command.Parameters.Add(new SqlParameter("@AccountNumber", school.AccountNumber));
 
                 try
                 {
-                    updateCommand.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + e.Number + " u liniji " + e.LineNumber);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + e.GetType());
                 }
                 catch (InvalidOperationException a)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + a.HResult);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
                 }
             }
         }

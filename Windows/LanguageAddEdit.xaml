@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF7.Windows"
         mc:Ignorable="d"
-        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="239.938" Width="309.557">
+        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="239.938" Width="309.557" ResizeMode="NoResize">
     <Grid Margin="10,0,0,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="75"/>

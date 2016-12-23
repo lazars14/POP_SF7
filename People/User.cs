@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace POP_SF7
 {
-    public enum Role { Administrator, Employee }
+    public enum Role { ADMINISTRATOR, EMPLOYEE }
 
     public class User : Person, INotifyPropertyChanged, ICloneable, IDataErrorInfo
     {
@@ -33,7 +33,10 @@ namespace POP_SF7
             set { userRole = value; OnPropertyChanged("UserRole"); }
         }
 
-        public User() { }
+        public User()
+        {
+            Jmbg = "1234567890123";
+        }
 
         public User(int id, string firstName, string lastName, string jmbg, string personAddress, string userName, string password, Role userRole, bool deleted) : base(id, firstName, lastName, jmbg, personAddress, deleted)
         {
@@ -52,10 +55,10 @@ namespace POP_SF7
 
                 DataSet dataSet = new DataSet();
 
-                SqlCommand loadCommand = connection.CreateCommand();
-                loadCommand.CommandText = @"Select * From UserU;";
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = @"Select * From UserU;";
 
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(loadCommand);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
                 try
                 {
                     dataAdapter.Fill(dataSet, "UserU");
@@ -72,18 +75,18 @@ namespace POP_SF7
                         user.UserName = (string)row["UserU_UserName"];
                         user.Password = (string)row["UserU_PasswordP"];
                         string role = (string)row["UserU_UserRole"];
-                        user.UserRole = (role.Equals("ADMINISTRATOR")) ? Role.Administrator : Role.Employee;
+                        user.UserRole = (role.Equals("ADMINISTRATOR")) ? Role.ADMINISTRATOR : Role.EMPLOYEE;
 
                         ApplicationA.Instance.Users.Add(user);
                     }
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + e.Number + " u liniji " + e.LineNumber);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + e.GetType());
                 }
                 catch (InvalidOperationException a)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + a.HResult);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
                 }
             }
         }
@@ -94,29 +97,29 @@ namespace POP_SF7
             {
                 connection.Open();
 
-                SqlCommand addCommand = connection.CreateCommand();
-                addCommand.CommandText = @"Insert Into UserU Values(@FirstName,@LastName,@Jmbg,@Address,@Deleted,@UserName,@Password,@Role);";
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = @"Insert Into UserU Values(@FirstName,@LastName,@Jmbg,@Address,@Deleted,@UserName,@Password,@Role);";
 
-                addCommand.Parameters.Add(new SqlParameter("@FirstName", user.FirstName));
-                addCommand.Parameters.Add(new SqlParameter("@LastName", user.LastName));
-                addCommand.Parameters.Add(new SqlParameter("@Jmbg", user.Jmbg));
-                addCommand.Parameters.Add(new SqlParameter("@Address", user.Address));
-                addCommand.Parameters.Add(new SqlParameter("@Deleted", user.Deleted));
-                addCommand.Parameters.Add(new SqlParameter("@UserName", user.UserName));
-                addCommand.Parameters.Add(new SqlParameter("@Password", user.Password));
-                addCommand.Parameters.Add(new SqlParameter("@Role", user.UserRole.ToString()));
+                command.Parameters.Add(new SqlParameter("@FirstName", user.FirstName));
+                command.Parameters.Add(new SqlParameter("@LastName", user.LastName));
+                command.Parameters.Add(new SqlParameter("@Jmbg", user.Jmbg));
+                command.Parameters.Add(new SqlParameter("@Address", user.Address));
+                command.Parameters.Add(new SqlParameter("@Deleted", user.Deleted));
+                command.Parameters.Add(new SqlParameter("@UserName", user.UserName));
+                command.Parameters.Add(new SqlParameter("@Password", user.Password));
+                command.Parameters.Add(new SqlParameter("@Role", user.UserRole.ToString()));
 
                 try
                 {
-                    addCommand.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + e.Number + " u liniji " + e.LineNumber);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + e.GetType());
                 }
                 catch (InvalidOperationException a)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + a.HResult);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
                 }
             }
         }
@@ -127,30 +130,30 @@ namespace POP_SF7
             {
                 connection.Open();
 
-                SqlCommand addCommand = connection.CreateCommand();
-                addCommand.CommandText = @"Update UserU Set UserU_FirstName=@FirstName, UserU_LastName=@LastName, UserU_Jmbg=@Jmbg, UserU_Address=@Address, UserU_Deleted=@Deleted, UserU_UserName=@UserName, UserU_Password=@Password, UserU_UserRole=@Role Where UserU_Id=@Id;";
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = @"Update UserU Set UserU_FirstName=@FirstName, UserU_LastName=@LastName, UserU_Jmbg=@Jmbg, UserU_Address=@Address, UserU_Deleted=@Deleted, UserU_UserName=@UserName, UserU_PasswordP=@Password, UserU_UserRole=@Role Where UserU_Id=@Id;";
 
-                addCommand.Parameters.Add(new SqlParameter("@FirstName", user.FirstName));
-                addCommand.Parameters.Add(new SqlParameter("@LastName", user.LastName));
-                addCommand.Parameters.Add(new SqlParameter("@Jmbg", user.Jmbg));
-                addCommand.Parameters.Add(new SqlParameter("@Address", user.Address));
-                addCommand.Parameters.Add(new SqlParameter("@Deleted", user.Deleted));
-                addCommand.Parameters.Add(new SqlParameter("@Id", user.Id));
-                addCommand.Parameters.Add(new SqlParameter("@UserName", user.UserName));
-                addCommand.Parameters.Add(new SqlParameter("@Password", user.Password));
-                addCommand.Parameters.Add(new SqlParameter("@Role", user.UserRole.ToString()));
+                command.Parameters.Add(new SqlParameter("@FirstName", user.FirstName));
+                command.Parameters.Add(new SqlParameter("@LastName", user.LastName));
+                command.Parameters.Add(new SqlParameter("@Jmbg", user.Jmbg));
+                command.Parameters.Add(new SqlParameter("@Address", user.Address));
+                command.Parameters.Add(new SqlParameter("@Deleted", user.Deleted));
+                command.Parameters.Add(new SqlParameter("@Id", user.Id));
+                command.Parameters.Add(new SqlParameter("@UserName", user.UserName));
+                command.Parameters.Add(new SqlParameter("@Password", user.Password));
+                command.Parameters.Add(new SqlParameter("@Role", user.UserRole.ToString()));
 
                 try
                 {
-                    addCommand.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + e.Number + " u liniji " + e.LineNumber);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + e.GetType());
                 }
                 catch (InvalidOperationException a)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + a.HResult);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
                 }
             }
         }
@@ -161,22 +164,22 @@ namespace POP_SF7
             {
                 connection.Open();
 
-                SqlCommand addCommand = connection.CreateCommand();
-                addCommand.CommandText = @"Update UserU Set UserU_Deleted=1 Where UserU_Id=@Id;";
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = @"Update UserU Set UserU_Deleted=1 Where UserU_Id=@Id;";
 
-                addCommand.Parameters.Add(new SqlParameter("@Id", user.Id));
+                command.Parameters.Add(new SqlParameter("@Id", user.Id));
 
                 try
                 {
-                    addCommand.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + e.Number + " u liniji " + e.LineNumber);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + e.GetType());
                 }
                 catch (InvalidOperationException a)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + a.HResult);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
                 }
             }
         }
@@ -210,7 +213,7 @@ namespace POP_SF7
                     case "Jmbg":
                         bool isNumeric = ValidationHelper.numeric(Jmbg);
                         if (!isNumeric) return ValidationHelper.Numeric;
-                        else if (ValidationHelper.containExact(Jmbg, 13)) return ValidationHelper.returnMessageExactLength(13);
+                        else if (!ValidationHelper.containExact(Jmbg, 13)) return ValidationHelper.returnMessageExactLength(13);
                         break;
                     case "Address":
                         if (ValidationHelper.EmptyField(Address)) return ValidationHelper.Empty;

@@ -51,10 +51,10 @@ namespace POP_SF7
 
                 DataSet dataSet = new DataSet();
 
-                SqlCommand loadCommand = connection.CreateCommand();
-                loadCommand.CommandText = @"Select * From LanguageL;";
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = @"Select * From LanguageL;";
 
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(loadCommand);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
                 try
                 {
                     dataAdapter.Fill(dataSet, "LanguageL");
@@ -71,11 +71,11 @@ namespace POP_SF7
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + e.Number + " u liniji " + e.LineNumber);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + e.GetType());
                 }
                 catch (InvalidOperationException a)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + a.HResult);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
                 }
 
             }
@@ -87,23 +87,23 @@ namespace POP_SF7
             {
                 connection.Open();
 
-                SqlCommand addCommand = connection.CreateCommand();
-                addCommand.CommandText = @"Insert Into LanguageL Values(@Name, @Deleted);";
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = @"Insert Into LanguageL Values(@Name, @Deleted);";
 
-                addCommand.Parameters.Add(new SqlParameter("@Name", language.Name));
-                addCommand.Parameters.Add(new SqlParameter("@Deleted", language.Deleted));
+                command.Parameters.Add(new SqlParameter("@Name", language.Name));
+                command.Parameters.Add(new SqlParameter("@Deleted", language.Deleted));
 
                 try
                 {
-                    addCommand.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + e.Number + " u liniji " + e.LineNumber);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + e.GetType());
                 }
                 catch (InvalidOperationException a)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + a.HResult);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
                 }
             }
         }
@@ -114,24 +114,24 @@ namespace POP_SF7
             {
                 connection.Open();
 
-                SqlCommand addCommand = connection.CreateCommand();
-                addCommand.CommandText = @"Update LanguageL Set Language_Name=@Name, Language_Deleted=@Deleted Where Language_Id=@Id;";
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = @"Update LanguageL Set Language_Name=@Name, Language_Deleted=@Deleted Where Language_Id=@Id;";
 
-                addCommand.Parameters.Add(new SqlParameter("@Name", language.Name));
-                addCommand.Parameters.Add(new SqlParameter("@Deleted", language.Deleted));
-                addCommand.Parameters.Add(new SqlParameter("@Id", language.Id));
+                command.Parameters.Add(new SqlParameter("@Name", language.Name));
+                command.Parameters.Add(new SqlParameter("@Deleted", language.Deleted));
+                command.Parameters.Add(new SqlParameter("@Id", language.Id));
 
                 try
                 {
-                    addCommand.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + e.Number + " u liniji " + e.LineNumber);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + e.GetType());
                 }
                 catch (InvalidOperationException a)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + a.HResult);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
                 }
             }
         }
@@ -142,22 +142,22 @@ namespace POP_SF7
             {
                 connection.Open();
 
-                SqlCommand addCommand = connection.CreateCommand();
-                addCommand.CommandText = @"Update LanguageL Set Language_Deleted=1 Where Language_Id=@Id;";
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = @"Update LanguageL Set Language_Deleted=1 Where Language_Id=@Id;";
 
-                addCommand.Parameters.Add(new SqlParameter("@Id", language.Id));
+                command.Parameters.Add(new SqlParameter("@Id", language.Id));
 
                 try
                 {
-                    addCommand.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + e.Number + " u liniji " + e.LineNumber);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + e.GetType());
                 }
                 catch (InvalidOperationException a)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + a.HResult);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
                 }
             }
         }

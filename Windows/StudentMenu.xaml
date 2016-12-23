@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF7"
         mc:Ignorable="d"
-        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="733.969" Width="799.725">
+        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="733.969" Width="799.725" ResizeMode="NoResize">
     <Grid>
         <TextBlock x:Name="studentstb" HorizontalAlignment="Left" Height="23" Margin="9,10,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="Ucenici" VerticalAlignment="Top" Width="770"/>
         <DataGrid x:Name="studentsdg" IsReadOnly="True" AutoGeneratingColumn="studentsdg_AutoGeneratingColumn" HorizontalAlignment="Left" Height="149" Margin="9,38,0,0" VerticalAlignment="Top" Width="697" SelectionChanged="usersdg_SelectionChanged"/>

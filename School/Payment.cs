@@ -51,7 +51,7 @@ namespace POP_SF7
             set { deleted = value; OnPropertyChanged("Deleted"); }
         }
 
-        public Payment() { }
+        public Payment() { Amount = 0; }
 
         public Payment(int id, Course course, Student student, double amount, DateTime date, bool deleted)
         {
@@ -73,10 +73,10 @@ namespace POP_SF7
 
                 DataSet dataSet = new DataSet();
 
-                SqlCommand loadCommand = connection.CreateCommand();
-                loadCommand.CommandText = @"Select * From Payment;";
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = @"Select * From Payment;";
 
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(loadCommand);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
 
                 try
                 {
@@ -95,11 +95,11 @@ namespace POP_SF7
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + e.Number + " u liniji " + e.LineNumber);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + e.GetType());
                 }
                 catch (InvalidOperationException a)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + a.HResult);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
                 }
             }
         }
@@ -110,26 +110,26 @@ namespace POP_SF7
             {
                 connection.Open();
 
-                SqlCommand addCommand = connection.CreateCommand();
-                addCommand.CommandText = @"Insert Into Payment Values(@Course,@Student,@Amount,@Date,@Deleted);";
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = @"Insert Into Payment Values(@Course,@Student,@Amount,@Date,@Deleted);";
 
-                addCommand.Parameters.Add(new SqlParameter("@Course", payment.Course.Id));
-                addCommand.Parameters.Add(new SqlParameter("@Student", payment.Student.Id));
-                addCommand.Parameters.Add(new SqlParameter("@Amount", payment.Amount));
-                addCommand.Parameters.Add(new SqlParameter("@Date", payment.Date));
-                addCommand.Parameters.Add(new SqlParameter("@Deleted", payment.Deleted));
+                command.Parameters.Add(new SqlParameter("@Course", payment.Course.Id));
+                command.Parameters.Add(new SqlParameter("@Student", payment.Student.Id));
+                command.Parameters.Add(new SqlParameter("@Amount", payment.Amount));
+                command.Parameters.Add(new SqlParameter("@Date", payment.Date));
+                command.Parameters.Add(new SqlParameter("@Deleted", payment.Deleted));
 
                 try
                 {
-                    addCommand.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + e.Number + " u liniji " + e.LineNumber);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + e.GetType());
                 }
                 catch (InvalidOperationException a)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + a.HResult);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
                 }
             }
         }
@@ -140,27 +140,27 @@ namespace POP_SF7
             {
                 connection.Open();
 
-                SqlCommand addCommand = connection.CreateCommand();
-                addCommand.CommandText = @"Update Payment Set Payment_Course=@Course, Payment_Student=@Student, Payment_Amount=@Amount, Payment_Date=@Date, Payment_Deleted=@Deleted Where Payment_Id=@Id;";
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = @"Update Payment Set Payment_Course=@Course, Payment_Student=@Student, Payment_Amount=@Amount, Payment_Date=@Date, Payment_Deleted=@Deleted Where Payment_Id=@Id;";
 
-                addCommand.Parameters.Add(new SqlParameter("@Course", payment.Course.Id));
-                addCommand.Parameters.Add(new SqlParameter("@Student", payment.Student.Id));
-                addCommand.Parameters.Add(new SqlParameter("@Amount", payment.Amount));
-                addCommand.Parameters.Add(new SqlParameter("@Date", payment.Date));
-                addCommand.Parameters.Add(new SqlParameter("@Deleted", payment.Deleted));
-                addCommand.Parameters.Add(new SqlParameter("@Id", payment.Id));
+                command.Parameters.Add(new SqlParameter("@Course", payment.Course.Id));
+                command.Parameters.Add(new SqlParameter("@Student", payment.Student.Id));
+                command.Parameters.Add(new SqlParameter("@Amount", payment.Amount));
+                command.Parameters.Add(new SqlParameter("@Date", payment.Date));
+                command.Parameters.Add(new SqlParameter("@Deleted", payment.Deleted));
+                command.Parameters.Add(new SqlParameter("@Id", payment.Id));
 
                 try
                 {
-                    addCommand.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + e.Number + " u liniji " + e.LineNumber);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + e.GetType());
                 }
                 catch (InvalidOperationException a)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + a.HResult);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
                 }
             }
         }
@@ -171,22 +171,22 @@ namespace POP_SF7
             {
                 connection.Open();
 
-                SqlCommand addCommand = connection.CreateCommand();
-                addCommand.CommandText = @"Update Payment Set Payment_Deleted=1 Where Payment_Id=@Id;";
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = @"Update Payment Set Payment_Deleted=1 Where Payment_Id=@Id;";
 
-                addCommand.Parameters.Add(new SqlParameter("@Id", payment.Id));
+                command.Parameters.Add(new SqlParameter("@Id", payment.Id));
 
                 try
                 {
-                    addCommand.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + e.Number + " u liniji " + e.LineNumber);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + e.GetType());
                 }
                 catch (InvalidOperationException a)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + a.HResult);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
                 }
             }
         }

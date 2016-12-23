@@ -30,10 +30,10 @@ namespace POP_SF7
 
                 DataSet dataSet = new DataSet();
 
-                SqlCommand loadCommand = connection.CreateCommand();
-                loadCommand.CommandText = @"Select * From Student;";
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = @"Select * From Student;";
 
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(loadCommand);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
                 
                 try
                 {
@@ -54,11 +54,11 @@ namespace POP_SF7
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + e.Number + " u liniji " + e.LineNumber);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + e.GetType());
                 }
                 catch (InvalidOperationException a)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + a.HResult);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
                 }
             }
         }
@@ -69,26 +69,26 @@ namespace POP_SF7
             {
                 connection.Open();
 
-                SqlCommand addCommand = connection.CreateCommand();
-                addCommand.CommandText = @"Insert Into Student Values(@FirstName,@LastName,@Jmbg,@Address,@Deleted);";
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = @"Insert Into Student Values(@FirstName,@LastName,@Jmbg,@Address,@Deleted);";
 
-                addCommand.Parameters.Add(new SqlParameter("@FirstName", student.FirstName));
-                addCommand.Parameters.Add(new SqlParameter("@LastName", student.LastName));
-                addCommand.Parameters.Add(new SqlParameter("@Jmbg", student.Jmbg));
-                addCommand.Parameters.Add(new SqlParameter("@Address", student.Address));
-                addCommand.Parameters.Add(new SqlParameter("@Deleted", student.Deleted));
+                command.Parameters.Add(new SqlParameter("@FirstName", student.FirstName));
+                command.Parameters.Add(new SqlParameter("@LastName", student.LastName));
+                command.Parameters.Add(new SqlParameter("@Jmbg", student.Jmbg));
+                command.Parameters.Add(new SqlParameter("@Address", student.Address));
+                command.Parameters.Add(new SqlParameter("@Deleted", student.Deleted));
 
                 try
                 {
-                    addCommand.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + e.Number + " u liniji " + e.LineNumber);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + e.GetType());
                 }
                 catch (InvalidOperationException a)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + a.HResult);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
                 }
             }
         }
@@ -99,27 +99,27 @@ namespace POP_SF7
             {
                 connection.Open();
 
-                SqlCommand addCommand = connection.CreateCommand();
-                addCommand.CommandText = @"Update Student Set Student_FirstName=@FirstName, Student_LastName=@LastName, Student_Jmbg=@Jmbg, Student_Address=@Address, Student_Deleted=@Deleted Where Student_Id=@Id;";
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = @"Update Student Set Student_FirstName=@FirstName, Student_LastName=@LastName, Student_Jmbg=@Jmbg, Student_Address=@Address, Student_Deleted=@Deleted Where Student_Id=@Id;";
 
-                addCommand.Parameters.Add(new SqlParameter("@FirstName", student.FirstName));
-                addCommand.Parameters.Add(new SqlParameter("@LastName", student.LastName));
-                addCommand.Parameters.Add(new SqlParameter("@Jmbg", student.Jmbg));
-                addCommand.Parameters.Add(new SqlParameter("@Address", student.Address));
-                addCommand.Parameters.Add(new SqlParameter("@Deleted", student.Deleted));
-                addCommand.Parameters.Add(new SqlParameter("@Id", student.Id));
+                command.Parameters.Add(new SqlParameter("@FirstName", student.FirstName));
+                command.Parameters.Add(new SqlParameter("@LastName", student.LastName));
+                command.Parameters.Add(new SqlParameter("@Jmbg", student.Jmbg));
+                command.Parameters.Add(new SqlParameter("@Address", student.Address));
+                command.Parameters.Add(new SqlParameter("@Deleted", student.Deleted));
+                command.Parameters.Add(new SqlParameter("@Id", student.Id));
 
                 try
                 {
-                    addCommand.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + e.Number + " u liniji " + e.LineNumber);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + e.GetType());
                 }
                 catch (InvalidOperationException a)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + a.HResult);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
                 }
             }
         }
@@ -130,22 +130,22 @@ namespace POP_SF7
             {
                 connection.Open();
 
-                SqlCommand addCommand = connection.CreateCommand();
-                addCommand.CommandText = @"Update Student Set Student_Deleted=1 Where Student_Id=@Id;";
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = @"Update Student Set Student_Deleted=1 Where Student_Id=@Id;";
 
-                addCommand.Parameters.Add(new SqlParameter("@Id", student.Id));
+                command.Parameters.Add(new SqlParameter("@Id", student.Id));
 
                 try
                 {
-                    addCommand.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + e.Number + " u liniji " + e.LineNumber);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + e.GetType());
                 }
                 catch (InvalidOperationException a)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + "\n" + "Greska " + a.HResult);
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
                 }
             }
         }

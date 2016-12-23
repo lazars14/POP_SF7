@@ -43,9 +43,9 @@ Insert into Teacher values('Matija', 'Popovic', 'Adresa 3', '1234567891011', 0);
 Insert into Teacher values('Marko', 'Radovanovic', 'Adresa 4', '1234567891011', 0);
 Insert into Teacher values('Lazar', 'Markovic', 'Adresa 5', '1234567891011', 0);
 
-Insert into UserU values('Marko', 'Radonjic', 'Adresa 1', '1234567891011', 0, 'marko', 'radonjic', 'ADMINISTRATOR');
-Insert into UserU values('Aleksandar', 'Todorovic', 'Adresa 2', '1234567891011', 0, 'aleksandar', 'todorovic', 'EMPLOYEE');
-Insert into UserU values('Drasko', 'Radovic', 'Adresa 3', '1234567891011', 0, 'drasko', 'radovic', 'EMPLOYEE');
+Insert into UserU values('Marko', 'Radonjic', '1234567891011', 'Adresa 1', 0, 'marko', 'radonjic', 'ADMINISTRATOR');
+Insert into UserU values('Aleksandar', 'Todorovic', '1234567891011', 'Adresa 2', 0, 'aleksandar', 'todorovic', 'EMPLOYEE');
+Insert into UserU values('Drasko', 'Radovic', '1234567891011', 'Adresa 3', 0, 'drasko', 'radovic', 'EMPLOYEE');
 
 Insert into Course(Course_LanguageId,Course_CourseTypeId,Course_Price,Course_TeacherId,Course_StartDate,Course_EndDate,Course_Deleted) values (1, 1, 24000.00, 1, '2017-01-01', '2018-01-01', 0);
 Insert into Course(Course_LanguageId,Course_CourseTypeId,Course_Price,Course_TeacherId,Course_StartDate,Course_EndDate,Course_Deleted) values (2, 2, 34000.00, 2, '2017-03-01', '2018-03-01', 0);

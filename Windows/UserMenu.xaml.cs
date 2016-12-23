@@ -74,12 +74,19 @@ namespace POP_SF7
             }
             else
             {
-                var result = MessageBox.Show("Da li ste sigurni da hocete da obrisete ovog korisnika?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                if (result == MessageBoxResult.Yes)
+                if(selectedUser.Id == ApplicationA.Instance.UserId)
                 {
-                    selectedUser = view.CurrentItem as User;
-                    User.Delete(selectedUser);
-                    selectedUser.Deleted = true;
+                    MessageBox.Show("Ne mozete da obrisete sebe!");
+                }
+                else
+                {
+                    var result = MessageBox.Show("Da li ste sigurni da hocete da obrisete ovog korisnika?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        selectedUser = view.CurrentItem as User;
+                        User.Delete(selectedUser);
+                        selectedUser.Deleted = true;
+                    }
                 }
             }
         }

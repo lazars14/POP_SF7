@@ -22,24 +22,25 @@ namespace POP_SF7
     {
         public School School { get; set; }
 
-        public MainMenu(Role role)
+        public MainMenu(Role role, int userId)
         {
             InitializeComponent();
             School = ApplicationA.Instance.School;
             DataContext = School;
+            ApplicationA.Instance.UserId = userId;
 
             setVisibilityRole(role);
         }
 
         public void setVisibilityRole(Role role)
         {
-            if (role == Role.Administrator)
+            if (role == Role.ADMINISTRATOR)
             {
                 payments.Visibility = Visibility.Collapsed;
                 students.Visibility = Visibility.Collapsed;
                 courses.Visibility = Visibility.Collapsed;
             }
-            else if (role == Role.Employee)
+            else if (role == Role.EMPLOYEE)
             {
                 editSchoolData.Visibility = Visibility.Collapsed;
                 teachers.Visibility = Visibility.Collapsed;

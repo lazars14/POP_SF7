@@ -41,6 +41,10 @@ namespace POP_SF7
         private void okbtn_Click(object sender, RoutedEventArgs e)
         {
             bool valid = false;
+            bool userDeleted = false;
+
+            string incorrectInput = "Korisnicko ime ili lozinka nisu ispravni!";
+            string deletedUser = "Obrisani ste iz sistema! Obratite se administratoru.";
 
             if (String.IsNullOrEmpty(usernametb.Text) || String.IsNullOrEmpty(passwordpb.Password))
             {
@@ -50,21 +54,34 @@ namespace POP_SF7
             {
                 foreach(User u in ApplicationA.Instance.Users)
                 {
-                    if (u.UserName.Equals(usernametb.Text) && u.Password.Equals(passwordpb.Password) && u.Deleted == false)
+                    if (u.UserName.Equals(usernametb.Text) && u.Password.Equals(passwordpb.Password) && u.Deleted == true)
+                    {
+                        userDeleted = true;
+                    }
+                    else if (u.UserName.Equals(usernametb.Text) && u.Password.Equals(passwordpb.Password) && u.Deleted == false)
                     {
                         valid = true;
-                        MainMenu mainMenu = new MainMenu(u.UserRole);
+                        MainMenu mainMenu = new MainMenu(u.UserRole, u.Id);
                         mainMenu.Show();
                         Close();
                     }
                 }
-                if(!valid)
+                if(userDeleted)
                 {
-                    usernametb.Text = "";
-                    passwordpb.Password = "";
-                    MessageBox.Show("Korisnicko ime ili lozinka nisu ispravni!");
+                    resetTextBoxes(deletedUser);
+                }
+                else if (!valid)
+                {
+                    resetTextBoxes(incorrectInput);
                 }
             }
+        }
+
+        public void resetTextBoxes(string message)
+        {
+            usernametb.Text = "";
+            passwordpb.Password = "";
+            MessageBox.Show(message);
         }
 
         private void passwordpb_KeyDown(object sender, KeyEventArgs e)
