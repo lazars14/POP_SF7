@@ -1,5 +1,4 @@
-﻿
-using POP_SF7.Helpers;
+﻿using POP_SF7.Helpers;
 using System;
 using System.ComponentModel;
 using System.Data;

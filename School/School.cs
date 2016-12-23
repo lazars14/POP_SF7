@@ -1,12 +1,9 @@
-﻿using POP_SF7;
-using POP_SF7.Helpers;
+﻿using POP_SF7.Helpers;
 using POP_SF7.Validations;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 

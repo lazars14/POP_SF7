@@ -1,7 +1,5 @@
 ﻿using POP_SF7.Helpers;
-using System;
 using System.ComponentModel;
-using System.Linq;
 
 namespace POP_SF7
 {
