@@ -41,7 +41,7 @@ namespace POP_SF7.Windows
             nametb.DataContext = LanguageL;
             deletedcb.DataContext = LanguageL;
 
-            descriptionlbl.Text = (decider == Decider.ADD) ? labelAddLanguage : labelEditLanguage;
+            userControl.descriptionlbl.Text = (decider == Decider.ADD) ? labelAddLanguage : labelEditLanguage;
         }
 
         private void okbtn_Click(object sender, RoutedEventArgs e)

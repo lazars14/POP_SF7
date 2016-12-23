@@ -5,17 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF7"
         mc:Ignorable="d"
-        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="674.871" Width="799.725" ResizeMode="NoResize">
+        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="586.871" Width="799.725" ResizeMode="NoResize">
     <Grid>
         <TextBlock x:Name="teacherstb" HorizontalAlignment="Left" Height="23" Margin="9,10,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="Nastavnici" VerticalAlignment="Top" Width="770"/>
+        
+        <!--#region DataGrid-->
         <DataGrid x:Name="teachersdg" IsReadOnly="True" AutoGeneratingColumn="teachersdg_AutoGeneratingColumn" HorizontalAlignment="Left" Height="149" Margin="9,38,0,0" VerticalAlignment="Top" Width="697" SelectionChanged="usersdg_SelectionChanged"/>
-        <StackPanel HorizontalAlignment="Left" Height="149" Margin="721,46,0,0" VerticalAlignment="Top" Width="58">
+        <StackPanel HorizontalAlignment="Left" Height="149" Margin="723,37,0,0" VerticalAlignment="Top" Width="58">
             <Button x:Name="addbtn" Content="Dodaj" Height="30" Margin="0,20,0,0" Click="addbtn_Click"/>
             <Button x:Name="editbtn" Content="Izmeni" Height="30" Margin="0,10" Click="editbtn_Click"/>
             <Button x:Name="deletebtn" Content="Obrisi" Height="30" Click="deletebtn_Click"/>
         </StackPanel>
+        <!--#endregion-->
 
-        <GroupBox Header="Pretraga" HorizontalAlignment="Left" Height="132" Margin="9,200,0,0" VerticalAlignment="Top" Width="415">
+        <!--#region SelectedCourse-->
+        <GroupBox x:Name="coursegb_Copy" Header="Selektovani kurs" HorizontalAlignment="Left" Height="60" Margin="9,192,0,0" VerticalAlignment="Top" Width="697">
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Label x:Name="courseLanguagelbl1" Content="Jezik"/>
+                <TextBlock x:Name="courseLanguagetb1" Text="{Binding SelectedItem.Course.Language.Name, ElementName=coursesdg}" Margin="50,0,0,0" Width="200"/>
+
+                <Label x:Name="courseCourseTypelbl1" Content="Tip kursa" Margin="50,0,0,0"/>
+                <TextBlock x:Name="courseCourseTypetb1" Text="{Binding SelectedItem.Course.CourseType.Name, ElementName=coursesdg}" Margin="50,0,0,0" Width="200"/>
+            </StackPanel>
+        </GroupBox>
+        <!--#endregion-->
+
+        <!--#region Search-->
+        <GroupBox Header="Pretraga" HorizontalAlignment="Left" Height="132" Margin="9,259,0,0" VerticalAlignment="Top" Width="415">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
@@ -40,8 +56,10 @@
                 <Button x:Name="cancelSearchbtn" Content="Ponisti" Grid.Row="2" Grid.Column="2" Margin="5" Click="cancelSearchbtn_Click"/>
             </Grid>
         </GroupBox>
-
-        <GroupBox Header="Sortiranje" HorizontalAlignment="Left" Height="132" Margin="431,200,0,0" VerticalAlignment="Top" Width="348">
+        <!--#endregion-->
+        
+        <!--#region Sort-->
+        <GroupBox Header="Sortiranje" HorizontalAlignment="Left" Height="132" Margin="433,259,0,0" VerticalAlignment="Top" Width="351">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
@@ -67,32 +85,19 @@
                 <Button x:Name="sortbtn" Content="Sortiraj" Grid.Row="2" Grid.ColumnSpan="4" Margin="100,5,100,0" Click="sortbtn_Click"/>
             </Grid>
         </GroupBox>
+        <!--#endregion-->
 
-        <!-- Teacher and Student -->
-        <GroupBox x:Name="coursesgb" Header="Kursevi" HorizontalAlignment="Left" Height="150" Margin="9,337,0,0" VerticalAlignment="Top" Width="414">
+        <!--#region Courses-->
+        <GroupBox x:Name="coursesgb" Header="Kursevi" HorizontalAlignment="Left" Height="150" Margin="10,396,0,0" VerticalAlignment="Top" Width="414">
             <DataGrid x:Name="coursesdg" IsReadOnly="True" AutoGeneratingColumn="coursesdg_AutoGeneratingColumn" ItemsSource="{Binding ElementName=teachersdg, Path=SelectedItem.ListOfCourses}" Margin="5"/>
         </GroupBox>
+        <!--#endregion-->
         
-        <GroupBox x:Name="languagesgb" Header="Jezici" HorizontalAlignment="Left" Height="150" Margin="431,337,0,0" VerticalAlignment="Top" Width="348">
+        <!--#region Languages-->
+        <GroupBox x:Name="languagesgb" Header="Jezici" HorizontalAlignment="Left" Height="150" Margin="436,396,0,0" VerticalAlignment="Top" Width="348">
             <DataGrid x:Name="languagesdg" IsReadOnly="True" AutoGeneratingColumn="languagesdg_AutoGeneratingColumn" ItemsSource="{Binding ElementName=teachersdg, Path=SelectedItem.ListOfLanguages}" Margin="5"/>
         </GroupBox>
-        <GroupBox x:Name="coursegb_Copy" Header="Selektovani kurs" HorizontalAlignment="Left" Height="144" Margin="10,492,0,0" VerticalAlignment="Top" Width="348">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="40"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="150"/>
-                </Grid.ColumnDefinitions>
-                <Label x:Name="courseLanguagelbl1" Content="Jezik" Grid.Row="0" Grid.Column="0" Margin="10,5,0,10"/>
-                <TextBlock x:Name="courseLanguagetb1" Text="{Binding SelectedItem.Course.Language.Name, ElementName=coursesdg}" Grid.Row="0" Grid.Column="1" Margin="0,5,0,5"/>
-
-                <Label x:Name="courseCourseTypelbl1" Content="Tip kursa" Grid.Row="1" Grid.Column="0" Margin="10,5,0,10"/>
-                <TextBlock x:Name="courseCourseTypetb1" Text="{Binding SelectedItem.Course.CourseType.Name, ElementName=coursesdg}" Grid.Row="1" Grid.Column="1" Margin="0,5,0,5"/>
-            </Grid>
-        </GroupBox>
-
+        <!--#endregion-->
+        
     </Grid>
 </Window>

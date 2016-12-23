@@ -5,17 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF7"
         mc:Ignorable="d"
-        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="372.858" Width="799.725" ResizeMode="NoResize">
+        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="369.975" Width="799.725" ResizeMode="NoResize">
     <Grid>
-        <TextBlock x:Name="userstb" HorizontalAlignment="Left" Height="23" Margin="9,10,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="Korisnici" FontSize="16" VerticalAlignment="Top" Width="770"/>
-        <DataGrid x:Name="usersdg" IsReadOnly="True" AutoGeneratingColumn="usersdg_AutoGeneratingColumn" HorizontalAlignment="Left" Height="149" Margin="9,38,0,0" VerticalAlignment="Top" Width="697"/>
+        <TextBlock x:Name="userstb" HorizontalAlignment="Left" Height="28" Margin="9,10,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="Korisnici" FontSize="16" VerticalAlignment="Top" Width="770"/>
+
+        <!--#region DataGrid-->
+        <DataGrid x:Name="usersdg" IsReadOnly="True" AutoGeneratingColumn="usersdg_AutoGeneratingColumn" HorizontalAlignment="Left" Height="149" Margin="10,38,0,0" VerticalAlignment="Top" Width="696"/>
         <StackPanel HorizontalAlignment="Left" Height="149" Margin="721,46,0,0" VerticalAlignment="Top" Width="58">
             <Button x:Name="addbtn" Content="Dodaj" Height="30" Margin="0,20,0,0" Click="addbtn_Click"/>
             <Button x:Name="editbtn" Content="Izmeni" Height="30" Margin="0,10" Click="editbtn_Click"/>
             <Button x:Name="deletebtn" Content="Obrisi" Height="30" Click="deletebtn_Click"/>
         </StackPanel>
+        <!--#endregion-->
 
-        <GroupBox Header="Pretraga" HorizontalAlignment="Left" Height="136" Margin="9,200,0,0" VerticalAlignment="Top" Width="415">
+        <!--#region Search-->
+        <GroupBox Header="Pretraga" HorizontalAlignment="Left" Height="136" Margin="9,192,0,0" VerticalAlignment="Top" Width="416">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
@@ -37,13 +41,15 @@
                 <TextBox x:Name="firstnametb" Grid.Row="1" Grid.Column="1" Margin="5"/>
                 <TextBox x:Name="lastnametb" Grid.Row="1" Grid.Column="2" Margin="5"/>
                 <TextBox x:Name="usernametb" Grid.Row="1" Grid.Column="3" Margin="5"/>
-                
+
                 <Button x:Name="searchbtn" Content="Pretrazi" Grid.Row="2" Grid.Column="1" Margin="5" Click="searchbtn_Click"/>
                 <Button x:Name="cancelSearchbtn" Content="Ponisti" Grid.Row="2" Grid.Column="2" Margin="5" Click="cancelSearchbtn_Click"/>
             </Grid>
         </GroupBox>
+        <!--#endregion-->
 
-        <GroupBox Header="Sortiranje" HorizontalAlignment="Left" Height="136" Margin="431,200,0,0" VerticalAlignment="Top" Width="348">
+        <!--#region Sort-->
+        <GroupBox Header="Sortiranje" HorizontalAlignment="Left" Height="136" Margin="431,192,0,0" VerticalAlignment="Top" Width="348">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
@@ -69,8 +75,6 @@
                 <Button x:Name="sortbtn" Content="Sortiraj" Grid.Row="2" Grid.ColumnSpan="4" Margin="100,5,100,0" Click="sortbtn_Click"/>
             </Grid>
         </GroupBox>
-
-        <!-- Teacher and Student -->
-
+        <!--#endregion-->
     </Grid>
 </Window>

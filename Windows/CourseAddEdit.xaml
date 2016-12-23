@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:resources="clr-namespace:POP_SF7.Properties"
         mc:Ignorable="d"
-        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="646.227" Width="325.21" ResizeMode="NoResize">
-    <Grid>
+        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="646.227" Width="337.21" ResizeMode="NoResize">
+    <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="200"/>
@@ -24,31 +24,31 @@
             <RowDefinition Height="200"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="descriptionlbl" Text="popuniti dinamicki" TextAlignment="Center" Grid.ColumnSpan="2" Grid.Row="0" Margin="10, 15, 5, 10"/>
+        <TextBlock x:Name="descriptionlbl" Text="popuniti dinamicki" TextAlignment="Center" Grid.ColumnSpan="2" Grid.Row="0" Margin="0, 15, 5, 10"/>
 
-        <Label x:Name="languagelbl" Content="Jezik" Grid.Row="1" Grid.Column="0" Margin="10,0,0,10"/>
+        <Label x:Name="languagelbl" Content="Jezik" Grid.Row="1" Grid.Column="0" Margin="0,0,0,10"/>
         <ComboBox x:Name="languagecb" Text="{Binding Path=Language}" Grid.Row="1" Grid.Column="1" Margin="10,0,0,10"/>
 
-        <Label x:Name="courseTypelbl" Content="Tip kursa" Grid.Row="2" Grid.Column="0" Margin="10,0,0,10"/>
+        <Label x:Name="courseTypelbl" Content="Tip kursa" Grid.Row="2" Grid.Column="0" Margin="0,0,0,10"/>
         <ComboBox x:Name="courseTypecb" Text="{Binding Path=CourseType}" Grid.Row="2" Grid.Column="1" Margin="10,0,0,10"/>
 
-        <Label x:Name="teacherlbl" Content="Nastavnik" Grid.Row="3" Grid.Column="0" Margin="10,0,0,10"/>
+        <Label x:Name="teacherlbl" Content="Nastavnik" Grid.Row="3" Grid.Column="0" Margin="0,0,0,10"/>
         <ComboBox x:Name="teachercb" Text="{Binding Path=Language}" Grid.Row="3" Grid.Column="1" Margin="10,0,0,10"/>
 
-        <Label x:Name="pricelbl" Content="Cena kursa" Grid.Row="4" Grid.Column="0" Margin="10,0,0,0"/>
+        <Label x:Name="pricelbl" Content="Cena kursa" Grid.Row="4" Grid.Column="0" Margin="0,0,0,0"/>
         <TextBox x:Name="pricetb" Text="{Binding Path=Price, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Margin="10,0,0,0"/>
         <TextBlock x:Name="priceValidation" Grid.Row="5" Grid.Column="1" Foreground="Red" Text="{Binding ElementName=pricetb, Path=(Validation.Errors).CurrentItem.ErrorContent}" Margin="10,0,0,5"/>
 
-        <Label x:Name="beginDatelbl" Content="Pocetni datum" Grid.Row="6" Grid.Column="0" Margin="10,0,0,10"/>
+        <Label x:Name="beginDatelbl" Content="Pocetni datum" Grid.Row="6" Grid.Column="0" Margin="0,0,0,10"/>
         <DatePicker x:Name="beginDatedpc" SelectedDate="{Binding Path=StartDate}" Grid.Row="6" Grid.Column="1" Margin="10,0,0,10"/>
 
-        <Label x:Name="endDatelbl" Content="Zavrsni datum" Grid.Row="7" Grid.Column="0" Margin="10,0,0,10"/>
+        <Label x:Name="endDatelbl" Content="Zavrsni datum" Grid.Row="7" Grid.Column="0" Margin="0,0,0,10"/>
         <DatePicker x:Name="endDatedpc" SelectedDate="{Binding Path=EndDate}" Grid.Row="7" Grid.Column="1" Margin="10,0,0,10"/>
 
-        <Label x:Name="deletedlbl" Content="Obrisan" Grid.Row="8" Grid.Column="0" Margin="10,0,0,10"/>
+        <Label x:Name="deletedlbl" Content="Obrisan" Grid.Row="8" Grid.Column="0" Margin="0,0,0,10"/>
         <CheckBox x:Name="deletedcb" IsChecked="{Binding Path=Deleted}" Grid.Row="8" Grid.Column="1" Margin="10,7,0,10"/>
 
-        <GroupBox Header="Ucenici" Grid.ColumnSpan="2" Grid.Row="9" Margin="10,0,0,0">
+        <GroupBox Header="Ucenici" Grid.ColumnSpan="2" Grid.Row="9">
             <Grid>
                 <DataGrid x:Name="studentsdg" IsReadOnly="True" AutoGeneratingColumn="studentsdg_AutoGeneratingColumn" ItemsSource="{Binding ListOfStudents}" HorizontalAlignment="Left" Height="130" Margin="10,10,0,0" VerticalAlignment="Top" Width="260"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="33" Margin="10,145,0,0" VerticalAlignment="Center" Width="275">

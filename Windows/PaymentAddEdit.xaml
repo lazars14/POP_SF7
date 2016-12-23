@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF7"
         mc:Ignorable="d"
-        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="362.844" Width="315.283" ResizeMode="NoResize">
-    <Grid>
+        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="362.844" Width="323.699" ResizeMode="NoResize">
+    <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="90"/>
             <ColumnDefinition Width="200"/>
@@ -21,28 +21,28 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="descriptionlbl" Text="Labela za popunjavanje" TextAlignment="Center" Grid.ColumnSpan="2" Grid.Row="0" Margin="10, 15, 5, 10"/>
+        <TextBlock x:Name="descriptionlbl" Text="Labela za popunjavanje" TextAlignment="Center" Grid.ColumnSpan="2" Grid.Row="0" Margin="0, 15, 5, 10"/>
 
-        <Label x:Name="courselbl" Content="Kurs" Grid.Row="1" Grid.Column="0" Margin="10,0,0,10"/>
+        <Label x:Name="courselbl" Content="Kurs" Grid.Row="1" Grid.Column="0" Margin="0,0,0,10"/>
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
             <TextBox x:Name="coursetb" Width="160" Margin="0,0,0,10"/>
             <Button x:Name="coursebtn" Content="..." Width="30" Margin="11,0,0,10"/>
         </StackPanel>
 
-        <Label x:Name="studentlbl" Content="Ucenik" Grid.Row="2" Grid.Column="0" Margin="10,0,0,10"/>
+        <Label x:Name="studentlbl" Content="Ucenik" Grid.Row="2" Grid.Column="0" Margin="0,0,0,10"/>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
             <TextBox x:Name="studenttb" Width="160" Margin="0,0,0,10"/>
             <Button x:Name="studentbtn" Content="..." Width="30" Margin="11,0,0,10"/>
         </StackPanel>
 
-        <Label x:Name="amountlbl" Content="Iznos uplate" Grid.Row="3" Grid.Column="0" Margin="10,0,0,0"/>
+        <Label x:Name="amountlbl" Content="Iznos uplate" Grid.Row="3" Grid.Column="0" Margin="0,0,0,0"/>
         <TextBox x:Name="amounttb" Text="{Binding Path=Amount, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1"/>
         <TextBlock x:Name="amountValidation" Grid.Row="4" Grid.Column="1" Foreground="Red" Text="{Binding ElementName=amounttb, Path=(Validation.Errors).CurrentItem.ErrorContent}" Margin="0,0,0,5"/>
         
-        <Label x:Name="datelbl" Content="Datum" Grid.Row="5" Grid.Column="0" Margin="10,0,0,10"/>
+        <Label x:Name="datelbl" Content="Datum" Grid.Row="5" Grid.Column="0" Margin="0,0,0,10"/>
         <DatePicker x:Name="datepck" SelectedDate="{Binding Path=Date}" Grid.Row="5" Grid.Column="1" Margin="0,0,0,10"/>
         
-        <Label x:Name="deletedlbl" Content="Obrisana" Grid.Row="6" Grid.Column="0" Margin="10,0,0,10"/>
+        <Label x:Name="deletedlbl" Content="Obrisana" Grid.Row="6" Grid.Column="0" Margin="0,0,0,10"/>
         <CheckBox x:Name="deletedcb" IsChecked="{Binding Path=Deleted}" Grid.Row="6" Grid.Column="1" Margin="0,7,0,10"/>
         
         <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">

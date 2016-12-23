@@ -4,9 +4,26 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:POP_SF7.UserControls"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             mc:Ignorable="d" d:DesignWidth="300" Height="153.093">
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="75"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="descriptionlbl" Text="popuniti" TextAlignment="Center" Grid.ColumnSpan="2" Grid.Row="0" Margin="10, 15, 5, 10"/>
+
+        <Label x:Name="namelbl" Content="Naziv" Grid.Row="1" Grid.Column="0"/>
+        <TextBox x:Name="nametb" Text="{Binding Path=Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1"/>
+        <TextBlock x:Name="priceValidation" Grid.Row="2" Grid.Column="1" Foreground="Red" Text="{Binding ElementName=nametb, Path=(Validation.Errors).CurrentItem.ErrorContent}" Margin="0,0,0,5"/>
+
+        <Label x:Name="deletedlbl" Content="Obrisano" Grid.Row="3" Grid.Column="0" Margin="0,0,0,10"/>
+        <CheckBox x:Name="deletedcb" IsChecked="{Binding Path=Deleted}" Content="" Grid.Row="3" Grid.Column="1" Margin="0,6,0,0"/>
     </Grid>
 </UserControl>

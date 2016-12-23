@@ -36,7 +36,7 @@ namespace POP_SF7
 
             DataContext = CourseTypeC;
 
-            descriptionlbl.Text = (decider == Decider.ADD) ? labelAddCourseType : labelEditCourseType;
+            userControl.descriptionlbl.Text = (decider == Decider.ADD) ? labelAddCourseType : labelEditCourseType;
         }
 
         private void okbtn_Click(object sender, RoutedEventArgs e)

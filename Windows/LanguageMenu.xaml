@@ -13,7 +13,6 @@
             <Button x:Name="addbtn" Content="Dodaj" Width="50" Click="addbtn_Click"/>
             <Button x:Name="editbtn" Content="Izmeni" Width="50" Margin="10,0,0,0" Click="editbtn_Click"/>
             <Button x:Name="deletebtn" Content="Obrisi" Width="50" Margin="10,0,0,0" Click="deletebtn_Click"/>
-            <Button x:Name="closebtn" Content="Izlaz" Width="50" Margin="54,0,0,0" Click="closebtn_Click"/>
         </StackPanel>
     </Grid>
 </Window>

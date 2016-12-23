@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:POP_SF7"
         mc:Ignorable="d"
         xmlns:userControls="clr-namespace:POP_SF7.UserControls"
-        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="637.933" Width="335.008" ResizeMode="NoResize">
-    <Grid>
+        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="645.933" Width="348.008" ResizeMode="NoResize">
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="350"/>
             <RowDefinition Height="200"/>

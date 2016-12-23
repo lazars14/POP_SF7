@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF7"
         mc:Ignorable="d"
-        Title="The Language School" Icon="Images/logoIcon16.png" Height="220.902" Width="333.504" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
-    <Grid>
+        Title="The Language School" Icon="Images/logoIcon16.png" Height="220.902" Width="336.103" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="200"/>
@@ -17,12 +17,12 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="descriptionlbl" Text="Dobrodosli!" TextAlignment="Center" Grid.ColumnSpan="2" Grid.Row="0" Margin="10, 15, 5, 10"/>
+        <TextBlock x:Name="descriptionlbl" Text="Dobrodosli!" TextAlignment="Center" Grid.ColumnSpan="2" Grid.Row="0" Margin="0, 10, 5, 10"/>
         
-        <Label x:Name="usernamelbl" Content="Korisnicko ime" Grid.Row="1" Grid.Column="0" Margin="10,0,0,10"/>
+        <Label x:Name="usernamelbl" Content="Korisnicko ime" Grid.Row="1" Grid.Column="0" Margin="0,0,0,10"/>
         <TextBox x:Name="usernametb" Grid.Row="1" Grid.Column="1" Margin="0,0,0,10"/>
         
-        <Label x:Name="passwordlbl" Content="Lozinka"  Grid.Row="2" Grid.Column="0" Margin="10,0,0,10"/>
+        <Label x:Name="passwordlbl" Content="Lozinka"  Grid.Row="2" Grid.Column="0" Margin="0,0,0,10"/>
         <PasswordBox x:Name="passwordpb" Grid.Row="2" KeyDown="passwordpb_KeyDown" Grid.Column="1" Margin="0,0,0,10"/>
         
         <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
