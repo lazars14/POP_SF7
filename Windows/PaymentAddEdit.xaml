@@ -25,13 +25,13 @@
 
         <Label x:Name="courselbl" Content="Kurs" Grid.Row="1" Grid.Column="0" Margin="0,0,0,10"/>
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
-            <TextBox x:Name="coursetb" Width="160" Margin="0,0,0,10"/>
+            <TextBox x:Name="coursetb" IsReadOnly="True" Width="160" Margin="0,0,0,10"/>
             <Button x:Name="coursebtn" Content="..." Width="30" Margin="11,0,0,10"/>
         </StackPanel>
 
         <Label x:Name="studentlbl" Content="Ucenik" Grid.Row="2" Grid.Column="0" Margin="0,0,0,10"/>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
-            <TextBox x:Name="studenttb" Width="160" Margin="0,0,0,10"/>
+            <TextBox x:Name="studenttb" IsReadOnly="True" Width="160" Margin="0,0,0,10"/>
             <Button x:Name="studentbtn" Content="..." Width="30" Margin="11,0,0,10"/>
         </StackPanel>
 

@@ -25,6 +25,9 @@ namespace POP_SF7
         public Decider Decider { get; set; }
         public ObservableCollection<Payment> ListOfPayments { get; set; }
 
+        public Course Course { get; set; }
+        public Student Student { get; set; }
+
         public string labelAddPayment = "Dodavanje nove uplate";
         public string labelEditPayment = "Izmena postojece uplate";
 
