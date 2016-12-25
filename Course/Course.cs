@@ -110,7 +110,7 @@ namespace POP_SF7
                         course.Price = (double)row["Course_Price"];
                         course.StartDate = (DateTime)row["Course_StartDate"];
                         course.EndDate = (DateTime)row["Course_EndDate"];
-                        course.Deleted = (bool)row["Deleted"];
+                        course.Deleted = (bool)row["Course_Deleted"];
 
                         ApplicationA.Instance.Courses.Add(course);
                     }
@@ -122,6 +122,10 @@ namespace POP_SF7
                 catch (InvalidOperationException a)
                 {
                     MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
+                }
+                catch (ArgumentException g)
+                {
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + g.GetType());
                 }
             }
         }
@@ -154,6 +158,10 @@ namespace POP_SF7
                 catch (InvalidOperationException a)
                 {
                     MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
+                }
+                catch (ArgumentException g)
+                {
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + g.GetType());
                 }
             }
         }
@@ -188,6 +196,10 @@ namespace POP_SF7
                 {
                     MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
                 }
+                catch (ArgumentException g)
+                {
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + g.GetType());
+                }
             }
         }
 
@@ -213,6 +225,10 @@ namespace POP_SF7
                 catch (InvalidOperationException a)
                 {
                     MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
+                }
+                catch (ArgumentException g)
+                {
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + g.GetType());
                 }
             }
         }

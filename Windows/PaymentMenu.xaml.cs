@@ -1,19 +1,10 @@
 ﻿using POP_SF7.Windows;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace POP_SF7
 {
@@ -27,6 +18,9 @@ namespace POP_SF7
 
         public List<Course> ListOfCourses { get; set; }
         public List<Student> ListOfStudents { get; set; }
+
+        public Course SearchCourse { get; set; }
+        public Student SearchStudent { get; set; }
 
         public PaymentMenu()
         {
@@ -166,6 +160,18 @@ namespace POP_SF7
                     e.Cancel = true;
                     break;
             }
+        }
+
+        private void coursebtn_Click(object sender, RoutedEventArgs e)
+        {
+            SelectFromList window = new SelectFromList(SelectFromMenuOrAddDecider.MENU, CourseStudentDecider.COURSE, this);
+            window.Show();
+        }
+
+        private void studentbtn_Click(object sender, RoutedEventArgs e)
+        {
+            SelectFromList window = new SelectFromList(SelectFromMenuOrAddDecider.MENU, CourseStudentDecider.STUDENT, this);
+            window.Show();
         }
     }
 }
