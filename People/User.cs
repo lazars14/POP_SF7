@@ -91,6 +91,10 @@ namespace POP_SF7
                 {
                     MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + g.GetType());
                 }
+                catch (NullReferenceException n)
+                {
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + n.GetType());
+                }
             }
         }
 
@@ -127,6 +131,10 @@ namespace POP_SF7
                 catch (ArgumentException g)
                 {
                     MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + g.GetType());
+                }
+                catch (NullReferenceException n)
+                {
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + n.GetType());
                 }
             }
         }
@@ -166,6 +174,10 @@ namespace POP_SF7
                 {
                     MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + g.GetType());
                 }
+                catch (NullReferenceException n)
+                {
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + n.GetType());
+                }
             }
         }
 
@@ -195,6 +207,10 @@ namespace POP_SF7
                 catch (ArgumentException g)
                 {
                     MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + g.GetType());
+                }
+                catch (NullReferenceException n)
+                {
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + n.GetType());
                 }
             }
         }

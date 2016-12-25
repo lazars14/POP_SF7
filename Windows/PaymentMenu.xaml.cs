@@ -1,4 +1,5 @@
 ﻿using POP_SF7.Windows;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -14,10 +15,6 @@ namespace POP_SF7
     public partial class PaymentMenu : Window
     {
         public ICollectionView view { get; set; }
-        public ObservableCollection<Payment> ListOfPayments { get; set; }
-
-        public List<Course> ListOfCourses { get; set; }
-        public List<Student> ListOfStudents { get; set; }
 
         public Course SearchCourse { get; set; }
         public Student SearchStudent { get; set; }
@@ -25,17 +22,25 @@ namespace POP_SF7
         public PaymentMenu()
         {
             InitializeComponent();
-            // ucitavanje uplata iz baze
-            view = CollectionViewSource.GetDefaultView(ListOfPayments);
+            view = CollectionViewSource.GetDefaultView(ApplicationA.Instance.Payments);
 
             paymentsdg.ItemsSource = view;
             paymentsdg.IsSynchronizedWithCurrentItem = true;
+            checkIfLoaded();
+        }
+
+        public void checkIfLoaded()
+        {
+            if(ApplicationA.Instance.Payments.Count == 0)
+            {
+                Payment.Load();
+            }
         }
 
         private void addbtn_Click(object sender, RoutedEventArgs e)
         {
             Payment newPayment = new Payment();
-            PaymentAddEdit addPayment = new PaymentAddEdit(newPayment, Decider.ADD, ListOfPayments);
+            PaymentAddEdit addPayment = new PaymentAddEdit(newPayment, Decider.ADD);
             addPayment.Show();
         }
 
@@ -49,11 +54,11 @@ namespace POP_SF7
             else
             {
                 Payment backup = (Payment)selectedPayment.Clone();
-                PaymentAddEdit edit = new PaymentAddEdit(selectedPayment, Decider.EDIT, ListOfPayments);
+                PaymentAddEdit edit = new PaymentAddEdit(selectedPayment, Decider.EDIT);
                 if(edit.ShowDialog() != true)
                 {
-                    int index = ListOfPayments.IndexOf(selectedPayment);
-                    ListOfPayments[index] = backup;
+                    int index = ApplicationA.Instance.Payments.IndexOf(selectedPayment);
+                    ApplicationA.Instance.Payments[index] = backup;
                 }
             }
         }
@@ -103,25 +108,37 @@ namespace POP_SF7
             view.Refresh();
         }
 
+        public bool courseSearchCondition(object s)
+        {
+            Course c = s as Course;
+            return c.Id == SearchCourse.Id;
+        }
+
+        public bool studentSearchCondition(object s)
+        {
+            Student c = s as Student;
+            return c.Id == SearchStudent.Id;
+        }
+
         private void searchbtn_Click(object sender, RoutedEventArgs e)
         {
             bool course = coursechb.IsChecked ?? false;
             bool student = studentchb.IsChecked ?? false;
 
+            Predicate<object> coursePredicate = new Predicate<object>(courseSearchCondition);
+            Predicate<object> studentPredicate = new Predicate<object>(studentSearchCondition);
+
             if (course && student)
             {
-                // pokupi podatke iz oba textboxa
-                // funkcija
+                view.Filter = coursePredicate + studentPredicate;
             }
             else if (course)
             {
-                // pokupi podatke iz textboxa za kurs
-                // funkcija
+                view.Filter = coursePredicate;
             }
             else if (student)
             {
-                // pokupi podatke iz textboxa za ucenika
-                // funkcija
+                view.Filter = studentPredicate;
             }
             else
             {

@@ -12,7 +12,6 @@ namespace POP_SF7
     {
         public Payment SelectedPayment { get; set; }
         public Decider Decider { get; set; }
-        public ObservableCollection<Payment> ListOfPayments { get; set; }
 
         public Course Course { get; set; }
         public Student Student { get; set; }
@@ -20,12 +19,11 @@ namespace POP_SF7
         public string labelAddPayment = "Dodavanje nove uplate";
         public string labelEditPayment = "Izmena postojece uplate";
 
-        public PaymentAddEdit(Payment payment, Decider decider, ObservableCollection<Payment> listOfPayments)
+        public PaymentAddEdit(Payment payment, Decider decider)
         {
             InitializeComponent();
             SelectedPayment = payment;
             Decider = decider;
-            ListOfPayments = listOfPayments;
 
             DataContext = SelectedPayment;
             descriptionlbl.Text = (payment == null) ? labelAddPayment : labelEditPayment;
