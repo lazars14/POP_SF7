@@ -12,18 +12,16 @@ namespace POP_SF7
     {
         public Student StudentS { get; set; }
         public Decider Decider { get; set; }
-        public ObservableCollection<Student> ListOfStudents { get; set; }
 
         public string labelAddStudent = "Dodavanje novog ucenika";
         public string labelEditStudent = "Izmena postojeceg ucenika";
         
-        public StudentAddEdit(Student student, Decider decider, ObservableCollection<Student> listOfStudents)
+        public StudentAddEdit(Student student, Decider decider)
         {
             InitializeComponent();
             StudentS = student;
             Decider = decider;
-            ListOfStudents = listOfStudents;
-
+            
             DataContext = StudentS;
             personInfo.descriptionlbl.Text = (Decider == Decider.ADD) ? labelAddStudent : labelEditStudent;
         }

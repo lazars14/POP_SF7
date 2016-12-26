@@ -16,7 +16,6 @@ namespace POP_SF7
     public partial class CourseAddEdit : Window
     {
         public Course Course { get; set; }
-        public ObservableCollection<Course> ListOfCourses { get; set; }
         public Decider Decider { get; set; }
 
         public List<Language> ListOfLanguages { get; set; }
@@ -28,20 +27,18 @@ namespace POP_SF7
         public string labelCourseAdd = "Dodavanje novog kursa";
         public string labelCourseEdit = "Izmena postojeceg kursa";
 
-        public CourseAddEdit(Course course, Decider decider, ObservableCollection<Course> listOfCourses)
+        public CourseAddEdit(Course course, Decider decider)
         {
             InitializeComponent();
             Course = course;
             Decider = decider;
-            ListOfCourses = listOfCourses;
         }
 
-        public void setupWindow()
+        private void setupWindow()
         {
             DataContext = Course;
             descriptionlbl.Text = (Decider == Decider.ADD) ? labelCourseAdd : labelCourseEdit;
 
-            // ucitavanje iz baze
             ListOfLanguages = new List<Language>();
             ListOfCourseTypes = new List<CourseType>();
             ListOfTeachers = new List<Teacher>();

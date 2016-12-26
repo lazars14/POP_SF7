@@ -62,7 +62,7 @@ namespace POP_SF7
             }
         }
 
-        public bool checkUsername()
+        private bool checkUsername()
         {
             bool valid = true;
             foreach (User u in ApplicationA.Instance.Users)
@@ -85,7 +85,7 @@ namespace POP_SF7
             return valid;
         }
 
-        public bool checkSelfDeletion()
+        private bool checkSelfDeletion()
         {
             if(UserU.Id == ApplicationA.Instance.UserId && UserU.Deleted == true)
             {
@@ -94,7 +94,7 @@ namespace POP_SF7
             return false;
         }
         
-        public void setRadioButton()
+        private void setRadioButton()
         {
             if(Decider == Decider.EDIT)
             {

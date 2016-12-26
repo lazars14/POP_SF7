@@ -23,7 +23,7 @@ namespace POP_SF7.Windows
             dynamicdg.IsSynchronizedWithCurrentItem = true;
         }
 
-        public void loadData()
+        private void loadData()
         {
             if (ApplicationA.Instance.Languages.Count() == 0) POP_SF7.Language.Load();
         }

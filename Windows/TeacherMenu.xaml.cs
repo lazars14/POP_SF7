@@ -21,25 +21,28 @@ namespace POP_SF7
         public ICollectionView CoursesView { get; set; }
         public ICollectionView LanguagesView { get; set; }
 
-        public ObservableCollection<Teacher> ListOfTeachers { get; set; }
-        public ObservableCollection<Course> ListOfCourses { get; set; }
-        public ObservableCollection<Language> ListOfLanguages { get; set; }
-
         public TeacherMenu()
         {
             InitializeComponent();
-            // ucitavanje iz baze
-            ListOfTeachers = new ObservableCollection<Teacher>();
-            TeachersView = CollectionViewSource.GetDefaultView(ListOfTeachers);
+            TeachersView = CollectionViewSource.GetDefaultView(ApplicationA.Instance.Teachers);
+            checkIfLoaded();
 
             teachersdg.ItemsSource = TeachersView;
             teachersdg.IsSynchronizedWithCurrentItem = true;
         }
 
+        private void checkIfLoaded()
+        {
+            if(ApplicationA.Instance.Teachers.Count == 0)
+            {
+                Teacher.Load();
+            }
+        }
+
         private void addbtn_Click(object sender, RoutedEventArgs e)
         {
             Teacher newTeacher = new Teacher();
-            TeacherAddEdit addUser = new TeacherAddEdit(newTeacher, Decider.ADD, ListOfTeachers);
+            TeacherAddEdit addUser = new TeacherAddEdit(newTeacher, Decider.ADD);
             addUser.Show();
         }
 
@@ -53,11 +56,11 @@ namespace POP_SF7
             else
             {
                 Teacher backup = (Teacher)selectedTeacher.Clone();
-                TeacherAddEdit edit = new TeacherAddEdit(selectedTeacher, Decider.EDIT, ListOfTeachers);
+                TeacherAddEdit edit = new TeacherAddEdit(selectedTeacher, Decider.EDIT);
                 if(edit.ShowDialog() != true)
                 {
-                    int index = ListOfTeachers.IndexOf(selectedTeacher);
-                    ListOfTeachers[index] = backup;
+                    int index = ApplicationA.Instance.Teachers.IndexOf(selectedTeacher);
+                    ApplicationA.Instance.Teachers[index] = backup;
                 }
             }
         }

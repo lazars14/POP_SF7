@@ -19,29 +19,29 @@ namespace POP_SF7
         public ICollectionView CoursesView { get; set; }
         public ICollectionView PaymentsView { get; set; }
 
-        public ObservableCollection<Student> ListOfStudents { get; set; }
-        public ObservableCollection<Course> ListOfCourses { get; set; }
-        public ObservableCollection<Payment> ListOfPayments { get; set; }
-
-
         public StudentMenu()
         {
             InitializeComponent();
-            // ucitavanje iz baze
-            ListOfStudents = new ObservableCollection<Student>();
-            ListOfCourses = new ObservableCollection<Course>();
-            ListOfPayments = new ObservableCollection<Payment>();
 
-            StudentsView = CollectionViewSource.GetDefaultView(ListOfStudents);
+            StudentsView = CollectionViewSource.GetDefaultView(ApplicationA.Instance.Students);
+            checkIfLoaded();
 
             studentsdg.ItemsSource = StudentsView;
             studentsdg.IsSynchronizedWithCurrentItem = true;
         }
 
+        private void checkIfLoaded()
+        {
+            if(ApplicationA.Instance.Students.Count == 0)
+            {
+                Student.Load();
+            }
+        }
+
         private void addbtn_Click(object sender, RoutedEventArgs e)
         {
             Student newStudent = new Student();
-            StudentAddEdit addUser = new StudentAddEdit(newStudent, Decider.ADD, ListOfStudents);
+            StudentAddEdit addUser = new StudentAddEdit(newStudent, Decider.ADD);
             addUser.Show();
         }
 
@@ -55,11 +55,11 @@ namespace POP_SF7
             else
             {
                 Student backup = (Student)selectedStudent.Clone();
-                StudentAddEdit edit = new StudentAddEdit(selectedStudent, Decider.EDIT, ListOfStudents);
+                StudentAddEdit edit = new StudentAddEdit(selectedStudent, Decider.EDIT);
                 if (edit.ShowDialog() != true)
                 {
-                    int index = ListOfStudents.IndexOf(selectedStudent);
-                    ListOfStudents[index] = backup;
+                    int index = ApplicationA.Instance.Students.IndexOf(selectedStudent);
+                    ApplicationA.Instance.Students[index] = backup;
                 }
             }
         }

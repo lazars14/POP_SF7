@@ -26,7 +26,7 @@ namespace POP_SF7
             dynamicdg.IsSynchronizedWithCurrentItem = true;
         }
 
-        public void loadData()
+        private void loadData()
         {
             if (ApplicationA.Instance.CourseTypes.Count() == 0) CourseType.Load();
         }

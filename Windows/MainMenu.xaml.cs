@@ -21,7 +21,7 @@ namespace POP_SF7
             setVisibilityRole(role);
         }
 
-        public void setVisibilityRole(Role role)
+        private void setVisibilityRole(Role role)
         {
             if (role == Role.ADMINISTRATOR)
             {

@@ -48,7 +48,7 @@ namespace POP_SF7.Windows
             checkIfLoaded();
         }
 
-        public void setupWindow()
+        private void setupWindow()
         {
             if (CourseStudentDecider == CourseStudentDecider.COURSE)
             {
@@ -62,7 +62,7 @@ namespace POP_SF7.Windows
             }
         }
 
-        public void checkIfLoaded()
+        private void checkIfLoaded()
         {
             if(CourseStudentDecider == CourseStudentDecider.COURSE)
             {

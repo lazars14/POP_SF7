@@ -24,8 +24,6 @@ namespace POP_SF7
         public CourseMenu()
         {
             InitializeComponent();
-            // ucitavanje svih podataka iz baze
-            ListOfCourses = new ObservableCollection<Course>();
             ListOfStudents = new ObservableCollection<Student>();
             ListOfLanguages = new List<Language>();
             ListOfCourseTypes = new List<CourseType>();
@@ -36,10 +34,18 @@ namespace POP_SF7
             coursesdg.IsSynchronizedWithCurrentItem = true;
         }
 
+        private void checkIfLoaded()
+        {
+            if(ApplicationA.Instance.Courses.Count == 0)
+            {
+                Course.Load();
+            }
+        }
+
         private void addbtn_Click(object sender, RoutedEventArgs e)
         {
             Course newCourse = new Course();
-            CourseAddEdit add = new CourseAddEdit(newCourse, Decider.ADD, ListOfCourses);
+            CourseAddEdit add = new CourseAddEdit(newCourse, Decider.ADD);
             add.Show();
         }
 
@@ -53,11 +59,11 @@ namespace POP_SF7
             else
             {
                 Course backup = (Course)selectedCourse.Clone();
-                CourseAddEdit edit = new CourseAddEdit(selectedCourse, Decider.EDIT, ListOfCourses);
+                CourseAddEdit edit = new CourseAddEdit(selectedCourse, Decider.EDIT);
                 if(edit.ShowDialog() != true)
                 {
-                    int index = ListOfCourses.IndexOf(selectedCourse);
-                    ListOfCourses[index] = backup;
+                    int index = ApplicationA.Instance.Courses.IndexOf(selectedCourse);
+                    ApplicationA.Instance.Courses[index] = backup;
                 }
             }
         }

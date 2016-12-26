@@ -29,7 +29,7 @@ namespace POP_SF7
             checkIfLoaded();
         }
 
-        public void checkIfLoaded()
+        private void checkIfLoaded()
         {
             if(ApplicationA.Instance.Payments.Count == 0)
             {
@@ -108,13 +108,13 @@ namespace POP_SF7
             view.Refresh();
         }
 
-        public bool courseSearchCondition(object s)
+        private bool courseSearchCondition(object s)
         {
             Course c = s as Course;
             return c.Id == SearchCourse.Id;
         }
 
-        public bool studentSearchCondition(object s)
+        private bool studentSearchCondition(object s)
         {
             Student c = s as Student;
             return c.Id == SearchStudent.Id;

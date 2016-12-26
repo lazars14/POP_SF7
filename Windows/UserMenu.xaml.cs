@@ -109,7 +109,7 @@ namespace POP_SF7
             bool lastName = lastnamechb.IsChecked ?? false;
             bool userName = usernamechb.IsChecked ?? false;
 
-            Search s = new Search(firstnametb.Text, lastnametb.Text, usernametb.Text, PeopleDecider.Student);
+            Search s = new Search(firstnametb.Text, lastnametb.Text, usernametb.Text, PeopleDecider.User);
             Predicate<object> firstNamePredicate = new Predicate<object>(s.firstname);
             Predicate<object> lastNamePredicate = new Predicate<object>(s.lastname);
             Predicate<object> userNamePredicate = new Predicate<object>(s.username);

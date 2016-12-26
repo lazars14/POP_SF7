@@ -12,17 +12,15 @@ namespace POP_SF7
     {
         public Teacher TeacherT { get; set; }
         public Decider Decider { get; set; }
-        public ObservableCollection<Teacher> ListOfTeachers { get; set; }
 
         public string labelAddTeacher = "Dodavanje novog nastavnika";
         public string labelEditTeacher = "Izmena postojeceg nastavnika";
 
-        public TeacherAddEdit(Teacher teacher, Decider decider, ObservableCollection<Teacher> listOfTeachers)
+        public TeacherAddEdit(Teacher teacher, Decider decider)
         {
             InitializeComponent();
             TeacherT = teacher;
             Decider = decider;
-            ListOfTeachers = listOfTeachers;
 
             DataContext = TeacherT;
             personInfo.descriptionlbl.Text = (Decider == Decider.ADD) ? labelAddTeacher : labelEditTeacher;
@@ -34,7 +32,7 @@ namespace POP_SF7
             {
                 Teacher.Add(TeacherT);
                 TeacherT.Id = ApplicationA.Instance.Teachers.Count() + 1;
-                ListOfTeachers.Add(TeacherT);
+                ApplicationA.Instance.Teachers.Add(TeacherT);
             }
             else
             {
