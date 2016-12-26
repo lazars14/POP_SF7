@@ -18,9 +18,6 @@ namespace POP_SF7
         public Course Course { get; set; }
         public Decider Decider { get; set; }
 
-        public List<Language> ListOfLanguages { get; set; }
-        public List<CourseType> ListOfCourseTypes { get; set; }
-        public List<Teacher> ListOfTeachers { get; set; }
         public ObservableCollection<Student> ListOfStudents { get; set; }
         public ICollectionView StudentsView { get; set; }
 
@@ -32,30 +29,30 @@ namespace POP_SF7
             InitializeComponent();
             Course = course;
             Decider = decider;
+
+            setupWindow();
         }
 
         private void setupWindow()
         {
             DataContext = Course;
+
             descriptionlbl.Text = (Decider == Decider.ADD) ? labelCourseAdd : labelCourseEdit;
 
-            ListOfLanguages = new List<Language>();
-            ListOfCourseTypes = new List<CourseType>();
-            ListOfTeachers = new List<Teacher>();
             ListOfStudents = new ObservableCollection<Student>();
 
-            languagecb.ItemsSource = ListOfLanguages;
+            languagecb.ItemsSource = ApplicationA.Instance.Languages;
             languagecb.DisplayMemberPath = "Name";
             languagecb.SelectedValuePath = "Id";
             languagecb.SelectedIndex = 0;
 
-            courseTypecb.ItemsSource = ListOfLanguages;
+            courseTypecb.ItemsSource = ApplicationA.Instance.CourseTypes;
             courseTypecb.DisplayMemberPath = "Name";
             courseTypecb.SelectedValuePath = "Id";
             courseTypecb.SelectedIndex = 0;
 
-            teachercb.ItemsSource = ListOfTeachers;
-            teachercb.DisplayMemberPath = "LastName";
+            teachercb.ItemsSource = ApplicationA.Instance.Teachers;
+            teachercb.DisplayMemberPath = "FullName";
             teachercb.SelectedValuePath = "Id";
             teachercb.SelectedIndex = 0;
 

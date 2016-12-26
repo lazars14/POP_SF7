@@ -10,6 +10,7 @@ namespace POP_SF7
     {
         public ObservableCollection<Language> ListOfLanguages { get; set; }
         public ObservableCollection<Course> ListOfCourses { get; set; }
+        public string FullName { get; set; }
 
         public Teacher() { }
 
@@ -17,6 +18,7 @@ namespace POP_SF7
         {
             ListOfLanguages = new ObservableCollection<Language>();
             ListOfCourses = new ObservableCollection<Course>();
+            FullName = FirstName + " " + LastName;
         }
 
         #region Database operations

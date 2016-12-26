@@ -15,23 +15,31 @@ namespace POP_SF7
     {
         public ICollectionView CoursesView { get; set; }
         public ICollectionView StudentsView { get; set; }
-        public ObservableCollection<Course> ListOfCourses { get; set; }
-        public ObservableCollection<Student> ListOfStudents { get; set; }
-
-        public List<Language> ListOfLanguages { get; set; }
-        public List<CourseType> ListOfCourseTypes { get; set; }
 
         public CourseMenu()
         {
             InitializeComponent();
-            ListOfStudents = new ObservableCollection<Student>();
-            ListOfLanguages = new List<Language>();
-            ListOfCourseTypes = new List<CourseType>();
+            checkIfLoaded();
+            setupWindow();
 
-            CoursesView = CollectionViewSource.GetDefaultView(ListOfCourses);
+            CoursesView = CollectionViewSource.GetDefaultView(ApplicationA.Instance.Courses);
 
             coursesdg.ItemsSource = CoursesView;
             coursesdg.IsSynchronizedWithCurrentItem = true;
+        }
+
+        private void setupWindow()
+        {
+            POP_SF7.Language.Load();
+            CourseType.Load();
+
+            languagecb.ItemsSource = ApplicationA.Instance.Languages;
+            languagecb.DisplayMemberPath = "Name";
+            languagecb.SelectedValuePath = "Id";
+
+            courseTypecb.ItemsSource = ApplicationA.Instance.CourseTypes;
+            courseTypecb.DisplayMemberPath = "Name";
+            courseTypecb.SelectedValuePath = "Id";
         }
 
         private void checkIfLoaded()
