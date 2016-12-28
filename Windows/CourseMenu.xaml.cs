@@ -1,4 +1,5 @@
 ﻿using POP_SF7.Windows;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -36,10 +37,12 @@ namespace POP_SF7
             languagecb.ItemsSource = ApplicationA.Instance.Languages;
             languagecb.DisplayMemberPath = "Name";
             languagecb.SelectedValuePath = "Id";
+            languagecb.SelectedIndex = 0;
 
             courseTypecb.ItemsSource = ApplicationA.Instance.CourseTypes;
             courseTypecb.DisplayMemberPath = "Name";
             courseTypecb.SelectedValuePath = "Id";
+            courseTypecb.SelectedIndex = 0;
         }
 
         private void checkIfLoaded()
@@ -114,10 +117,6 @@ namespace POP_SF7
             {
                 CoursesView.SortDescriptions.Add(new SortDescription(("Price"), direction));
             }
-            else if (numberOfStudentsrb.IsChecked ?? false)
-            {
-
-            }
             else if (startDaterb.IsChecked ?? false)
             {
                 CoursesView.SortDescriptions.Add(new SortDescription(("StartDate"), direction));
@@ -129,26 +128,49 @@ namespace POP_SF7
             CoursesView.Refresh();
         }
 
+        private bool languageSearchCondition(object s)
+        {
+            Language c = s as Language;
+            return c.Id == (int)languagecb.SelectedValue;
+        }
+
+        private bool courseTypeSearchCondition(object s)
+        {
+            CourseType c = s as CourseType;
+            return c.Id == (int)courseTypecb.SelectedValue;
+        }
+
+        private bool finishedCoursesSearchCondition(object s)
+        {
+            Course c = s as Course;
+            return c.EndDate >= DateTime.Today;
+        }
+
+        private bool ongoingCoursesSearchCondition(object s)
+        {
+            Course c = s as Course;
+            return c.EndDate <= DateTime.Today;
+        }
+
         private void searchbtn_Click(object sender, RoutedEventArgs e)
         {
             bool language = languagechb.IsChecked ?? false;
             bool courseType = courseTypechb.IsChecked ?? false;
 
+            Predicate<object> languagePredicate = new Predicate<object>(languageSearchCondition);
+            Predicate<object> courseTypePredicate = new Predicate<object>(courseTypeSearchCondition);
 
             if (language && courseType)
             {
-                // pokupi podatke iz oba comboboxa
-                // funkcija
+                CoursesView.Filter = languagePredicate + courseTypePredicate;
             }
             else if(language)
             {
-                // pokupi podatke iz comboboxa za jezik
-                // funkcija
+                CoursesView.Filter = languagePredicate;
             }
             else if(courseType)
             {
-                // pokupi podatke iz comboboxa za tip kursa
-                // funkcija
+                CoursesView.Filter = courseTypePredicate;
             }
             else
             {
@@ -233,6 +255,26 @@ namespace POP_SF7
                     break;
                 case "Error":
                     e.Cancel = true;
+                    break;
+            }
+        }
+
+        private void allCoursesrb_Checked(object sender, RoutedEventArgs e)
+        {
+            Predicate<object> finishedCoursesPredicate = new Predicate<object>(finishedCoursesSearchCondition);
+            Predicate<object> ongoingCoursesPredicate = new Predicate<object>(ongoingCoursesSearchCondition);
+
+            RadioButton rb = (RadioButton)sender;
+            switch(rb.Name)
+            {
+                case "allCoursesrb":
+                    CoursesView.Filter = null;
+                    break;
+                case "completedCoursesrb":
+                    CoursesView.Filter = finishedCoursesPredicate;
+                    break;
+                case "ongoingCoursesrb":
+                    CoursesView.Filter = ongoingCoursesSearchCondition;
                     break;
             }
         }
