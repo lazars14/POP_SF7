@@ -53,11 +53,13 @@ namespace POP_SF7
 
         public Payment() { Amount = 0; }
 
-        public Payment(int id, Course course, Student student, double amount, DateTime date, bool deleted)
+        public Payment(int id) { Id = id; }
+
+        public Payment(int id, int courseId, int studentId, double amount, DateTime date, bool deleted)
         {
             Id = id;
-            Course = course;
-            Student = student;
+            Course = new Course(courseId);
+            Student = new Student(studentId);
             Amount = amount;
             Date = date;
             Deleted = deleted;
@@ -84,11 +86,13 @@ namespace POP_SF7
 
                     foreach (DataRow row in dataSet.Tables["Payment"].Rows)
                     {
-                        Payment payment = new Payment();
-                        payment.Id = (int)row["Payment_Id"];
-                        payment.Amount = (double)row["Payment_Amount"];
-                        payment.Date = (DateTime)row["Payment_Date"];
-                        payment.Deleted = (bool)row["Payment_Deleted"];
+                        int id = (int)row["Payment_Id"];
+                        int courseId = (int)row["Payment_CourseId"];
+                        int studentId = (int)row["Payment_StudentId"];
+                        double amount = (double)row["Payment_Amount"];
+                        DateTime date = (DateTime)row["Payment_Date"];
+                        bool deleted = (bool)row["Payment_Deleted"];
+                        Payment payment = new Payment(id, courseId, studentId, amount, date, deleted);
 
                         ApplicationA.Instance.Payments.Add(payment);
                     }

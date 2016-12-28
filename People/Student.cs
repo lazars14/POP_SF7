@@ -13,6 +13,8 @@ namespace POP_SF7
 
         public Student() { }
 
+        public Student(int id) { Id = id; }
+
         public Student(int id, string firstName, string lastName, string jmbg, string personAddress, bool deleted) : base(id, firstName, lastName, jmbg, personAddress, deleted)
         {
             ListOfPayments = new ObservableCollection<Payment>();

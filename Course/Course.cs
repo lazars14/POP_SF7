@@ -71,14 +71,16 @@ namespace POP_SF7
 
         public Course() { Price = 0; }
 
-        public Course(int id, Language language, CourseType courseType, double price, Teacher teacher, DateTime startDate, DateTime endDate, bool deleted)
+        public Course(int id) { Id = id; }
+
+        public Course(int id, int languageId, int courseTypeId, double price, int teacherId, DateTime startDate, DateTime endDate, bool deleted)
         {
             Id = id;
-            Language = language;
-            CourseType = courseType;
+            Language = new Language(languageId);
+            CourseType = new CourseType(courseTypeId);
             Price = price;
             ListOfStudents = new ObservableCollection<Student>();
-            Teacher = teacher;
+            Teacher = new Teacher(teacherId);
             StartDate = startDate;
             EndDate = endDate;
             Deleted = deleted;
@@ -105,12 +107,15 @@ namespace POP_SF7
 
                     foreach (DataRow row in dataSet.Tables["Course"].Rows)
                     {
-                        Course course = new Course();
-                        course.Id = (int)row["Course_Id"];
-                        course.Price = (double)row["Course_Price"];
-                        course.StartDate = (DateTime)row["Course_StartDate"];
-                        course.EndDate = (DateTime)row["Course_EndDate"];
-                        course.Deleted = (bool)row["Course_Deleted"];
+                        int id = (int)row["Course_Id"];
+                        int languageId = (int)row["Course_LanguageId"];
+                        int courseTypeId = (int)row["Course_CourseTypeId"];
+                        int teacherId = (int)row["Course_TeacherId"];
+                        double price = (double)row["Course_Price"];
+                        DateTime startDate = (DateTime)row["Course_StartDate"];
+                        DateTime endDate = (DateTime)row["Course_EndDate"];
+                        bool deleted = (bool)row["Course_Deleted"];
+                        Course course = new Course(id, languageId, courseTypeId, price, teacherId, startDate, endDate, deleted);
 
                         ApplicationA.Instance.Courses.Add(course);
                     }

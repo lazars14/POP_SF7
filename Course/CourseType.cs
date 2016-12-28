@@ -32,6 +32,11 @@ namespace POP_SF7
 
         public CourseType() { }
 
+        public CourseType(int id)
+        {
+            Id = id;
+        }
+
         public CourseType(int id, string name, bool deleted)
         {
             Id = id;

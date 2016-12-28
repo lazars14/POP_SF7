@@ -14,6 +14,11 @@ namespace POP_SF7
 
         public Teacher() { }
 
+        public Teacher(int id)
+        {
+            Id = id;
+        }
+
         public Teacher(int id, string firstName, string lastName, string jmbg, string personAddress, bool deleted) : base(id, firstName, lastName, jmbg, personAddress, deleted)
         {
             ListOfLanguages = new ObservableCollection<Language>();
