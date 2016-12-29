@@ -101,11 +101,11 @@ namespace POP_SF7
                 SqlCommand command = connection.CreateCommand();
                 command.CommandText = @"Insert Into CourseType Values(@Name, @Deleted);";
 
-                command.Parameters.Add(new SqlParameter("@Name", type.Name));
-                command.Parameters.Add(new SqlParameter("@Deleted", type.Deleted));
-
                 try
                 {
+                    command.Parameters.Add(new SqlParameter("@Name", type.Name));
+                    command.Parameters.Add(new SqlParameter("@Deleted", type.Deleted));
+
                     command.ExecuteNonQuery();
                 }
                 catch (SqlException e)
@@ -136,12 +136,12 @@ namespace POP_SF7
                 SqlCommand command = connection.CreateCommand();
                 command.CommandText = @"Update CourseType Set CourseType_Name=@Name, CourseType_Deleted=@Deleted Where CourseType_Id=@Id;";
 
-                command.Parameters.Add(new SqlParameter("@Name", type.Name));
-                command.Parameters.Add(new SqlParameter("@Deleted", type.Deleted));
-                command.Parameters.Add(new SqlParameter("@Id", type.Id));
-
                 try
                 {
+                    command.Parameters.Add(new SqlParameter("@Name", type.Name));
+                    command.Parameters.Add(new SqlParameter("@Deleted", type.Deleted));
+                    command.Parameters.Add(new SqlParameter("@Id", type.Id));
+
                     command.ExecuteNonQuery();
                 }
                 catch (SqlException e)

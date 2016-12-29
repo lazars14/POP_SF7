@@ -24,18 +24,9 @@ namespace POP_SF7
             InitializeComponent();
 
             StudentsView = CollectionViewSource.GetDefaultView(ApplicationA.Instance.Students);
-            checkIfLoaded();
 
             studentsdg.ItemsSource = StudentsView;
             studentsdg.IsSynchronizedWithCurrentItem = true;
-        }
-
-        private void checkIfLoaded()
-        {
-            if(ApplicationA.Instance.Students.Count == 0)
-            {
-                Student.Load();
-            }
         }
 
         private void addbtn_Click(object sender, RoutedEventArgs e)

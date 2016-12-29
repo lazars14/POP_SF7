@@ -12,7 +12,7 @@ namespace POP_SF7
         public ObservableCollection<Course> ListOfCourses { get; set; }
         public string FullName { get; set; }
 
-        public Teacher() { }
+        public Teacher() { Jmbg = "1234567890123"; }
 
         public Teacher(int id)
         {
@@ -86,14 +86,14 @@ namespace POP_SF7
                 SqlCommand command = connection.CreateCommand();
                 command.CommandText = @"Insert Into Teacher Values(@FirstName,@LastName,@Jmbg,@Address,@Deleted);";
 
-                command.Parameters.Add(new SqlParameter("@FirstName", teacher.FirstName));
-                command.Parameters.Add(new SqlParameter("@LastName", teacher.LastName));
-                command.Parameters.Add(new SqlParameter("@Jmbg", teacher.Jmbg));
-                command.Parameters.Add(new SqlParameter("@Address", teacher.Address));
-                command.Parameters.Add(new SqlParameter("@Deleted", teacher.Deleted));
-
                 try
                 {
+                    command.Parameters.Add(new SqlParameter("@FirstName", teacher.FirstName));
+                    command.Parameters.Add(new SqlParameter("@LastName", teacher.LastName));
+                    command.Parameters.Add(new SqlParameter("@Jmbg", teacher.Jmbg));
+                    command.Parameters.Add(new SqlParameter("@Address", teacher.Address));
+                    command.Parameters.Add(new SqlParameter("@Deleted", teacher.Deleted));
+
                     command.ExecuteNonQuery();
                 }
                 catch (SqlException e)
@@ -124,15 +124,15 @@ namespace POP_SF7
                 SqlCommand command = connection.CreateCommand();
                 command.CommandText = @"Update Teacher Set Teacher_FirstName=@FirstName, Teacher_LastName=@LastName, Teacher_Jmbg=@Jmbg, Teacher_Address=@Address, Teacher_Deleted=@Deleted Where Teacher_Id=@Id;";
 
-                command.Parameters.Add(new SqlParameter("@FirstName", teacher.FirstName));
-                command.Parameters.Add(new SqlParameter("@LastName", teacher.LastName));
-                command.Parameters.Add(new SqlParameter("@Jmbg", teacher.Jmbg));
-                command.Parameters.Add(new SqlParameter("@Address", teacher.Address));
-                command.Parameters.Add(new SqlParameter("@Deleted", teacher.Deleted));
-                command.Parameters.Add(new SqlParameter("@Id", teacher.Id));
-
                 try
                 {
+                    command.Parameters.Add(new SqlParameter("@FirstName", teacher.FirstName));
+                    command.Parameters.Add(new SqlParameter("@LastName", teacher.LastName));
+                    command.Parameters.Add(new SqlParameter("@Jmbg", teacher.Jmbg));
+                    command.Parameters.Add(new SqlParameter("@Address", teacher.Address));
+                    command.Parameters.Add(new SqlParameter("@Deleted", teacher.Deleted));
+                    command.Parameters.Add(new SqlParameter("@Id", teacher.Id));
+
                     command.ExecuteNonQuery();
                 }
                 catch (SqlException e)

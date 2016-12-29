@@ -32,7 +32,6 @@ namespace POP_SF7.Windows
             MenuWindow = menu;
 
             setupWindow();
-            checkIfLoaded();
         }
 
         public SelectFromList(SelectFromMenuOrAddDecider decider, CourseStudentDecider decider2, PaymentAddEdit addEdit)
@@ -45,7 +44,6 @@ namespace POP_SF7.Windows
             AddEditWindow = addEdit;
 
             setupWindow();
-            checkIfLoaded();
         }
 
         private void setupWindow()
@@ -59,24 +57,6 @@ namespace POP_SF7.Windows
             {
                 description.Text = selectStudent;
                 dataGrid.ItemsSource = ApplicationA.Instance.Students;
-            }
-        }
-
-        private void checkIfLoaded()
-        {
-            if(CourseStudentDecider == CourseStudentDecider.COURSE)
-            {
-                if(ApplicationA.Instance.Courses.Count() == 0)
-                {
-                    Course.Load();
-                }
-            }
-            else
-            {
-                if (ApplicationA.Instance.Students.Count() == 0)
-                {
-                    Student.Load();
-                }
             }
         }
 

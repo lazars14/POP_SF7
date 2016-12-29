@@ -148,16 +148,16 @@ namespace POP_SF7
                 SqlCommand command = connection.CreateCommand();
                 command.CommandText = @"Insert Into Course Values(@Language,@CourseType,@Price,@Teacher,@StartDate,@EndDate,@Deleted);";
 
-                command.Parameters.Add(new SqlParameter("@Language", course.Language.Id));
-                command.Parameters.Add(new SqlParameter("@CourseType", course.CourseType.Id));
-                command.Parameters.Add(new SqlParameter("@Price", course.Price));
-                command.Parameters.Add(new SqlParameter("@Teacher", course.Teacher.Id));
-                command.Parameters.Add(new SqlParameter("@StartDate", course.StartDate));
-                command.Parameters.Add(new SqlParameter("@EndDate", course.EndDate));
-                command.Parameters.Add(new SqlParameter("@Deleted", course.Deleted));
-
                 try
                 {
+                    command.Parameters.Add(new SqlParameter("@Language", course.Language.Id));
+                    command.Parameters.Add(new SqlParameter("@CourseType", course.CourseType.Id));
+                    command.Parameters.Add(new SqlParameter("@Price", course.Price));
+                    command.Parameters.Add(new SqlParameter("@Teacher", course.Teacher.Id));
+                    command.Parameters.Add(new SqlParameter("@StartDate", course.StartDate));
+                    command.Parameters.Add(new SqlParameter("@EndDate", course.EndDate));
+                    command.Parameters.Add(new SqlParameter("@Deleted", course.Deleted));
+
                     command.ExecuteNonQuery();
                 }
                 catch (SqlException e)
@@ -186,19 +186,19 @@ namespace POP_SF7
                 connection.Open();
 
                 SqlCommand command = connection.CreateCommand();
-                command.CommandText = @"Update Course Set Course_Language=@Language, Course_CourseType=@CourseType, Course_Price=@Price, Course_Teacher=@Teacher, Course_StartDate=@StartDate, Course_EndDate=@EndDate, Course_Deleted=@Deleted Where Course_Id=@Id);";
-
-                command.Parameters.Add(new SqlParameter("@Language", course.Language.Id));
-                command.Parameters.Add(new SqlParameter("@CourseType", course.CourseType.Id));
-                command.Parameters.Add(new SqlParameter("@Price", course.Price));
-                command.Parameters.Add(new SqlParameter("@Teacher", course.Teacher.Id));
-                command.Parameters.Add(new SqlParameter("@StartDate", course.StartDate));
-                command.Parameters.Add(new SqlParameter("@EndDate", course.EndDate));
-                command.Parameters.Add(new SqlParameter("@Deleted", course.Deleted));
-                command.Parameters.Add(new SqlParameter("@Id", course.Id));
+                command.CommandText = @"Update Course Set Course_Language=@Language, Course_CourseType=@CourseType, Course_Price=@Price, Course_Teacher=@Teacher, Course_StartDate=@StartDate, Course_EndDate=@EndDate, Course_Deleted=@Deleted Where Course_Id=@Id);";    
 
                 try
                 {
+                    command.Parameters.Add(new SqlParameter("@Language", course.Language.Id));
+                    command.Parameters.Add(new SqlParameter("@CourseType", course.CourseType.Id));
+                    command.Parameters.Add(new SqlParameter("@Price", course.Price));
+                    command.Parameters.Add(new SqlParameter("@Teacher", course.Teacher.Id));
+                    command.Parameters.Add(new SqlParameter("@StartDate", course.StartDate));
+                    command.Parameters.Add(new SqlParameter("@EndDate", course.EndDate));
+                    command.Parameters.Add(new SqlParameter("@Deleted", course.Deleted));
+                    command.Parameters.Add(new SqlParameter("@Id", course.Id));
+
                     command.ExecuteNonQuery();
                 }
                 catch (SqlException e)

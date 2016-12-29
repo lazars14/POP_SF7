@@ -19,16 +19,10 @@ namespace POP_SF7
         public CourseTypeMenu()
         {
             InitializeComponent();
-            loadData();
 
             view = CollectionViewSource.GetDefaultView(ApplicationA.Instance.CourseTypes);
             dynamicdg.ItemsSource = view;
             dynamicdg.IsSynchronizedWithCurrentItem = true;
-        }
-
-        private void loadData()
-        {
-            if (ApplicationA.Instance.CourseTypes.Count() == 0) CourseType.Load();
         }
 
         private void addbtn_Click(object sender, RoutedEventArgs e)

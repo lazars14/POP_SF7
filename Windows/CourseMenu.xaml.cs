@@ -20,7 +20,6 @@ namespace POP_SF7
         public CourseMenu()
         {
             InitializeComponent();
-            checkIfLoaded();
             setupWindow();
 
             CoursesView = CollectionViewSource.GetDefaultView(ApplicationA.Instance.Courses);
@@ -43,14 +42,6 @@ namespace POP_SF7
             courseTypecb.DisplayMemberPath = "Name";
             courseTypecb.SelectedValuePath = "Id";
             courseTypecb.SelectedIndex = 0;
-        }
-
-        private void checkIfLoaded()
-        {
-            if(ApplicationA.Instance.Courses.Count == 0)
-            {
-                Course.Load();
-            }
         }
 
         private void addbtn_Click(object sender, RoutedEventArgs e)
@@ -130,26 +121,26 @@ namespace POP_SF7
 
         private bool languageSearchCondition(object s)
         {
-            Language c = s as Language;
-            return c.Id == (int)languagecb.SelectedValue;
+            Course c = s as Course;
+            return c.Language.Id == (int)languagecb.SelectedValue;
         }
 
         private bool courseTypeSearchCondition(object s)
         {
-            CourseType c = s as CourseType;
-            return c.Id == (int)courseTypecb.SelectedValue;
+            Course c = s as Course;
+            return c.CourseType.Id == (int)courseTypecb.SelectedValue;
         }
 
         private bool finishedCoursesSearchCondition(object s)
         {
             Course c = s as Course;
-            return c.EndDate >= DateTime.Today;
+            return c.EndDate <= DateTime.Today;
         }
 
         private bool ongoingCoursesSearchCondition(object s)
         {
             Course c = s as Course;
-            return c.EndDate <= DateTime.Today;
+            return c.EndDate >= DateTime.Today;
         }
 
         private void searchbtn_Click(object sender, RoutedEventArgs e)
@@ -180,7 +171,15 @@ namespace POP_SF7
 
         private void coursesdg_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            Course selectedCourse = CoursesView.CurrentItem as Course;
+            if (selectedCourse == null)
+            {
+                CoursesView.MoveCurrentToFirst();
+                selectedCourse = CoursesView.CurrentItem as Course;
+            }
+            selectedCourse.Language = ApplicationA.Instance.Languages[selectedCourse.Language.Id - 1];
+            selectedCourse.CourseType = ApplicationA.Instance.CourseTypes[selectedCourse.CourseType.Id - 1];
+            selectedCourse.Teacher = ApplicationA.Instance.Teachers[selectedCourse.Teacher.Id - 1];
         }
 
         private void cancelSearchbtn_Click(object sender, RoutedEventArgs e)
@@ -259,24 +258,18 @@ namespace POP_SF7
             }
         }
 
-        private void allCoursesrb_Checked(object sender, RoutedEventArgs e)
+        private void showCoursesbtn_Click(object sender, RoutedEventArgs e)
         {
             Predicate<object> finishedCoursesPredicate = new Predicate<object>(finishedCoursesSearchCondition);
             Predicate<object> ongoingCoursesPredicate = new Predicate<object>(ongoingCoursesSearchCondition);
 
-            RadioButton rb = (RadioButton)sender;
-            switch(rb.Name)
-            {
-                case "allCoursesrb":
-                    CoursesView.Filter = null;
-                    break;
-                case "completedCoursesrb":
-                    CoursesView.Filter = finishedCoursesPredicate;
-                    break;
-                case "ongoingCoursesrb":
-                    CoursesView.Filter = ongoingCoursesSearchCondition;
-                    break;
-            }
+            bool allCourses = allCoursesrb.IsChecked ?? false;
+            bool finishedCourses = completedCoursesrb.IsChecked ?? false;
+            bool ongoingCourses = ongoingCoursesrb.IsChecked ?? false;
+
+            if(allCourses) CoursesView.Filter = null;
+            else if(finishedCourses) CoursesView.Filter = finishedCoursesPredicate;
+            else if(ongoingCourses) CoursesView.Filter = ongoingCoursesSearchCondition;
         }
     }
 }

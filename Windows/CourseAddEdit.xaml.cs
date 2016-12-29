@@ -67,9 +67,9 @@ namespace POP_SF7
             }
             else
             {
-                Language language = Course.Language;
-                CourseType courseType = Course.CourseType;
-                Teacher teacher = Course.Teacher;
+                languagecb.SelectedIndex = Course.Language.Id - 1;
+                courseTypecb.SelectedIndex = Course.CourseType.Id - 1;
+                teachercb.SelectedIndex = Course.Teacher.Id - 1;
             }
         }
 

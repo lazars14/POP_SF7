@@ -8,7 +8,7 @@
         Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="586.184" Width="817.867" ResizeMode="NoResize">
     <Grid>
         <TextBlock x:Name="coursestb" HorizontalAlignment="Left" Height="23" Margin="9,10,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="Kursevi" VerticalAlignment="Top" Width="791"/>
-        
+
         <!--#region DataGrid-->
         <DataGrid x:Name="coursesdg" IsReadOnly="True" HorizontalAlignment="Left" AutoGeneratingColumn="coursesdg_AutoGeneratingColumn" Height="149" Margin="9,38,0,0" VerticalAlignment="Top" Width="717" SelectionChanged="coursesdg_SelectionChanged"/>
         <StackPanel HorizontalAlignment="Left" Height="149" Margin="742,38,0,0" VerticalAlignment="Top" Width="58">
@@ -43,7 +43,7 @@
         <!--#endregion-->
 
         <!--#region SelectedCourse-->
-        <GroupBox x:Name="coursegb" Header="Opsti podaci o kursu" HorizontalAlignment="Left" Height="144" Margin="326,192,0,0" VerticalAlignment="Top" Width="300">
+        <GroupBox x:Name="coursegb" Header="Opsti podaci o kursu" HorizontalAlignment="Left" Height="144" Margin="295,192,0,0" VerticalAlignment="Top" Width="300">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
@@ -63,16 +63,18 @@
         <!--#endregion-->
 
         <!--#region FilterCourses-->
-        <GroupBox x:Name="coursesViewgb" Header="Prikaz kurseva" HorizontalAlignment="Left" Height="144" Margin="647,192,0,0" VerticalAlignment="Top" Width="153">
+        <GroupBox x:Name="coursesViewgb" Header="Prikaz kurseva" HorizontalAlignment="Left" Height="144" Margin="600,192,0,0" VerticalAlignment="Top" Width="200">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
-                <RadioButton x:Name="allCoursesrb" GroupName="coursesView" Content="Svi kursevi" IsChecked="True" Grid.Row="0" Margin="10" Checked="allCoursesrb_Checked"/>
-                <RadioButton x:Name="completedCoursesrb" GroupName="coursesView" Content="Gotovi kursevi" Grid.Row="1" Margin="10" Checked="allCoursesrb_Checked"/>
-                <RadioButton x:Name="ongoingCoursesrb" GroupName="coursesView" Content="Tekuci kursevi" Grid.Row="2" Margin="10" Checked="allCoursesrb_Checked"/>
+                <RadioButton x:Name="allCoursesrb" GroupName="coursesView" Content="Svi kursevi" IsChecked="True" Grid.Row="0" Margin="5"/>
+                <RadioButton x:Name="completedCoursesrb" GroupName="coursesView" Content="Gotovi kursevi" Grid.Row="1" Margin="5"/>
+                <RadioButton x:Name="ongoingCoursesrb" GroupName="coursesView" Content="Tekuci kursevi" Grid.Row="2" Margin="5"/>
+                <Button x:Name="showCoursesbtn" Content="Prikazi" Grid.Row="3" Margin="25,5,25,5" Click="showCoursesbtn_Click"/>
             </Grid>
         </GroupBox>
         <!--#endregion-->
@@ -95,7 +97,7 @@
             </Grid>
         </GroupBox>
         <!--#endregion-->
-        
+
         <!--#region Search-->
         <GroupBox x:Name="coursesgb" Header="Pretraga" HorizontalAlignment="Left" Height="151" Margin="10,395,0,0" VerticalAlignment="Top" Width="302">
             <Grid>
@@ -119,7 +121,7 @@
             </Grid>
         </GroupBox>
         <!--#endregion-->
-     
+
         <!--#region Students-->
         <GroupBox Header="Ucenici" HorizontalAlignment="Left" Height="151" Margin="326,395,0,0" VerticalAlignment="Top" Width="474">
             <Grid>
@@ -128,6 +130,6 @@
             </Grid>
         </GroupBox>
         <!--#endregion-->
-        
+
     </Grid>
 </Window>

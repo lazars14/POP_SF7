@@ -1,4 +1,5 @@
 ﻿using POP_SF7.Windows;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -27,21 +28,48 @@ namespace POP_SF7
 
             DataContext = SelectedPayment;
             descriptionlbl.Text = (payment == null) ? labelAddPayment : labelEditPayment;
+            setupCourseAndStudent();
+        }
+
+        private void setupCourseAndStudent()
+        {
+            if(Decider == Decider.EDIT)
+            {
+                Course = ApplicationA.Instance.Courses[SelectedPayment.Course.Id - 1];
+                Student = ApplicationA.Instance.Students[SelectedPayment.Student.Id - 1];
+
+                coursetb.Text = Course.StartDate.ToShortDateString() + "-" + Course.EndDate.ToShortDateString() + ", " + Course.Price.ToString();
+                studenttb.Text = Student.FirstName + " " + Student.LastName;
+            }
+            else
+            {
+                datepck.SelectedDate = DateTime.Today;
+            }
         }
 
         private void okbtn_Click(object sender, RoutedEventArgs e)
         {
-            if(Decider == Decider.ADD)
+            if(string.IsNullOrEmpty(coursetb.Text) || string.IsNullOrEmpty(studenttb.Text) || string.IsNullOrEmpty(amounttb.Text))
             {
-                Payment.Add(SelectedPayment);
-                SelectedPayment.Id = ApplicationA.Instance.Payments.Count() + 1;
-                ApplicationA.Instance.Payments.Add(SelectedPayment);
+                MessageBox.Show("Morate da popunite sva polja!");
             }
             else
             {
-                Payment.Edit(SelectedPayment);
+                SelectedPayment.Course = Course;
+                SelectedPayment.Student = Student;
+
+                if (Decider == Decider.ADD)
+                {
+                    Payment.Add(SelectedPayment);
+                    SelectedPayment.Id = ApplicationA.Instance.Payments.Count() + 1;
+                    ApplicationA.Instance.Payments.Add(SelectedPayment);
+                }
+                else
+                {
+                    Payment.Edit(SelectedPayment);
+                }
+                Close();
             }
-            Close();
         }
 
         private void coursebtn_Click(object sender, RoutedEventArgs e)

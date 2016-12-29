@@ -16,16 +16,10 @@ namespace POP_SF7.Windows
         public LanguageMenu()
         {
             InitializeComponent();
-            loadData();
 
             view = CollectionViewSource.GetDefaultView(ApplicationA.Instance.Languages);
             dynamicdg.ItemsSource = view;
             dynamicdg.IsSynchronizedWithCurrentItem = true;
-        }
-
-        private void loadData()
-        {
-            if (ApplicationA.Instance.Languages.Count() == 0) POP_SF7.Language.Load();
         }
 
         private void addbtn_Click(object sender, RoutedEventArgs e)

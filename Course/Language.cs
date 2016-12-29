@@ -101,11 +101,11 @@ namespace POP_SF7
                 SqlCommand command = connection.CreateCommand();
                 command.CommandText = @"Insert Into LanguageL Values(@Name, @Deleted);";
 
-                command.Parameters.Add(new SqlParameter("@Name", language.Name));
-                command.Parameters.Add(new SqlParameter("@Deleted", language.Deleted));
-
                 try
                 {
+                    command.Parameters.Add(new SqlParameter("@Name", language.Name));
+                    command.Parameters.Add(new SqlParameter("@Deleted", language.Deleted));
+
                     command.ExecuteNonQuery();
                 }
                 catch (SqlException e)
@@ -136,12 +136,12 @@ namespace POP_SF7
                 SqlCommand command = connection.CreateCommand();
                 command.CommandText = @"Update LanguageL Set Language_Name=@Name, Language_Deleted=@Deleted Where Language_Id=@Id;";
 
-                command.Parameters.Add(new SqlParameter("@Name", language.Name));
-                command.Parameters.Add(new SqlParameter("@Deleted", language.Deleted));
-                command.Parameters.Add(new SqlParameter("@Id", language.Id));
-
                 try
                 {
+                    command.Parameters.Add(new SqlParameter("@Name", language.Name));
+                    command.Parameters.Add(new SqlParameter("@Deleted", language.Deleted));
+                    command.Parameters.Add(new SqlParameter("@Id", language.Id));
+
                     command.ExecuteNonQuery();
                 }
                 catch (SqlException e)

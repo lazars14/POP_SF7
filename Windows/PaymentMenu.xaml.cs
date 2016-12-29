@@ -26,15 +26,6 @@ namespace POP_SF7
 
             paymentsdg.ItemsSource = view;
             paymentsdg.IsSynchronizedWithCurrentItem = true;
-            checkIfLoaded();
-        }
-
-        private void checkIfLoaded()
-        {
-            if(ApplicationA.Instance.Payments.Count == 0)
-            {
-                Payment.Load();
-            }
         }
 
         private void addbtn_Click(object sender, RoutedEventArgs e)
@@ -110,14 +101,14 @@ namespace POP_SF7
 
         private bool courseSearchCondition(object s)
         {
-            Course c = s as Course;
-            return c.Id == SearchCourse.Id;
+            Payment c = s as Payment;
+            return c.Course.Id == SearchCourse.Id;
         }
 
         private bool studentSearchCondition(object s)
         {
-            Student c = s as Student;
-            return c.Id == SearchStudent.Id;
+            Payment c = s as Payment;
+            return c.Student.Id == SearchStudent.Id;
         }
 
         private void searchbtn_Click(object sender, RoutedEventArgs e)
@@ -189,6 +180,22 @@ namespace POP_SF7
         {
             SelectFromList window = new SelectFromList(SelectFromMenuOrAddDecider.MENU, CourseStudentDecider.STUDENT, this);
             window.Show();
+        }
+
+        private void paymentsdg_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Payment selectedPayment = view.CurrentItem as Payment;
+            if(selectedPayment == null)
+            {
+                view.MoveCurrentToFirst();
+                selectedPayment = view.CurrentItem as Payment;
+            }
+
+            selectedPayment.Student = ApplicationA.Instance.Students[selectedPayment.Student.Id - 1];
+
+            selectedPayment.Course = ApplicationA.Instance.Courses[selectedPayment.Course.Id - 1];
+            selectedPayment.Course.Language = ApplicationA.Instance.Languages[selectedPayment.Course.Language.Id - 1];
+            selectedPayment.Course.CourseType = ApplicationA.Instance.CourseTypes[selectedPayment.Course.CourseType.Id - 1];
         }
     }
 }

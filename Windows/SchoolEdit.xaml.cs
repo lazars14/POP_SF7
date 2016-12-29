@@ -7,18 +7,18 @@ namespace POP_SF7
     /// </summary>
     public partial class SchoolEdit : Window
     {
-        public School School { get; set; }
+        public SchoolS SchoolS { get; set; }
 
-        public SchoolEdit(School school)
+        public SchoolEdit(SchoolS school)
         {
             InitializeComponent();
-            School = school;
-            DataContext = School;
+            SchoolS = school;
+            DataContext = SchoolS;
         }
 
         private void okbtn_Click(object sender, RoutedEventArgs e)
         {
-            School.UpdateSchool(School);
+            SchoolS.UpdateSchool(SchoolS);
             Close();
         }
     }

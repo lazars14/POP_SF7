@@ -107,17 +107,17 @@ namespace POP_SF7
                 SqlCommand command = connection.CreateCommand();
                 command.CommandText = @"Insert Into UserU Values(@FirstName,@LastName,@Jmbg,@Address,@Deleted,@UserName,@Password,@Role);";
 
-                command.Parameters.Add(new SqlParameter("@FirstName", user.FirstName));
-                command.Parameters.Add(new SqlParameter("@LastName", user.LastName));
-                command.Parameters.Add(new SqlParameter("@Jmbg", user.Jmbg));
-                command.Parameters.Add(new SqlParameter("@Address", user.Address));
-                command.Parameters.Add(new SqlParameter("@Deleted", user.Deleted));
-                command.Parameters.Add(new SqlParameter("@UserName", user.UserName));
-                command.Parameters.Add(new SqlParameter("@Password", user.Password));
-                command.Parameters.Add(new SqlParameter("@Role", user.UserRole.ToString()));
-
                 try
                 {
+                    command.Parameters.Add(new SqlParameter("@FirstName", user.FirstName));
+                    command.Parameters.Add(new SqlParameter("@LastName", user.LastName));
+                    command.Parameters.Add(new SqlParameter("@Jmbg", user.Jmbg));
+                    command.Parameters.Add(new SqlParameter("@Address", user.Address));
+                    command.Parameters.Add(new SqlParameter("@Deleted", user.Deleted));
+                    command.Parameters.Add(new SqlParameter("@UserName", user.UserName));
+                    command.Parameters.Add(new SqlParameter("@Password", user.Password));
+                    command.Parameters.Add(new SqlParameter("@Role", user.UserRole.ToString()));
+
                     command.ExecuteNonQuery();
                 }
                 catch (SqlException e)
@@ -148,18 +148,18 @@ namespace POP_SF7
                 SqlCommand command = connection.CreateCommand();
                 command.CommandText = @"Update UserU Set UserU_FirstName=@FirstName, UserU_LastName=@LastName, UserU_Jmbg=@Jmbg, UserU_Address=@Address, UserU_Deleted=@Deleted, UserU_UserName=@UserName, UserU_PasswordP=@Password, UserU_UserRole=@Role Where UserU_Id=@Id;";
 
-                command.Parameters.Add(new SqlParameter("@FirstName", user.FirstName));
-                command.Parameters.Add(new SqlParameter("@LastName", user.LastName));
-                command.Parameters.Add(new SqlParameter("@Jmbg", user.Jmbg));
-                command.Parameters.Add(new SqlParameter("@Address", user.Address));
-                command.Parameters.Add(new SqlParameter("@Deleted", user.Deleted));
-                command.Parameters.Add(new SqlParameter("@Id", user.Id));
-                command.Parameters.Add(new SqlParameter("@UserName", user.UserName));
-                command.Parameters.Add(new SqlParameter("@Password", user.Password));
-                command.Parameters.Add(new SqlParameter("@Role", user.UserRole.ToString()));
-
                 try
                 {
+                    command.Parameters.Add(new SqlParameter("@FirstName", user.FirstName));
+                    command.Parameters.Add(new SqlParameter("@LastName", user.LastName));
+                    command.Parameters.Add(new SqlParameter("@Jmbg", user.Jmbg));
+                    command.Parameters.Add(new SqlParameter("@Address", user.Address));
+                    command.Parameters.Add(new SqlParameter("@Deleted", user.Deleted));
+                    command.Parameters.Add(new SqlParameter("@Id", user.Id));
+                    command.Parameters.Add(new SqlParameter("@UserName", user.UserName));
+                    command.Parameters.Add(new SqlParameter("@Password", user.Password));
+                    command.Parameters.Add(new SqlParameter("@Role", user.UserRole.ToString()));
+
                     command.ExecuteNonQuery();
                 }
                 catch (SqlException e)

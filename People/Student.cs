@@ -11,7 +11,7 @@ namespace POP_SF7
         public ObservableCollection<Payment> ListOfPayments { get; set; }
         public ObservableCollection<Course> ListOfCourses { get; set; }
 
-        public Student() { }
+        public Student() { Jmbg = "1234567890123"; }
 
         public Student(int id) { Id = id; }
 
@@ -81,14 +81,14 @@ namespace POP_SF7
                 SqlCommand command = connection.CreateCommand();
                 command.CommandText = @"Insert Into Student Values(@FirstName,@LastName,@Jmbg,@Address,@Deleted);";
 
-                command.Parameters.Add(new SqlParameter("@FirstName", student.FirstName));
-                command.Parameters.Add(new SqlParameter("@LastName", student.LastName));
-                command.Parameters.Add(new SqlParameter("@Jmbg", student.Jmbg));
-                command.Parameters.Add(new SqlParameter("@Address", student.Address));
-                command.Parameters.Add(new SqlParameter("@Deleted", student.Deleted));
-
                 try
                 {
+                    command.Parameters.Add(new SqlParameter("@FirstName", student.FirstName));
+                    command.Parameters.Add(new SqlParameter("@LastName", student.LastName));
+                    command.Parameters.Add(new SqlParameter("@Jmbg", student.Jmbg));
+                    command.Parameters.Add(new SqlParameter("@Address", student.Address));
+                    command.Parameters.Add(new SqlParameter("@Deleted", student.Deleted));
+
                     command.ExecuteNonQuery();
                 }
                 catch (SqlException e)
@@ -119,15 +119,15 @@ namespace POP_SF7
                 SqlCommand command = connection.CreateCommand();
                 command.CommandText = @"Update Student Set Student_FirstName=@FirstName, Student_LastName=@LastName, Student_Jmbg=@Jmbg, Student_Address=@Address, Student_Deleted=@Deleted Where Student_Id=@Id;";
 
-                command.Parameters.Add(new SqlParameter("@FirstName", student.FirstName));
-                command.Parameters.Add(new SqlParameter("@LastName", student.LastName));
-                command.Parameters.Add(new SqlParameter("@Jmbg", student.Jmbg));
-                command.Parameters.Add(new SqlParameter("@Address", student.Address));
-                command.Parameters.Add(new SqlParameter("@Deleted", student.Deleted));
-                command.Parameters.Add(new SqlParameter("@Id", student.Id));
-
                 try
                 {
+                    command.Parameters.Add(new SqlParameter("@FirstName", student.FirstName));
+                    command.Parameters.Add(new SqlParameter("@LastName", student.LastName));
+                    command.Parameters.Add(new SqlParameter("@Jmbg", student.Jmbg));
+                    command.Parameters.Add(new SqlParameter("@Address", student.Address));
+                    command.Parameters.Add(new SqlParameter("@Deleted", student.Deleted));
+                    command.Parameters.Add(new SqlParameter("@Id", student.Id));
+
                     command.ExecuteNonQuery();
                 }
                 catch (SqlException e)

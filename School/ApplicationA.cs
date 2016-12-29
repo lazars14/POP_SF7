@@ -10,7 +10,7 @@ namespace POP_SF7
 
         public const string DATABASE_ERROR_MESSAGE = "Doslo je do greske sa bazom!" + "\n" + "Greska ";
 
-        public School School { get; set; }
+        public SchoolS SchoolS { get; set; }
         public int UserId { get; set; }
 
         public ObservableCollection<Language> Languages { get; set; }
@@ -33,7 +33,7 @@ namespace POP_SF7
 
         private ApplicationA()
         {
-            School = School.LoadSchool();
+            SchoolS = SchoolS.LoadSchool();
             Languages = new ObservableCollection<Language>();
             CourseTypes = new ObservableCollection<CourseType>();
             Courses = new ObservableCollection<Course>();
@@ -43,5 +43,21 @@ namespace POP_SF7
             Students = new ObservableCollection<Student>();
         }
 
+        public static void LoadAllDataAdministrator()
+        {
+            Language.Load();
+            CourseType.Load();
+            Teacher.Load();
+        }
+
+        public static void LoadAllDataEmployee()
+        {
+            Language.Load();
+            CourseType.Load();
+            Teacher.Load();
+            Student.Load();
+            Payment.Load();
+            Course.Load();
+        }
     }
 }

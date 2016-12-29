@@ -9,13 +9,13 @@ namespace POP_SF7
     /// </summary>
     public partial class MainMenu : Window
     {
-        public School School { get; set; }
+        public SchoolS SchoolS { get; set; }
 
         public MainMenu(Role role, int userId)
         {
             InitializeComponent();
-            School = ApplicationA.Instance.School;
-            DataContext = School;
+            SchoolS = ApplicationA.Instance.SchoolS;
+            DataContext = SchoolS;
             ApplicationA.Instance.UserId = userId;
 
             setVisibilityRole(role);
@@ -28,6 +28,8 @@ namespace POP_SF7
                 payments.Visibility = Visibility.Collapsed;
                 students.Visibility = Visibility.Collapsed;
                 courses.Visibility = Visibility.Collapsed;
+
+                ApplicationA.LoadAllDataAdministrator();
             }
             else if (role == Role.EMPLOYEE)
             {
@@ -36,6 +38,8 @@ namespace POP_SF7
                 users.Visibility = Visibility.Collapsed;
                 languages.Visibility = Visibility.Collapsed;
                 courseTypes.Visibility = Visibility.Collapsed;
+
+                ApplicationA.LoadAllDataEmployee();
             }
         }
 
@@ -47,11 +51,11 @@ namespace POP_SF7
             switch(menuItemName)
             {
                 case "editSchoolData":
-                    School backup = (School) School.Clone();
-                    SchoolEdit schoolEdit = new SchoolEdit(School);
+                    SchoolS backup = (SchoolS) SchoolS.Clone();
+                    SchoolEdit schoolEdit = new SchoolEdit(SchoolS);
                     if(schoolEdit.ShowDialog() != true)
                     {
-                        School = backup;
+                        SchoolS = backup;
                     }
                     break;
                 case "payments":

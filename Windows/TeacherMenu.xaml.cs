@@ -25,18 +25,9 @@ namespace POP_SF7
         {
             InitializeComponent();
             TeachersView = CollectionViewSource.GetDefaultView(ApplicationA.Instance.Teachers);
-            checkIfLoaded();
 
             teachersdg.ItemsSource = TeachersView;
             teachersdg.IsSynchronizedWithCurrentItem = true;
-        }
-
-        private void checkIfLoaded()
-        {
-            if(ApplicationA.Instance.Teachers.Count == 0)
-            {
-                Teacher.Load();
-            }
         }
 
         private void addbtn_Click(object sender, RoutedEventArgs e)
@@ -194,6 +185,9 @@ namespace POP_SF7
                     e.Cancel = true;
                     break;
                 case "Error":
+                    e.Cancel = true;
+                    break;
+                case "FullName":
                     e.Cancel = true;
                     break;
             }

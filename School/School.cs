@@ -9,7 +9,7 @@ using System.Windows.Controls;
 
 namespace POP_SF7
 {
-    public class School : INotifyPropertyChanged, ICloneable, IDataErrorInfo
+    public class SchoolS : INotifyPropertyChanged, ICloneable, IDataErrorInfo
     {
         private string name;
         public string Name
@@ -67,9 +67,9 @@ namespace POP_SF7
             set { accountNumber = value; OnPropertyChanged("AccountNumber"); }
         }
 
-        public School() { }
+        public SchoolS() { }
 
-        public School(string name, string address, string phoneNumber, string email, string webSite, string PIB, string identificationNumber, string accountNumber)
+        public SchoolS(string name, string address, string phoneNumber, string email, string webSite, string PIB, string identificationNumber, string accountNumber)
         {
             Name = name;
             Address = address;
@@ -83,7 +83,7 @@ namespace POP_SF7
 
         #region Database operations
 
-        public static School LoadSchool()
+        public static SchoolS LoadSchool()
         {
             using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
             {
@@ -101,7 +101,7 @@ namespace POP_SF7
 
                     DataRow row = dataSet.Tables["School"].Rows[0];
 
-                    School school = new School();
+                    SchoolS school = new SchoolS();
                     school.IdentificationNumber = (string)row["School_IdentificationNumber"];
                     school.Name = (string)row["School_Name"];
                     school.Address = (string)row["School_Address"];
@@ -134,24 +134,24 @@ namespace POP_SF7
             }
         }
 
-        public static void UpdateSchool(School school)
+        public static void UpdateSchool(SchoolS school)
         {
             using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
             {
                 SqlCommand command = connection.CreateCommand();
                 command.CommandText = @"Update School Set School_Name=@Name, School_Address=@Address, School_PhoneNumber=@PhoneNumber, School_Email=@Email, School_WebSite=@WebSite, School_Pib=@Pib, School_IdentificationNumber=@IdentificationNumber, School_AccountNumber=@AccountNumber Where School_Id=1;";
-
-                command.Parameters.Add(new SqlParameter("@Name", school.Name));
-                command.Parameters.Add(new SqlParameter("@Address", school.Address));
-                command.Parameters.Add(new SqlParameter("@PhoneNumber", school.PhoneNumber));
-                command.Parameters.Add(new SqlParameter("@Email", school.Email));
-                command.Parameters.Add(new SqlParameter("@WebSite", school.WebSite));
-                command.Parameters.Add(new SqlParameter("@Pib", school.Pib));
-                command.Parameters.Add(new SqlParameter("@IdentificationNumber", school.IdentificationNumber));
-                command.Parameters.Add(new SqlParameter("@AccountNumber", school.AccountNumber));
-
+                
                 try
                 {
+                    command.Parameters.Add(new SqlParameter("@Name", school.Name));
+                    command.Parameters.Add(new SqlParameter("@Address", school.Address));
+                    command.Parameters.Add(new SqlParameter("@PhoneNumber", school.PhoneNumber));
+                    command.Parameters.Add(new SqlParameter("@Email", school.Email));
+                    command.Parameters.Add(new SqlParameter("@WebSite", school.WebSite));
+                    command.Parameters.Add(new SqlParameter("@Pib", school.Pib));
+                    command.Parameters.Add(new SqlParameter("@IdentificationNumber", school.IdentificationNumber));
+                    command.Parameters.Add(new SqlParameter("@AccountNumber", school.AccountNumber));
+
                     command.ExecuteNonQuery();
                 }
                 catch (SqlException e)
@@ -252,7 +252,7 @@ namespace POP_SF7
 
         public object Clone()
         {
-            School schoolCopy = new School();
+            SchoolS schoolCopy = new SchoolS();
             schoolCopy.Name = Name;
             schoolCopy.Address = Address;
             schoolCopy.PhoneNumber = PhoneNumber;
