@@ -9,18 +9,18 @@ using System.Windows;
 
 namespace POP_SF7.School
 {
-    public class TeacherTeachesLanguage
+    public class TeacherTeachesCourse
     {
         public int Id { get; set; }
         public int TeacherId { get; set; }
-        public int LanguageId { get; set; }
+        public int CourseId { get; set; }
         public bool Deleted { get; set; }
 
-        public TeacherTeachesLanguage(int id, int teacherId, int languageId, bool deleted)
+        public TeacherTeachesCourse(int id, int teacherId, int courseId, bool deleted)
         {
             Id = id;
             TeacherId = teacherId;
-            LanguageId = languageId;
+            CourseId = courseId;
             Deleted = deleted;
         }
 
@@ -35,61 +35,24 @@ namespace POP_SF7.School
                 DataSet dataSet = new DataSet();
 
                 SqlCommand command = connection.CreateCommand();
-                command.CommandText = @"Select * From TeacherTeachesLanguage;";
+                command.CommandText = @"Select * From TeacherTeachesCourse;";
 
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
 
                 try
                 {
-                    dataAdapter.Fill(dataSet, "TeacherTeachesLanguage");
+                    dataAdapter.Fill(dataSet, "TeacherTeachesCourse");
 
-                    foreach(DataRow row in dataSet.Tables["TeacherTeachesLanguage"].Rows)
+                    foreach (DataRow row in dataSet.Tables["TeacherTeachesCourse"].Rows)
                     {
-                        int id = (int)row["Teaches_Id"];
-                        int teacherId = (int)row["Teaches_TeacherId"];
-                        int languageId = (int)row["Teaches_LanguageId"];
-                        bool deleted = (bool)row["Teaches_Deleted"];
-                        TeacherTeachesLanguage teach = new TeacherTeachesLanguage(id, teacherId, languageId, deleted);
+                        int id = (int)row["TCourse_Id"];
+                        int teacherId = (int)row["TCourse_TeacherId"];
+                        int courseId = (int)row["TCourse_CourseId"];
+                        bool deleted = (bool)row["TCourse_Deleted"];
+                        TeacherTeachesCourse teach = new TeacherTeachesCourse(id, teacherId, courseId, deleted);
 
-                        ApplicationA.Instance.TeacherTeachesLanguageCollection.Add(teach);
+                        ApplicationA.Instance.TeacherTeachesCourseCollection.Add(teach);
                     }
-                }
-                catch (SqlException e)
-                {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + e.GetType());
-                }
-                catch (InvalidOperationException a)
-                {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
-                }
-                catch (ArgumentException g)
-                {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + g.ParamName);
-                }
-                catch (NullReferenceException n)
-                {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + n.GetType());
-                }
-            }
-
-        }
-
-        public static void Add(TeacherTeachesLanguage teach)
-        {
-            using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
-            {
-                connection.Open();
-
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText = @"Insert Into TeacherTeachesLanguage Values(@TeacherId,@LanguageId,@Deleted);";
-
-                try
-                {
-                    command.Parameters.Add(new SqlParameter("@TeacherId", teach.TeacherId));
-                    command.Parameters.Add(new SqlParameter("@LanguageId", teach.LanguageId));
-                    command.Parameters.Add(new SqlParameter("@Deleted", teach.Deleted));
-
-                    command.ExecuteNonQuery();
                 }
                 catch (SqlException e)
                 {
@@ -110,18 +73,54 @@ namespace POP_SF7.School
             }
         }
 
-        public static void Delete(TeacherTeachesLanguage teach)
+        public static void Add(TeacherTeachesCourse teaches)
         {
             using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
             {
                 connection.Open();
 
                 SqlCommand command = connection.CreateCommand();
-                command.CommandText = @"Update TeacherTeachesLanguage Set Teaches_Deleted=1 Where Teaches_Id=@Id;";
+                command.CommandText = @"Insert Into TeacherTeachesCourse Values(@TeacherId,@CourseId,@Deleted);";
 
                 try
                 {
-                    command.Parameters.Add(new SqlParameter("@Id", teach.Id));
+                    command.Parameters.Add(new SqlParameter("@TeacherId", teaches.TeacherId));
+                    command.Parameters.Add(new SqlParameter("@CourseId", teaches.CourseId));
+                    command.Parameters.Add(new SqlParameter("@Deleted", teaches.Deleted));
+
+                    command.ExecuteNonQuery();
+                }
+                catch (SqlException e)
+                {
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + e.GetType());
+                }
+                catch (InvalidOperationException a)
+                {
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
+                }
+                catch (ArgumentException g)
+                {
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + g.ParamName);
+                }
+                catch (NullReferenceException n)
+                {
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + n.GetType());
+                }
+            }
+        }
+
+        public static void Delete(TeacherTeachesCourse teaches)
+        {
+            using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
+            {
+                connection.Open();
+
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = @"Update TeacherTeachesCourse Set TCourse_Deleted=1 Where TCourse_Id=@Id;";
+
+                try
+                {
+                    command.Parameters.Add(new SqlParameter("@Id", teaches.Id));
 
                     command.ExecuteNonQuery();
                 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF7"
         mc:Ignorable="d"
-        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="362.844" Width="323.699" ResizeMode="NoResize">
+        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="629.365" Width="323.699" ResizeMode="NoResize" Closing="ClosingFunction">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="90"/>
@@ -19,35 +19,58 @@
             <RowDefinition Height="25"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
+            <RowDefinition Height="270"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         <TextBlock x:Name="descriptionlbl" Text="Labela za popunjavanje" TextAlignment="Center" Grid.ColumnSpan="2" Grid.Row="0" Margin="0, 15, 5, 10"/>
 
-        <Label x:Name="courselbl" Content="Kurs" Grid.Row="1" Grid.Column="0" Margin="0,0,0,10"/>
+        <Label x:Name="studentlbl" Content="Ucenik" Grid.Row="1" Grid.Column="0" Margin="0,0,0,10"/>
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
-            <TextBox x:Name="coursetb" IsReadOnly="True" Width="160" Margin="0,0,0,10"/>
-            <Button x:Name="coursebtn" Content="..." Width="30" Margin="11,0,0,10" Click="coursebtn_Click"/>
+            <TextBox x:Name="studenttb" IsReadOnly="True" SelectionChanged="studenttb_SelectionChanged" Width="160" Margin="0,0,0,10"/>
+            <Button x:Name="studentbtn" Content="..." Width="30" Margin="11,0,0,10" Click="studentbtn_Click"/>
         </StackPanel>
 
-        <Label x:Name="studentlbl" Content="Ucenik" Grid.Row="2" Grid.Column="0" Margin="0,0,0,10"/>
+        <Label x:Name="courselbl" Content="Kurs" Grid.Row="2" Grid.Column="0" Margin="0,0,0,10"/>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
-            <TextBox x:Name="studenttb" IsReadOnly="True" Width="160" Margin="0,0,0,10"/>
-            <Button x:Name="studentbtn" Content="..." Width="30" Margin="11,0,0,10" Click="studentbtn_Click"/>
+            <TextBox x:Name="coursetb" IsReadOnly="True" Width="160" Margin="0,0,0,10" SelectionChanged="coursetb_SelectionChanged"/>
+            <Button x:Name="coursebtn" Content="..." Width="30" Margin="11,0,0,10" Click="coursebtn_Click"/>
         </StackPanel>
 
         <Label x:Name="amountlbl" Content="Iznos uplate" Grid.Row="3" Grid.Column="0" Margin="0,0,0,0"/>
         <TextBox x:Name="amounttb" Text="{Binding Path=Amount, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1"/>
         <TextBlock x:Name="amountValidation" Grid.Row="4" Grid.Column="1" Foreground="Red" Text="{Binding ElementName=amounttb, Path=(Validation.Errors).CurrentItem.ErrorContent}" Margin="0,0,0,5"/>
-        
+
         <Label x:Name="datelbl" Content="Datum" Grid.Row="5" Grid.Column="0" Margin="0,0,0,10"/>
         <DatePicker x:Name="datepck" SelectedDate="{Binding Path=Date}" Grid.Row="5" Grid.Column="1" Margin="0,0,0,10"/>
-        
+
         <Label x:Name="deletedlbl" Content="Obrisana" Grid.Row="6" Grid.Column="0" Margin="0,0,0,10"/>
         <CheckBox x:Name="deletedcb" IsChecked="{Binding Path=Deleted}" Grid.Row="6" Grid.Column="1" Margin="0,7,0,10"/>
-        
-        <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
+
+        <GroupBox x:Name="groupBox" Grid.ColumnSpan="2" Header="Uplate za dati kurs" HorizontalAlignment="Left" Height="260" Margin="0,0,-6,0" Grid.Row="7" VerticalAlignment="Top" Width="298">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="104"/>
+                    <ColumnDefinition Width="186"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <DataGrid x:Name="paymentsdg" Grid.Row="0" Grid.ColumnSpan="2" IsReadOnly="True" AutoGeneratingColumn="paymentsdg_AutoGeneratingColumn" Margin="5"/>
+
+                <Label Content="Uplaceno:" Grid.Row="1" Grid.Column="0" Margin="5"/>
+                <TextBlock x:Name="paidtb" Grid.Row="1" Grid.Column="1" Margin="5"/>
+
+                <Label Content="Preostali iznos: " Grid.Row="2" Grid.Column="0" Margin="5"/>
+                <TextBlock x:Name="lefttb" Grid.Row="2" Grid.Column="1" Margin="5"/>
+            </Grid>
+        </GroupBox>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="8" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
             <Button x:Name="okbtn" Content="OK" Width="70" Height="30" Click="okbtn_Click"/>
             <Button x:Name="cancelbtn" IsCancel="True" Content="Cancel" Width="70" Height="30" Margin="30,0,0,0"/>
         </StackPanel>
+
     </Grid>
 </Window>

@@ -140,7 +140,7 @@ namespace POP_SF7
             {
                 SqlCommand command = connection.CreateCommand();
                 command.CommandText = @"Update School Set School_Name=@Name, School_Address=@Address, School_PhoneNumber=@PhoneNumber, School_Email=@Email, School_WebSite=@WebSite, School_Pib=@Pib, School_IdentificationNumber=@IdentificationNumber, School_AccountNumber=@AccountNumber Where School_Id=1;";
-                
+
                 try
                 {
                     command.Parameters.Add(new SqlParameter("@Name", school.Name));

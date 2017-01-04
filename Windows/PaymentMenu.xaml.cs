@@ -22,10 +22,22 @@ namespace POP_SF7
         public PaymentMenu()
         {
             InitializeComponent();
+            setupWindow();
+        }
+
+        private void setupWindow()
+        {
             view = CollectionViewSource.GetDefaultView(ApplicationA.Instance.Payments);
 
             paymentsdg.ItemsSource = view;
             paymentsdg.IsSynchronizedWithCurrentItem = true;
+
+            if(ApplicationA.Instance.Payments.Count == 0)
+            {
+                // upisati u log
+                MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE);
+                Close();
+            }
         }
 
         private void addbtn_Click(object sender, RoutedEventArgs e)
@@ -190,12 +202,18 @@ namespace POP_SF7
                 view.MoveCurrentToFirst();
                 selectedPayment = view.CurrentItem as Payment;
             }
+            try
+            {
+                if(selectedPayment.Student.FirstName == null)
+                {
+                    selectedPayment.Student = ApplicationA.Instance.Students[selectedPayment.Student.Id - 1];
 
-            selectedPayment.Student = ApplicationA.Instance.Students[selectedPayment.Student.Id - 1];
-
-            selectedPayment.Course = ApplicationA.Instance.Courses[selectedPayment.Course.Id - 1];
-            selectedPayment.Course.Language = ApplicationA.Instance.Languages[selectedPayment.Course.Language.Id - 1];
-            selectedPayment.Course.CourseType = ApplicationA.Instance.CourseTypes[selectedPayment.Course.CourseType.Id - 1];
+                    selectedPayment.Course = ApplicationA.Instance.Courses[selectedPayment.Course.Id - 1];
+                    selectedPayment.Course.Language = ApplicationA.Instance.Languages[selectedPayment.Course.Language.Id - 1];
+                    selectedPayment.Course.CourseType = ApplicationA.Instance.CourseTypes[selectedPayment.Course.CourseType.Id - 1];
+                }
+            }
+            catch(NullReferenceException a) { Console.WriteLine(a.StackTrace); }
         }
     }
 }

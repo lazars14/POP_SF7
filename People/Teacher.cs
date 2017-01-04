@@ -12,7 +12,7 @@ namespace POP_SF7
         public ObservableCollection<Course> ListOfCourses { get; set; }
         public string FullName { get; set; }
 
-        public Teacher() { Jmbg = "1234567890123"; }
+        public Teacher() { Jmbg = "1234567890123"; ListOfCourses = new ObservableCollection<Course>(); ListOfLanguages = new ObservableCollection<Language>(); }
 
         public Teacher(int id)
         {

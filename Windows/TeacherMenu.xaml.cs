@@ -1,4 +1,5 @@
 ﻿using POP_SF7.Helpers;
+using POP_SF7.School;
 using POP_SF7.Windows;
 using System;
 using System.Collections.ObjectModel;
@@ -148,7 +149,53 @@ namespace POP_SF7
 
         private void usersdg_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            int selectedTeacherId = 1;
+
+            Student selectedStudent = TeachersView.CurrentItem as Student;
+            if (selectedStudent == null)
+            {
+                TeachersView.MoveCurrentToFirst();
+                selectedStudent = TeachersView.CurrentItem as Student;
+            }
+            else
+            {
+                selectedTeacherId = selectedStudent.Id;
+            }
+
+            Teacher selectedTeacherTwo = ApplicationA.Instance.Teachers[selectedTeacherId - 1];
+            if (selectedTeacherTwo.ListOfCourses.Count == 0)
+            {
+                try
+                {
+                    foreach (TeacherTeachesCourse ttc in ApplicationA.Instance.TeacherTeachesCourseCollection)
+                    {
+                        if (ttc.TeacherId == selectedTeacherId)
+                        {
+                            Course course = ApplicationA.Instance.Courses[ttc.CourseId - 1];
+                            selectedTeacherTwo.ListOfCourses.Add(course);
+                        }
+                    }
+
+                    foreach (TeacherTeachesLanguage ttl in ApplicationA.Instance.TeacherTeachesLanguageCollection)
+                    {
+                        if (ttl.TeacherId == selectedTeacherId)
+                        {
+                            Language lang = ApplicationA.Instance.Languages[ttl.LanguageId - 1];
+                            selectedTeacherTwo.ListOfLanguages.Add(lang);
+                        }
+                    }
+                }
+                catch(ArgumentOutOfRangeException a) { Console.WriteLine(a.StackTrace); }
+                
+            }
+
+            CoursesView = CollectionViewSource.GetDefaultView(selectedTeacherTwo.ListOfCourses);
+            coursesdg.ItemsSource = CoursesView;
+            coursesdg.IsSynchronizedWithCurrentItem = true;
+
+            LanguagesView = CollectionViewSource.GetDefaultView(selectedTeacherTwo.ListOfLanguages);
+            languagesdg.ItemsSource = LanguagesView;
+            languagesdg.IsSynchronizedWithCurrentItem = true;
         }
 
         private void cancelSearchbtn_Click(object sender, RoutedEventArgs e)

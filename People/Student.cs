@@ -8,16 +8,14 @@ namespace POP_SF7
 {
     public class Student : Person, ICloneable
     {
-        public ObservableCollection<Payment> ListOfPayments { get; set; }
         public ObservableCollection<Course> ListOfCourses { get; set; }
 
-        public Student() { Jmbg = "1234567890123"; }
+        public Student() { Jmbg = "1234567890123"; ListOfCourses = new ObservableCollection<Course>(); }
 
         public Student(int id) { Id = id; }
 
         public Student(int id, string firstName, string lastName, string jmbg, string personAddress, bool deleted) : base(id, firstName, lastName, jmbg, personAddress, deleted)
         {
-            ListOfPayments = new ObservableCollection<Payment>();
             ListOfCourses = new ObservableCollection<Course>();
         }
 
@@ -196,7 +194,6 @@ namespace POP_SF7
             studentCopy.Jmbg = Jmbg;
             studentCopy.Address = Address;
             studentCopy.Deleted = Deleted;
-            studentCopy.ListOfPayments = ListOfPayments;
             studentCopy.ListOfCourses = ListOfCourses;
 
             return studentCopy;

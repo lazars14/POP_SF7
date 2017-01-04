@@ -15,28 +15,17 @@
         </Grid.RowDefinitions>
         <userControls:PersonUserControl x:Name="personInfo" Grid.Row="0"/>
         
-        <!--#region Tab-->
-        <TabControl x:Name="tabControl" TabStripPlacement="Top" Grid.Row="1" Margin="10,10,1,10">
-            <TabItem x:Name="coursesTabItem" Header="Kursevi" IsSelected="True">
-                <Grid>
-                    <DataGrid x:Name="coursesdg" HorizontalAlignment="Left" Height="110" Margin="10,10,0,0" VerticalAlignment="Top" Width="275"/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="33" Margin="10,120,0,0" VerticalAlignment="Center" Width="275">
-                        <Button x:Name="addCoursebtn" Content="Dodaj" Width="75" Margin="55,5,5,5" HorizontalAlignment="Center"/>
-                        <Button x:Name="deleteCoursebtn" Content="Obrisi" Width="75" Margin="5"/>
-                    </StackPanel>
-                </Grid>
-            </TabItem>
-
-            <TabItem x:Name="paymentsTabItem" Header="Uplate" >
-                <Grid>
-                    <DataGrid x:Name="paymentsdg" HorizontalAlignment="Left" Height="110" Margin="10,10,0,0" VerticalAlignment="Top" Width="275"/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="33" Margin="10,120,0,0" VerticalAlignment="Center" Width="275">
-                        <Button x:Name="addPaymentbtn" Content="Dodaj" Width="75" Margin="55,5,5,5" HorizontalAlignment="Center"/>
-                        <Button x:Name="deletePaymentbtn" Content="Obrisi" Width="75" Margin="5"/>
-                    </StackPanel>
-                </Grid>
-            </TabItem>
-        </TabControl>
+        <!--#region Courses-->
+        <GroupBox Header="Kursevi" Grid.Row="1">
+            <Grid>
+                <DataGrid x:Name="coursesdg" IsReadOnly="True" HorizontalAlignment="Left" Height="110" Margin="10,10,0,0" VerticalAlignment="Top" Width="275"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="33" Margin="10,120,0,0" VerticalAlignment="Center" Width="275">
+                    <Button x:Name="addCoursebtn" Content="Dodaj" Width="75" Margin="55,5,5,5" HorizontalAlignment="Center"/>
+                    <Button x:Name="deleteCoursebtn" Content="Obrisi" Width="75" Margin="5"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+        
         <!--#endregion-->
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,10,0,0">

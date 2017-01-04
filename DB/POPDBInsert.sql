@@ -22,20 +22,6 @@ Insert into Student values('Nemanja', 'Kapetanovic', 'Adresa 7', '1234567891011'
 Insert into Student values('Stefan', 'Fundic', 'Adresa 8', '1234567891011', 0);
 Insert into Student values('Nenad', 'Nerandzic', 'Adresa 9', '1234567891011', 0);
 Insert into Student values('Filip', 'Zekavcic', 'Adresa 10', '1234567891011', 0);
-Insert into Student values('Ugljesa', 'Bogdanovic', 'Adresa 11', '1234567891011', 0);
-Insert into Student values('Stevan', 'Jeremic', 'Adresa 12', '1234567891011', 0);
-Insert into Student values('Milan', 'Radivojevic', 'Adresa 13', '1234567891011', 0);
-Insert into Student values('Aleksa', 'Jelic', 'Adresa 14', '1234567891011', 0);
-Insert into Student values('Milos', 'Jankovic', 'Adresa 15', '1234567891011', 0);
-Insert into Student values('Marko', 'Sarenac', 'Adresa 16', '1234567891011', 0);
-Insert into Student values('Brano', 'Djukanovic', 'Adresa 17', '1234567891011', 0);
-Insert into Student values('Aleksandar', 'Vasic', 'Adresa 18', '1234567891011', 0);
-Insert into Student values('Nikola', 'Milutinovic', 'Adresa 19', '1234567891011', 0);
-Insert into Student values('Marko', 'Dujkovic', 'Adresa 20', '1234567891011', 0);
-Insert into Student values('Bojan', 'Bogdanovic', 'Adresa 21', '1234567891011', 0);
-Insert into Student values('Antonije', 'Dimitrijevic', 'Adresa 22', '1234567891011', 0);
-Insert into Student values('Danilo', 'Ostojic', 'Adresa 23', '1234567891011', 0);
-Insert into Student values('Dusan', 'Hukic', 'Adresa 24', '1234567891011', 0);
 
 Insert into Teacher values('Uros', 'Carapic', 'Adresa 1', '1234567891011', 0);
 Insert into Teacher values('Stefan', 'Mitrovic', 'Adresa 2', '1234567891011', 0);
@@ -63,6 +49,12 @@ Insert into TeacherTeachesLanguage(Teaches_TeacherId,Teaches_LanguageId,Teaches_
 Insert into TeacherTeachesLanguage(Teaches_TeacherId,Teaches_LanguageId,Teaches_Deleted) values (1,6,0);
 Insert into TeacherTeachesLanguage(Teaches_TeacherId,Teaches_LanguageId,Teaches_Deleted) values (4,7,0);
 
+Insert into TeacherTeachesCourse values (1,1,0);
+Insert into TeacherTeachesCourse values (2,2,0);
+Insert into TeacherTeachesCourse values (3,3,0);
+Insert into TeacherTeachesCourse values (4,4,0);
+Insert into TeacherTeachesCourse values (5,5,0);
+
 Insert into StudentAttendsCourse(Attends_CourseId,Attends_StudentId,Attends_Deleted) values (1,1,0);
 Insert into StudentAttendsCourse(Attends_CourseId,Attends_StudentId,Attends_Deleted) values (1,2,0);
 Insert into StudentAttendsCourse(Attends_CourseId,Attends_StudentId,Attends_Deleted) values (1,3,0);
@@ -71,11 +63,6 @@ Insert into StudentAttendsCourse(Attends_CourseId,Attends_StudentId,Attends_Dele
 Insert into StudentAttendsCourse(Attends_CourseId,Attends_StudentId,Attends_Deleted) values (1,6,0);
 
 Insert into Payment(Payment_CourseId,Payment_StudentId,Payment_Amount,Payment_Date,Payment_Deleted) values (1,1,1200.00,'2017-02-02', 0);
-Insert into Payment(Payment_CourseId,Payment_StudentId,Payment_Amount,Payment_Date,Payment_Deleted) values (1,1,1200.00,'2017-02-02', 0);
-Insert into Payment(Payment_CourseId,Payment_StudentId,Payment_Amount,Payment_Date,Payment_Deleted) values (1,1,1200.00,'2017-02-02', 0);
-Insert into Payment(Payment_CourseId,Payment_StudentId,Payment_Amount,Payment_Date,Payment_Deleted) values (1,1,1200.00,'2017-02-02', 0);
-
-Insert into Payment(Payment_CourseId,Payment_StudentId,Payment_Amount,Payment_Date,Payment_Deleted) values (1,2,1200.00,'2017-03-02', 0);
-Insert into Payment(Payment_CourseId,Payment_StudentId,Payment_Amount,Payment_Date,Payment_Deleted) values (1,2,1200.00,'2017-03-02', 0);
-Insert into Payment(Payment_CourseId,Payment_StudentId,Payment_Amount,Payment_Date,Payment_Deleted) values (1,2,1200.00,'2017-03-02', 0);
-Insert into Payment(Payment_CourseId,Payment_StudentId,Payment_Amount,Payment_Date,Payment_Deleted) values (1,2,1200.00,'2017-03-02', 0);
+Insert into Payment(Payment_CourseId,Payment_StudentId,Payment_Amount,Payment_Date,Payment_Deleted) values (2,2,1200.00,'2017-03-02', 0);
+Insert into Payment(Payment_CourseId,Payment_StudentId,Payment_Amount,Payment_Date,Payment_Deleted) values (3,3,1200.00,'2017-03-02', 0);
+Insert into Payment(Payment_CourseId,Payment_StudentId,Payment_Amount,Payment_Date,Payment_Deleted) values (1,1,1200.00,'2017-05-02', 0);

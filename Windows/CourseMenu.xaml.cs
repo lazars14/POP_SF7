@@ -1,4 +1,5 @@
-﻿using POP_SF7.Windows;
+﻿using POP_SF7.School;
+using POP_SF7.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,21 +18,20 @@ namespace POP_SF7
         public ICollectionView CoursesView { get; set; }
         public ICollectionView StudentsView { get; set; }
 
+        public ObservableCollection<Student> StudentsForSelectedCourse = new ObservableCollection<Student>();
+
         public CourseMenu()
         {
             InitializeComponent();
             setupWindow();
-
-            CoursesView = CollectionViewSource.GetDefaultView(ApplicationA.Instance.Courses);
-
-            coursesdg.ItemsSource = CoursesView;
-            coursesdg.IsSynchronizedWithCurrentItem = true;
         }
 
         private void setupWindow()
         {
-            POP_SF7.Language.Load();
-            CourseType.Load();
+            CoursesView = CollectionViewSource.GetDefaultView(ApplicationA.Instance.Courses);
+
+            coursesdg.ItemsSource = CoursesView;
+            coursesdg.IsSynchronizedWithCurrentItem = true;
 
             languagecb.ItemsSource = ApplicationA.Instance.Languages;
             languagecb.DisplayMemberPath = "Name";
@@ -42,6 +42,10 @@ namespace POP_SF7
             courseTypecb.DisplayMemberPath = "Name";
             courseTypecb.SelectedValuePath = "Id";
             courseTypecb.SelectedIndex = 0;
+
+            StudentsView = CollectionViewSource.GetDefaultView(StudentsForSelectedCourse);
+            studentsdg.ItemsSource = StudentsView;
+            studentsdg.IsSynchronizedWithCurrentItem = true;
         }
 
         private void addbtn_Click(object sender, RoutedEventArgs e)
@@ -171,15 +175,42 @@ namespace POP_SF7
 
         private void coursesdg_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            int selectedCourseId = 1;
+
             Course selectedCourse = CoursesView.CurrentItem as Course;
             if (selectedCourse == null)
             {
                 CoursesView.MoveCurrentToFirst();
                 selectedCourse = CoursesView.CurrentItem as Course;
             }
-            selectedCourse.Language = ApplicationA.Instance.Languages[selectedCourse.Language.Id - 1];
-            selectedCourse.CourseType = ApplicationA.Instance.CourseTypes[selectedCourse.CourseType.Id - 1];
-            selectedCourse.Teacher = ApplicationA.Instance.Teachers[selectedCourse.Teacher.Id - 1];
+            else
+            {
+                selectedCourseId = selectedCourse.Id;
+            }
+
+            try
+            {
+                if(selectedCourse.Language.Name == null)
+                {
+                    selectedCourse.Language = ApplicationA.Instance.Languages[selectedCourse.Language.Id - 1];
+                    selectedCourse.CourseType = ApplicationA.Instance.CourseTypes[selectedCourse.CourseType.Id - 1];
+                    selectedCourse.Teacher = ApplicationA.Instance.Teachers[selectedCourse.Teacher.Id - 1];
+                }
+            }
+            catch(NullReferenceException a) { Console.WriteLine(a.StackTrace); }
+            
+
+            // students
+            if(StudentsForSelectedCourse.Count != 0) StudentsForSelectedCourse.Clear();
+
+            foreach (StudentAttendsCourse sac in ApplicationA.Instance.StudentAttendsCourseCollection)
+            {
+                if(sac.CourseId == selectedCourseId)
+                {
+                    Student s = ApplicationA.Instance.Students[sac.StudentId - 1];
+                    StudentsForSelectedCourse.Add(s);
+                }
+            }
         }
 
         private void cancelSearchbtn_Click(object sender, RoutedEventArgs e)

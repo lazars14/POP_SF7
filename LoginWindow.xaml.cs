@@ -20,7 +20,7 @@ namespace POP_SF7
 
         public void loadData()
         {
-            if (ApplicationA.Instance.Users.Count() == 0) User.Load();
+            if (ApplicationA.Instance.Users.Count == 0) User.Load();
         }
 
         private void cancelbtn_Click(object sender, RoutedEventArgs e)
@@ -71,6 +71,7 @@ namespace POP_SF7
         {
             usernametb.Text = "";
             passwordpb.Password = "";
+            usernametb.Focus();
             MessageBox.Show(message);
         }
 

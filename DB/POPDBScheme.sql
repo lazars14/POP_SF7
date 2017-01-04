@@ -13,21 +13,21 @@ Create Table School
 	School_WebSite Varchar(30),
 	School_Pib Char(9),
 	School_AccountNumber Char(20)
-) On School;
+);
 
 Create Table LanguageL
 (
 	Language_Id Int Primary Key Not Null Identity,
 	Language_Name Varchar(30),
 	Language_Deleted Bit
-) On Course;
+);
 
 Create Table CourseType
 (
 	CourseType_Id Int Primary Key Not Null Identity,
 	CourseType_Name Varchar(30),
 	CourseType_Deleted Bit
-) On Course;
+);
 
 Create Table Student
 (
@@ -37,7 +37,7 @@ Create Table Student
 	Student_Jmbg Char(13),
 	Student_Address Varchar(50),
 	Student_Deleted Bit
-) On People;
+);
 
 Create Table Teacher
 (
@@ -47,7 +47,7 @@ Create Table Teacher
 	Teacher_Jmbg Char(13),
 	Teacher_Address Varchar(50),
 	Teacher_Deleted Bit
-) On People;
+);
 
 Create Table UserU
 (
@@ -60,7 +60,7 @@ Create Table UserU
 	UserU_UserName Varchar(20) Unique,
 	UserU_PasswordP Varchar(20),
 	UserU_UserRole Varchar(20)
-) On People;
+);
 
 Create Table Course
 (
@@ -72,7 +72,7 @@ Create Table Course
 	Course_StartDate Date,
 	Course_EndDate Date,
 	Course_Deleted Bit
-) On Course;
+);
 
 Create Table Payment
 (
@@ -82,7 +82,7 @@ Create Table Payment
 	Payment_Amount Float,
 	Payment_Date Date,
 	Payment_Deleted Bit
-) On School;
+);
 
 Create Table TeacherTeachesLanguage
 (
@@ -90,7 +90,7 @@ Create Table TeacherTeachesLanguage
 	Teaches_TeacherId Int Foreign Key References Teacher(Teacher_Id),
 	Teaches_LanguageId Int Foreign Key References LanguageL(Language_Id),
 	Teaches_Deleted Bit
-) On Course;
+);
 
 Create Table StudentAttendsCourse
 (
@@ -98,4 +98,12 @@ Create Table StudentAttendsCourse
 	Attends_CourseId Int Foreign Key References Course(Course_Id),
 	Attends_StudentId Int Foreign Key References Student(Student_Id),
 	Attends_Deleted Bit
-) On Course;
+);
+
+Create Table TeacherTeachesCourse
+(
+	TCourse_Id Int Primary Key Not Null Identity,
+	TCourse_TeacherId Int Foreign Key References Teacher(Teacher_Id),
+	TCourse_CourseId Int Foreign Key References Course(Course_Id),
+	TCourse_Deleted Bit
+);

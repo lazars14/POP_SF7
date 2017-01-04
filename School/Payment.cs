@@ -51,7 +51,7 @@ namespace POP_SF7
             set { deleted = value; OnPropertyChanged("Deleted"); }
         }
 
-        public Payment() { Amount = 0; }
+        public Payment() { Amount = 0; Date = DateTime.Today; }
 
         public Payment(int id) { Id = id; }
 

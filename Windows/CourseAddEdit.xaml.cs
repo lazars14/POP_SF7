@@ -1,4 +1,5 @@
-﻿using POP_SF7.Windows;
+﻿using POP_SF7.School;
+using POP_SF7.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -62,8 +63,7 @@ namespace POP_SF7
 
             if(Decider == Decider.ADD)
             {
-                beginDatedpc.SelectedDate = DateTime.Today;
-                endDatedpc.SelectedDate = DateTime.Today;
+                teachercb.IsEnabled = false;
             }
             else
             {
@@ -113,6 +113,35 @@ namespace POP_SF7
                 case "ListOfCourses":
                     e.Cancel = true;
                     break;
+            }
+        }
+
+        private void languagecb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            List<Teacher> filteredTeachers = new List<Teacher>();
+            int languageId = 0;
+            try
+            {
+                languageId = (int)languagecb.SelectedValue;
+            }
+            catch(NullReferenceException a) { Console.WriteLine(a.StackTrace); }
+            foreach(TeacherTeachesLanguage ttl in ApplicationA.Instance.TeacherTeachesLanguageCollection)
+            {
+                if(ttl.LanguageId == languageId)
+                {
+                    Teacher teach = ApplicationA.Instance.Teachers[ttl.TeacherId - 1];
+                    filteredTeachers.Add(teach);
+                }
+            }
+            if(filteredTeachers.Count == 0)
+            {
+                MessageBox.Show("Ne postoji nastavnik koji predaje odabrani jezik!");
+                teachercb.IsEnabled = false;
+            }
+            else
+            {
+                teachercb.ItemsSource = filteredTeachers;
+                teachercb.IsEnabled = true;
             }
         }
     }

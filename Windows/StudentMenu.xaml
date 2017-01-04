@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF7"
         mc:Ignorable="d"
-        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="656.969" Width="799.725" ResizeMode="NoResize">
+        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="656.969" Width="799.725" ResizeMode="NoResize" Closed="closeFilters">
     <Grid>
         <TextBlock x:Name="studentstb" HorizontalAlignment="Left" Height="23" Margin="9,10,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="Ucenici" VerticalAlignment="Top" Width="770"/>
         
@@ -78,13 +78,13 @@
         
         <!--#region Courses-->
         <GroupBox x:Name="coursesgb" Header="Kursevi" HorizontalAlignment="Left" Height="171" Margin="9,339,0,0" VerticalAlignment="Top" Width="414">
-            <DataGrid x:Name="coursesdg" IsReadOnly="True" AutoGeneratingColumn="coursesdg_AutoGeneratingColumn" ItemsSource="{Binding ElementName=studentsdg, Path=SelectedItem.ListOfCourses}" Margin="5"/>
+            <DataGrid x:Name="coursesdg" SelectionChanged="coursesdg_SelectionChanged" IsReadOnly="True" AutoGeneratingColumn="coursesdg_AutoGeneratingColumn" ItemsSource="{Binding ElementName=studentsdg, Path=SelectedItem.ListOfCourses}" Margin="5"/>
         </GroupBox>
         <!--#endregion-->
 
         <!--#region Payments-->
         <GroupBox x:Name="paymentsgb" Header="Uplate" HorizontalAlignment="Left" Height="171" Margin="431,339,0,0" VerticalAlignment="Top" Width="348">
-            <DataGrid x:Name="paymentsdg" IsReadOnly="True" AutoGeneratingColumn="paymentsdg_AutoGeneratingColumn" ItemsSource="{Binding ElementName=studentsdg, Path=SelectedItem.ListOfPayments}" Margin="5"/>
+            <DataGrid x:Name="paymentsdg" SelectionChanged="paymentsdg_SelectionChanged" IsReadOnly="True" AutoGeneratingColumn="paymentsdg_AutoGeneratingColumn" ItemsSource="{Binding ElementName=studentsdg, Path=SelectedItem.ListOfPayments}" Margin="5"/>
         </GroupBox>
         <!--#endregion -->
 
@@ -100,10 +100,10 @@
                     <ColumnDefinition Width="150"/>
                 </Grid.ColumnDefinitions>
                 <Label x:Name="courseLanguagelbl1" Content="Jezik" Grid.Row="0" Grid.Column="0" Margin="10,5,0,10"/>
-                <TextBlock x:Name="courseLanguagetb1" Text="{Binding SelectedItem.Course.Language.Name, ElementName=coursesdg}" Grid.Row="0" Grid.Column="1" Margin="0,5,0,5"/>
+                <TextBlock x:Name="courseLanguagetb1" Text="{Binding SelectedItem.Language.Name, ElementName=coursesdg}" Grid.Row="0" Grid.Column="1" Margin="0,5,0,5"/>
 
                 <Label x:Name="courseCourseTypelbl1" Content="Tip kursa" Grid.Row="1" Grid.Column="0" Margin="10,5,0,10"/>
-                <TextBlock x:Name="courseCourseTypetb1" Text="{Binding SelectedItem.Course.CourseType.Name, ElementName=coursesdg}" Grid.Row="1" Grid.Column="1" Margin="0,5,0,5"/>
+                <TextBlock x:Name="courseCourseTypetb1" Text="{Binding SelectedItem.CourseType.Name, ElementName=coursesdg}" Grid.Row="1" Grid.Column="1" Margin="0,5,0,5"/>
             </Grid>
         </GroupBox>
         <!--#endregion-->

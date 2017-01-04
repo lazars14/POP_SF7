@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using POP_SF7.School;
+using System.Collections.ObjectModel;
 
 namespace POP_SF7
 {
@@ -20,6 +21,9 @@ namespace POP_SF7
         public ObservableCollection<Teacher> Teachers { get; set; }
         public ObservableCollection<User> Users { get; set; }
         public ObservableCollection<Student> Students { get; set; }
+        public ObservableCollection<TeacherTeachesLanguage> TeacherTeachesLanguageCollection { get; set; }
+        public ObservableCollection<StudentAttendsCourse> StudentAttendsCourseCollection { get; set; }
+        public ObservableCollection<TeacherTeachesCourse> TeacherTeachesCourseCollection { get; set; }
 
         private static ApplicationA instance = new ApplicationA();
 
@@ -34,13 +38,16 @@ namespace POP_SF7
         private ApplicationA()
         {
             SchoolS = SchoolS.LoadSchool();
+            Users = new ObservableCollection<User>();
             Languages = new ObservableCollection<Language>();
             CourseTypes = new ObservableCollection<CourseType>();
             Courses = new ObservableCollection<Course>();
             Payments = new ObservableCollection<Payment>();
             Teachers = new ObservableCollection<Teacher>();
-            Users = new ObservableCollection<User>();
             Students = new ObservableCollection<Student>();
+            TeacherTeachesLanguageCollection = new ObservableCollection<TeacherTeachesLanguage>();
+            StudentAttendsCourseCollection = new ObservableCollection<StudentAttendsCourse>();
+            TeacherTeachesCourseCollection = new ObservableCollection<TeacherTeachesCourse>();
         }
 
         public static void LoadAllDataAdministrator()
@@ -48,6 +55,8 @@ namespace POP_SF7
             Language.Load();
             CourseType.Load();
             Teacher.Load();
+            TeacherTeachesLanguage.Load();
+            TeacherTeachesCourse.Load();
         }
 
         public static void LoadAllDataEmployee()
@@ -58,6 +67,9 @@ namespace POP_SF7
             Student.Load();
             Payment.Load();
             Course.Load();
+            TeacherTeachesLanguage.Load();
+            StudentAttendsCourse.Load();
+            TeacherTeachesCourse.Load();
         }
     }
 }

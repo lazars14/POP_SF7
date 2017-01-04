@@ -34,7 +34,7 @@ namespace POP_SF7
 
         private void editbtn_Click(object sender, RoutedEventArgs e)
         {
-            CourseType selectedCourseType = (CourseType)dynamicdg.SelectedItem;
+            CourseType selectedCourseType =(CourseType) dynamicdg.SelectedItem;
             if(selectedCourseType == null)
             {
                 MessageBox.Show("Morate da selektujete red u tabeli kako bi izmenili tip kursa!");

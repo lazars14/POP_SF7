@@ -69,7 +69,7 @@ namespace POP_SF7
             set { deleted = value; OnPropertyChanged("Deleted"); }
         }
 
-        public Course() { Price = 0; }
+        public Course() { Price = 0; StartDate = DateTime.Today; EndDate = DateTime.Today.AddDays(7); }
 
         public Course(int id) { Id = id; }
 

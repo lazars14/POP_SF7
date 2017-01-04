@@ -1,6 +1,11 @@
-﻿using System.Linq;
+﻿using POP_SF7.School;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System;
 
 namespace POP_SF7.Windows
 {
@@ -51,7 +56,15 @@ namespace POP_SF7.Windows
             if (CourseStudentDecider == CourseStudentDecider.COURSE)
             {
                 description.Text = selectCourse;
-                dataGrid.ItemsSource = ApplicationA.Instance.Courses;
+                if(MenuAddDecider == SelectFromMenuOrAddDecider.ADD)
+                {
+                    dataGrid.ItemsSource = AddEditWindow.Student.ListOfCourses;
+                }
+                else
+                {
+                    dataGrid.ItemsSource = ApplicationA.Instance.Courses;
+                }
+                
             }
             else
             {

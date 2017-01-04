@@ -1,4 +1,5 @@
 ﻿using POP_SF7.Helpers;
+using POP_SF7.School;
 using POP_SF7.Windows;
 using System;
 using System.Collections.ObjectModel;
@@ -17,16 +18,43 @@ namespace POP_SF7
     {
         public ICollectionView StudentsView { get; set; }
         public ICollectionView CoursesView { get; set; }
-        public ICollectionView PaymentsView { get; set; }
+        public ICollectionView PaymentsView { get; set; } 
 
         public StudentMenu()
         {
             InitializeComponent();
 
+            setupViews();
+        }
+
+        private void setupViews()
+        {
+            // student view load
             StudentsView = CollectionViewSource.GetDefaultView(ApplicationA.Instance.Students);
 
             studentsdg.ItemsSource = StudentsView;
             studentsdg.IsSynchronizedWithCurrentItem = true;
+
+            // payment view load
+            PaymentsView = CollectionViewSource.GetDefaultView(ApplicationA.Instance.Payments);
+            Predicate<object> studentIdPredicate = new Predicate<object>(selectedStudentIdSearchCondition);
+            PaymentsView.Filter = studentIdPredicate;
+
+            paymentsdg.ItemsSource = PaymentsView;
+            paymentsdg.IsSynchronizedWithCurrentItem = true;
+        }
+
+        private bool selectedStudentIdSearchCondition(object s)
+        {
+            Payment c = s as Payment;
+            Student ss = StudentsView.CurrentItem as Student;
+            return c.Student.Id == ss.Id;
+        }
+
+        private bool showNoneSearchCondition(object s)
+        {
+            Payment c = s as Payment;
+            return c.Student.Id == -1;
         }
 
         private void addbtn_Click(object sender, RoutedEventArgs e)
@@ -147,7 +175,72 @@ namespace POP_SF7
 
         private void usersdg_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            Student selectedStudent = StudentsView.CurrentItem as Student;
+            if(selectedStudent != null)
+            {
+                int selectedStudentId = selectedStudent.Id;
+                try
+                {
+                    PaymentsView.Refresh();
+                    Student selectedStudentTwo = ApplicationA.Instance.Students[selectedStudentId - 1];
+                    if (selectedStudentTwo.ListOfCourses.Count == 0)
+                    {
+                        foreach (StudentAttendsCourse sac in ApplicationA.Instance.StudentAttendsCourseCollection)
+                        {
+                            if (sac.StudentId == selectedStudentId)
+                            {
+                                Course course = ApplicationA.Instance.Courses[sac.StudentId - 1];
+                                selectedStudentTwo.ListOfCourses.Add(course);
+                            }
+                        }
+                    }
+                    CoursesView = CollectionViewSource.GetDefaultView(selectedStudentTwo.ListOfCourses);
+                    coursesdg.ItemsSource = CoursesView;
+                    coursesdg.IsSynchronizedWithCurrentItem = true;
+                }
+                catch (NullReferenceException a)
+                {
+                    Console.WriteLine(a.StackTrace);
+                }
+            }
+
+            // verzija gde uzima prvog iz tabele ako nijedan nije selektovan
+
+            /*Student selectedStudent = StudentsView.CurrentItem as Student;
+            if(selectedStudent == null)
+            {
+                StudentsView.MoveCurrentToFirst();
+                selectedStudent = StudentsView.CurrentItem as Student;
+            }
+            else
+            {
+                selectedStudentId = selectedStudent.Id;
+            }
+
+            try
+            {
+                PaymentsView.Refresh();
+            }
+            catch(NullReferenceException a)
+            {
+                Console.WriteLine(a.StackTrace);
+            }
+
+            Student selectedStudentTwo = ApplicationA.Instance.Students[selectedStudentId - 1];
+            if(selectedStudentTwo.ListOfCourses.Count == 0)
+            {
+                foreach (StudentAttendsCourse sac in ApplicationA.Instance.StudentAttendsCourseCollection)
+                {
+                    if (sac.StudentId == selectedStudentId)
+                    {
+                        Course course = ApplicationA.Instance.Courses[sac.StudentId - 1];
+                        selectedStudentTwo.ListOfCourses.Add(course);
+                    }
+                }
+            }
+            CoursesView = CollectionViewSource.GetDefaultView(selectedStudentTwo.ListOfCourses);
+            coursesdg.ItemsSource = CoursesView;
+            coursesdg.IsSynchronizedWithCurrentItem = true;*/
         }
 
         private void cancelSearchbtn_Click(object sender, RoutedEventArgs e)
@@ -252,6 +345,35 @@ namespace POP_SF7
                     e.Cancel = true;
                     break;
             }
+        }
+
+        private void paymentsdg_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Payment selectedPayment = PaymentsView.CurrentItem as Payment;
+            try
+            {
+                selectedPayment.Course = ApplicationA.Instance.Courses[selectedPayment.Course.Id - 1];
+                selectedPayment.Course.Language = ApplicationA.Instance.Languages[selectedPayment.Course.Language.Id - 1];
+                selectedPayment.Course.CourseType = ApplicationA.Instance.CourseTypes[selectedPayment.Course.CourseType.Id - 1];
+            }
+            catch(NullReferenceException a) { Console.WriteLine(a.StackTrace); }
+        }
+
+        private void coursesdg_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Course selectedCourse = CoursesView.CurrentItem as Course;
+            try
+            {
+                selectedCourse.Language = ApplicationA.Instance.Languages[selectedCourse.Language.Id - 1];
+                selectedCourse.CourseType = ApplicationA.Instance.CourseTypes[selectedCourse.CourseType.Id - 1];
+            }
+            catch (NullReferenceException a) { Console.WriteLine(a.StackTrace); }
+        }
+
+        private void closeFilters(object sender, EventArgs e)
+        {
+            CoursesView.Filter = null;
+            PaymentsView.Filter = null;
         }
     }
 }

@@ -27,7 +27,7 @@
         <TextBlock x:Name="descriptionlbl" Text="popuniti dinamicki" TextAlignment="Center" Grid.ColumnSpan="2" Grid.Row="0" Margin="0, 15, 5, 10"/>
 
         <Label x:Name="languagelbl" Content="Jezik" Grid.Row="1" Grid.Column="0" Margin="0,0,0,10"/>
-        <ComboBox x:Name="languagecb" Text="{Binding Path=Language}" Grid.Row="1" Grid.Column="1" Margin="10,0,0,10"/>
+        <ComboBox x:Name="languagecb" Text="{Binding Path=Language}" Grid.Row="1" Grid.Column="1" Margin="10,0,0,10" SelectionChanged="languagecb_SelectionChanged"/>
 
         <Label x:Name="courseTypelbl" Content="Tip kursa" Grid.Row="2" Grid.Column="0" Margin="0,0,0,10"/>
         <ComboBox x:Name="courseTypecb" Text="{Binding Path=CourseType}" Grid.Row="2" Grid.Column="1" Margin="10,0,0,10"/>
