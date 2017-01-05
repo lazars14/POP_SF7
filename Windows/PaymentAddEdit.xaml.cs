@@ -1,4 +1,5 @@
-﻿using POP_SF7.School;
+﻿using POP_SF7.Helpers;
+using POP_SF7.School;
 using POP_SF7.Windows;
 using System;
 using System.Collections.Generic;
@@ -114,9 +115,11 @@ namespace POP_SF7
 
                 if (Decider == Decider.ADD)
                 {
-                    Payment.Add(SelectedPayment);
-                    SelectedPayment.Id = ApplicationA.Instance.Payments.Count() + 1;
-                    ApplicationA.Instance.Payments.Add(SelectedPayment);
+                    if(Payment.Add(SelectedPayment))
+                    {
+                        SelectedPayment.Id = ApplicationA.Instance.Payments.Count() + 1;
+                        ApplicationA.Instance.Payments.Add(SelectedPayment);
+                    }
                 }
                 else
                 {
@@ -173,30 +176,7 @@ namespace POP_SF7
 
         private void paymentsdg_AutoGeneratingColumn(object sender, System.Windows.Controls.DataGridAutoGeneratingColumnEventArgs e)
         {
-            switch ((string)e.Column.Header)
-            {
-                case "Id":
-                    e.Cancel = true;
-                    break;
-                case "Course":
-                    e.Cancel = true;
-                    break;
-                case "Student":
-                    e.Cancel = true;
-                    break;
-                case "Amount":
-                    e.Column.Header = "Iznos";
-                    break;
-                case "Date":
-                    e.Column.Header = "Datum";
-                    break;
-                case "Deleted":
-                    e.Column.Header = "Obrisano";
-                    break;
-                case "Error":
-                    e.Cancel = true;
-                    break;
-            }
+            LoadColumnsHelper.LoadPayment(e);
         }
 
         private void coursetb_SelectionChanged(object sender, RoutedEventArgs e)
@@ -218,7 +198,11 @@ namespace POP_SF7
 
         private void ClosingFunction(object sender, CancelEventArgs e)
         {
-            PaymentsView.Filter = null;
+            try
+            {
+                PaymentsView.Filter = null;
+            }
+            catch(NullReferenceException a) { Console.WriteLine(a.StackTrace); }
         }
     }
 }

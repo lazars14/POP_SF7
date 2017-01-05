@@ -2,6 +2,10 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System;
+using POP_SF7.Helpers;
+using System.ComponentModel;
+using System.Windows.Data;
 
 namespace POP_SF7
 {
@@ -10,6 +14,8 @@ namespace POP_SF7
     /// </summary>
     public partial class StudentAddEdit : Window
     {
+        public ICollectionView CoursesView { get; set; }
+
         public Student StudentS { get; set; }
         public Decider Decider { get; set; }
 
@@ -19,26 +25,43 @@ namespace POP_SF7
         public StudentAddEdit(Student student, Decider decider)
         {
             InitializeComponent();
+
             StudentS = student;
             Decider = decider;
-            
+
+            setupWindow();
+        }
+
+        private void setupWindow()
+        {
             DataContext = StudentS;
             personInfo.descriptionlbl.Text = (Decider == Decider.ADD) ? labelAddStudent : labelEditStudent;
+
+            CoursesView = CollectionViewSource.GetDefaultView(StudentS.ListOfCourses);
+            coursesdg.ItemsSource = CoursesView;
+            coursesdg.IsSynchronizedWithCurrentItem = true;
         }
 
         private void okbtn_Click(object sender, RoutedEventArgs e)
         {
             if(Decider == Decider.ADD)
             {
-                Student.Add(StudentS);
-                StudentS.Id = ApplicationA.Instance.Students.Count() + 1;
-                ApplicationA.Instance.Students.Add(StudentS);
+                if(Student.Add(StudentS))
+                {
+                    StudentS.Id = ApplicationA.Instance.Students.Count() + 1;
+                    ApplicationA.Instance.Students.Add(StudentS);
+                }
             }
             else
             {
                 Student.Edit(StudentS);
             }
             Close();
+        }
+
+        private void coursesdg_AutoGeneratingColumn(object sender, System.Windows.Controls.DataGridAutoGeneratingColumnEventArgs e)
+        {
+            LoadColumnsHelper.LoadCourse(e);
         }
     }
 }

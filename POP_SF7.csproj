@@ -57,6 +57,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helpers\LoadColumnsHelper.cs" />
     <Compile Include="Helpers\Search.cs" />
     <Compile Include="Helpers\ValidationHelper.cs" />
     <Compile Include="People\Student.cs" />

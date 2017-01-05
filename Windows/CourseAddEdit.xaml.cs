@@ -1,4 +1,5 @@
-﻿using POP_SF7.School;
+﻿using POP_SF7.Helpers;
+using POP_SF7.School;
 using POP_SF7.Windows;
 using System;
 using System.Collections.Generic;
@@ -77,9 +78,11 @@ namespace POP_SF7
         {
             if(Decider == Decider.ADD)
             {
-                Course.Add(Course);
-                Course.Id = ApplicationA.Instance.Courses.Count() + 1;
-                ApplicationA.Instance.Courses.Add(Course);
+                if(Course.Add(Course))
+                {
+                    Course.Id = ApplicationA.Instance.Courses.Count() + 1;
+                    ApplicationA.Instance.Courses.Add(Course);
+                }
             }
             else
             {
@@ -90,30 +93,7 @@ namespace POP_SF7
 
         private void studentsdg_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            switch ((string)e.Column.Header)
-            {
-                case "FirstName":
-                    e.Column.Header = "Ime";
-                    break;
-                case "LastName":
-                    e.Column.Header = "Prezime";
-                    break;
-                case "Address":
-                    e.Cancel = true;
-                    break;
-                case "Jmbg":
-                    e.Cancel = true;
-                    break;
-                case "Deleted":
-                    e.Column.Header = "Obrisan";
-                    break;
-                case "ListOfPayments":
-                    e.Cancel = true;
-                    break;
-                case "ListOfCourses":
-                    e.Cancel = true;
-                    break;
-            }
+            LoadColumnsHelper.LoadStudent(e);
         }
 
         private void languagecb_SelectionChanged(object sender, SelectionChangedEventArgs e)

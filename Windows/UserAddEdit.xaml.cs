@@ -44,9 +44,11 @@ namespace POP_SF7
             {
                 if (Decider == Decider.ADD)
                 {
-                    User.Add(UserU);
-                    UserU.Id = ApplicationA.Instance.Users.Count() + 1;
-                    ApplicationA.Instance.Users.Add(UserU);
+                    if (User.Add(UserU))
+                    {
+                        UserU.Id = ApplicationA.Instance.Users.Count() + 1;
+                        ApplicationA.Instance.Users.Add(UserU);
+                    }
                     Close();
                 }
                 else

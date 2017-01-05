@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:POP_SF7"
         mc:Ignorable="d"
         xmlns:userControls="clr-namespace:POP_SF7.UserControls"
-        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="585.933" Width="346.008" ResizeMode="NoResize">
+        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="605.933" Width="346.008" ResizeMode="NoResize">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="350"/>
@@ -20,7 +20,7 @@
         <TabControl x:Name="tabControl" TabStripPlacement="Top" Grid.Row="1" Margin="10,10,1,10">
             <TabItem x:Name="languagesTabItem" Header="Jezici">
                 <Grid>
-                    <DataGrid x:Name="languagesdg" HorizontalAlignment="Left" Height="110" Margin="10,10,0,0" VerticalAlignment="Top" Width="275"/>
+                    <DataGrid x:Name="languagesdg" AutoGeneratingColumn="languagesdg_AutoGeneratingColumn" HorizontalAlignment="Left" Height="110" Margin="10,10,0,0" VerticalAlignment="Top" Width="275"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="33" Margin="10,120,0,0" VerticalAlignment="Center" Width="275">
                         <Button x:Name="addLanguagesbtn" Content="Dodaj" Width="75" Margin="55,5,5,5" HorizontalAlignment="Center"/>
                         <Button x:Name="deleteLanguagesbtn" Content="Obrisi" Width="75" Margin="5"/>
@@ -29,7 +29,7 @@
             </TabItem>
             <TabItem x:Name="coursesTabItem" Header="Kursevi" IsSelected="True">
                 <Grid>
-                    <DataGrid x:Name="coursesdg" HorizontalAlignment="Left" Height="110" Margin="10,10,0,0" VerticalAlignment="Top" Width="275"/>
+                    <DataGrid x:Name="coursesdg" AutoGeneratingColumn="languagesdg_AutoGeneratingColumn" HorizontalAlignment="Left" Height="110" Margin="10,10,0,0" VerticalAlignment="Top" Width="275"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="33" Margin="10,120,0,0" VerticalAlignment="Center" Width="275">
                         <Button x:Name="addCoursebtn" Content="Dodaj" Width="75" Margin="55,5,5,5" HorizontalAlignment="Center"/>
                         <Button x:Name="deleteCoursebtn" Content="Obrisi" Width="75" Margin="5"/>

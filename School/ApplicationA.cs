@@ -1,5 +1,6 @@
 ﻿using POP_SF7.School;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace POP_SF7
 {
@@ -54,22 +55,44 @@ namespace POP_SF7
         {
             Language.Load();
             CourseType.Load();
+            Course.Load();
             Teacher.Load();
             TeacherTeachesLanguage.Load();
             TeacherTeachesCourse.Load();
+
+            /*
+            MessageBox.Show(ApplicationA.Instance.Languages.Count.ToString() + " Jezici");
+            MessageBox.Show(ApplicationA.Instance.CourseTypes.Count.ToString() + " Tipovi kurseva");
+            MessageBox.Show(ApplicationA.Instance.Courses.Count.ToString() + " Kursevi");
+            MessageBox.Show(ApplicationA.Instance.Teachers.Count.ToString() + " Nastavnici");
+            MessageBox.Show(ApplicationA.Instance.TeacherTeachesLanguageCollection.Count.ToString() + " TTL");
+            MessageBox.Show(ApplicationA.Instance.TeacherTeachesCourseCollection.Count.ToString() + " TTC");
+            */
         }
 
         public static void LoadAllDataEmployee()
         {
-            Language.Load();
-            CourseType.Load();
-            Teacher.Load();
-            Student.Load();
+            Language.Load(); 
+            CourseType.Load(); 
+            Teacher.Load(); 
+            Student.Load(); 
             Payment.Load();
-            Course.Load();
-            TeacherTeachesLanguage.Load();
+            Course.Load(); 
+            TeacherTeachesLanguage.Load(); 
             StudentAttendsCourse.Load();
             TeacherTeachesCourse.Load();
+
+            /*
+            MessageBox.Show(ApplicationA.Instance.Languages.Count.ToString() + " Jezici");
+            MessageBox.Show(ApplicationA.Instance.CourseTypes.Count.ToString() + " Tipovi kurseva");
+            MessageBox.Show(ApplicationA.Instance.Teachers.Count.ToString() + " Nastavnici");
+            MessageBox.Show(ApplicationA.Instance.Students.Count.ToString() + " Ucenici");
+            MessageBox.Show(ApplicationA.Instance.Payments.Count.ToString() + " Uplate");
+            MessageBox.Show(ApplicationA.Instance.Courses.Count.ToString() + " Kursevi");
+            MessageBox.Show(ApplicationA.Instance.TeacherTeachesLanguageCollection.Count.ToString() + " TTL");
+            MessageBox.Show(ApplicationA.Instance.StudentAttendsCourseCollection.Count.ToString() + " SAC");
+            MessageBox.Show(ApplicationA.Instance.TeacherTeachesCourseCollection.Count.ToString() + " TTC");
+            */
         }
     }
 }

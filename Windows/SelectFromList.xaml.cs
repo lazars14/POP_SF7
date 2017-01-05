@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System;
+using POP_SF7.Helpers;
 
 namespace POP_SF7.Windows
 {
@@ -130,72 +131,11 @@ namespace POP_SF7.Windows
         {
             if(CourseStudentDecider == CourseStudentDecider.COURSE)
             {
-                switch((string)e.Column.Header)
-                {
-                    case "Id":
-                        e.Cancel = true;
-                        break;
-                    case "Language":
-                        e.Cancel = true;
-                        break;
-                    case "CourseType":
-                        e.Cancel = true;
-                        break;
-                    case "Price":
-                        e.Column.Header = "Cena";
-                        break;
-                    case "ListOfStudents":
-                        e.Cancel = true;
-                        break;
-                    case "Teacher":
-                        e.Cancel = true;
-                        break;
-                    case "StartDate":
-                        e.Column.Header = "Datum pocetka";
-                        break;
-                    case "EndDate":
-                        e.Column.Header = "Datum kraja";
-                        break;
-                    case "Deleted":
-                        e.Column.Header = "Obrisan";
-                        break;
-                    case "Error":
-                        e.Cancel = true;
-                        break;
-                }
+                LoadColumnsHelper.LoadCourse(e);
             }
             else
             {
-                switch ((string)e.Column.Header)
-                {
-                    case "Id":
-                        e.Cancel = true;
-                        break;
-                    case "FirstName":
-                        e.Column.Header = "Ime";
-                        break;
-                    case "LastName":
-                        e.Column.Header = "Prezime";
-                        break;
-                    case "Address":
-                        e.Column.Header = "Adresa";
-                        break;
-                    case "Jmbg":
-                        e.Column.Header = "JMBG";
-                        break;
-                    case "Deleted":
-                        e.Column.Header = "Obrisan";
-                        break;
-                    case "ListOfPayments":
-                        e.Cancel = true;
-                        break;
-                    case "ListOfCourses":
-                        e.Cancel = true;
-                        break;
-                    case "Error":
-                        e.Cancel = true;
-                        break;
-                }
+                LoadColumnsHelper.LoadStudent(e);
             }
         }
     }

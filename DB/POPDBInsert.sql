@@ -12,22 +12,22 @@ Insert into CourseType values('Pocetni', 0);
 Insert into CourseType values('Srednji', 0);
 Insert into CourseType values('Napredni', 0);
 
-Insert into Student values('Luka', 'Maksimovic', 'Adresa 1', '1234567891011', 0);
-Insert into Student values('Bogdan', 'Dragovic', 'Adresa 2', '1234567891011', 0);
-Insert into Student values('Igor', 'Jevdjenic', 'Adresa 3', '1234567891011', 0);
-Insert into Student values('Dejan', 'Pejic', 'Adresa 4', '1234567891011', 0);
-Insert into Student values('Nemanja', 'Vucicevic', 'Adresa 5', '1234567891011', 0);
-Insert into Student values('Nenad', 'Karanovic', 'Adresa 6', '1234567891011', 0);
-Insert into Student values('Nemanja', 'Kapetanovic', 'Adresa 7', '1234567891011', 0);
-Insert into Student values('Stefan', 'Fundic', 'Adresa 8', '1234567891011', 0);
-Insert into Student values('Nenad', 'Nerandzic', 'Adresa 9', '1234567891011', 0);
-Insert into Student values('Filip', 'Zekavcic', 'Adresa 10', '1234567891011', 0);
+Insert into Student values('Luka', 'Maksimovic', '1234567891011', 'Adresa 1', 0);
+Insert into Student values('Bogdan', 'Dragovic', '1234567891011', 'Adresa 2', 0);
+Insert into Student values('Igor', 'Jevdjenic', '1234567891011', 'Adresa 3', 0);
+Insert into Student values('Dejan', 'Pejic', '1234567891011', 'Adresa 4', 0);
+Insert into Student values('Nemanja', 'Vucicevic', '1234567891011', 'Adresa 5', 0);
+Insert into Student values('Nenad', 'Karanovic', '1234567891011', 'Adresa 6', 0);
+Insert into Student values('Nemanja', 'Kapetanovic', '1234567891011', 'Adresa 7', 0);
+Insert into Student values('Stefan', 'Fundic', '1234567891011', 'Adresa 8', 0);
+Insert into Student values('Nenad', 'Nerandzic', '1234567891011', 'Adresa 9', 0);
+Insert into Student values('Filip', 'Zekavcic', '1234567891011', 'Adresa 10', 0);
 
-Insert into Teacher values('Uros', 'Carapic', 'Adresa 1', '1234567891011', 0);
-Insert into Teacher values('Stefan', 'Mitrovic', 'Adresa 2', '1234567891011', 0);
-Insert into Teacher values('Matija', 'Popovic', 'Adresa 3', '1234567891011', 0);
-Insert into Teacher values('Marko', 'Radovanovic', 'Adresa 4', '1234567891011', 0);
-Insert into Teacher values('Lazar', 'Markovic', 'Adresa 5', '1234567891011', 0);
+Insert into Teacher values('Uros', 'Carapic', '1234567891011', 'Adresa 1', 0);
+Insert into Teacher values('Stefan', 'Mitrovic', '1234567891011', 'Adresa 2', 0);
+Insert into Teacher values('Matija', 'Popovic', '1234567891011', 'Adresa 3', 0);
+Insert into Teacher values('Marko', 'Radovanovic', '1234567891011', 'Adresa 4', 0);
+Insert into Teacher values('Lazar', 'Markovic', '1234567891011', 'Adresa 5', 0);
 
 Insert into UserU values('Marko', 'Radonjic', '1234567891011', 'Adresa 1', 0, 'marko', 'radonjic', 'ADMINISTRATOR');
 Insert into UserU values('Aleksandar', 'Todorovic', '1234567891011', 'Adresa 2', 0, 'aleksandar', 'todorovic', 'EMPLOYEE');

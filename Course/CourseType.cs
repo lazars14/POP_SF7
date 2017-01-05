@@ -92,10 +92,12 @@ namespace POP_SF7
             }
         }
 
-        public static void Add(CourseType type)
+        public static bool Add(CourseType type)
         {
             using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
             {
+                bool valid = false;
+
                 connection.Open();
 
                 SqlCommand command = connection.CreateCommand();
@@ -107,6 +109,8 @@ namespace POP_SF7
                     command.Parameters.Add(new SqlParameter("@Deleted", type.Deleted));
 
                     command.ExecuteNonQuery();
+
+                    valid = true;
                 }
                 catch (SqlException e)
                 {
@@ -124,6 +128,8 @@ namespace POP_SF7
                 {
                     MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + n.GetType());
                 }
+
+                return valid;
             }
         }
 

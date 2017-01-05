@@ -116,10 +116,12 @@ namespace POP_SF7
             }
         }
 
-        public static void Add(Payment payment)
+        public static bool Add(Payment payment)
         {
             using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
             {
+                bool valid = false;
+
                 connection.Open();
 
                 SqlCommand command = connection.CreateCommand();
@@ -134,6 +136,8 @@ namespace POP_SF7
                     command.Parameters.Add(new SqlParameter("@Deleted", payment.Deleted));
 
                     command.ExecuteNonQuery();
+
+                    valid = true;
                 }
                 catch (SqlException e)
                 {
@@ -151,6 +155,8 @@ namespace POP_SF7
                 {
                     MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + n.GetType());
                 }
+
+                return valid;
             }
         }
 

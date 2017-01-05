@@ -250,101 +250,17 @@ namespace POP_SF7
 
         private void studentsdg_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            switch ((string)e.Column.Header)
-            {
-                case "Id":
-                    e.Cancel = true;
-                    break;
-                case "FirstName":
-                    e.Column.Header = "Ime";
-                    break;
-                case "LastName":
-                    e.Column.Header = "Prezime";
-                    break;
-                case "Address":
-                    e.Column.Header = "Adresa";
-                    break;
-                case "Jmbg":
-                    e.Column.Header = "JMBG";
-                    break;
-                case "Deleted":
-                    e.Column.Header = "Obrisan";
-                    break;
-                case "ListOfPayments":
-                    e.Cancel = true;
-                    break;
-                case "ListOfCourses":
-                    e.Cancel = true;
-                    break;
-                case "Error":
-                    e.Cancel = true;
-                    break;
-            }
+            LoadColumnsHelper.LoadStudent(e);
         }
 
         private void coursesdg_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            switch ((string)e.Column.Header)
-            {
-                case "Id":
-                    e.Cancel = true;
-                    break;
-                case "Language":
-                    e.Cancel = true;
-                    break;
-                case "CourseType":
-                    e.Cancel = true;
-                    break;
-                case "Price":
-                    e.Column.Header = "Cena";
-                    break;
-                case "ListOfStudents":
-                    e.Cancel = true;
-                    break;
-                case "Teacher":
-                    e.Cancel = true;
-                    break;
-                case "StartDate":
-                    e.Column.Header = "Datum pocetka";
-                    break;
-                case "EndDate":
-                    e.Column.Header = "Datum kraja";
-                    break;
-                case "Deleted":
-                    e.Column.Header = "Obrisan";
-                    break;
-                case "Error":
-                    e.Cancel = true;
-                    break;
-            }
+            LoadColumnsHelper.LoadCourse(e);
         }
 
         private void paymentsdg_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            switch ((string)e.Column.Header)
-            {
-                case "Id":
-                    e.Cancel = true;
-                    break;
-                case "Course":
-                    e.Cancel = true;
-                    break;
-                case "Student":
-                    e.Cancel = true;
-                    break;
-                case "Amount":
-                    e.Column.Header = "Iznos";
-                    break;
-                case "Date":
-                    e.Column.Header = "Datum";
-                    break;
-                case "Deleted":
-                    e.Column.Header = "Obrisano";
-                    break;
-                case "Error":
-                    e.Cancel = true;
-                    break;
-            }
+            LoadColumnsHelper.LoadPayment(e);
         }
 
         private void paymentsdg_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -352,9 +268,12 @@ namespace POP_SF7
             Payment selectedPayment = PaymentsView.CurrentItem as Payment;
             try
             {
-                selectedPayment.Course = ApplicationA.Instance.Courses[selectedPayment.Course.Id - 1];
-                selectedPayment.Course.Language = ApplicationA.Instance.Languages[selectedPayment.Course.Language.Id - 1];
-                selectedPayment.Course.CourseType = ApplicationA.Instance.CourseTypes[selectedPayment.Course.CourseType.Id - 1];
+                if(selectedPayment.Course.Language.Name == null)
+                {
+                    selectedPayment.Course = ApplicationA.Instance.Courses[selectedPayment.Course.Id - 1];
+                    selectedPayment.Course.Language = ApplicationA.Instance.Languages[selectedPayment.Course.Language.Id - 1];
+                    selectedPayment.Course.CourseType = ApplicationA.Instance.CourseTypes[selectedPayment.Course.CourseType.Id - 1];
+                }
             }
             catch(NullReferenceException a) { Console.WriteLine(a.StackTrace); }
         }
@@ -364,16 +283,23 @@ namespace POP_SF7
             Course selectedCourse = CoursesView.CurrentItem as Course;
             try
             {
-                selectedCourse.Language = ApplicationA.Instance.Languages[selectedCourse.Language.Id - 1];
-                selectedCourse.CourseType = ApplicationA.Instance.CourseTypes[selectedCourse.CourseType.Id - 1];
+                if(selectedCourse.Language.Name == null)
+                {
+                    selectedCourse.Language = ApplicationA.Instance.Languages[selectedCourse.Language.Id - 1];
+                    selectedCourse.CourseType = ApplicationA.Instance.CourseTypes[selectedCourse.CourseType.Id - 1];
+                }
             }
             catch (NullReferenceException a) { Console.WriteLine(a.StackTrace); }
         }
 
         private void closeFilters(object sender, EventArgs e)
         {
-            CoursesView.Filter = null;
-            PaymentsView.Filter = null;
+            try
+            {
+                CoursesView.Filter = null;
+                PaymentsView.Filter = null;
+            }
+            catch (NullReferenceException a) { Console.WriteLine(a.StackTrace); }
         }
     }
 }

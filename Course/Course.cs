@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Windows;
 using POP_SF7.Helpers;
+using System.Globalization;
 
 namespace POP_SF7
 {
@@ -38,8 +39,6 @@ namespace POP_SF7
             get { return price; }
             set { price = value; OnPropertyChanged("Price"); }
         }
-
-        public ObservableCollection<Student> ListOfStudents { get; set; }
 
         private Teacher teacher;
         public Teacher Teacher
@@ -79,7 +78,6 @@ namespace POP_SF7
             Language = new Language(languageId);
             CourseType = new CourseType(courseTypeId);
             Price = price;
-            ListOfStudents = new ObservableCollection<Student>();
             Teacher = new Teacher(teacherId);
             StartDate = startDate;
             EndDate = endDate;
@@ -139,10 +137,12 @@ namespace POP_SF7
             }
         }
 
-        public static void Add(Course course)
+        public static bool Add(Course course)
         {
             using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
             {
+                bool valid = false;
+
                 connection.Open();
 
                 SqlCommand command = connection.CreateCommand();
@@ -159,6 +159,8 @@ namespace POP_SF7
                     command.Parameters.Add(new SqlParameter("@Deleted", course.Deleted));
 
                     command.ExecuteNonQuery();
+
+                    valid = true;
                 }
                 catch (SqlException e)
                 {
@@ -176,6 +178,8 @@ namespace POP_SF7
                 {
                     MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + n.GetType());
                 }
+
+                return valid;
             }
         }
 
@@ -310,7 +314,6 @@ namespace POP_SF7
             courseCopy.Language = Language;
             courseCopy.CourseType = CourseType;
             courseCopy.Price = Price;
-            courseCopy.ListOfStudents = new ObservableCollection<Student>(ListOfStudents);
             courseCopy.Teacher = Teacher;
             courseCopy.StartDate = StartDate;
             courseCopy.EndDate = EndDate;

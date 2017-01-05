@@ -86,7 +86,7 @@ namespace POP_SF7
                     case "Jmbg":
                         bool isNumeric = ValidationHelper.numeric(Jmbg);
                         if (!isNumeric) return ValidationHelper.Numeric;
-                        else if (ValidationHelper.containExact(Jmbg, 13)) return ValidationHelper.returnMessageExactLength(13);
+                        else if (!ValidationHelper.containExact(Jmbg, 13)) return ValidationHelper.returnMessageExactLength(13);
                         break;
                     case "Address":
                         if (ValidationHelper.EmptyField(Address)) return ValidationHelper.Empty;

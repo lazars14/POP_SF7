@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using POP_SF7.Helpers;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -78,21 +79,7 @@ namespace POP_SF7.Windows
 
         private void dynamicdg_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            switch((string)e.Column.Header)
-            {
-                case "Id":
-                    e.Cancel = true; // visibility.Collapsed
-                    break;
-                case "Name":
-                    e.Column.Header = "Naziv";
-                    break;
-                case "Deleted":
-                    e.Column.Header = "Obrisano";
-                    break;
-                case "Error":
-                    e.Cancel = true;
-                    break;
-            }
+            LoadColumnsHelper.LoadLanguage(e);
         }
     }
 }

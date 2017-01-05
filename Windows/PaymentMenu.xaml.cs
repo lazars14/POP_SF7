@@ -1,4 +1,5 @@
-﻿using POP_SF7.Windows;
+﻿using POP_SF7.Helpers;
+using POP_SF7.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -31,13 +32,6 @@ namespace POP_SF7
 
             paymentsdg.ItemsSource = view;
             paymentsdg.IsSynchronizedWithCurrentItem = true;
-
-            if(ApplicationA.Instance.Payments.Count == 0)
-            {
-                // upisati u log
-                MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE);
-                Close();
-            }
         }
 
         private void addbtn_Click(object sender, RoutedEventArgs e)
@@ -156,30 +150,7 @@ namespace POP_SF7
 
         private void paymentsdg_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            switch ((string)e.Column.Header)
-            {
-                case "Id":
-                    e.Cancel = true;
-                    break;
-                case "Course":
-                    e.Cancel = true;
-                    break;
-                case "Student":
-                    e.Cancel = true;
-                    break;
-                case "Amount":
-                    e.Column.Header = "Iznos";
-                    break;
-                case "Date":
-                    e.Column.Header = "Datum";
-                    break;
-                case "Deleted":
-                    e.Column.Header = "Obrisano";
-                    break;
-                case "Error":
-                    e.Cancel = true;
-                    break;
-            }
+            LoadColumnsHelper.LoadPayment(e);
         }
 
         private void coursebtn_Click(object sender, RoutedEventArgs e)
@@ -197,14 +168,9 @@ namespace POP_SF7
         private void paymentsdg_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Payment selectedPayment = view.CurrentItem as Payment;
-            if(selectedPayment == null)
-            {
-                view.MoveCurrentToFirst();
-                selectedPayment = view.CurrentItem as Payment;
-            }
             try
             {
-                if(selectedPayment.Student.FirstName == null)
+                if (selectedPayment.Student.FirstName == null)
                 {
                     selectedPayment.Student = ApplicationA.Instance.Students[selectedPayment.Student.Id - 1];
 

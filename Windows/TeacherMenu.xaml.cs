@@ -149,24 +149,15 @@ namespace POP_SF7
 
         private void usersdg_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            int selectedTeacherId = 1;
-
-            Student selectedStudent = TeachersView.CurrentItem as Student;
-            if (selectedStudent == null)
+            Teacher selectedTeacher = TeachersView.CurrentItem as Teacher;
+          
+            try
             {
-                TeachersView.MoveCurrentToFirst();
-                selectedStudent = TeachersView.CurrentItem as Student;
-            }
-            else
-            {
-                selectedTeacherId = selectedStudent.Id;
-            }
-
-            Teacher selectedTeacherTwo = ApplicationA.Instance.Teachers[selectedTeacherId - 1];
-            if (selectedTeacherTwo.ListOfCourses.Count == 0)
-            {
-                try
+                int selectedTeacherId = selectedTeacher.Id;
+                Teacher selectedTeacherTwo = ApplicationA.Instance.Teachers[selectedTeacherId - 1];
+                if (selectedTeacherTwo.ListOfCourses.Count == 0)
                 {
+                    
                     foreach (TeacherTeachesCourse ttc in ApplicationA.Instance.TeacherTeachesCourseCollection)
                     {
                         if (ttc.TeacherId == selectedTeacherId)
@@ -184,18 +175,22 @@ namespace POP_SF7
                             selectedTeacherTwo.ListOfLanguages.Add(lang);
                         }
                     }
+
+
                 }
-                catch(ArgumentOutOfRangeException a) { Console.WriteLine(a.StackTrace); }
-                
+                else
+                {
+                    LanguagesView = CollectionViewSource.GetDefaultView(selectedTeacherTwo.ListOfLanguages);
+                    languagesdg.ItemsSource = LanguagesView;
+                    languagesdg.IsSynchronizedWithCurrentItem = true;
+
+                    CoursesView = CollectionViewSource.GetDefaultView(selectedTeacherTwo.ListOfCourses);
+                    coursesdg.ItemsSource = CoursesView;
+                    coursesdg.IsSynchronizedWithCurrentItem = true;
+                }
+
             }
-
-            CoursesView = CollectionViewSource.GetDefaultView(selectedTeacherTwo.ListOfCourses);
-            coursesdg.ItemsSource = CoursesView;
-            coursesdg.IsSynchronizedWithCurrentItem = true;
-
-            LanguagesView = CollectionViewSource.GetDefaultView(selectedTeacherTwo.ListOfLanguages);
-            languagesdg.ItemsSource = LanguagesView;
-            languagesdg.IsSynchronizedWithCurrentItem = true;
+            catch (NullReferenceException a) { Console.WriteLine(a.StackTrace); }
         }
 
         private void cancelSearchbtn_Click(object sender, RoutedEventArgs e)
@@ -205,95 +200,30 @@ namespace POP_SF7
 
         private void teachersdg_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            switch ((string)e.Column.Header)
-            {
-                case "Id":
-                    e.Cancel = true;
-                    break;
-                case "FirstName":
-                    e.Column.Header = "Ime";
-                    break;
-                case "LastName":
-                    e.Column.Header = "Prezime";
-                    break;
-                case "Address":
-                    e.Column.Header = "Adresa";
-                    break;
-                case "Jmbg":
-                    e.Column.Header = "JMBG";
-                    break;
-                case "Deleted":
-                    e.Column.Header = "Obrisan";
-                    break;
-                case "ListOfLanguages":
-                    e.Cancel = true;
-                    break;
-                case "ListOfCourses":
-                    e.Cancel = true;
-                    break;
-                case "Error":
-                    e.Cancel = true;
-                    break;
-                case "FullName":
-                    e.Cancel = true;
-                    break;
-            }
+            LoadColumnsHelper.LoadTeacher(e);
         }
 
         private void languagesdg_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            switch ((string)e.Column.Header)
-            {
-                case "Id":
-                    e.Cancel = true;
-                    break;
-                case "Name":
-                    e.Column.Header = "Ime";
-                    break;
-                case "Deleted":
-                    e.Column.Header = "Obrisano";
-                    break;
-                case "Error":
-                    e.Cancel = true;
-                    break;
-            }
+            LoadColumnsHelper.LoadLanguage(e);
         }
 
         private void coursesdg_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            switch ((string)e.Column.Header)
+            LoadColumnsHelper.LoadCourse(e);
+        }
+
+        private void coursesdg_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
             {
-                case "Id":
-                    e.Cancel = true;
-                    break;
-                case "Language":
-                    e.Cancel = true;
-                    break;
-                case "CourseType":
-                    e.Cancel = true;
-                    break;
-                case "Price":
-                    e.Column.Header = "Cena";
-                    break;
-                case "ListOfStudents":
-                    e.Cancel = true;
-                    break;
-                case "Teacher":
-                    e.Cancel = true;
-                    break;
-                case "StartDate":
-                    e.Column.Header = "Datum pocetka";
-                    break;
-                case "EndDate":
-                    e.Column.Header = "Datum kraja";
-                    break;
-                case "Deleted":
-                    e.Column.Header = "Obrisan";
-                    break;
-                case "Error":
-                    e.Cancel = true;
-                    break;
-            }
+                Course selectedCourse = CoursesView.CurrentItem as Course;
+                if (selectedCourse.Language.Name == null)
+                {
+                    selectedCourse.Language = ApplicationA.Instance.Languages[selectedCourse.Language.Id - 1];
+                    selectedCourse.CourseType = ApplicationA.Instance.CourseTypes[selectedCourse.CourseType.Id - 1];
+                }
+            }catch(NullReferenceException a) { Console.WriteLine(a.StackTrace); }
         }
     }
 }

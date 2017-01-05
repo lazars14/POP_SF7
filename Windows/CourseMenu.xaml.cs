@@ -1,4 +1,5 @@
-﻿using POP_SF7.School;
+﻿using POP_SF7.Helpers;
+using POP_SF7.School;
 using POP_SF7.Windows;
 using System;
 using System.Collections.Generic;
@@ -220,73 +221,12 @@ namespace POP_SF7
 
         private void studentsdg_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            switch ((string)e.Column.Header)
-            {
-                case "Id":
-                    e.Cancel = true;
-                    break;
-                case "FirstName":
-                    e.Column.Header = "Ime";
-                    break;
-                case "LastName":
-                    e.Column.Header = "Prezime";
-                    break;
-                case "Address":
-                    e.Cancel = true;
-                    break;
-                case "Jmbg":
-                    e.Column.Header = "JMBG";
-                    break;
-                case "Deleted":
-                    e.Column.Header = "Obrisan";
-                    break;
-                case "ListOfPayments":
-                    e.Cancel = true;
-                    break;
-                case "ListOfCourses":
-                    e.Cancel = true;
-                    break;
-                case "Error":
-                    e.Cancel = true;
-                    break;
-            }
+            LoadColumnsHelper.LoadStudent(e);
         }
 
         private void coursesdg_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            switch ((string)e.Column.Header)
-            {
-                case "Id":
-                    e.Cancel = true;
-                    break;
-                case "Language":
-                    e.Cancel = true;
-                    break;
-                case "CourseType":
-                    e.Cancel = true;
-                    break;
-                case "Price":
-                    e.Column.Header = "Cena";
-                    break;
-                case "ListOfStudents":
-                    e.Cancel = true;
-                    break;
-                case "Teacher":
-                    e.Cancel = true;
-                    break;
-                case "StartDate":
-                    e.Column.Header = "Datum pocetka";
-                    break;
-                case "EndDate":
-                    e.Column.Header = "Datum kraja";
-                    break;
-                case "Deleted":
-                    e.Column.Header = "Obrisan";
-                    break;
-                case "Error":
-                    e.Cancel = true;
-                    break;
-            }
+            LoadColumnsHelper.LoadCourse(e);
         }
 
         private void showCoursesbtn_Click(object sender, RoutedEventArgs e)
