@@ -31,18 +31,34 @@ namespace POP_SF7.Windows
 
         private void okbtn_Click(object sender, RoutedEventArgs e)
         {
-            if(Decider == Decider.ADD)
+            if(userControl.nametb.Text.Equals(""))
             {
-                if(POP_SF7.Language.Add(LanguageL))
-                {
-                    LanguageL.Id = ApplicationA.Instance.Languages.Count() + 1;
-                    ApplicationA.Instance.Languages.Add(LanguageL);
-                }
+                MessageBox.Show(ApplicationA.FILL_ALL_FIELDS_WARNING);
             }
             else
             {
-                POP_SF7.Language.Edit(LanguageL);
+                if (Decider == Decider.ADD)
+                {
+                    if (POP_SF7.Language.Add(LanguageL))
+                    {
+                        LanguageL.Id = ApplicationA.Instance.Languages.Count() + 1;
+                        ApplicationA.Instance.Languages.Add(LanguageL);
+                    }
+                }
+                else
+                {
+                    if (!POP_SF7.Language.Edit(LanguageL))
+                    {
+                        cancelbtn_Click(null, null);
+                    }
+                }
+                Close();
             }
+            
+        }
+
+        private void cancelbtn_Click(object sender, RoutedEventArgs e)
+        {
             Close();
         }
     }

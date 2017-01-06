@@ -120,12 +120,16 @@ namespace POP_SF7
                         SelectedPayment.Id = ApplicationA.Instance.Payments.Count() + 1;
                         ApplicationA.Instance.Payments.Add(SelectedPayment);
                     }
+                    Close();
                 }
                 else
                 {
-                    Payment.Edit(SelectedPayment);
+                    if(!Payment.Edit(SelectedPayment))
+                    {
+                        cancelbtn_Click(null, null);
+                    }
+                    Close();
                 }
-                Close();
             }
         }
 
@@ -203,6 +207,11 @@ namespace POP_SF7
                 PaymentsView.Filter = null;
             }
             catch(NullReferenceException a) { Console.WriteLine(a.StackTrace); }
+        }
+
+        private void cancelbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

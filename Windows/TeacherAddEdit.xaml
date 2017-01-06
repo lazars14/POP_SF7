@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:POP_SF7"
         mc:Ignorable="d"
         xmlns:userControls="clr-namespace:POP_SF7.UserControls"
-        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="605.933" Width="346.008" ResizeMode="NoResize">
+        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="647.933" Width="346.008" ResizeMode="NoResize">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="350"/>
@@ -41,7 +41,7 @@
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,10,0,0">
             <Button x:Name="okbtn" Content="OK" Width="70" Height="30" Click="okbtn_Click"/>
-            <Button x:Name="cancelbtn" IsCancel="True" Content="Cancel" Width="70" Height="30" Margin="30,0,0,0"/>
+            <Button x:Name="cancelbtn" IsCancel="True" Content="Cancel" Width="70" Height="30" Margin="30,0,0,0" Click="cancelbtn_Click"/>
         </StackPanel>
     </Grid>
 </Window>

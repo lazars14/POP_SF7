@@ -74,8 +74,10 @@ namespace POP_SF7
                     if (result == MessageBoxResult.Yes)
                     {
                         selectedUser = view.CurrentItem as User;
-                        User.Delete(selectedUser);
-                        selectedUser.Deleted = true;
+                        if(User.Delete(selectedUser))
+                        {
+                            selectedUser.Deleted = true;
+                        }
                     }
                 }
             }

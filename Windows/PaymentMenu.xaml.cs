@@ -77,8 +77,10 @@ namespace POP_SF7
                 if (result == MessageBoxResult.Yes)
                 {
                     selectedPayment = view.CurrentItem as Payment;
-                    Payment.Delete(selectedPayment);
-                    selectedPayment.Deleted = true;
+                    if(Payment.Delete(selectedPayment))
+                    {
+                        selectedPayment.Deleted = true;
+                    }
                 }
             }
         }

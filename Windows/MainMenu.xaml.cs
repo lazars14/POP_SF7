@@ -29,7 +29,10 @@ namespace POP_SF7
                 students.Visibility = Visibility.Collapsed;
                 courses.Visibility = Visibility.Collapsed;
 
-                ApplicationA.LoadAllDataAdministrator();
+                if(ApplicationA.AdminDataLoaded == false && ApplicationA.EmployeeDataLoaded == false)
+                {
+                    ApplicationA.LoadAllDataAdministrator();
+                }
             }
             else if (role == Role.EMPLOYEE)
             {
@@ -39,7 +42,14 @@ namespace POP_SF7
                 languages.Visibility = Visibility.Collapsed;
                 courseTypes.Visibility = Visibility.Collapsed;
 
-                ApplicationA.LoadAllDataEmployee();
+                if (ApplicationA.AdminDataLoaded == true && ApplicationA.EmployeeDataLoaded == false)
+                {
+                    ApplicationA.LoadEmployeeAdminDifference();
+                }
+                else if(ApplicationA.AdminDataLoaded == false && ApplicationA.EmployeeDataLoaded == false)
+                {
+                    ApplicationA.LoadAllDataEmployee();
+                }
             }
         }
 

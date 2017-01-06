@@ -44,24 +44,39 @@ namespace POP_SF7
 
         private void okbtn_Click(object sender, RoutedEventArgs e)
         {
-            if(Decider == Decider.ADD)
+            if (personInfo.nametb.Text.Equals("") || personInfo.lastnametb.Text.Equals("") || personInfo.addresstb.Text.Equals("") || personInfo.jmbgtb.Text.Equals(""))
             {
-                if(Student.Add(StudentS))
-                {
-                    StudentS.Id = ApplicationA.Instance.Students.Count() + 1;
-                    ApplicationA.Instance.Students.Add(StudentS);
-                }
+                MessageBox.Show(ApplicationA.FILL_ALL_FIELDS_WARNING);
             }
             else
             {
-                Student.Edit(StudentS);
+                if (Decider == Decider.ADD)
+                {
+                    if (Student.Add(StudentS))
+                    {
+                        StudentS.Id = ApplicationA.Instance.Students.Count() + 1;
+                        ApplicationA.Instance.Students.Add(StudentS);
+                    }
+                }
+                else
+                {
+                    if (!Student.Edit(StudentS))
+                    {
+                        cancelbtn_Click(null, null);
+                    }
+                }
+                Close();
             }
-            Close();
         }
 
         private void coursesdg_AutoGeneratingColumn(object sender, System.Windows.Controls.DataGridAutoGeneratingColumnEventArgs e)
         {
             LoadColumnsHelper.LoadCourse(e);
+        }
+
+        private void cancelbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

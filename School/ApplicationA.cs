@@ -12,8 +12,13 @@ namespace POP_SF7
 
         public const string DATABASE_ERROR_MESSAGE = "Doslo je do greske sa bazom!" + "\n" + "Greska ";
 
+        public const string FILL_ALL_FIELDS_WARNING = "Morate da popunite sva polja!";
+
         public SchoolS SchoolS { get; set; }
         public int UserId { get; set; }
+
+        public static bool AdminDataLoaded = false;
+        public static bool EmployeeDataLoaded = false;
 
         public ObservableCollection<Language> Languages { get; set; }
         public ObservableCollection<CourseType> CourseTypes { get; set; }
@@ -39,6 +44,7 @@ namespace POP_SF7
         private ApplicationA()
         {
             SchoolS = SchoolS.LoadSchool();
+
             Users = new ObservableCollection<User>();
             Languages = new ObservableCollection<Language>();
             CourseTypes = new ObservableCollection<CourseType>();
@@ -59,6 +65,8 @@ namespace POP_SF7
             Teacher.Load();
             TeacherTeachesLanguage.Load();
             TeacherTeachesCourse.Load();
+
+            AdminDataLoaded = true;
 
             /*
             MessageBox.Show(ApplicationA.Instance.Languages.Count.ToString() + " Jezici");
@@ -82,6 +90,8 @@ namespace POP_SF7
             StudentAttendsCourse.Load();
             TeacherTeachesCourse.Load();
 
+            EmployeeDataLoaded = true;
+
             /*
             MessageBox.Show(ApplicationA.Instance.Languages.Count.ToString() + " Jezici");
             MessageBox.Show(ApplicationA.Instance.CourseTypes.Count.ToString() + " Tipovi kurseva");
@@ -92,6 +102,21 @@ namespace POP_SF7
             MessageBox.Show(ApplicationA.Instance.TeacherTeachesLanguageCollection.Count.ToString() + " TTL");
             MessageBox.Show(ApplicationA.Instance.StudentAttendsCourseCollection.Count.ToString() + " SAC");
             MessageBox.Show(ApplicationA.Instance.TeacherTeachesCourseCollection.Count.ToString() + " TTC");
+            */
+        }
+
+        public static void LoadEmployeeAdminDifference()
+        {
+            Student.Load();
+            Payment.Load();
+            StudentAttendsCourse.Load();
+
+            EmployeeDataLoaded = true;
+
+            /*
+            MessageBox.Show(ApplicationA.Instance.Students.Count.ToString() + " Ucenici");
+            MessageBox.Show(ApplicationA.Instance.Payments.Count.ToString() + " Uplate");
+            MessageBox.Show(ApplicationA.Instance.StudentAttendsCourseCollection.Count.ToString() + " SAC");
             */
         }
     }

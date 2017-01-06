@@ -92,8 +92,11 @@ namespace POP_SF7
                 if (result == MessageBoxResult.Yes)
                 {
                     selectedCourse = CoursesView.CurrentItem as Course;
-                    Course.Delete(selectedCourse);
-                    selectedCourse.Deleted = true;
+                    if(Course.Delete(selectedCourse))
+                    {
+                        selectedCourse.Deleted = true;
+                    }
+                    
                 }
             }
         }

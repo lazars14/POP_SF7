@@ -35,7 +35,11 @@ namespace POP_SF7
             bool valid = checkUsername();
             bool deletingSelf = checkSelfDeletion();
 
-            if (deletingSelf)
+            if(personInfo.nametb.Text.Equals("") || personInfo.lastnametb.Text.Equals("") || personInfo.addresstb.Text.Equals("") || personInfo.jmbgtb.Text.Equals("") || usernametb.Text.Equals("") || passwordtb.Text.Equals(""))
+            {
+                MessageBox.Show(ApplicationA.FILL_ALL_FIELDS_WARNING);
+            }
+            else if (deletingSelf)
             {
                 MessageBox.Show("Ne mozete da obrisete sebe!");
                 personInfo.deletedcb.IsChecked = false;
@@ -53,7 +57,10 @@ namespace POP_SF7
                 }
                 else
                 {   
-                    User.Edit(UserU);
+                    if(!User.Edit(UserU))
+                    {
+                        cancelbtn_Click(null, null);
+                    }
                     Close();
                 }
             }
@@ -126,6 +133,11 @@ namespace POP_SF7
             {
                 Console.WriteLine(a.StackTrace);
             }     
+        }
+
+        private void cancelbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

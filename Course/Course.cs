@@ -183,10 +183,12 @@ namespace POP_SF7
             }
         }
 
-        public static void Edit(Course course)
+        public static bool Edit(Course course)
         {
             using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
             {
+                bool valid = false;
+
                 connection.Open();
 
                 SqlCommand command = connection.CreateCommand();
@@ -204,6 +206,8 @@ namespace POP_SF7
                     command.Parameters.Add(new SqlParameter("@Id", course.Id));
 
                     command.ExecuteNonQuery();
+
+                    valid = true;
                 }
                 catch (SqlException e)
                 {
@@ -221,23 +225,29 @@ namespace POP_SF7
                 {
                     MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + n.GetType());
                 }
+
+                return valid;
             }
         }
 
-        public static void Delete(Course course)
+        public static bool Delete(Course course)
         {
             using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
             {
+                bool valid = false;
+
                 connection.Open();
 
                 SqlCommand command = connection.CreateCommand();
                 command.CommandText = @"Update Course Set Course_Deleted=1 Where Course_Id=@Id;";
 
-                command.Parameters.Add(new SqlParameter("@Id", course.Id));
-
                 try
                 {
+                    command.Parameters.Add(new SqlParameter("@Id", course.Id));
+
                     command.ExecuteNonQuery();
+
+                    valid = true;
                 }
                 catch (SqlException e)
                 {
@@ -255,6 +265,8 @@ namespace POP_SF7
                 {
                     MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + n.GetType());
                 }
+
+                return valid;
             }
         }
 

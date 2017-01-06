@@ -113,6 +113,9 @@
     <Compile Include="Windows\PaymentMenu.xaml.cs">
       <DependentUpon>PaymentMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\SelectCourseLanguage.xaml.cs">
+      <DependentUpon>SelectCourseLanguage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\SelectFromList.xaml.cs">
       <DependentUpon>SelectFromList.xaml</DependentUpon>
     </Compile>
@@ -190,6 +193,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\PaymentMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\SelectCourseLanguage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

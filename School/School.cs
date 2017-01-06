@@ -134,10 +134,14 @@ namespace POP_SF7
             }
         }
 
-        public static void UpdateSchool(SchoolS school)
+        public static bool UpdateSchool(SchoolS school)
         {
             using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
             {
+                bool valid = false;
+
+                connection.Open();
+
                 SqlCommand command = connection.CreateCommand();
                 command.CommandText = @"Update School Set School_Name=@Name, School_Address=@Address, School_PhoneNumber=@PhoneNumber, School_Email=@Email, School_WebSite=@WebSite, School_Pib=@Pib, School_IdentificationNumber=@IdentificationNumber, School_AccountNumber=@AccountNumber Where School_Id=1;";
 
@@ -153,6 +157,8 @@ namespace POP_SF7
                     command.Parameters.Add(new SqlParameter("@AccountNumber", school.AccountNumber));
 
                     command.ExecuteNonQuery();
+
+                    valid = true;
                 }
                 catch (SqlException e)
                 {
@@ -170,6 +176,8 @@ namespace POP_SF7
                 {
                     MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + n.GetType());
                 }
+
+                return valid;
             }
         }
 

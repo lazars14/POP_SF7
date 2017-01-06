@@ -76,19 +76,29 @@ namespace POP_SF7
 
         private void okbtn_Click(object sender, RoutedEventArgs e)
         {
-            if(Decider == Decider.ADD)
+            if(pricetb.Text.Equals("") || languagecb.SelectedItem == null || courseTypecb.SelectedItem == null || teachercb.SelectedItem == null)
             {
-                if(Course.Add(Course))
-                {
-                    Course.Id = ApplicationA.Instance.Courses.Count() + 1;
-                    ApplicationA.Instance.Courses.Add(Course);
-                }
+                MessageBox.Show(ApplicationA.FILL_ALL_FIELDS_WARNING);
             }
             else
             {
-                Course.Edit(Course);
+                if (Decider == Decider.ADD)
+                {
+                    if (Course.Add(Course))
+                    {
+                        Course.Id = ApplicationA.Instance.Courses.Count() + 1;
+                        ApplicationA.Instance.Courses.Add(Course);
+                    }
+                }
+                else
+                {
+                    if (!Course.Edit(Course))
+                    {
+                        cancelbtn_Click(null, null);
+                    }
+                }
+                Close();
             }
-            Close();
         }
 
         private void studentsdg_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
@@ -123,6 +133,11 @@ namespace POP_SF7
                 teachercb.ItemsSource = filteredTeachers;
                 teachercb.IsEnabled = true;
             }
+        }
+
+        private void cancelbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

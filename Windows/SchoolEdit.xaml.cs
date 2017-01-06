@@ -18,7 +18,19 @@ namespace POP_SF7
 
         private void okbtn_Click(object sender, RoutedEventArgs e)
         {
-            SchoolS.UpdateSchool(SchoolS);
+            if(nametb.Text.Equals("") || addresstb.Text.Equals("") || phonetb.Text.Equals("") || nametb.Text.Equals("") || emailtb.Text.Equals("") || websitetb.Text.Equals("") || pibtb.Text.Equals("") || identificationNumbertb.Text.Equals("") || accountNumbertb.Text.Equals(""))
+            {
+                MessageBox.Show(ApplicationA.FILL_ALL_FIELDS_WARNING);
+            }
+            else if(!SchoolS.UpdateSchool(SchoolS))
+            {
+                cancelbtn_Click(null, null);
+            }
+            Close();
+        }
+
+        private void cancelbtn_Click(object sender, RoutedEventArgs e)
+        {
             Close();
         }
     }

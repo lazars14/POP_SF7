@@ -100,8 +100,10 @@ namespace POP_SF7
                 if (result == MessageBoxResult.Yes)
                 {
                     selectedStudent = StudentsView.CurrentItem as Student;
-                    Student.Delete(selectedStudent);
-                    selectedStudent.Deleted = true;
+                    if(Student.Delete(selectedStudent))
+                    {
+                        selectedStudent.Deleted = true;
+                    }
                 }
             }
         }

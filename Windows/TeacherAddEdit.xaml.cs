@@ -50,19 +50,29 @@ namespace POP_SF7
 
         private void okbtn_Click(object sender, RoutedEventArgs e)
         {
-            if(Decider == Decider.ADD)
+            if (personInfo.nametb.Text.Equals("") || personInfo.lastnametb.Text.Equals("") || personInfo.addresstb.Text.Equals("") || personInfo.jmbgtb.Text.Equals(""))
             {
-                if(Teacher.Add(TeacherT))
-                {
-                    TeacherT.Id = ApplicationA.Instance.Teachers.Count() + 1;
-                    ApplicationA.Instance.Teachers.Add(TeacherT);
-                }
+                MessageBox.Show(ApplicationA.FILL_ALL_FIELDS_WARNING);
             }
             else
             {
-                Teacher.Edit(TeacherT);
+                if (Decider == Decider.ADD)
+                {
+                    if (Teacher.Add(TeacherT))
+                    {
+                        TeacherT.Id = ApplicationA.Instance.Teachers.Count() + 1;
+                        ApplicationA.Instance.Teachers.Add(TeacherT);
+                    }
+                }
+                else
+                {
+                    if (!Teacher.Edit(TeacherT))
+                    {
+                        cancelbtn_Click(null, null);
+                    }
+                }
+                Close();
             }
-            Close();
         }
 
         private void languagesdg_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
@@ -76,6 +86,11 @@ namespace POP_SF7
             {
                 LoadColumnsHelper.LoadCourse(e);
             }
+        }
+
+        private void cancelbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

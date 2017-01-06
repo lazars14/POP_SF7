@@ -145,10 +145,12 @@ namespace POP_SF7
             }
         }
 
-        public static void Edit(User user)
+        public static bool Edit(User user)
         {
             using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
             {
+                bool valid = false;
+
                 connection.Open();
 
                 SqlCommand command = connection.CreateCommand();
@@ -167,6 +169,8 @@ namespace POP_SF7
                     command.Parameters.Add(new SqlParameter("@Role", user.UserRole.ToString()));
 
                     command.ExecuteNonQuery();
+
+                    valid = true;
                 }
                 catch (SqlException e)
                 {
@@ -184,23 +188,29 @@ namespace POP_SF7
                 {
                     MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + n.GetType());
                 }
+
+                return valid;
             }
         }
 
-        public static void Delete(User user)
+        public static bool Delete(User user)
         {
             using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
             {
+                bool valid = false;
+
                 connection.Open();
 
                 SqlCommand command = connection.CreateCommand();
                 command.CommandText = @"Update UserU Set UserU_Deleted=1 Where UserU_Id=@Id;";
 
-                command.Parameters.Add(new SqlParameter("@Id", user.Id));
-
                 try
                 {
+                    command.Parameters.Add(new SqlParameter("@Id", user.Id));
+
                     command.ExecuteNonQuery();
+
+                    valid = true;
                 }
                 catch (SqlException e)
                 {
@@ -218,6 +228,8 @@ namespace POP_SF7
                 {
                     MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + n.GetType());
                 }
+
+                return valid;
             }
         }
 

@@ -29,18 +29,33 @@ namespace POP_SF7
 
         private void okbtn_Click(object sender, RoutedEventArgs e)
         {
-            if (Decider == Decider.ADD)
+            if(userControl.nametb.Text.Equals(""))
             {
-                if(CourseType.Add(CourseTypeC))
-                {
-                    CourseTypeC.Id = ApplicationA.Instance.CourseTypes.Count() + 1;
-                    ApplicationA.Instance.CourseTypes.Add(CourseTypeC);
-                }
+                MessageBox.Show(ApplicationA.FILL_ALL_FIELDS_WARNING);
             }
             else
             {
-                CourseType.Edit(CourseTypeC);
+                if (Decider == Decider.ADD)
+                {
+                    if (CourseType.Add(CourseTypeC))
+                    {
+                        CourseTypeC.Id = ApplicationA.Instance.CourseTypes.Count() + 1;
+                        ApplicationA.Instance.CourseTypes.Add(CourseTypeC);
+                    }
+                }
+                else
+                {
+                    if (!CourseType.Edit(CourseTypeC))
+                    {
+                        cancelbtn_Click(null, null);
+                    }
+                }
+                Close();
             }
+        }
+
+        private void cancelbtn_Click(object sender, RoutedEventArgs e)
+        {
             Close();
         }
     }

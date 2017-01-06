@@ -66,8 +66,10 @@ namespace POP_SF7.Windows
                 if (result == MessageBoxResult.Yes)
                 {
                     selectedLanguage = view.CurrentItem as Language;
-                    POP_SF7.Language.Delete(selectedLanguage);
-                    selectedLanguage.Deleted = true;
+                    if(POP_SF7.Language.Delete(selectedLanguage))
+                    {
+                        selectedLanguage.Deleted = true;
+                    }
                 }
             }
         }

@@ -74,8 +74,10 @@ namespace POP_SF7
                 if (result == MessageBoxResult.Yes)
                 {
                     selectedTeacher = TeachersView.CurrentItem as Teacher;
-                    Teacher.Delete(selectedTeacher);
-                    selectedTeacher.Deleted = true;
+                    if(Teacher.Delete(selectedTeacher))
+                    {
+                        selectedTeacher.Deleted = true;
+                    }
                 }
             }
         }

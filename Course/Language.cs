@@ -133,10 +133,12 @@ namespace POP_SF7
             }
         }
 
-        public static void Edit(Language language)
+        public static bool Edit(Language language)
         {
             using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
             {
+                bool valid = false;
+
                 connection.Open();
 
                 SqlCommand command = connection.CreateCommand();
@@ -149,6 +151,8 @@ namespace POP_SF7
                     command.Parameters.Add(new SqlParameter("@Id", language.Id));
 
                     command.ExecuteNonQuery();
+
+                    valid = true;
                 }
                 catch (SqlException e)
                 {
@@ -166,23 +170,29 @@ namespace POP_SF7
                 {
                     MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + n.GetType());
                 }
+
+                return valid;
             }
         }
 
-        public static void Delete(Language language)
+        public static bool Delete(Language language)
         {
             using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
             {
+                bool valid = false;
+
                 connection.Open();
 
                 SqlCommand command = connection.CreateCommand();
                 command.CommandText = @"Update LanguageL Set Language_Deleted=1 Where Language_Id=@Id;";
 
-                command.Parameters.Add(new SqlParameter("@Id", language.Id));
-
                 try
                 {
+                    command.Parameters.Add(new SqlParameter("@Id", language.Id));
+
                     command.ExecuteNonQuery();
+
+                    valid = true;
                 }
                 catch (SqlException e)
                 {
@@ -200,6 +210,8 @@ namespace POP_SF7
                 {
                     MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + n.GetType());
                 }
+
+                return valid;
             }
         }
 
