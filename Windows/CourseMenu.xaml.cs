@@ -139,6 +139,12 @@ namespace POP_SF7
             return c.CourseType.Id == (int)courseTypecb.SelectedValue;
         }
 
+        private bool courseTypeAndLanguageSearchCondition(object s)
+        {
+            Course c = s as Course;
+            return c.CourseType.Id == (int)courseTypecb.SelectedValue && c.Language.Id == (int)languagecb.SelectedValue; 
+        }
+
         private bool finishedCoursesSearchCondition(object s)
         {
             Course c = s as Course;
@@ -158,10 +164,11 @@ namespace POP_SF7
 
             Predicate<object> languagePredicate = new Predicate<object>(languageSearchCondition);
             Predicate<object> courseTypePredicate = new Predicate<object>(courseTypeSearchCondition);
+            Predicate<object> languageAndCourseType = new Predicate<object>(courseTypeAndLanguageSearchCondition);
 
             if (language && courseType)
             {
-                CoursesView.Filter = languagePredicate + courseTypePredicate;
+                CoursesView.Filter = languageAndCourseType;
             }
             else if(language)
             {

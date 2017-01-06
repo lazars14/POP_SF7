@@ -119,6 +119,13 @@ namespace POP_SF7
             return c.Student.Id == SearchStudent.Id;
         }
 
+        private bool studentAndCourseSearchCondition(object s)
+        {
+            Payment c = s as Payment;
+            return c.Student.Id == SearchStudent.Id && c.Course.Id == SearchCourse.Id;
+        }
+
+
         private void searchbtn_Click(object sender, RoutedEventArgs e)
         {
             bool course = coursechb.IsChecked ?? false;
@@ -126,10 +133,11 @@ namespace POP_SF7
 
             Predicate<object> coursePredicate = new Predicate<object>(courseSearchCondition);
             Predicate<object> studentPredicate = new Predicate<object>(studentSearchCondition);
+            Predicate<object> courseAndStudentPredicate = new Predicate<object>(studentAndCourseSearchCondition);
 
             if (course && student)
             {
-                view.Filter = coursePredicate + studentPredicate;
+                view.Filter = courseAndStudentPredicate;
             }
             else if (course)
             {
