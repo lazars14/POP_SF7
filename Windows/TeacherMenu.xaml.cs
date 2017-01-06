@@ -152,14 +152,12 @@ namespace POP_SF7
         private void usersdg_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Teacher selectedTeacher = TeachersView.CurrentItem as Teacher;
-          
-            try
+            if(selectedTeacher != null)
             {
                 int selectedTeacherId = selectedTeacher.Id;
                 Teacher selectedTeacherTwo = ApplicationA.Instance.Teachers[selectedTeacherId - 1];
-                if (selectedTeacherTwo.ListOfCourses.Count == 0)
+                if (selectedTeacherTwo.ListOfCourses.Count == 0)  // ovde ako student ne slusa nijedan kurs proverice svaki put...
                 {
-                    
                     foreach (TeacherTeachesCourse ttc in ApplicationA.Instance.TeacherTeachesCourseCollection)
                     {
                         if (ttc.TeacherId == selectedTeacherId)
@@ -177,8 +175,6 @@ namespace POP_SF7
                             selectedTeacherTwo.ListOfLanguages.Add(lang);
                         }
                     }
-
-
                 }
                 else
                 {
@@ -190,9 +186,17 @@ namespace POP_SF7
                     coursesdg.ItemsSource = CoursesView;
                     coursesdg.IsSynchronizedWithCurrentItem = true;
                 }
-
             }
-            catch (NullReferenceException a) { Console.WriteLine(a.StackTrace); }
+            else
+            {
+                LanguagesView = CollectionViewSource.GetDefaultView(new ObservableCollection<Language>());
+                languagesdg.ItemsSource = LanguagesView;
+                languagesdg.IsSynchronizedWithCurrentItem = true;
+
+                CoursesView = CollectionViewSource.GetDefaultView(new ObservableCollection<Course>());
+                coursesdg.ItemsSource = CoursesView;
+                coursesdg.IsSynchronizedWithCurrentItem = true;
+            }
         }
 
         private void cancelSearchbtn_Click(object sender, RoutedEventArgs e)
@@ -217,15 +221,24 @@ namespace POP_SF7
 
         private void coursesdg_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            try
+            /*if(CoursesView == null)
+            {
+                Teacher selectedTeacher = TeachersView.CurrentItem as Teacher;
+                Teacher selectedTeacherTwo = ApplicationA.Instance.Teachers[selectedTeacher.Id - 1];
+
+                CoursesView = CollectionViewSource.GetDefaultView(selectedTeacherTwo.ListOfCourses);
+                coursesdg.ItemsSource = CoursesView;
+                coursesdg.IsSynchronizedWithCurrentItem = true;
+            }*/
+            if(CoursesView != null)
             {
                 Course selectedCourse = CoursesView.CurrentItem as Course;
-                if (selectedCourse.Language.Name == null)
+                if (selectedCourse != null && selectedCourse.Language == null)
                 {
                     selectedCourse.Language = ApplicationA.Instance.Languages[selectedCourse.Language.Id - 1];
                     selectedCourse.CourseType = ApplicationA.Instance.CourseTypes[selectedCourse.CourseType.Id - 1];
                 }
-            }catch(NullReferenceException a) { Console.WriteLine(a.StackTrace); }
+            }
         }
     }
 }

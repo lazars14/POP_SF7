@@ -186,41 +186,32 @@ namespace POP_SF7
 
         private void coursesdg_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            int selectedCourseId = 1;
-
             Course selectedCourse = CoursesView.CurrentItem as Course;
-            if (selectedCourse == null)
+            if(selectedCourse != null)
             {
-                CoursesView.MoveCurrentToFirst();
-                selectedCourse = CoursesView.CurrentItem as Course;
-            }
-            else
-            {
-                selectedCourseId = selectedCourse.Id;
-            }
-
-            try
-            {
-                if(selectedCourse.Language.Name == null)
+                int selectedCourseId = selectedCourse.Id;
+                if (selectedCourse.Language.Name == "")
                 {
                     selectedCourse.Language = ApplicationA.Instance.Languages[selectedCourse.Language.Id - 1];
                     selectedCourse.CourseType = ApplicationA.Instance.CourseTypes[selectedCourse.CourseType.Id - 1];
                     selectedCourse.Teacher = ApplicationA.Instance.Teachers[selectedCourse.Teacher.Id - 1];
                 }
-            }
-            catch(NullReferenceException a) { Console.WriteLine(a.StackTrace); }
-            
 
-            // students
-            if(StudentsForSelectedCourse.Count != 0) StudentsForSelectedCourse.Clear();
+                // students
+                if (StudentsForSelectedCourse.Count != 0) StudentsForSelectedCourse.Clear();
 
-            foreach (StudentAttendsCourse sac in ApplicationA.Instance.StudentAttendsCourseCollection)
-            {
-                if(sac.CourseId == selectedCourseId)
+                foreach (StudentAttendsCourse sac in ApplicationA.Instance.StudentAttendsCourseCollection)
                 {
-                    Student s = ApplicationA.Instance.Students[sac.StudentId - 1];
-                    StudentsForSelectedCourse.Add(s);
+                    if (sac.CourseId == selectedCourseId)
+                    {
+                        Student s = ApplicationA.Instance.Students[sac.StudentId - 1];
+                        StudentsForSelectedCourse.Add(s);
+                    }
                 }
+            }
+            else
+            {
+                if (StudentsForSelectedCourse.Count != 0) StudentsForSelectedCourse.Clear();
             }
         }
 

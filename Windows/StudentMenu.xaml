@@ -100,10 +100,10 @@
                     <ColumnDefinition Width="150"/>
                 </Grid.ColumnDefinitions>
                 <Label x:Name="courseLanguagelbl1" Content="Jezik" Grid.Row="0" Grid.Column="0" Margin="10,5,0,10"/>
-                <TextBlock x:Name="courseLanguagetb1" Text="{Binding SelectedItem.Language.Name, ElementName=coursesdg}" Grid.Row="0" Grid.Column="1" Margin="0,5,0,5"/>
+                <TextBlock x:Name="courseLanguagetb1" Text="{Binding SelectedItem.Language.Name, ElementName=coursesdg}" Grid.Row="0" Grid.Column="1" Margin="0,10,0,5"/>
 
                 <Label x:Name="courseCourseTypelbl1" Content="Tip kursa" Grid.Row="1" Grid.Column="0" Margin="10,5,0,10"/>
-                <TextBlock x:Name="courseCourseTypetb1" Text="{Binding SelectedItem.CourseType.Name, ElementName=coursesdg}" Grid.Row="1" Grid.Column="1" Margin="0,5,0,5"/>
+                <TextBlock x:Name="courseCourseTypetb1" Text="{Binding SelectedItem.CourseType.Name, ElementName=coursesdg}" Grid.Row="1" Grid.Column="1" Margin="0,10,0,5"/>
             </Grid>
         </GroupBox>
         <!--#endregion-->

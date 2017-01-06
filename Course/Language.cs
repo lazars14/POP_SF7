@@ -35,6 +35,7 @@ namespace POP_SF7
         public Language(int id)
         {
             Id = id;
+            Name = "";
         }
 
         public Language(int id, string name, bool deleted)
