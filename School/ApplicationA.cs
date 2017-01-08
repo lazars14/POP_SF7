@@ -57,16 +57,20 @@ namespace POP_SF7
             TeacherTeachesCourseCollection = new ObservableCollection<TeacherTeachesCourse>();
         }
 
-        public static void LoadAllDataAdministrator()
+        public static bool LoadAllDataAdministrator()
         {
-            Language.Load();
-            CourseType.Load();
-            Course.Load();
-            Teacher.Load();
-            TeacherTeachesLanguage.Load();
-            TeacherTeachesCourse.Load();
+            bool valid = true;
+
+            valid = Language.Load();
+            valid = CourseType.Load();
+            valid = Course.Load();
+            valid = Teacher.Load();
+            valid = TeacherTeachesLanguage.Load();
+            valid = TeacherTeachesCourse.Load();
 
             AdminDataLoaded = true;
+
+            return valid;
 
             /*
             MessageBox.Show(ApplicationA.Instance.Languages.Count.ToString() + " Jezici");
@@ -78,19 +82,23 @@ namespace POP_SF7
             */
         }
 
-        public static void LoadAllDataEmployee()
+        public static bool LoadAllDataEmployee()
         {
-            Language.Load(); 
-            CourseType.Load(); 
-            Teacher.Load(); 
-            Student.Load(); 
-            Payment.Load();
-            Course.Load(); 
-            TeacherTeachesLanguage.Load(); 
-            StudentAttendsCourse.Load();
-            TeacherTeachesCourse.Load();
+            bool valid = true;
+
+            valid = Language.Load(); 
+            valid = CourseType.Load(); 
+            valid = Teacher.Load(); 
+            valid = Student.Load(); 
+            valid = Payment.Load();
+            valid = Course.Load(); 
+            valid = TeacherTeachesLanguage.Load(); 
+            valid = StudentAttendsCourse.Load();
+            valid = TeacherTeachesCourse.Load();
 
             EmployeeDataLoaded = true;
+
+            return valid;
 
             /*
             MessageBox.Show(ApplicationA.Instance.Languages.Count.ToString() + " Jezici");
@@ -105,13 +113,17 @@ namespace POP_SF7
             */
         }
 
-        public static void LoadEmployeeAdminDifference()
+        public static bool LoadEmployeeAdminDifference()
         {
-            Student.Load();
-            Payment.Load();
-            StudentAttendsCourse.Load();
+            bool valid = true;
+
+            valid = Student.Load();
+            valid = Payment.Load();
+            valid = StudentAttendsCourse.Load();
 
             EmployeeDataLoaded = true;
+
+            return valid;
 
             /*
             MessageBox.Show(ApplicationA.Instance.Students.Count.ToString() + " Ucenici");

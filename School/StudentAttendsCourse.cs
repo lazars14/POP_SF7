@@ -26,10 +26,12 @@ namespace POP_SF7.School
 
         #region Database Operations
 
-        public static void Load()
+        public static bool Load()
         {
             using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
             {
+                bool valid = false;
+
                 connection.Open();
 
                 DataSet dataSet = new DataSet();
@@ -53,6 +55,8 @@ namespace POP_SF7.School
 
                         ApplicationA.Instance.StudentAttendsCourseCollection.Add(attends);
                     }
+
+                    valid = true;
                 }
                 catch (SqlException e)
                 {
@@ -70,14 +74,18 @@ namespace POP_SF7.School
                 {
                     MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + n.GetType());
                 }
+
+                return valid;
             }
 
         }
 
-        public static void Add(StudentAttendsCourse attends)
+        public static bool Add(StudentAttendsCourse attends)
         {
             using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
             {
+                bool valid = false;
+
                 connection.Open();
 
                 SqlCommand command = connection.CreateCommand();
@@ -90,6 +98,8 @@ namespace POP_SF7.School
                     command.Parameters.Add(new SqlParameter("@Deleted", attends.Deleted));
 
                     command.ExecuteNonQuery();
+
+                    valid = true;
                 }
                 catch (SqlException e)
                 {
@@ -107,13 +117,17 @@ namespace POP_SF7.School
                 {
                     MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + n.GetType());
                 }
+
+                return valid;
             }
         }
 
-        public static void Delete(StudentAttendsCourse attends)
+        public static bool Delete(StudentAttendsCourse attends)
         {
             using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
             {
+                bool valid = false;
+
                 connection.Open();
 
                 SqlCommand command = connection.CreateCommand();
@@ -124,6 +138,8 @@ namespace POP_SF7.School
                     command.Parameters.Add(new SqlParameter("@Id", attends.Id));
 
                     command.ExecuteNonQuery();
+
+                    valid = true;
                 }
                 catch (SqlException e)
                 {
@@ -141,6 +157,48 @@ namespace POP_SF7.School
                 {
                     MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + n.GetType());
                 }
+
+                return valid;
+            }
+        }
+
+        public static bool UnDelete(StudentAttendsCourse attends)
+        {
+            using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
+            {
+                bool valid = false;
+
+                connection.Open();
+
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = @"Update StudentAttendsCourse Set Attends_Deleted=0 Where Attends_Id=@Id;";
+
+                try
+                {
+                    command.Parameters.Add(new SqlParameter("@Id", attends.Id));
+
+                    command.ExecuteNonQuery();
+
+                    valid = true;
+                }
+                catch (SqlException e)
+                {
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + e.GetType());
+                }
+                catch (InvalidOperationException a)
+                {
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
+                }
+                catch (ArgumentException g)
+                {
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + g.GetType());
+                }
+                catch (NullReferenceException n)
+                {
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + n.GetType());
+                }
+
+                return valid;
             }
         }
 

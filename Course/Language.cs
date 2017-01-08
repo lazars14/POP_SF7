@@ -47,10 +47,12 @@ namespace POP_SF7
 
         #region Database operations
 
-        public static void Load()
+        public static bool Load()
         {
             using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
             {
+                bool valid = false;
+
                 connection.Open();
 
                 DataSet dataSet = new DataSet();
@@ -72,6 +74,8 @@ namespace POP_SF7
 
                         ApplicationA.Instance.Languages.Add(lang);
                     }
+
+                    valid = true;
                 }
                 catch (SqlException e)
                 {
@@ -90,6 +94,7 @@ namespace POP_SF7
                     MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + n.GetType());
                 }
 
+                return valid;
             }
         }
 

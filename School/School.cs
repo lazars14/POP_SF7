@@ -129,8 +129,8 @@ namespace POP_SF7
                 {
                     MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + n.GetType());
                 }
-                return null;
 
+                return null;
             }
         }
 

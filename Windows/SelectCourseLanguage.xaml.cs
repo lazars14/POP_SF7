@@ -17,25 +17,20 @@ namespace POP_SF7.Windows
     /// <summary>
     /// Interaction logic for SelectCourseLanguage.xaml
     /// </summary>
-    
-    public enum LanguageCourseDecider { LANGUAGE, COURSE }
 
     public partial class SelectCourseLanguage : Window
     {
         public StudentAddEdit StudentWindow { get; set; }
         public TeacherAddEdit TeacherWindow { get; set; }
 
-        public LanguageCourseDecider Decider { get; set; }
-
         public string addLanguage = "Dodavanje jezika";
         public string addCourse = "Dodavanje kursa";
 
-        public SelectCourseLanguage(TeacherAddEdit teacherAddEdit, LanguageCourseDecider languageCourseDecider)
+        public SelectCourseLanguage(TeacherAddEdit teacherAddEdit)
         {
             InitializeComponent();
 
             TeacherWindow = teacherAddEdit;
-            Decider = languageCourseDecider;
 
             setupWindow();
         }
@@ -45,14 +40,13 @@ namespace POP_SF7.Windows
             InitializeComponent();
 
             StudentWindow = studentAddEdit;
-            Decider = LanguageCourseDecider.COURSE;
 
             setupWindow();
         }
 
         private void setupWindow()
         {
-            if(Decider == LanguageCourseDecider.COURSE)
+            if(TeacherWindow == null)
             {
                 description.Text = addCourse;
                 setupCourseGrid();
@@ -67,12 +61,37 @@ namespace POP_SF7.Windows
         private void setupLanguageGrid()
         {
             List<Language> FilteredLanguages = new List<Language>();
-            // od svih jezika moram da oduzmem ove koje on vec zna, i onda da vidim za obrisane kako sta... mozda samo da obrisem fizicki jezik, ili mora logicki...
+            foreach(Language language in ApplicationA.Instance.Languages)
+            {
+                if(!TeacherWindow.TeacherT.ListOfLanguages.Contains(language))
+                {
+                    FilteredLanguages.Add(language);
+                }
+            }
+
+            if(FilteredLanguages.Count == 0)
+            {
+                MessageBox.Show("Ne postoje jezici koji mogu da se dodaju za datog nastavnika!");
+                Close();
+            }
         }
 
         private void setupCourseGrid()
         {
-            throw new NotImplementedException();
+            List<Course> FilteredCourses = new List<Course>();
+            foreach(Course course in ApplicationA.Instance.Courses)
+            {
+                if(!StudentWindow.StudentS.ListOfCourses.Contains(course))
+                {
+                    FilteredCourses.Add(course);
+                }
+            }
+
+            if(FilteredCourses.Count == 0)
+            {
+                MessageBox.Show("Ne postoje kursevi koji mogu da se dodaju za datog ucenika!");
+                Close();
+            }
         }
 
         private void closebtn_Click(object sender, RoutedEventArgs e)
@@ -82,7 +101,16 @@ namespace POP_SF7.Windows
 
         private void okbtn_Click(object sender, RoutedEventArgs e)
         {
-
+            if(TeacherWindow == null)
+            {
+                Course selectedCourse = dataGrid.SelectedItem as Course;
+                StudentWindow.StudentS.ListOfCourses.Add(selectedCourse);
+            }
+            else
+            {
+                Language selectedLanguage = dataGrid.SelectedItem as Language;
+                TeacherWindow.TeacherT.ListOfLanguages.Add(selectedLanguage);
+            }
         }
     }
 }

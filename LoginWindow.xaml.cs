@@ -20,7 +20,13 @@ namespace POP_SF7
 
         public void loadData()
         {
-            if (ApplicationA.Instance.Users.Count == 0) User.Load();
+            if (ApplicationA.Instance.Users.Count == 0)
+            {
+                if(!User.Load())
+                {
+                    Close();
+                }
+            }
         }
 
         private void cancelbtn_Click(object sender, RoutedEventArgs e)

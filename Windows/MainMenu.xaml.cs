@@ -31,7 +31,10 @@ namespace POP_SF7
 
                 if(ApplicationA.AdminDataLoaded == false && ApplicationA.EmployeeDataLoaded == false)
                 {
-                    ApplicationA.LoadAllDataAdministrator();
+                    if (!ApplicationA.LoadAllDataAdministrator())
+                    {
+                        Close();
+                    }
                 }
             }
             else if (role == Role.EMPLOYEE)
@@ -44,11 +47,17 @@ namespace POP_SF7
 
                 if (ApplicationA.AdminDataLoaded == true && ApplicationA.EmployeeDataLoaded == false)
                 {
-                    ApplicationA.LoadEmployeeAdminDifference();
+                    if(!ApplicationA.LoadEmployeeAdminDifference())
+                    {
+                        Close();
+                    }
                 }
                 else if(ApplicationA.AdminDataLoaded == false && ApplicationA.EmployeeDataLoaded == false)
                 {
-                    ApplicationA.LoadAllDataEmployee();
+                    if(!ApplicationA.LoadAllDataEmployee())
+                    {
+                        Close();
+                    }
                 }
             }
         }

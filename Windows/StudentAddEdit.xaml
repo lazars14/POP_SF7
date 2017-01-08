@@ -18,10 +18,11 @@
         <!--#region Courses-->
         <GroupBox Header="Kursevi" Grid.Row="1">
             <Grid>
-                <DataGrid x:Name="coursesdg" AutoGeneratingColumn="coursesdg_AutoGeneratingColumn" IsReadOnly="True" HorizontalAlignment="Left" Height="110" Margin="10,10,0,0" VerticalAlignment="Top" Width="275"/>
+                <DataGrid x:Name="coursesdg" AutoGeneratingColumn="coursesdg_AutoGeneratingColumn" IsReadOnly="True" HorizontalAlignment="Left" Height="110" Margin="10,10,0,0" VerticalAlignment="Top" Width="290"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="33" Margin="10,120,0,0" VerticalAlignment="Center" Width="275">
-                    <Button x:Name="addCoursebtn" Content="Dodaj" Width="75" Margin="55,5,5,5" HorizontalAlignment="Center"/>
-                    <Button x:Name="deleteCoursebtn" Content="Obrisi" Width="75" Margin="5"/>
+                    <Button x:Name="addCoursebtn" Content="Dodaj" Width="75" Margin="25,5,5,5" Click="addCoursebtn_Click"/>
+                    <Button x:Name="undeleteCoursebtn" Content="Povrati" Width="75" Margin="5" Click="undeleteCoursebtn_Click"/>
+                    <Button x:Name="deleteCoursebtn" Content="Obrisi" Width="75" Margin="5" Click="deleteCoursebtn_Click"/>
                 </StackPanel>
             </Grid>
         </GroupBox>

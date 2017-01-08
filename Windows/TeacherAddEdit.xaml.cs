@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Windows.Data;
 using System.Windows.Controls;
 using POP_SF7.Helpers;
+using POP_SF7.School;
 
 namespace POP_SF7
 {
@@ -23,6 +24,8 @@ namespace POP_SF7
 
         public string labelAddTeacher = "Dodavanje novog nastavnika";
         public string labelEditTeacher = "Izmena postojeceg nastavnika";
+
+        public string WarningMessage = "Ukoliko izbrisete ovaj jezik svi kursevi sa ovim jezikom (za datog nastavnika) nece moci da se menjaju!";
 
         public TeacherAddEdit(Teacher teacher, Decider decider)
         {
@@ -91,6 +94,80 @@ namespace POP_SF7
         private void cancelbtn_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void addLanguagebtn_Click(object sender, RoutedEventArgs e)
+        {
+            SelectCourseLanguage scl = new SelectCourseLanguage(this);
+            scl.Show();
+        }
+
+        private void undeleteLanguagebtn_Click(object sender, RoutedEventArgs e)
+        {
+            Language selectedLanguage = LanguagesView.CurrentItem as Language;
+            if (selectedLanguage == null)
+            {
+                MessageBox.Show("Morate da selektujete jezik da biste ga povratili!");
+            }
+            else
+            {
+                if (selectedLanguage.Deleted == false)
+                {
+                    MessageBox.Show("Selektovani jezik nije obrisan!");
+                }
+                else
+                {
+                    var result = MessageBox.Show("Da li ste sigurni da hocete da povratite dati jezik za ovog nastavnika?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        foreach (TeacherTeachesLanguage ttl in ApplicationA.Instance.TeacherTeachesLanguageCollection)
+                        {
+                            if (ttl.TeacherId == TeacherT.Id && ttl.LanguageId == selectedLanguage.Id)
+                            {
+                                if (TeacherTeachesLanguage.UnDelete(ttl))
+                                {
+                                    ttl.Deleted = false;
+                                    selectedLanguage.Deleted = false;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void deleteLanguagebtn_Click(object sender, RoutedEventArgs e)
+        {
+            Language selectedLanguage = LanguagesView.CurrentItem as Language;
+            if(selectedLanguage == null)
+            {
+                MessageBox.Show("Morate da selektujete jezik da biste ga obrisali!");
+            }
+            else
+            {
+                if(selectedLanguage.Deleted == true)
+                {
+                    MessageBox.Show("Selektovani jezik je vec obrisan!");
+                }
+                else
+                {
+                    var result = MessageBox.Show("Da li ste sigurni da hocete da obrisete dati jezik za ovog nastavnika?\n" + WarningMessage, "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        foreach (TeacherTeachesLanguage ttl in ApplicationA.Instance.TeacherTeachesLanguageCollection)
+                        {
+                            if(ttl.TeacherId == TeacherT.Id && ttl.LanguageId == selectedLanguage.Id)
+                            {
+                                if(TeacherTeachesLanguage.Delete(ttl))
+                                {
+                                    ttl.Deleted = true;
+                                    selectedLanguage.Deleted = true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

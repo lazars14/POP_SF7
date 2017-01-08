@@ -6,6 +6,7 @@ using System;
 using POP_SF7.Helpers;
 using System.ComponentModel;
 using System.Windows.Data;
+using POP_SF7.School;
 
 namespace POP_SF7
 {
@@ -77,6 +78,80 @@ namespace POP_SF7
         private void cancelbtn_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void addCoursebtn_Click(object sender, RoutedEventArgs e)
+        {
+            SelectCourseLanguage scl = new SelectCourseLanguage(this);
+            scl.Show();
+        }
+
+        private void undeleteCoursebtn_Click(object sender, RoutedEventArgs e)
+        {
+            Course selectedCourse = CoursesView.CurrentItem as Course;
+            if (selectedCourse == null)
+            {
+                MessageBox.Show("Morate da selektujete kurs koji zelite da obrisete!");
+            }
+            else
+            {
+                if (selectedCourse.Deleted == false)
+                {
+                    MessageBox.Show("Izabrani kurs nije obrisan!");
+                }
+                else
+                {
+                    var result = MessageBox.Show("Da li ste sigurni da hocete da povratite dati kurs za ovog ucenika?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        foreach (StudentAttendsCourse sac in ApplicationA.Instance.StudentAttendsCourseCollection)
+                        {
+                            if (sac.StudentId == StudentS.Id && sac.CourseId == selectedCourse.Id)
+                            {
+                                if (StudentAttendsCourse.UnDelete(sac))
+                                {
+                                    sac.Deleted = false;
+                                    selectedCourse.Deleted = false;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void deleteCoursebtn_Click(object sender, RoutedEventArgs e)
+        {
+            Course selectedCourse = CoursesView.CurrentItem as Course;
+            if(selectedCourse == null)
+            {
+                MessageBox.Show("Morate da selektujete kurs koji zelite da obrisete!");
+            }
+            else
+            {
+                if(selectedCourse.Deleted == true)
+                {
+                    MessageBox.Show("Izabrani kurs je vec obrisan!");
+                }
+                else
+                {
+                    var result = MessageBox.Show("Da li ste sigurni da hocete da obrisete dati kurs za ovog ucenika?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        foreach(StudentAttendsCourse sac in ApplicationA.Instance.StudentAttendsCourseCollection)
+                        {
+                            if(sac.StudentId == StudentS.Id && sac.CourseId == selectedCourse.Id)
+                            {
+                                if(StudentAttendsCourse.Delete(sac))
+                                {
+                                    sac.Deleted = true;
+                                    selectedCourse.Deleted = true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
