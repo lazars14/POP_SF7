@@ -153,10 +153,13 @@ namespace POP_SF7
                 {
                     foreach (StudentAttendsCourse sac in ApplicationA.Instance.StudentAttendsCourseCollection)
                     {
-                        if (sac.StudentId == Student.Id)
+                        if (sac.StudentId == Student.Id && sac.Deleted == false)
                         {
                             Course c = ApplicationA.Instance.Courses[sac.CourseId - 1];
-                            Student.ListOfCourses.Add(c);
+                            if(c.Deleted == false)
+                            {
+                                Student.ListOfCourses.Add(c);
+                            }
                         }
                     }
                     if (Student.ListOfCourses.Count == 0)

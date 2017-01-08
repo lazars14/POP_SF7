@@ -1,4 +1,6 @@
-﻿using System;
+﻿using POP_SF7.Helpers;
+using POP_SF7.School;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -74,6 +76,10 @@ namespace POP_SF7.Windows
                 MessageBox.Show("Ne postoje jezici koji mogu da se dodaju za datog nastavnika!");
                 Close();
             }
+            else
+            {
+                dataGrid.ItemsSource = FilteredLanguages;
+            }
         }
 
         private void setupCourseGrid()
@@ -92,6 +98,10 @@ namespace POP_SF7.Windows
                 MessageBox.Show("Ne postoje kursevi koji mogu da se dodaju za datog ucenika!");
                 Close();
             }
+            else
+            {
+                dataGrid.ItemsSource = FilteredCourses;
+            }
         }
 
         private void closebtn_Click(object sender, RoutedEventArgs e)
@@ -104,12 +114,53 @@ namespace POP_SF7.Windows
             if(TeacherWindow == null)
             {
                 Course selectedCourse = dataGrid.SelectedItem as Course;
-                StudentWindow.StudentS.ListOfCourses.Add(selectedCourse);
+                if(selectedCourse == null)
+                {
+                    MessageBox.Show("Morate da selektujete kurs kako biste ga dodali na ucenika!");
+                }
+                else
+                {
+                    int nextId = ApplicationA.Instance.StudentAttendsCourseCollection.Count() + 1;
+                    StudentAttendsCourse toAdd = new StudentAttendsCourse(nextId, selectedCourse.Id, StudentWindow.StudentS.Id, false);
+
+                    if (StudentAttendsCourse.Add(toAdd))
+                    {
+                        ApplicationA.Instance.StudentAttendsCourseCollection.Add(toAdd);
+                        StudentWindow.StudentS.ListOfCourses.Add(selectedCourse);
+                    }
+                    Close();
+                }
             }
             else
             {
                 Language selectedLanguage = dataGrid.SelectedItem as Language;
-                TeacherWindow.TeacherT.ListOfLanguages.Add(selectedLanguage);
+                if(selectedLanguage == null)
+                {
+                    MessageBox.Show("Morate da selektujete jezik kako biste ga dodali na nastavnika!");
+                }
+                else
+                {
+                    int nextId = ApplicationA.Instance.Languages.Count() + 1;
+                    TeacherTeachesLanguage toAdd = new TeacherTeachesLanguage(nextId, TeacherWindow.TeacherT.Id, selectedLanguage.Id, false);
+                    if(TeacherTeachesLanguage.Add(toAdd))
+                    {
+                        ApplicationA.Instance.TeacherTeachesLanguageCollection.Add(toAdd);
+                        TeacherWindow.TeacherT.ListOfLanguages.Add(selectedLanguage);
+                    }
+                    Close();
+                }
+            }
+        }
+
+        private void dataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if(TeacherWindow == null)
+            {
+                LoadColumnsHelper.LoadCourse(e);
+            }
+            else
+            {
+                LoadColumnsHelper.LoadLanguage(e);
             }
         }
     }

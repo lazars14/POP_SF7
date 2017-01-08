@@ -8,7 +8,7 @@
         Title="SelectCourseLanguage" Height="317.01" Width="300">
     <Grid>
         <TextBlock x:Name="description" HorizontalAlignment="Left" Height="34" Margin="10,12,0,0" TextWrapping="Wrap" Text="TextBlock" TextAlignment="Center" VerticalAlignment="Top" Width="272"/>
-        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Height="186" Margin="10,51,0,0" VerticalAlignment="Top" Width="272"/>
+        <DataGrid x:Name="dataGrid" AutoGeneratingColumn="dataGrid_AutoGeneratingColumn" HorizontalAlignment="Left" Height="186" Margin="10,51,0,0" VerticalAlignment="Top" Width="272"/>
         <Button x:Name="okbtn" Content="Dodaj" HorizontalAlignment="Left" Height="27" Margin="10,249,0,0" VerticalAlignment="Top" Width="82" Click="okbtn_Click"/>
         <Button x:Name="closebtn" Content="Izlaz" HorizontalAlignment="Left" Height="27" Margin="200,249,0,0" VerticalAlignment="Top" Width="82" Click="closebtn_Click"/>
     </Grid>
