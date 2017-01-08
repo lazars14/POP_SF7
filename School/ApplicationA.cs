@@ -1,5 +1,7 @@
 ﻿using POP_SF7.School;
+using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Windows;
 
 namespace POP_SF7
@@ -10,11 +12,15 @@ namespace POP_SF7
                                           Initial Catalog=TheLanguageSchool;
                                           Data Source=DUSAN\SQLEXPRESS";
 
-        public const string DATABASE_ERROR_MESSAGE = "Doslo je do greske sa bazom!" + "\n" + "Greska ";
+        public const string FILE_NAME = @"..\..\Log.txt";
+
+        public const string DATABASE_ERROR_MESSAGE = "Doslo je do greske sa bazom!";
 
         public const string FILL_ALL_FIELDS_WARNING = "Morate da popunite sva polja!";
 
         public SchoolS SchoolS { get; set; }
+
+        public static User LoggedUser { get; set; }
         public int UserId { get; set; }
 
         public static bool AdminDataLoaded = false;
@@ -44,6 +50,7 @@ namespace POP_SF7
         private ApplicationA()
         {
             SchoolS = SchoolS.LoadSchool();
+            LoggedUser = new User(0);
 
             Users = new ObservableCollection<User>();
             Languages = new ObservableCollection<Language>();
@@ -55,6 +62,17 @@ namespace POP_SF7
             TeacherTeachesLanguageCollection = new ObservableCollection<TeacherTeachesLanguage>();
             StudentAttendsCourseCollection = new ObservableCollection<StudentAttendsCourse>();
             TeacherTeachesCourseCollection = new ObservableCollection<TeacherTeachesCourse>();
+        }
+
+        public static void WriteToLog(string stackTrace)
+        {
+            using (FileStream fs = new FileStream(FILE_NAME, FileMode.Append))
+            using (StreamWriter sw = new StreamWriter(fs))
+            {
+                string delimiter = "|";
+                string nextLine = "\n";
+                sw.Write(DateTime.Now + delimiter + LoggedUser.ToString() + nextLine + stackTrace + nextLine);
+            }
         }
 
         public static bool LoadAllDataAdministrator()

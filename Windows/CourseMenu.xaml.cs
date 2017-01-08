@@ -52,7 +52,7 @@ namespace POP_SF7
         private void addbtn_Click(object sender, RoutedEventArgs e)
         {
             Course newCourse = new Course();
-            CourseAddEdit add = new CourseAddEdit(newCourse, Decider.ADD);
+            CourseAddEdit add = new CourseAddEdit(newCourse, Decider.ADD, StudentsForSelectedCourse);
             add.Show();
         }
 
@@ -66,7 +66,7 @@ namespace POP_SF7
             else
             {
                 Course backup = (Course)selectedCourse.Clone();
-                CourseAddEdit edit = new CourseAddEdit(selectedCourse, Decider.EDIT);
+                CourseAddEdit edit = new CourseAddEdit(selectedCourse, Decider.EDIT, StudentsForSelectedCourse);
                 if(edit.ShowDialog() != true)
                 {
                     int index = ApplicationA.Instance.Courses.IndexOf(selectedCourse);

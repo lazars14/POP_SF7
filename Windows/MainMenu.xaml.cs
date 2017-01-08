@@ -112,7 +112,5 @@ namespace POP_SF7
                     break;
             }
         }
-
-        
     }
 }

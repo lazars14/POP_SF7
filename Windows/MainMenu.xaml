@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="357.172" Width="595.64" ResizeMode="NoResize">
     <Grid>
-        <Menu x:Name="mainMenu" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="578">
+        <Menu x:Name="mainMenu" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="590">
             <MenuItem x:Name="schoolMenu" Header="Skola">
                 <MenuItem x:Name="editSchoolData" Header="Izmena podataka o skoli" Click="menuItem_Click"/>
                 <MenuItem x:Name="payments" Header="Evidencija uplata" Click="menuItem_Click"/>

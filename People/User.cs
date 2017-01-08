@@ -37,11 +37,28 @@ namespace POP_SF7
             Jmbg = "1234567890123";
         }
 
+        // za logged user-a, koristim za logovanje
+        public User(int id)
+        {
+            Id = id;
+            FirstName = "Load";
+            LastName = "Fail";
+            Jmbg = "0000000000000";
+            UserName = "random";
+            Password = "random";
+        }
+
         public User(int id, string firstName, string lastName, string jmbg, string personAddress, string userName, string password, Role userRole, bool deleted) : base(id, firstName, lastName, jmbg, personAddress, deleted)
         {
             UserName = userName;
             Password = password;
             UserRole = userRole;
+        }
+
+        public override string ToString()
+        {
+            string delimiter = "|";
+            return Id + delimiter + FirstName + delimiter + LastName + delimiter + Jmbg + delimiter + UserName + delimiter + Password;
         }
 
         #region Database operations
@@ -85,19 +102,23 @@ namespace POP_SF7
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + e.GetType());
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE);
+                    ApplicationA.WriteToLog(e.StackTrace);
                 }
                 catch (InvalidOperationException a)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE);
+                    ApplicationA.WriteToLog(a.StackTrace);
                 }
                 catch (ArgumentException g)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + g.GetType());
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE);
+                    ApplicationA.WriteToLog(g.StackTrace);
                 }
                 catch (NullReferenceException n)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + n.GetType());
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE);
+                    ApplicationA.WriteToLog(n.StackTrace);
                 }
 
                 return valid;
@@ -132,19 +153,23 @@ namespace POP_SF7
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + e.GetType());
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE);
+                    ApplicationA.WriteToLog(e.StackTrace);
                 }
                 catch (InvalidOperationException a)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE);
+                    ApplicationA.WriteToLog(a.StackTrace);
                 }
                 catch (ArgumentException g)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + g.GetType());
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE);
+                    ApplicationA.WriteToLog(g.StackTrace);
                 }
                 catch (NullReferenceException n)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + n.GetType());
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE);
+                    ApplicationA.WriteToLog(n.StackTrace);
                 }
 
                 return valid;
@@ -180,19 +205,23 @@ namespace POP_SF7
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + e.GetType());
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE);
+                    ApplicationA.WriteToLog(e.StackTrace);
                 }
                 catch (InvalidOperationException a)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE);
+                    ApplicationA.WriteToLog(a.StackTrace);
                 }
                 catch (ArgumentException g)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + g.GetType());
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE);
+                    ApplicationA.WriteToLog(g.StackTrace);
                 }
                 catch (NullReferenceException n)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + n.GetType());
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE);
+                    ApplicationA.WriteToLog(n.StackTrace);
                 }
 
                 return valid;
@@ -220,19 +249,23 @@ namespace POP_SF7
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + e.GetType());
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE);
+                    ApplicationA.WriteToLog(e.StackTrace);
                 }
                 catch (InvalidOperationException a)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + a.GetType());
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE);
+                    ApplicationA.WriteToLog(a.StackTrace);
                 }
                 catch (ArgumentException g)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + g.GetType());
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE);
+                    ApplicationA.WriteToLog(g.StackTrace);
                 }
                 catch (NullReferenceException n)
                 {
-                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE + n.GetType());
+                    MessageBox.Show(ApplicationA.DATABASE_ERROR_MESSAGE);
+                    ApplicationA.WriteToLog(n.StackTrace);
                 }
 
                 return valid;

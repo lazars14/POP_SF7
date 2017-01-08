@@ -82,7 +82,7 @@ namespace POP_SF7
 
         private void addCoursebtn_Click(object sender, RoutedEventArgs e)
         {
-            SelectCourseLanguage scl = new SelectCourseLanguage(this);
+            SelectCourseLangStud scl = new SelectCourseLangStud(this);
             scl.Show();
         }
 
@@ -111,7 +111,7 @@ namespace POP_SF7
                                 if (StudentAttendsCourse.UnDelete(sac))
                                 {
                                     sac.Deleted = false;
-                                    selectedCourse.Deleted = false;
+                                    // boja - default
                                 }
                             }
                         }
@@ -145,7 +145,7 @@ namespace POP_SF7
                                 if(StudentAttendsCourse.Delete(sac))
                                 {
                                     sac.Deleted = true;
-                                    selectedCourse.Deleted = true;
+                                    //boja - crvena
                                 }
                             }
                         }

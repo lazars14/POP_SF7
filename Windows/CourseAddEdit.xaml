@@ -50,10 +50,11 @@
 
         <GroupBox Header="Ucenici" Grid.ColumnSpan="2" Grid.Row="9">
             <Grid>
-                <DataGrid x:Name="studentsdg" IsReadOnly="True" AutoGeneratingColumn="studentsdg_AutoGeneratingColumn" ItemsSource="{Binding ListOfStudents}" HorizontalAlignment="Left" Height="130" Margin="10,10,0,0" VerticalAlignment="Top" Width="260"/>
+                <DataGrid x:Name="studentsdg" IsReadOnly="True" AutoGeneratingColumn="studentsdg_AutoGeneratingColumn" ItemsSource="{Binding ListOfStudents}" HorizontalAlignment="Left" Height="130" Margin="10,10,0,0" VerticalAlignment="Top" Width="270"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="33" Margin="10,145,0,0" VerticalAlignment="Center" Width="275">
-                    <Button x:Name="addStudentbtn" Content="Dodaj" Width="75" Margin="50,5,5,5" HorizontalAlignment="Center"/>
-                    <Button x:Name="deleteStudentbtn" Content="Obrisi" Width="75" Margin="5"/>
+                    <Button x:Name="addStudentbtn" Content="Dodaj" Width="75" Margin="10,5,5,5" Click="addStudentbtn_Click"/>
+                    <Button x:Name="undeleteStudentbtn" Content="Povrati" Width="75" Margin="5" Click="undeleteStudentbtn_Click"/>
+                    <Button x:Name="deleteStudentbtn" Content="Obrisi" Width="75" Margin="5" Click="deleteStudentbtn_Click"/>
                 </StackPanel>
             </Grid>
         </GroupBox>

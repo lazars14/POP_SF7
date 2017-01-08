@@ -26,11 +26,12 @@ namespace POP_SF7
         public string labelCourseAdd = "Dodavanje novog kursa";
         public string labelCourseEdit = "Izmena postojeceg kursa";
 
-        public CourseAddEdit(Course course, Decider decider)
+        public CourseAddEdit(Course course, Decider decider, ObservableCollection<Student> listOfStudents)
         {
             InitializeComponent();
             Course = course;
             Decider = decider;
+            ListOfStudents = listOfStudents;
 
             setupWindow();
         }
@@ -40,8 +41,6 @@ namespace POP_SF7
             DataContext = Course;
 
             descriptionlbl.Text = (Decider == Decider.ADD) ? labelCourseAdd : labelCourseEdit;
-
-            ListOfStudents = new ObservableCollection<Student>();
 
             languagecb.ItemsSource = ApplicationA.Instance.Languages;
             languagecb.DisplayMemberPath = "Name";
@@ -115,6 +114,7 @@ namespace POP_SF7
                 languageId = (int)languagecb.SelectedValue;
             }
             catch(NullReferenceException a) { Console.WriteLine(a.StackTrace); }
+
             foreach(TeacherTeachesLanguage ttl in ApplicationA.Instance.TeacherTeachesLanguageCollection)
             {
                 if(ttl.LanguageId == languageId)
@@ -123,12 +123,7 @@ namespace POP_SF7
                     filteredTeachers.Add(teach);
                 }
             }
-            if(filteredTeachers.Count == 0)
-            {
-                MessageBox.Show("Ne postoji nastavnik koji predaje odabrani jezik!");
-                teachercb.IsEnabled = false;
-            }
-            else
+            if(filteredTeachers.Count != 0)
             {
                 teachercb.ItemsSource = filteredTeachers;
                 teachercb.IsEnabled = true;
@@ -138,6 +133,80 @@ namespace POP_SF7
         private void cancelbtn_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void addStudentbtn_Click(object sender, RoutedEventArgs e)
+        {
+            SelectCourseLangStud add = new SelectCourseLangStud(this);
+            add.Show(); 
+        }
+
+        private void deleteStudentbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Student selectedStudent = StudentsView.CurrentItem as Student;
+            if (selectedStudent == null)
+            {
+                MessageBox.Show("Morate da selektujete ucenika da biste ga obrisali!");
+            }
+            else
+            {
+                if (selectedStudent.Deleted == true)
+                {
+                    MessageBox.Show("Selektovani ucenik je obrisan!");
+                }
+                else
+                {
+                    var result = MessageBox.Show("Da li ste sigurni da hocete da obrisete datog ucenika za ovaj kurs?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        foreach (StudentAttendsCourse sac in ApplicationA.Instance.StudentAttendsCourseCollection)
+                        {
+                            if (sac.CourseId == Course.Id && sac.StudentId == selectedStudent.Id)
+                            {
+                                if (StudentAttendsCourse.UnDelete(sac))
+                                {
+                                    sac.Deleted = true;
+                                    // boja - crvena
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void undeleteStudentbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Student selectedStudent = StudentsView.CurrentItem as Student;
+            if (selectedStudent == null)
+            {
+                MessageBox.Show("Morate da selektujete ucenika da biste ga povratili!");
+            }
+            else
+            {
+                if (selectedStudent.Deleted == false)
+                {
+                    MessageBox.Show("Selektovani ucenik nije obrisan!");
+                }
+                else
+                {
+                    var result = MessageBox.Show("Da li ste sigurni da hocete da povratite datog ucenika za ovog kurs?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        foreach (StudentAttendsCourse sac in ApplicationA.Instance.StudentAttendsCourseCollection)
+                        {
+                            if (sac.CourseId == Course.Id && sac.StudentId == selectedStudent.Id)
+                            {
+                                if (StudentAttendsCourse.UnDelete(sac))
+                                {
+                                    sac.Deleted = false;
+                                    // boja - default
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

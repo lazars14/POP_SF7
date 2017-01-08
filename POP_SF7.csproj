@@ -58,7 +58,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Helpers\LoadColumnsHelper.cs" />
-    <Compile Include="Helpers\Search.cs" />
+    <Compile Include="Helpers\SearchHelper.cs" />
     <Compile Include="Helpers\ValidationHelper.cs" />
     <Compile Include="People\Student.cs" />
     <Compile Include="People\Teacher.cs" />
@@ -113,8 +113,8 @@
     <Compile Include="Windows\PaymentMenu.xaml.cs">
       <DependentUpon>PaymentMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\SelectCourseLanguage.xaml.cs">
-      <DependentUpon>SelectCourseLanguage.xaml</DependentUpon>
+    <Compile Include="Windows\SelectCourseLangStud.xaml.cs">
+      <DependentUpon>SelectCourseLangStud.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\SelectFromList.xaml.cs">
       <DependentUpon>SelectFromList.xaml</DependentUpon>
@@ -196,7 +196,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\SelectCourseLanguage.xaml">
+    <Page Include="Windows\SelectCourseLangStud.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -263,6 +263,7 @@
   <ItemGroup>
     <Content Include="DB\POPDBInsert.sql" />
     <Content Include="DB\POPDBScheme.sql" />
+    <Resource Include="Log.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

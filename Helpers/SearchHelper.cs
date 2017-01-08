@@ -1,7 +1,7 @@
 ﻿
 namespace POP_SF7.Helpers
 {
-    class Search
+    class SearchHelper
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -10,9 +10,9 @@ namespace POP_SF7.Helpers
 
         public PeopleDecider Decider { get; set; }
 
-        public Search() { }
+        public SearchHelper() { }
 
-        public Search(string firstName, string lastName, string jmbgOfUsername, PeopleDecider decider)
+        public SearchHelper(string firstName, string lastName, string jmbgOfUsername, PeopleDecider decider)
         {
             FirstName = firstName;
             LastName = lastName;

@@ -20,15 +20,17 @@ namespace POP_SF7.Windows
     /// Interaction logic for SelectCourseLanguage.xaml
     /// </summary>
 
-    public partial class SelectCourseLanguage : Window
+    public partial class SelectCourseLangStud : Window
     {
         public StudentAddEdit StudentWindow { get; set; }
         public TeacherAddEdit TeacherWindow { get; set; }
+        public CourseAddEdit CourseWindow { get; set; }
 
         public string addLanguage = "Dodavanje jezika";
         public string addCourse = "Dodavanje kursa";
+        public string addStudent = "Dodavanje ucenika";
 
-        public SelectCourseLanguage(TeacherAddEdit teacherAddEdit)
+        public SelectCourseLangStud(TeacherAddEdit teacherAddEdit)
         {
             InitializeComponent();
 
@@ -37,7 +39,7 @@ namespace POP_SF7.Windows
             setupWindow();
         }
 
-        public SelectCourseLanguage(StudentAddEdit studentAddEdit)
+        public SelectCourseLangStud(StudentAddEdit studentAddEdit)
         {
             InitializeComponent();
 
@@ -46,17 +48,53 @@ namespace POP_SF7.Windows
             setupWindow();
         }
 
+        public SelectCourseLangStud(CourseAddEdit courseAddEdit)
+        {
+            InitializeComponent();
+
+            CourseWindow = courseAddEdit;
+
+            setupWindow();
+        }
+
         private void setupWindow()
         {
-            if(TeacherWindow == null)
+            if(TeacherWindow == null && CourseWindow == null)
             {
                 description.Text = addCourse;
                 setupCourseGrid();
             }
-            else
+            else if(CourseWindow == null && StudentWindow == null)
             {
                 description.Text = addLanguage;
                 setupLanguageGrid();
+            }
+            else
+            {
+                description.Text = addStudent;
+                setupStudentsGrid();
+            }
+        }
+
+        private void setupStudentsGrid()
+        {
+            List<Student> FilteredStudents = new List<Student>();
+            foreach(Student student in ApplicationA.Instance.Students)
+            {
+                if(!CourseWindow.ListOfStudents.Contains(student))
+                {
+                    FilteredStudents.Add(student);
+                }
+            }
+
+            if (FilteredStudents.Count == 0)
+            {
+                MessageBox.Show("Ne postoje ucenici koji mogu da se dodaju na dati kurs!");
+                Close();
+            }
+            else
+            {
+                dataGrid.ItemsSource = FilteredStudents;
             }
         }
 
@@ -111,7 +149,7 @@ namespace POP_SF7.Windows
 
         private void okbtn_Click(object sender, RoutedEventArgs e)
         {
-            if(TeacherWindow == null)
+            if(TeacherWindow == null && CourseWindow == null)
             {
                 Course selectedCourse = dataGrid.SelectedItem as Course;
                 if(selectedCourse == null)
@@ -131,7 +169,7 @@ namespace POP_SF7.Windows
                     Close();
                 }
             }
-            else
+            else if(CourseWindow == null && StudentWindow == null)
             {
                 Language selectedLanguage = dataGrid.SelectedItem as Language;
                 if(selectedLanguage == null)
@@ -150,17 +188,40 @@ namespace POP_SF7.Windows
                     Close();
                 }
             }
+            else
+            {
+                Student selectedStudent = dataGrid.SelectedItem as Student;
+                if(selectedStudent == null)
+                {
+                    MessageBox.Show("Morate da selektujete ucenika kako biste ga preuzeli!");
+                }
+                else
+                {
+                    int nextId = ApplicationA.Instance.Students.Count() + 1;
+                    StudentAttendsCourse toAdd = new StudentAttendsCourse(nextId, CourseWindow.Course.Id, selectedStudent.Id, false);
+                    if(StudentAttendsCourse.Add(toAdd))
+                    {
+                        ApplicationA.Instance.StudentAttendsCourseCollection.Add(toAdd);
+                        CourseWindow.ListOfStudents.Add(selectedStudent);
+                    }
+                    Close();
+                }
+            }
         }
 
         private void dataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            if(TeacherWindow == null)
+            if(TeacherWindow == null && CourseWindow == null)
             {
                 LoadColumnsHelper.LoadCourse(e);
             }
-            else
+            else if(CourseWindow == null && StudentWindow == null)
             {
                 LoadColumnsHelper.LoadLanguage(e);
+            }
+            else
+            {
+                LoadColumnsHelper.LoadStudent(e);
             }
         }
     }

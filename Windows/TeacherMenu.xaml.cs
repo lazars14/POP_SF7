@@ -110,7 +110,7 @@ namespace POP_SF7
             bool lastName = lastnamechb.IsChecked ?? false;
             bool jmbg = jmbgchb.IsChecked ?? false;
 
-            Search s = new Search(firstnametb.Text, lastnametb.Text, jmbgtb.Text, PeopleDecider.Teacher);
+            SearchHelper s = new SearchHelper(firstnametb.Text, lastnametb.Text, jmbgtb.Text, PeopleDecider.Teacher);
             Predicate<object> firstNamePredicate = new Predicate<object>(s.firstname);
             Predicate<object> lastNamePredicate = new Predicate<object>(s.lastname);
             Predicate<object> jmbgPredicate = new Predicate<object>(s.jmbg);

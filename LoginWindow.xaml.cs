@@ -57,6 +57,7 @@ namespace POP_SF7
                     else if (u.UserName.Equals(usernametb.Text) && u.Password.Equals(passwordpb.Password) && u.Deleted == false)
                     {
                         valid = true;
+                        ApplicationA.LoggedUser = u;
                         MainMenu mainMenu = new MainMenu(u.UserRole, u.Id);
                         mainMenu.Show();
                         Close();
