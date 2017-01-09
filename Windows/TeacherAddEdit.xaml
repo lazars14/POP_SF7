@@ -20,7 +20,7 @@
         <TabControl x:Name="tabControl" TabStripPlacement="Top" Grid.Row="1" Margin="10,10,1,10">
             <TabItem x:Name="languagesTabItem" Header="Jezici">
                 <Grid>
-                    <DataGrid x:Name="languagesdg" AutoGeneratingColumn="languagesdg_AutoGeneratingColumn" HorizontalAlignment="Left" Height="110" Margin="10,10,0,0" VerticalAlignment="Top" Width="283"/>
+                    <DataGrid x:Name="languagesdg" LoadingRow="languagesdg_LoadingRow" AutoGeneratingColumn="languagesdg_AutoGeneratingColumn" HorizontalAlignment="Left" Height="110" Margin="10,10,0,0" VerticalAlignment="Top" Width="283"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="33" Margin="10,120,0,0" VerticalAlignment="Center" Width="275">
                         <Button x:Name="addLanguagebtn" Content="Dodaj" Width="75" Margin="20,5,5,5" Click="addLanguagebtn_Click"/>
                         <Button x:Name="undeleteLanguagebtn" Content="Povrati" Width="75" Margin="5" Click="undeleteLanguagebtn_Click"/>

@@ -8,6 +8,8 @@ using System.Windows.Data;
 using System.Windows.Controls;
 using POP_SF7.Helpers;
 using POP_SF7.School;
+using System.Collections.Generic;
+using System.Windows.Media;
 
 namespace POP_SF7
 {
@@ -19,6 +21,9 @@ namespace POP_SF7
         public ICollectionView CoursesView { get; set; }
         public ICollectionView LanguagesView { get; set; }
 
+        public List<int> DeletedIndexes { get; set; }
+        public static SolidColorBrush Red = new SolidColorBrush(Colors.Red);
+
         public Teacher TeacherT { get; set; }
         public Decider Decider { get; set; }
 
@@ -27,14 +32,27 @@ namespace POP_SF7
 
         public string WarningMessage = "Ukoliko izbrisete ovaj jezik svi kursevi sa ovim jezikom (za datog nastavnika) nece moci da se menjaju!";
 
-        public TeacherAddEdit(Teacher teacher, Decider decider)
+        public TeacherAddEdit(Teacher teacher, Decider decider, List<int> deletedIndexes)
         {
-            InitializeComponent();
-
             TeacherT = teacher;
             Decider = decider;
+            DeletedIndexes = deletedIndexes;
+
+            InitializeComponent();
 
             setupWindow();
+        }
+
+        private void languagesdg_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            int rowIndex = e.Row.GetIndex();
+            if(Decider == Decider.EDIT)
+            {
+                if(DeletedIndexes.Contains(rowIndex))
+                {
+                    e.Row.Background = Red;
+                }
+            }
         }
 
         private void setupWindow()
@@ -91,6 +109,33 @@ namespace POP_SF7
             }
         }
 
+        private bool Deleted(int rowIndex)
+        {
+            bool valid = false;
+
+            foreach(DataGridRow row in LanguagesView)
+            {
+                int index = row.GetIndex();
+                if(DeletedIndexes.Contains(index))
+                {
+                    valid = true;
+                }
+            }
+
+            return valid;
+        }
+
+        private void changeColor(int rowForDeletion, SolidColorBrush brush)
+        {
+            foreach (DataGridRow row in LanguagesView)
+            {
+                if (row.GetIndex() == rowForDeletion)
+                {
+                    row.Background = brush;
+                }
+            }
+        }
+
         private void cancelbtn_Click(object sender, RoutedEventArgs e)
         {
             Close();
@@ -111,7 +156,7 @@ namespace POP_SF7
             }
             else
             {
-                if (selectedLanguage.Deleted == false) // ovde ide provera na osnovu boje
+                if (!Deleted(LanguagesView.CurrentPosition)) // ovde ide provera na osnovu boje
                 {
                     MessageBox.Show("Selektovani jezik nije obrisan!");
                 }
@@ -127,6 +172,7 @@ namespace POP_SF7
                                 if (TeacherTeachesLanguage.UnDelete(ttl))
                                 {
                                     ttl.Deleted = false;
+                                    changeColor(LanguagesView.CurrentPosition, null);
                                     // boja - default
                                 }
                             }
@@ -145,7 +191,7 @@ namespace POP_SF7
             }
             else
             {
-                if(selectedLanguage.Deleted == true) // ovde ide provera na osnovu boje
+                if(Deleted(LanguagesView.CurrentPosition)) // ovde ide provera na osnovu boje
                 {
                     MessageBox.Show("Selektovani jezik je vec obrisan!");
                 }
@@ -161,6 +207,7 @@ namespace POP_SF7
                                 if(TeacherTeachesLanguage.Delete(ttl))
                                 {
                                     ttl.Deleted = true;
+                                    changeColor(LanguagesView.CurrentPosition, Red);
                                     // boja - crvena
                                 }
                             }
@@ -169,5 +216,7 @@ namespace POP_SF7
                 }
             }
         }
+
+        
     }
 }

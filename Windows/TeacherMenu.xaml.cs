@@ -2,6 +2,7 @@
 using POP_SF7.School;
 using POP_SF7.Windows;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
@@ -22,10 +23,13 @@ namespace POP_SF7
         public ICollectionView CoursesView { get; set; }
         public ICollectionView LanguagesView { get; set; }
 
+        public List<int> DeletedLanguagesForTeacher { get; set; }
+
         public TeacherMenu()
         {
             InitializeComponent();
             TeachersView = CollectionViewSource.GetDefaultView(ApplicationA.Instance.Teachers);
+            DeletedLanguagesForTeacher = new List<int>();
 
             teachersdg.ItemsSource = TeachersView;
             teachersdg.IsSynchronizedWithCurrentItem = true;
@@ -34,7 +38,7 @@ namespace POP_SF7
         private void addbtn_Click(object sender, RoutedEventArgs e)
         {
             Teacher newTeacher = new Teacher();
-            TeacherAddEdit addUser = new TeacherAddEdit(newTeacher, Decider.ADD);
+            TeacherAddEdit addUser = new TeacherAddEdit(newTeacher, Decider.ADD, null);
             addUser.Show();
         }
 
@@ -48,7 +52,7 @@ namespace POP_SF7
             else
             {
                 Teacher backup = (Teacher)selectedTeacher.Clone();
-                TeacherAddEdit edit = new TeacherAddEdit(selectedTeacher, Decider.EDIT);
+                TeacherAddEdit edit = new TeacherAddEdit(selectedTeacher, Decider.EDIT, DeletedLanguagesForTeacher);
                 if(edit.ShowDialog() != true)
                 {
                     int index = ApplicationA.Instance.Teachers.IndexOf(selectedTeacher);
@@ -151,6 +155,13 @@ namespace POP_SF7
 
         private void usersdg_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if(DeletedLanguagesForTeacher.Count != 0)
+            {
+                DeletedLanguagesForTeacher.Clear();
+            }
+
+            int deletedNextIndex = 0;
+
             Teacher selectedTeacher = TeachersView.CurrentItem as Teacher;
             if(selectedTeacher != null)
             {
@@ -164,6 +175,11 @@ namespace POP_SF7
                         {
                             Course course = ApplicationA.Instance.Courses[ttc.CourseId - 1];
                             selectedTeacherTwo.ListOfCourses.Add(course);
+                            if (ttc.Deleted == true)
+                            {
+                                DeletedLanguagesForTeacher.Add(deletedNextIndex);
+                                deletedNextIndex += 1;
+                            }
                         }
                     }
 
