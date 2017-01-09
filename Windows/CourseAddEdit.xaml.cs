@@ -150,7 +150,7 @@ namespace POP_SF7
             }
             else
             {
-                if (selectedStudent.Deleted == true)
+                if (selectedStudent.Deleted == true) // ovde ide provera na osnovu boje
                 {
                     MessageBox.Show("Selektovani ucenik je obrisan!");
                 }
@@ -184,7 +184,7 @@ namespace POP_SF7
             }
             else
             {
-                if (selectedStudent.Deleted == false)
+                if (selectedStudent.Deleted == false) // ovde ide provera na osnovu boje
                 {
                     MessageBox.Show("Selektovani ucenik nije obrisan!");
                 }

@@ -65,12 +65,29 @@ namespace POP_SF7
             }
             else
             {
-                Course backup = (Course)selectedCourse.Clone();
-                CourseAddEdit edit = new CourseAddEdit(selectedCourse, Decider.EDIT, StudentsForSelectedCourse);
-                if(edit.ShowDialog() != true)
+                // provera da li je jezik datog kursa obrisan za nastavnika
+                bool valid = true;
+                foreach(TeacherTeachesLanguage ttl in ApplicationA.Instance.TeacherTeachesLanguageCollection)
                 {
-                    int index = ApplicationA.Instance.Courses.IndexOf(selectedCourse);
-                    ApplicationA.Instance.Courses[index] = backup;
+                    if(ttl.LanguageId == selectedCourse.Language.Id && ttl.TeacherId == selectedCourse.Teacher.Id && ttl.Deleted == true)
+                    {
+                        valid = false;
+                    }
+                }
+
+                if(!valid)
+                {
+                    MessageBox.Show("Jezik " + selectedCourse.Language.Name + " je obrisan za nastavnika " + selectedCourse.Teacher.LastName + " " + selectedCourse.Teacher.FirstName + ". Da biste mogli da izmenite ovaj kurs morate da povratite ovaj jezik za datog nastavnika!");
+                }
+                else
+                {
+                    Course backup = (Course)selectedCourse.Clone();
+                    CourseAddEdit edit = new CourseAddEdit(selectedCourse, Decider.EDIT, StudentsForSelectedCourse);
+                    if (edit.ShowDialog() != true)
+                    {
+                        int index = ApplicationA.Instance.Courses.IndexOf(selectedCourse);
+                        ApplicationA.Instance.Courses[index] = backup;
+                    }
                 }
             }
         }
@@ -88,7 +105,7 @@ namespace POP_SF7
             }
             else
             {
-                var result = MessageBox.Show("Da li ste sigurni da hocete da obrisete ovog korisnika?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                var result = MessageBox.Show("Da li ste sigurni da hocete da obrisete ovaj kurs?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.Yes)
                 {
                     selectedCourse = CoursesView.CurrentItem as Course;

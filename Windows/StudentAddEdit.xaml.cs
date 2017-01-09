@@ -95,7 +95,7 @@ namespace POP_SF7
             }
             else
             {
-                if (selectedCourse.Deleted == false)
+                if (selectedCourse.Deleted == false) // ovde ide provera na osnovu boje
                 {
                     MessageBox.Show("Izabrani kurs nije obrisan!");
                 }
@@ -129,7 +129,7 @@ namespace POP_SF7
             }
             else
             {
-                if(selectedCourse.Deleted == true)
+                if(selectedCourse.Deleted == true) // ovde ide provera na osnovu boje
                 {
                     MessageBox.Show("Izabrani kurs je vec obrisan!");
                 }

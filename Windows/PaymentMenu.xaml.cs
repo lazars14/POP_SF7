@@ -50,12 +50,19 @@ namespace POP_SF7
             }
             else
             {
-                Payment backup = (Payment)selectedPayment.Clone();
-                PaymentAddEdit edit = new PaymentAddEdit(selectedPayment, Decider.EDIT);
-                if(edit.ShowDialog() != true)
+                if(selectedPayment.Course.Deleted == true)
                 {
-                    int index = ApplicationA.Instance.Payments.IndexOf(selectedPayment);
-                    ApplicationA.Instance.Payments[index] = backup;
+                    MessageBox.Show("Kurs selektovane uplate je obrisan! Ne mozete da izmenite ovu uplatu dok ne povratite kurs!");
+                }
+                else
+                {
+                    Payment backup = (Payment)selectedPayment.Clone();
+                    PaymentAddEdit edit = new PaymentAddEdit(selectedPayment, Decider.EDIT);
+                    if (edit.ShowDialog() != true)
+                    {
+                        int index = ApplicationA.Instance.Payments.IndexOf(selectedPayment);
+                        ApplicationA.Instance.Payments[index] = backup;
+                    }
                 }
             }
         }

@@ -111,7 +111,7 @@ namespace POP_SF7
             }
             else
             {
-                if (selectedLanguage.Deleted == false)
+                if (selectedLanguage.Deleted == false) // ovde ide provera na osnovu boje
                 {
                     MessageBox.Show("Selektovani jezik nije obrisan!");
                 }
@@ -145,7 +145,7 @@ namespace POP_SF7
             }
             else
             {
-                if(selectedLanguage.Deleted == true)
+                if(selectedLanguage.Deleted == true) // ovde ide provera na osnovu boje
                 {
                     MessageBox.Show("Selektovani jezik je vec obrisan!");
                 }
