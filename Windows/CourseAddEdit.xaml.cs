@@ -72,42 +72,11 @@ namespace POP_SF7
             {
                 teachercb.IsEnabled = false;
             }
-            else
-            {
-                MessageBox.Show("Jezik: " + Course.Language.Id + " ... Tip kursa: " + Course.CourseType.Id + " ... Nastavnik: " + Course.Teacher.Id);
-
-                languagecb.SelectedIndex = Course.Language.Id - 1;
-                courseTypecb.SelectedIndex = Course.CourseType.Id - 1;
-                teachercb.SelectedIndex = setTeacherComboBoxEDIT((int)languagecb.SelectedValue);
-            }
         }
 
-        private int setTeacherComboBoxEDIT(int languageId)
+        private int setTeacherComboBoxEDIT()
         {
-            /*int index = 0;
-
-            if (FilteredTeachers.Count != 0) FilteredTeachers.Clear();
-
-            foreach (TeacherTeachesLanguage ttl in ApplicationA.Instance.TeacherTeachesLanguageCollection)
-            {
-                if (ttl.LanguageId == languageId && ttl.Deleted == false)
-                {
-                    Teacher teach = ApplicationA.Instance.Teachers[ttl.TeacherId - 1];
-                    FilteredTeachers.Add(teach);
-                }
-            }
-
-            return index;*/
-
-            int index = 0;
-            for (int i = 0; i < FilteredTeachers.Count(); i++)
-            {
-                Teacher t = FilteredTeachers[i];
-                if(t.Id == Course.Teacher.Id)
-                {
-                    index = i;
-                }
-            }
+            int index = FilteredTeachers.IndexOf(Course.Teacher);
 
             return index;
         }
@@ -120,12 +89,6 @@ namespace POP_SF7
             }
             else
             {
-                Course.Language = (Language)languagecb.SelectedItem; MessageBox.Show(Course.Language.Name);
-                Course.CourseType = (CourseType)courseTypecb.SelectedItem; MessageBox.Show(Course.CourseType.Name);
-                Course.Teacher = (Teacher)teachercb.SelectedItem; MessageBox.Show(Course.Teacher.FirstName);
-
-                MessageBox.Show("Jezik: " + Course.Language.Id + " ... Tip kursa: " + Course.CourseType.Id + " ... Nastavnik: " + Course.Teacher.Id);
-
                 if (Decider == Decider.ADD)
                 {
                     if (Course.Add(Course))
