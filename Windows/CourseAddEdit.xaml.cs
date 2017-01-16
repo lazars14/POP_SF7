@@ -23,6 +23,8 @@ namespace POP_SF7
         public ObservableCollection<Student> ListOfStudents { get; set; }
         public ICollectionView StudentsView { get; set; }
 
+        public ObservableCollection<Teacher> FilteredTeachers { get; set; }
+
         public string labelCourseAdd = "Dodavanje novog kursa";
         public string labelCourseEdit = "Izmena postojeceg kursa";
 
@@ -32,6 +34,7 @@ namespace POP_SF7
             Course = course;
             Decider = decider;
             ListOfStudents = listOfStudents;
+            FilteredTeachers = new ObservableCollection<Teacher>();
 
             setupWindow();
         }
@@ -52,11 +55,15 @@ namespace POP_SF7
             courseTypecb.SelectedValuePath = "Id";
             courseTypecb.SelectedIndex = 0;
 
-            teachercb.ItemsSource = ApplicationA.Instance.Teachers;
-            teachercb.DisplayMemberPath = "FullName";
+            teachercb.ItemsSource = FilteredTeachers;
+            teachercb.DisplayMemberPath = "LastName";
             teachercb.SelectedValuePath = "Id";
             teachercb.SelectedIndex = 0;
 
+            if(Decider == Decider.ADD && ListOfStudents.Count != 0)
+            {
+                ListOfStudents.Clear();
+            }
             StudentsView = CollectionViewSource.GetDefaultView(ListOfStudents);
             studentsdg.ItemsSource = StudentsView;
             studentsdg.IsSynchronizedWithCurrentItem = true;
@@ -67,10 +74,42 @@ namespace POP_SF7
             }
             else
             {
+                MessageBox.Show("Jezik: " + Course.Language.Id + " ... Tip kursa: " + Course.CourseType.Id + " ... Nastavnik: " + Course.Teacher.Id);
+
                 languagecb.SelectedIndex = Course.Language.Id - 1;
                 courseTypecb.SelectedIndex = Course.CourseType.Id - 1;
-                teachercb.SelectedIndex = Course.Teacher.Id - 1;
+                teachercb.SelectedIndex = setTeacherComboBoxEDIT((int)languagecb.SelectedValue);
             }
+        }
+
+        private int setTeacherComboBoxEDIT(int languageId)
+        {
+            /*int index = 0;
+
+            if (FilteredTeachers.Count != 0) FilteredTeachers.Clear();
+
+            foreach (TeacherTeachesLanguage ttl in ApplicationA.Instance.TeacherTeachesLanguageCollection)
+            {
+                if (ttl.LanguageId == languageId && ttl.Deleted == false)
+                {
+                    Teacher teach = ApplicationA.Instance.Teachers[ttl.TeacherId - 1];
+                    FilteredTeachers.Add(teach);
+                }
+            }
+
+            return index;*/
+
+            int index = 0;
+            for (int i = 0; i < FilteredTeachers.Count(); i++)
+            {
+                Teacher t = FilteredTeachers[i];
+                if(t.Id == Course.Teacher.Id)
+                {
+                    index = i;
+                }
+            }
+
+            return index;
         }
 
         private void okbtn_Click(object sender, RoutedEventArgs e)
@@ -81,6 +120,12 @@ namespace POP_SF7
             }
             else
             {
+                Course.Language = (Language)languagecb.SelectedItem; MessageBox.Show(Course.Language.Name);
+                Course.CourseType = (CourseType)courseTypecb.SelectedItem; MessageBox.Show(Course.CourseType.Name);
+                Course.Teacher = (Teacher)teachercb.SelectedItem; MessageBox.Show(Course.Teacher.FirstName);
+
+                MessageBox.Show("Jezik: " + Course.Language.Id + " ... Tip kursa: " + Course.CourseType.Id + " ... Nastavnik: " + Course.Teacher.Id);
+
                 if (Decider == Decider.ADD)
                 {
                     if (Course.Add(Course))
@@ -107,26 +152,24 @@ namespace POP_SF7
 
         private void languagecb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            List<Teacher> filteredTeachers = new List<Teacher>();
             int languageId = 0;
-            try
+
+            if (FilteredTeachers.Count != 0) FilteredTeachers.Clear();
+
+            if(languagecb.SelectedItem != null)
             {
                 languageId = (int)languagecb.SelectedValue;
-            }
-            catch(NullReferenceException a) { Console.WriteLine(a.StackTrace); }
 
-            foreach(TeacherTeachesLanguage ttl in ApplicationA.Instance.TeacherTeachesLanguageCollection)
-            {
-                if(ttl.LanguageId == languageId)
+                foreach (TeacherTeachesLanguage ttl in ApplicationA.Instance.TeacherTeachesLanguageCollection)
                 {
-                    Teacher teach = ApplicationA.Instance.Teachers[ttl.TeacherId - 1];
-                    filteredTeachers.Add(teach);
+                    if (ttl.LanguageId == languageId && ttl.Deleted == false)
+                    {
+                        Teacher teach = ApplicationA.Instance.Teachers[ttl.TeacherId - 1];
+                        FilteredTeachers.Add(teach);
+                    }
                 }
-            }
-            if(filteredTeachers.Count != 0)
-            {
-                teachercb.ItemsSource = filteredTeachers;
-                teachercb.IsEnabled = true;
+
+                teachercb.IsEnabled = (FilteredTeachers.Count == 0) ? false : true;
             }
         }
 
