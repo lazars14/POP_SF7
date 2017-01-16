@@ -1,4 +1,5 @@
-﻿using POP_SF7.Helpers;
+﻿using POP_SF7.DB;
+using POP_SF7.Helpers;
 using POP_SF7.School;
 using POP_SF7.Windows;
 using System;
@@ -115,7 +116,7 @@ namespace POP_SF7
 
                 if (Decider == Decider.ADD)
                 {
-                    if(Payment.Add(SelectedPayment))
+                    if(PaymentDAO.Add(SelectedPayment))
                     {
                         SelectedPayment.Id = ApplicationA.Instance.Payments.Count() + 1;
                         ApplicationA.Instance.Payments.Add(SelectedPayment);
@@ -124,7 +125,7 @@ namespace POP_SF7
                 }
                 else
                 {
-                    if(!Payment.Edit(SelectedPayment))
+                    if(!PaymentDAO.Edit(SelectedPayment))
                     {
                         cancelbtn_Click(null, null);
                     }

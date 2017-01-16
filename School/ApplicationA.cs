@@ -1,4 +1,5 @@
-﻿using POP_SF7.School;
+﻿using POP_SF7.DB;
+using POP_SF7.School;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -49,7 +50,7 @@ namespace POP_SF7
 
         private ApplicationA()
         {
-            SchoolS = SchoolS.LoadSchool();
+            SchoolS = SchoolDAO.LoadSchool();
             LoggedUser = new User(0);
 
             Users = new ObservableCollection<User>();
@@ -79,12 +80,12 @@ namespace POP_SF7
         {
             bool valid = true;
 
-            valid = Language.Load();
-            valid = CourseType.Load();
-            valid = Course.Load();
-            valid = Teacher.Load();
-            valid = TeacherTeachesLanguage.Load();
-            valid = TeacherTeachesCourse.Load();
+            valid = LanguageDAO.Load();
+            valid = CourseTypeDAO.Load();
+            valid = CourseDAO.Load();
+            valid = TeacherDAO.Load();
+            valid = TeacherTeachesLanguageDAO.Load();
+            valid = TeacherTeachesCourseDAO.Load();
 
             AdminDataLoaded = true;
 
@@ -104,15 +105,15 @@ namespace POP_SF7
         {
             bool valid = true;
 
-            valid = Language.Load(); 
-            valid = CourseType.Load(); 
-            valid = Teacher.Load(); 
-            valid = Student.Load(); 
-            valid = Payment.Load();
-            valid = Course.Load(); 
-            valid = TeacherTeachesLanguage.Load(); 
-            valid = StudentAttendsCourse.Load();
-            valid = TeacherTeachesCourse.Load();
+            valid = LanguageDAO.Load(); 
+            valid = CourseTypeDAO.Load(); 
+            valid = TeacherDAO.Load(); 
+            valid = StudentDAO.Load(); 
+            valid = PaymentDAO.Load();
+            valid = CourseDAO.Load(); 
+            valid = TeacherTeachesLanguageDAO.Load(); 
+            valid = StudentAttendsCourseDAO.Load();
+            valid = TeacherTeachesCourseDAO.Load();
 
             EmployeeDataLoaded = true;
 
@@ -135,9 +136,9 @@ namespace POP_SF7
         {
             bool valid = true;
 
-            valid = Student.Load();
-            valid = Payment.Load();
-            valid = StudentAttendsCourse.Load();
+            valid = StudentDAO.Load();
+            valid = PaymentDAO.Load();
+            valid = StudentAttendsCourseDAO.Load();
 
             EmployeeDataLoaded = true;
 

@@ -1,4 +1,5 @@
-﻿using POP_SF7.Helpers;
+﻿using POP_SF7.DB;
+using POP_SF7.Helpers;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -66,7 +67,7 @@ namespace POP_SF7.Windows
                 if (result == MessageBoxResult.Yes)
                 {
                     selectedLanguage = view.CurrentItem as Language;
-                    if(POP_SF7.Language.Delete(selectedLanguage))
+                    if(LanguageDAO.Delete(selectedLanguage))
                     {
                         selectedLanguage.Deleted = true;
                     }

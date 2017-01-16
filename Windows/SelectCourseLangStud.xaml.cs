@@ -1,4 +1,5 @@
-﻿using POP_SF7.Helpers;
+﻿using POP_SF7.DB;
+using POP_SF7.Helpers;
 using POP_SF7.School;
 using System;
 using System.Collections.Generic;
@@ -161,7 +162,7 @@ namespace POP_SF7.Windows
                     int nextId = ApplicationA.Instance.StudentAttendsCourseCollection.Count() + 1;
                     StudentAttendsCourse toAdd = new StudentAttendsCourse(nextId, selectedCourse.Id, StudentWindow.StudentS.Id, false);
 
-                    if (StudentAttendsCourse.Add(toAdd))
+                    if (StudentAttendsCourseDAO.Add(toAdd))
                     {
                         ApplicationA.Instance.StudentAttendsCourseCollection.Add(toAdd);
                         StudentWindow.StudentS.ListOfCourses.Add(selectedCourse);
@@ -180,7 +181,7 @@ namespace POP_SF7.Windows
                 {
                     int nextId = ApplicationA.Instance.Languages.Count() + 1;
                     TeacherTeachesLanguage toAdd = new TeacherTeachesLanguage(nextId, TeacherWindow.TeacherT.Id, selectedLanguage.Id, false);
-                    if(TeacherTeachesLanguage.Add(toAdd))
+                    if(TeacherTeachesLanguageDAO.Add(toAdd))
                     {
                         ApplicationA.Instance.TeacherTeachesLanguageCollection.Add(toAdd);
                         TeacherWindow.TeacherT.ListOfLanguages.Add(selectedLanguage);
@@ -199,7 +200,7 @@ namespace POP_SF7.Windows
                 {
                     int nextId = ApplicationA.Instance.Students.Count() + 1;
                     StudentAttendsCourse toAdd = new StudentAttendsCourse(nextId, CourseWindow.Course.Id, selectedStudent.Id, false);
-                    if(StudentAttendsCourse.Add(toAdd))
+                    if(StudentAttendsCourseDAO.Add(toAdd))
                     {
                         ApplicationA.Instance.StudentAttendsCourseCollection.Add(toAdd);
                         CourseWindow.ListOfStudents.Add(selectedStudent);

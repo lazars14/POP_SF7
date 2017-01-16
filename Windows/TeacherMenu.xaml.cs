@@ -1,4 +1,5 @@
-﻿using POP_SF7.Helpers;
+﻿using POP_SF7.DB;
+using POP_SF7.Helpers;
 using POP_SF7.School;
 using POP_SF7.Windows;
 using System;
@@ -78,7 +79,7 @@ namespace POP_SF7
                 if (result == MessageBoxResult.Yes)
                 {
                     selectedTeacher = TeachersView.CurrentItem as Teacher;
-                    if(Teacher.Delete(selectedTeacher))
+                    if(TeacherDAO.Delete(selectedTeacher))
                     {
                         selectedTeacher.Deleted = true;
                     }

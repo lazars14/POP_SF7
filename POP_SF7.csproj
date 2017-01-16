@@ -57,6 +57,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DB\CourseDAO.cs" />
+    <Compile Include="DB\CourseTypeDAO.cs" />
+    <Compile Include="DB\LanguageDAO.cs" />
+    <Compile Include="DB\PaymentDAO.cs" />
+    <Compile Include="DB\SchoolDAO.cs" />
+    <Compile Include="DB\StudentAttendsCourseDAO.cs" />
+    <Compile Include="DB\StudentDAO.cs" />
+    <Compile Include="DB\TeacherDAO.cs" />
+    <Compile Include="DB\TeacherTeachesCourseDAO.cs" />
+    <Compile Include="DB\TeacherTeachesLanguageDAO.cs" />
+    <Compile Include="DB\UserDAO.cs" />
     <Compile Include="Helpers\LoadColumnsHelper.cs" />
     <Compile Include="Helpers\SearchHelper.cs" />
     <Compile Include="Helpers\ValidationHelper.cs" />

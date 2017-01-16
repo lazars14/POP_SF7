@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using POP_SF7.DB;
+using System.Linq;
 using System.Windows;
 
 namespace POP_SF7.Windows
@@ -39,7 +40,7 @@ namespace POP_SF7.Windows
             {
                 if (Decider == Decider.ADD)
                 {
-                    if (POP_SF7.Language.Add(LanguageL))
+                    if (LanguageDAO.Add(LanguageL))
                     {
                         LanguageL.Id = ApplicationA.Instance.Languages.Count() + 1;
                         ApplicationA.Instance.Languages.Add(LanguageL);
@@ -47,7 +48,7 @@ namespace POP_SF7.Windows
                 }
                 else
                 {
-                    if (!POP_SF7.Language.Edit(LanguageL))
+                    if (!LanguageDAO.Edit(LanguageL))
                     {
                         cancelbtn_Click(null, null);
                     }

@@ -1,4 +1,5 @@
-﻿using POP_SF7.Helpers;
+﻿using POP_SF7.DB;
+using POP_SF7.Helpers;
 using POP_SF7.Windows;
 using System;
 using System.Collections.Generic;
@@ -84,7 +85,7 @@ namespace POP_SF7
                 if (result == MessageBoxResult.Yes)
                 {
                     selectedPayment = view.CurrentItem as Payment;
-                    if(Payment.Delete(selectedPayment))
+                    if(PaymentDAO.Delete(selectedPayment))
                     {
                         selectedPayment.Deleted = true;
                     }

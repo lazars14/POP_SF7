@@ -1,4 +1,5 @@
-﻿using POP_SF7.Helpers;
+﻿using POP_SF7.DB;
+using POP_SF7.Helpers;
 using POP_SF7.School;
 using POP_SF7.Windows;
 using System;
@@ -109,7 +110,7 @@ namespace POP_SF7
                 if (result == MessageBoxResult.Yes)
                 {
                     selectedCourse = CoursesView.CurrentItem as Course;
-                    if(Course.Delete(selectedCourse))
+                    if(CourseDAO.Delete(selectedCourse))
                     {
                         selectedCourse.Deleted = true;
                     }

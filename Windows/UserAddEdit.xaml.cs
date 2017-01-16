@@ -1,4 +1,5 @@
-﻿using POP_SF7.Windows;
+﻿using POP_SF7.DB;
+using POP_SF7.Windows;
 using System;
 using System.Linq;
 using System.Windows;
@@ -48,7 +49,7 @@ namespace POP_SF7
             {
                 if (Decider == Decider.ADD)
                 {
-                    if (User.Add(UserU))
+                    if (UserDAO.Add(UserU))
                     {
                         UserU.Id = ApplicationA.Instance.Users.Count() + 1;
                         ApplicationA.Instance.Users.Add(UserU);
@@ -57,7 +58,7 @@ namespace POP_SF7
                 }
                 else
                 {   
-                    if(!User.Edit(UserU))
+                    if(!UserDAO.Edit(UserU))
                     {
                         cancelbtn_Click(null, null);
                     }

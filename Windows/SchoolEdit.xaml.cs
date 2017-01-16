@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using POP_SF7.DB;
+using System.Windows;
 
 namespace POP_SF7
 {
@@ -22,7 +23,7 @@ namespace POP_SF7
             {
                 MessageBox.Show(ApplicationA.FILL_ALL_FIELDS_WARNING);
             }
-            else if(!SchoolS.UpdateSchool(SchoolS))
+            else if(!SchoolDAO.UpdateSchool(SchoolS))
             {
                 cancelbtn_Click(null, null);
             }

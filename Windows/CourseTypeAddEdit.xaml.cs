@@ -1,4 +1,5 @@
-﻿using POP_SF7.Windows;
+﻿using POP_SF7.DB;
+using POP_SF7.Windows;
 using System.Linq;
 using System.Windows;
 
@@ -37,7 +38,7 @@ namespace POP_SF7
             {
                 if (Decider == Decider.ADD)
                 {
-                    if (CourseType.Add(CourseTypeC))
+                    if (CourseTypeDAO.Add(CourseTypeC))
                     {
                         CourseTypeC.Id = ApplicationA.Instance.CourseTypes.Count() + 1;
                         ApplicationA.Instance.CourseTypes.Add(CourseTypeC);
@@ -45,7 +46,7 @@ namespace POP_SF7
                 }
                 else
                 {
-                    if (!CourseType.Edit(CourseTypeC))
+                    if (!CourseTypeDAO.Edit(CourseTypeC))
                     {
                         cancelbtn_Click(null, null);
                     }

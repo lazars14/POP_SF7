@@ -10,6 +10,7 @@ using POP_SF7.Helpers;
 using POP_SF7.School;
 using System.Collections.Generic;
 using System.Windows.Media;
+using POP_SF7.DB;
 
 namespace POP_SF7
 {
@@ -79,7 +80,7 @@ namespace POP_SF7
             {
                 if (Decider == Decider.ADD)
                 {
-                    if (Teacher.Add(TeacherT))
+                    if (TeacherDAO.Add(TeacherT))
                     {
                         TeacherT.Id = ApplicationA.Instance.Teachers.Count() + 1;
                         ApplicationA.Instance.Teachers.Add(TeacherT);
@@ -87,7 +88,7 @@ namespace POP_SF7
                 }
                 else
                 {
-                    if (!Teacher.Edit(TeacherT))
+                    if (!TeacherDAO.Edit(TeacherT))
                     {
                         cancelbtn_Click(null, null);
                     }
@@ -169,7 +170,7 @@ namespace POP_SF7
                         {
                             if (ttl.TeacherId == TeacherT.Id && ttl.LanguageId == selectedLanguage.Id)
                             {
-                                if (TeacherTeachesLanguage.UnDelete(ttl))
+                                if (TeacherTeachesLanguageDAO.UnDelete(ttl))
                                 {
                                     ttl.Deleted = false;
                                     changeColor(LanguagesView.CurrentPosition, null);
@@ -204,7 +205,7 @@ namespace POP_SF7
                         {
                             if(ttl.TeacherId == TeacherT.Id && ttl.LanguageId == selectedLanguage.Id)
                             {
-                                if(TeacherTeachesLanguage.Delete(ttl))
+                                if(TeacherTeachesLanguageDAO.Delete(ttl))
                                 {
                                     ttl.Deleted = true;
                                     changeColor(LanguagesView.CurrentPosition, Red);

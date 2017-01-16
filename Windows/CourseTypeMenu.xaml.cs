@@ -1,4 +1,5 @@
-﻿using POP_SF7.Helpers;
+﻿using POP_SF7.DB;
+using POP_SF7.Helpers;
 using POP_SF7.Windows;
 using System.ComponentModel;
 using System.Linq;
@@ -70,7 +71,7 @@ namespace POP_SF7
                 if(result == MessageBoxResult.Yes)
                 {                   
                     selectedCourseType = view.CurrentItem as CourseType;
-                    if(CourseType.Delete(selectedCourseType))
+                    if(CourseTypeDAO.Delete(selectedCourseType))
                     {
                         selectedCourseType.Deleted = true;
                     }

@@ -3,8 +3,3 @@
    at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
    at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
    at POP_SF7.SchoolS.UpdateSchool(SchoolS school) in D:\TekuciProjekti\POP2016\POP_SF7\POP_SF7\School\School.cs:line 159
-8/1/2017 11:39:12 PM|1|Marko|Radonjic|1234567891011|marko|radonjic
-   at System.Data.SqlClient.SqlCommand.ValidateCommand(String method, Boolean async)
-   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
-   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
-   at POP_SF7.SchoolS.UpdateSchool(SchoolS school) in D:\TekuciProjekti\POP2016\POP_SF7\POP_SF7\School\School.cs:line 159

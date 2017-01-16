@@ -7,6 +7,7 @@ using POP_SF7.Helpers;
 using System.ComponentModel;
 using System.Windows.Data;
 using POP_SF7.School;
+using POP_SF7.DB;
 
 namespace POP_SF7
 {
@@ -53,7 +54,7 @@ namespace POP_SF7
             {
                 if (Decider == Decider.ADD)
                 {
-                    if (Student.Add(StudentS))
+                    if (StudentDAO.Add(StudentS))
                     {
                         StudentS.Id = ApplicationA.Instance.Students.Count() + 1;
                         ApplicationA.Instance.Students.Add(StudentS);
@@ -61,7 +62,7 @@ namespace POP_SF7
                 }
                 else
                 {
-                    if (!Student.Edit(StudentS))
+                    if (!StudentDAO.Edit(StudentS))
                     {
                         cancelbtn_Click(null, null);
                     }
@@ -108,7 +109,7 @@ namespace POP_SF7
                         {
                             if (sac.StudentId == StudentS.Id && sac.CourseId == selectedCourse.Id)
                             {
-                                if (StudentAttendsCourse.UnDelete(sac))
+                                if (StudentAttendsCourseDAO.UnDelete(sac))
                                 {
                                     sac.Deleted = false;
                                     // boja - default
@@ -142,7 +143,7 @@ namespace POP_SF7
                         {
                             if(sac.StudentId == StudentS.Id && sac.CourseId == selectedCourse.Id)
                             {
-                                if(StudentAttendsCourse.Delete(sac))
+                                if(StudentAttendsCourseDAO.Delete(sac))
                                 {
                                     sac.Deleted = true;
                                     //boja - crvena

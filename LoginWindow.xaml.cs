@@ -1,4 +1,5 @@
-﻿using System;
+﻿using POP_SF7.DB;
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -22,7 +23,7 @@ namespace POP_SF7
         {
             if (ApplicationA.Instance.Users.Count == 0)
             {
-                if(!User.Load())
+                if(!UserDAO.Load())
                 {
                     Close();
                 }

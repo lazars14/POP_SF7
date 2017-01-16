@@ -1,4 +1,5 @@
-﻿using POP_SF7.Helpers;
+﻿using POP_SF7.DB;
+using POP_SF7.Helpers;
 using POP_SF7.Windows;
 using System;
 using System.ComponentModel;
@@ -74,7 +75,7 @@ namespace POP_SF7
                     if (result == MessageBoxResult.Yes)
                     {
                         selectedUser = view.CurrentItem as User;
-                        if(User.Delete(selectedUser))
+                        if(UserDAO.Delete(selectedUser))
                         {
                             selectedUser.Deleted = true;
                         }
