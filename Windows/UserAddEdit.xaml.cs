@@ -54,11 +54,19 @@ namespace POP_SF7
                         UserU.Id = ApplicationA.Instance.Users.Count() + 1;
                         ApplicationA.Instance.Users.Add(UserU);
                     }
+                    else
+                    {
+                        DialogResult = false;
+                    }
                     Close();
                 }
                 else
                 {   
-                    if(!UserDAO.Edit(UserU))
+                    if(UserDAO.Edit(UserU))
+                    {
+                        this.DialogResult = true;
+                    }
+                    else
                     {
                         cancelbtn_Click(null, null);
                     }
@@ -138,6 +146,7 @@ namespace POP_SF7
 
         private void cancelbtn_Click(object sender, RoutedEventArgs e)
         {
+            this.DialogResult = false;
             Close();
         }
     }

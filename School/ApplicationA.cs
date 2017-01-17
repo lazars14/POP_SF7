@@ -19,6 +19,8 @@ namespace POP_SF7
 
         public const string FILL_ALL_FIELDS_WARNING = "Morate da popunite sva polja!";
 
+        public const string FILL_FIELD = "Popuniti";
+
         public SchoolS SchoolS { get; set; }
 
         public static User LoggedUser { get; set; }

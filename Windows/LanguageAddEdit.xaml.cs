@@ -48,7 +48,11 @@ namespace POP_SF7.Windows
                 }
                 else
                 {
-                    if (!LanguageDAO.Edit(LanguageL))
+                    if (LanguageDAO.Edit(LanguageL))
+                    {
+                        this.DialogResult = true;
+                    }
+                    else
                     {
                         cancelbtn_Click(null, null);
                     }
@@ -60,6 +64,7 @@ namespace POP_SF7.Windows
 
         private void cancelbtn_Click(object sender, RoutedEventArgs e)
         {
+            this.DialogResult = false;
             Close();
         }
     }

@@ -121,16 +121,19 @@ namespace POP_SF7
                         SelectedPayment.Id = ApplicationA.Instance.Payments.Count() + 1;
                         ApplicationA.Instance.Payments.Add(SelectedPayment);
                     }
-                    Close();
                 }
                 else
                 {
-                    if(!PaymentDAO.Edit(SelectedPayment))
+                    if(PaymentDAO.Edit(SelectedPayment))
+                    {
+                        this.DialogResult = true;
+                    }
+                    else
                     {
                         cancelbtn_Click(null, null);
                     }
-                    Close();
                 }
+                Close();
             }
         }
 
@@ -215,6 +218,7 @@ namespace POP_SF7
 
         private void cancelbtn_Click(object sender, RoutedEventArgs e)
         {
+            this.DialogResult = false;
             Close();
         }
     }

@@ -34,7 +34,12 @@ namespace POP_SF7
 
         public User()
         {
+            FirstName = ApplicationA.FILL_FIELD;
+            LastName = ApplicationA.FILL_FIELD;
+            Address = ApplicationA.FILL_FIELD;
             Jmbg = "1234567890123";
+            UserName = ApplicationA.FILL_FIELD;
+            Password = ApplicationA.FILL_FIELD;
         }
 
         // za logged user-a, koristim za logovanje

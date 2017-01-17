@@ -30,7 +30,7 @@ namespace POP_SF7
             set { deleted = value; OnPropertyChanged("Deleted"); }
         }
 
-        public Language() { }
+        public Language() { Name = ApplicationA.FILL_FIELD; }
 
         public Language(int id)
         {

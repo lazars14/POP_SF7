@@ -62,7 +62,11 @@ namespace POP_SF7
                 }
                 else
                 {
-                    if (!StudentDAO.Edit(StudentS))
+                    if (StudentDAO.Edit(StudentS))
+                    {
+                        this.DialogResult = true;
+                    }
+                    else
                     {
                         cancelbtn_Click(null, null);
                     }
@@ -78,6 +82,7 @@ namespace POP_SF7
 
         private void cancelbtn_Click(object sender, RoutedEventArgs e)
         {
+            this.DialogResult = false;
             Close();
         }
 

@@ -30,7 +30,7 @@ namespace POP_SF7
             set { deleted = value; OnPropertyChanged("Deleted"); }
         }
 
-        public CourseType() { }
+        public CourseType() { Name = ApplicationA.FILL_FIELD; }
 
         public CourseType(int id)
         {

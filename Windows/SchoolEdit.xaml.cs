@@ -23,15 +23,23 @@ namespace POP_SF7
             {
                 MessageBox.Show(ApplicationA.FILL_ALL_FIELDS_WARNING);
             }
-            else if(!SchoolDAO.UpdateSchool(SchoolS))
+            else
             {
-                cancelbtn_Click(null, null);
+                if(SchoolDAO.UpdateSchool(SchoolS))
+                {
+                    this.DialogResult = true;
+                }
+                else
+                {
+                    cancelbtn_Click(null, null);
+                }
+                Close();
             }
-            Close();
         }
 
         private void cancelbtn_Click(object sender, RoutedEventArgs e)
         {
+            this.DialogResult = false;
             Close();
         }
     }

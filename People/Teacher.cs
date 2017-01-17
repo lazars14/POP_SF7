@@ -13,7 +13,15 @@ namespace POP_SF7
 
         public string FullName { get; set; }
 
-        public Teacher() { Jmbg = "1234567890123"; ListOfCourses = new ObservableCollection<Course>(); ListOfLanguages = new ObservableCollection<Language>(); }
+        public Teacher()
+        {
+            FirstName = ApplicationA.FILL_FIELD;
+            LastName = ApplicationA.FILL_FIELD;
+            Address = ApplicationA.FILL_FIELD;
+            Jmbg = "1234567890123";
+            ListOfCourses = new ObservableCollection<Course>();
+            ListOfLanguages = new ObservableCollection<Language>();
+        }
 
         public Teacher(int id)
         {

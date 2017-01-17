@@ -57,7 +57,7 @@ namespace POP_SF7
             courseTypecb.SelectedIndex = 0;
 
             teachercb.ItemsSource = FilteredTeachers;
-            teachercb.DisplayMemberPath = "LastName";
+            teachercb.DisplayMemberPath = "FullName";
             teachercb.SelectedValuePath = "Id";
             teachercb.SelectedIndex = 0;
 
@@ -100,7 +100,11 @@ namespace POP_SF7
                 }
                 else
                 {
-                    if (!CourseDAO.Edit(Course))
+                    if (CourseDAO.Edit(Course))
+                    {
+                        this.DialogResult = true;
+                    }
+                    else
                     {
                         cancelbtn_Click(null, null);
                     }
@@ -139,6 +143,7 @@ namespace POP_SF7
 
         private void cancelbtn_Click(object sender, RoutedEventArgs e)
         {
+            this.DialogResult = false;
             Close();
         }
 

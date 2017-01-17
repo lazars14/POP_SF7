@@ -46,7 +46,11 @@ namespace POP_SF7
                 }
                 else
                 {
-                    if (!CourseTypeDAO.Edit(CourseTypeC))
+                    if (CourseTypeDAO.Edit(CourseTypeC))
+                    {
+                        this.DialogResult = true;
+                    }
+                    else
                     {
                         cancelbtn_Click(null, null);
                     }
@@ -57,6 +61,7 @@ namespace POP_SF7
 
         private void cancelbtn_Click(object sender, RoutedEventArgs e)
         {
+            this.DialogResult = false;
             Close();
         }
     }

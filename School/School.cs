@@ -108,6 +108,7 @@ namespace POP_SF7
                     case "PhoneNumber":
                         PhoneNumberValidationRule validator0 = new PhoneNumberValidationRule();
                         if (validator0.Validate(PhoneNumber, null) != ValidationResult.ValidResult) return ValidationHelper.Pattern + PhoneNumberValidationRule.CorrectPattern;
+                        else if (ValidationHelper.BiggerThanMaxLength(PhoneNumber, 12)) return ValidationHelper.returnMessageMaxLength(12);
                         break;
                     case "Email":
                         EMailValidationRule validator = new EMailValidationRule();
@@ -131,6 +132,7 @@ namespace POP_SF7
                     case "AccountNumber":
                         AccountNumberValidationRule validator1 = new AccountNumberValidationRule();
                         if (validator1.Validate(AccountNumber, null) != ValidationResult.ValidResult) return ValidationHelper.Pattern + AccountNumberValidationRule.CorrectPattern;
+                        else if (!ValidationHelper.containExact(AccountNumber, 20)) return ValidationHelper.returnMessageExactLength(20);
                         break;
                 }
                 return "";

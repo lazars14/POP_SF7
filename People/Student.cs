@@ -10,7 +10,14 @@ namespace POP_SF7
     {
         public ObservableCollection<Course> ListOfCourses { get; set; }
 
-        public Student() { Jmbg = "1234567890123"; ListOfCourses = new ObservableCollection<Course>(); }
+        public Student()
+        {
+            FirstName = ApplicationA.FILL_FIELD;
+            LastName = ApplicationA.FILL_FIELD;
+            Address = ApplicationA.FILL_FIELD;
+            Jmbg = "1234567890123";
+            ListOfCourses = new ObservableCollection<Course>();
+        }
 
         public Student(int id) { Id = id; }
 

@@ -1,6 +1,7 @@
 ﻿using POP_SF7.Windows;
 using System.Windows;
 using System.Windows.Controls;
+using System;
 
 namespace POP_SF7
 {
@@ -9,13 +10,10 @@ namespace POP_SF7
     /// </summary>
     public partial class MainMenu : Window
     {
-        public SchoolS SchoolS { get; set; }
-
         public MainMenu(Role role, int userId)
         {
             InitializeComponent();
-            SchoolS = ApplicationA.Instance.SchoolS;
-            DataContext = SchoolS;
+            DataContext = ApplicationA.Instance.SchoolS;
             ApplicationA.Instance.UserId = userId;
 
             setVisibilityRole(role);
@@ -62,6 +60,18 @@ namespace POP_SF7
             }
         }
 
+        private void editSchool()
+        {
+            SchoolS backup = (SchoolS) ApplicationA.Instance.SchoolS.Clone();
+            SchoolEdit schoolEdit = new SchoolEdit(ApplicationA.Instance.SchoolS);
+            if (schoolEdit.ShowDialog() != true)
+            {
+                ApplicationA.Instance.SchoolS = backup;
+                // ispravljeno
+                DataContext = ApplicationA.Instance.SchoolS;
+            }
+        }
+
         private void menuItem_Click(object sender, RoutedEventArgs e)
         {
             MenuItem menuItem = (MenuItem)sender;
@@ -70,12 +80,7 @@ namespace POP_SF7
             switch(menuItemName)
             {
                 case "editSchoolData":
-                    SchoolS backup = (SchoolS) SchoolS.Clone();
-                    SchoolEdit schoolEdit = new SchoolEdit(SchoolS);
-                    if(schoolEdit.ShowDialog() != true)
-                    {
-                        SchoolS = backup;
-                    }
+                    editSchool();
                     break;
                 case "payments":
                     PaymentMenu payments = new PaymentMenu();

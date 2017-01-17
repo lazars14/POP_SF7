@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF7"
         mc:Ignorable="d"
-        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="357.172" Width="595.64" ResizeMode="NoResize">
+        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="357.172" Width="606.64" ResizeMode="NoResize">
     <Grid>
-        <Menu x:Name="mainMenu" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="590">
+        <Menu x:Name="mainMenu" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="601">
             <MenuItem x:Name="schoolMenu" Header="Skola">
                 <MenuItem x:Name="editSchoolData" Header="Izmena podataka o skoli" Click="menuItem_Click"/>
                 <MenuItem x:Name="payments" Header="Evidencija uplata" Click="menuItem_Click"/>
@@ -25,7 +25,7 @@
             <MenuItem x:Name="logout" Header="Odjava" Click="menuItem_Click"/>
         </Menu>
         <Image x:Name="logoimg" Source="../Images/logo.png" HorizontalAlignment="Left" Width="250" Margin="17,36,0,10"/>
-        <GroupBox Header="Podaci" HorizontalAlignment="Left" Height="280" Margin="272,36,0,0" VerticalAlignment="Top" Width="306">
+        <GroupBox Header="Podaci" HorizontalAlignment="Left" Height="280" Margin="272,36,0,0" VerticalAlignment="Top" Width="319">
             <Grid Margin="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
@@ -43,28 +43,28 @@
                 </Grid.ColumnDefinitions>
                 
                 <Label x:Name="namelbl" Content="Naziv" Grid.Row="0" Grid.Column="0"/>
-                <TextBox x:Name="nametb" Background="Transparent" BorderThickness="0" Text="{Binding Name}" IsReadOnly="True" Grid.Row="0" Grid.Column="1" Margin="0,5,0,0"/>
+                <TextBox x:Name="nametb" Background="Transparent" BorderThickness="0" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Grid.Row="0" Grid.Column="1" Margin="0,5,-5,0"/>
 
                 <Label x:Name="addresslbl" Content="Adresa" Grid.Row="1" Grid.Column="0"/>
-                <TextBox x:Name="addresstb" Background="Transparent" BorderThickness="0" IsReadOnly="True" Text="{Binding Address}" Grid.Row="1" Grid.Column="1" Margin="0,5,0,0"/>
+                <TextBox x:Name="addresstb" Background="Transparent" BorderThickness="0" IsReadOnly="True" Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="0,5,-5,0"/>
 
                 <Label x:Name="phonelbl" Content="Telefon" Grid.Row="2" Grid.Column="0"/>
-                <TextBox x:Name="phonetb" Background="Transparent" BorderThickness="0" IsReadOnly="True" Text="{Binding PhoneNumber}" Grid.Row="2" Grid.Column="1" Margin="0,5,0,0"/>
+                <TextBox x:Name="phonetb" Background="Transparent" BorderThickness="0" IsReadOnly="True" Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Margin="0,5,-5,0"/>
 
                 <Label x:Name="emaillbl" Content="Email" Grid.Row="3" Grid.Column="0"/>
-                <TextBox x:Name="emailtb" Background="Transparent" BorderThickness="0" IsReadOnly="True" Text="{Binding Email}" Grid.Row="3" Grid.Column="1" Margin="0,5,0,0"/>
+                <TextBox x:Name="emailtb" Background="Transparent" BorderThickness="0" IsReadOnly="True" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" Margin="0,5,-5,0"/>
 
                 <Label x:Name="websitelbl" Content="Web sajt" Grid.Row="4" Grid.Column="0"/>
-                <TextBox x:Name="websitetb" Background="Transparent" BorderThickness="0" IsReadOnly="True" Text="{Binding WebSite}" Grid.Row="4" Grid.Column="1" Margin="0,5,0,0"/>
+                <TextBox x:Name="websitetb" Background="Transparent" BorderThickness="0" IsReadOnly="True" Text="{Binding WebSite, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Margin="0,5,-5,0"/>
 
                 <Label x:Name="piblbl" Content="PIB" Grid.Row="5" Grid.Column="0"/>
-                <TextBox x:Name="pibtb" Background="Transparent" BorderThickness="0" IsReadOnly="True" Text="{Binding Pib}" Grid.Row="5" Grid.Column="1" Margin="0,5,0,0"/>
+                <TextBox x:Name="pibtb" Background="Transparent" BorderThickness="0" IsReadOnly="True" Text="{Binding Pib, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" Margin="0,5,-5,0"/>
 
                 <Label x:Name="idnumberlbl" Content="Maticni broj" Grid.Row="6" Grid.Column="0"/>
-                <TextBox x:Name="idnumbertb" Background="Transparent" BorderThickness="0" IsReadOnly="True" Text="{Binding IdentificationNumber}" Grid.Row="6" Grid.Column="1" Margin="0,5,0,0"/>
+                <TextBox x:Name="idnumbertb" Background="Transparent" BorderThickness="0" IsReadOnly="True" Text="{Binding IdentificationNumber, UpdateSourceTrigger=PropertyChanged}" Grid.Row="6" Grid.Column="1" Margin="0,5,-5,0"/>
 
                 <Label x:Name="accountlbl" Content="Racun" Grid.Row="7" Grid.Column="0"/>
-                <TextBox x:Name="accounttb" Background="Transparent" BorderThickness="0" IsReadOnly="True" Text="{Binding AccountNumber}" Grid.Row="7" Grid.Column="1" Margin="0,5,0,0"/>
+                <TextBox x:Name="accounttb" Background="Transparent" BorderThickness="0" IsReadOnly="True" Text="{Binding AccountNumber, UpdateSourceTrigger=PropertyChanged}" Grid.Row="7" Grid.Column="1" Margin="0,5,-5,0"/>
             </Grid>
         </GroupBox>
     </Grid>

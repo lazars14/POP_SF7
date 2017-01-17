@@ -32,13 +32,13 @@ namespace POP_SF7.DB
 
                     foreach (DataRow row in dataSet.Tables["Teacher"].Rows)
                     {
-                        Teacher teacher = new Teacher();
-                        teacher.Id = (int)row["Teacher_Id"];
-                        teacher.FirstName = (string)row["Teacher_FirstName"];
-                        teacher.LastName = (string)row["Teacher_LastName"];
-                        teacher.Jmbg = (string)row["Teacher_Jmbg"];
-                        teacher.Address = (string)row["Teacher_Address"];
-                        teacher.Deleted = (bool)row["Teacher_Deleted"];
+                        int id = (int)row["Teacher_Id"];
+                        string firstName = (string)row["Teacher_FirstName"];
+                        string lastName = (string)row["Teacher_LastName"];
+                        string jmbg = (string)row["Teacher_Jmbg"];
+                        string address = (string)row["Teacher_Address"];
+                        bool deleted = (bool)row["Teacher_Deleted"];
+                        Teacher teacher = new Teacher(id, firstName, lastName, jmbg, address, deleted);
 
                         ApplicationA.Instance.Teachers.Add(teacher);
                     }
