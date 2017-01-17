@@ -24,6 +24,10 @@ namespace POP_SF7
         public ObservableCollection<Student> ListOfStudents { get; set; }
         public ICollectionView StudentsView { get; set; }
 
+        public List<Student> AddedStudents { get; set; }
+        public List<Student> EditedStudents { get; set; }
+        public List<Student> DeletedStudents { get; set; }
+
         public ObservableCollection<Teacher> FilteredTeachers { get; set; }
 
         public string labelCourseAdd = "Dodavanje novog kursa";
@@ -171,7 +175,7 @@ namespace POP_SF7
                     var result = MessageBox.Show("Da li ste sigurni da hocete da obrisete datog ucenika za ovaj kurs?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                     if (result == MessageBoxResult.Yes)
                     {
-                        foreach (StudentAttendsCourse sac in ApplicationA.Instance.StudentAttendsCourseCollection)
+                        /*foreach (StudentAttendsCourse sac in ApplicationA.Instance.StudentAttendsCourseCollection)
                         {
                             if (sac.CourseId == Course.Id && sac.StudentId == selectedStudent.Id)
                             {
@@ -181,7 +185,8 @@ namespace POP_SF7
                                     // boja - crvena
                                 }
                             }
-                        }
+                        }*/
+                        checkIfStudentAddedOrDeleted(selectedStudent);
                     }
                 }
             }
@@ -205,6 +210,7 @@ namespace POP_SF7
                     var result = MessageBox.Show("Da li ste sigurni da hocete da povratite datog ucenika za ovog kurs?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                     if (result == MessageBoxResult.Yes)
                     {
+                        /*
                         foreach (StudentAttendsCourse sac in ApplicationA.Instance.StudentAttendsCourseCollection)
                         {
                             if (sac.CourseId == Course.Id && sac.StudentId == selectedStudent.Id)
@@ -216,9 +222,27 @@ namespace POP_SF7
                                 }
                             }
                         }
+                        */
+                        if (DeletedStudents.Contains(selectedStudent))
+                        {
+                            DeletedStudents.Remove(selectedStudent);
+                        }
                     }
                 }
             }
+        }
+
+        private void checkIfStudentAddedOrDeleted(Student student)
+        {
+            if(AddedStudents.Contains(student))
+            {
+                AddedStudents.Remove(student);
+            }
+            else if(EditedStudents.Contains(student))
+            {
+                EditedStudents.Remove(student);
+            }
+            DeletedStudents.Add(student);
         }
     }
 }

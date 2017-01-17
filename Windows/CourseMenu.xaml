@@ -125,7 +125,7 @@
         <!--#region Students-->
         <GroupBox Header="Ucenici" HorizontalAlignment="Left" Height="151" Margin="326,395,0,0" VerticalAlignment="Top" Width="474">
             <Grid>
-                <DataGrid IsReadOnly="True" x:Name="studentsdg" ItemsSource="{Binding ElementName=coursesdg, Path=SelectedItem.ListOfStudents}" AutoGeneratingColumn="studentsdg_AutoGeneratingColumn" HorizontalAlignment="Left" Height="114" Margin="10,10,0,0" VerticalAlignment="Top" Width="442"/>
+                <DataGrid x:Name="studentsdg" IsReadOnly="True" ItemsSource="{Binding ElementName=coursesdg, Path=SelectedItem.ListOfStudents}" AutoGeneratingColumn="studentsdg_AutoGeneratingColumn" HorizontalAlignment="Left" Height="114" Margin="10,10,0,0" VerticalAlignment="Top" Width="442"/>
             </Grid>
         </GroupBox>
         <!--#endregion-->

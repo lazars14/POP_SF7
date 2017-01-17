@@ -152,12 +152,20 @@ namespace POP_SF7.Windows
         {
             if(TeacherWindow == null && CourseWindow == null)
             {
-                Course selectedCourse = dataGrid.SelectedItem as Course;
-                if(selectedCourse == null)
+                int a = dataGrid.SelectedItems.Count;
+                if (a > 0)
+                {
+                    foreach (Course c in dataGrid.SelectedItems)
+                    {
+                        StudentWindow.StudentS.ListOfCourses.Add(c);
+                    }
+                    Close();
+                }
+                else
                 {
                     MessageBox.Show("Morate da selektujete kurs kako biste ga dodali na ucenika!");
                 }
-                else
+                /*else
                 {
                     int nextId = ApplicationA.Instance.StudentAttendsCourseCollection.Count() + 1;
                     StudentAttendsCourse toAdd = new StudentAttendsCourse(nextId, selectedCourse.Id, StudentWindow.StudentS.Id, false);
@@ -168,45 +176,58 @@ namespace POP_SF7.Windows
                         StudentWindow.StudentS.ListOfCourses.Add(selectedCourse);
                     }
                     Close();
-                }
+                }*/
             }
             else if(CourseWindow == null && StudentWindow == null)
             {
-                Language selectedLanguage = dataGrid.SelectedItem as Language;
-                if(selectedLanguage == null)
+                int a = dataGrid.SelectedItems.Count;
+                if (a > 0)
                 {
-                    MessageBox.Show("Morate da selektujete jezik kako biste ga dodali na nastavnika!");
+                    foreach (Language lang in dataGrid.SelectedItems)
+                    {
+                        TeacherWindow.TeacherT.ListOfLanguages.Add(lang);
+                    }
+                    Close();
                 }
                 else
                 {
-                    int nextId = ApplicationA.Instance.Languages.Count() + 1;
+                    MessageBox.Show("Morate da selektujete jezik kako biste ga dodali na nastavnika!");
+                    /*int nextId = ApplicationA.Instance.Languages.Count() + 1;
                     TeacherTeachesLanguage toAdd = new TeacherTeachesLanguage(nextId, TeacherWindow.TeacherT.Id, selectedLanguage.Id, false);
                     if(TeacherTeachesLanguageDAO.Add(toAdd))
                     {
                         ApplicationA.Instance.TeacherTeachesLanguageCollection.Add(toAdd);
                         TeacherWindow.TeacherT.ListOfLanguages.Add(selectedLanguage);
-                    }
-                    Close();
+                    }*/
                 }
             }
             else
             {
-                Student selectedStudent = dataGrid.SelectedItem as Student;
-                if(selectedStudent == null)
+                int a = dataGrid.SelectedItems.Count;
+                if(a > 0)
                 {
-                    MessageBox.Show("Morate da selektujete ucenika kako biste ga preuzeli!");
+                    foreach (Student selectedStudent in dataGrid.SelectedItems)
+                    {
+                        CourseWindow.ListOfStudents.Add(selectedStudent);
+                        CourseWindow.AddedStudents.Add(selectedStudent);
+                    }
+                    Close();
                 }
                 else
                 {
-                    int nextId = ApplicationA.Instance.Students.Count() + 1;
-                    StudentAttendsCourse toAdd = new StudentAttendsCourse(nextId, CourseWindow.Course.Id, selectedStudent.Id, false);
+                    MessageBox.Show("Morate da selektujete ucenika kako biste ga preuzeli!");
+                }
+                /*
+                else
+                {
+                    StudentAttendsCourse toAdd = new StudentAttendsCourse(0, CourseWindow.Course.Id, selectedStudent.Id, false);
                     if(StudentAttendsCourseDAO.Add(toAdd))
                     {
                         ApplicationA.Instance.StudentAttendsCourseCollection.Add(toAdd);
                         CourseWindow.ListOfStudents.Add(selectedStudent);
                     }
                     Close();
-                }
+                }*/
             }
         }
 
