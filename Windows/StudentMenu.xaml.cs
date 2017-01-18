@@ -33,17 +33,16 @@ namespace POP_SF7
         {
             // student view load
             StudentsView = CollectionViewSource.GetDefaultView(ApplicationA.Instance.Students);
-
             studentsdg.ItemsSource = StudentsView;
             studentsdg.IsSynchronizedWithCurrentItem = true;
 
             // payment view load
             PaymentsView = CollectionViewSource.GetDefaultView(ApplicationA.Instance.Payments);
-            Predicate<object> studentIdPredicate = new Predicate<object>(selectedStudentIdSearchCondition);
-            PaymentsView.Filter = studentIdPredicate;
-
             paymentsdg.ItemsSource = PaymentsView;
             paymentsdg.IsSynchronizedWithCurrentItem = true;
+
+            Predicate<object> studentIdPredicate = new Predicate<object>(selectedStudentIdSearchCondition);
+            PaymentsView.Filter = studentIdPredicate;
         }
 
         private bool selectedStudentIdSearchCondition(object s)
@@ -188,18 +187,15 @@ namespace POP_SF7
 
         private void usersdg_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Student selectedStudent = StudentsView.CurrentItem as Student;
-            if(selectedStudent != null)
+            try
             {
-                CoursesView = CollectionViewSource.GetDefaultView(selectedStudent.ListOfCourses);
-                coursesdg.ItemsSource = CoursesView;
-                coursesdg.IsSynchronizedWithCurrentItem = true;
+                /*Predicate<object> studentIdPredicate = new Predicate<object>(selectedStudentIdSearchCondition);
+                PaymentsView.Filter = studentIdPredicate;*/
+                PaymentsView.Refresh();
             }
-            else
+            catch(NullReferenceException a)
             {
-                CoursesView = CollectionViewSource.GetDefaultView(new ObservableCollection<Course>());
-                coursesdg.ItemsSource = CoursesView;
-                coursesdg.IsSynchronizedWithCurrentItem = true;
+                Console.WriteLine(a.StackTrace);
             }
         }
 
@@ -225,7 +221,7 @@ namespace POP_SF7
 
         private void paymentsdg_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Payment selectedPayment = PaymentsView.CurrentItem as Payment;
+            Payment selectedPayment = paymentsdg.SelectedItem as Payment;
             if(selectedPayment != null)
             {
                 if(selectedPayment.Course.Language == null)
@@ -239,10 +235,10 @@ namespace POP_SF7
 
         private void coursesdg_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Course selectedCourse = CoursesView.CurrentItem as Course;
+            Course selectedCourse = coursesdg.SelectedItem as Course;
             if(selectedCourse != null)
             {
-                if(selectedCourse.Language == null)
+                if(selectedCourse.Language.Name == "")
                 {
                     selectedCourse.Language = ApplicationA.Instance.Languages[selectedCourse.Language.Id - 1];
                     selectedCourse.CourseType = ApplicationA.Instance.CourseTypes[selectedCourse.CourseType.Id - 1];

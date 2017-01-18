@@ -64,7 +64,7 @@ namespace POP_SF7
                 {   
                     if(UserDAO.Edit(UserU))
                     {
-                        this.DialogResult = true;
+                        DialogResult = true;
                     }
                     else
                     {
@@ -146,7 +146,7 @@ namespace POP_SF7
 
         private void cancelbtn_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = false;
+            DialogResult = false;
             Close();
         }
     }

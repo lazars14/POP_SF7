@@ -1,15 +1,13 @@
 ﻿using POP_SF7.Windows;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
-using System;
 using System.ComponentModel;
 using System.Windows.Data;
 using System.Windows.Controls;
 using POP_SF7.Helpers;
 using System.Collections.Generic;
-using System.Windows.Media;
 using POP_SF7.DB;
+using System.Collections.ObjectModel;
 
 namespace POP_SF7
 {
@@ -33,7 +31,7 @@ namespace POP_SF7
 
         public string WarningMessage = "Ukoliko izbrisete ovaj jezik svi kursevi sa ovim jezikom (za datog nastavnika) nece moci da se menjaju!";
 
-        public TeacherAddEdit(Teacher teacher, Decider decider, List<int> deletedIndexes)
+        public TeacherAddEdit(Teacher teacher, Decider decider)
         {
             TeacherT = teacher;
             Decider = decider;
@@ -57,14 +55,17 @@ namespace POP_SF7
 
             deletedCoursesdg.ItemsSource = TeacherT.ListOfDeletedCourses;
             deletedCoursesdg.IsSynchronizedWithCurrentItem = true;
+            
+            setupGrid(LanguagesView, TeacherT.ListOfLanguages, languagesdg);
 
-            LanguagesView = CollectionViewSource.GetDefaultView(TeacherT.ListOfLanguages);
-            languagesdg.ItemsSource = LanguagesView;
-            languagesdg.IsSynchronizedWithCurrentItem = true;
+            setupGrid(DeletedLanguagesView, TeacherT.ListOfDeletedLanguages, deletedLanguagesdg);
+        }
 
-            DeletedLanguagesView = CollectionViewSource.GetDefaultView(TeacherT.ListOfDeletedLanguages);
-            deletedLanguagesdg.ItemsSource = DeletedLanguagesView;
-            deletedLanguagesdg.IsSynchronizedWithCurrentItem = true;
+        private void setupGrid(ICollectionView view, ObservableCollection<Language> collection, DataGrid dataGrid)
+        {
+            view = CollectionViewSource.GetDefaultView(collection);
+            dataGrid.ItemsSource = view;
+            dataGrid.IsSynchronizedWithCurrentItem = true;
         }
 
         private void okbtn_Click(object sender, RoutedEventArgs e)

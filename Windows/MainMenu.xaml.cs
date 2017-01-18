@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System;
+using System.Collections.Generic;
 
 namespace POP_SF7
 {
@@ -27,7 +28,7 @@ namespace POP_SF7
                 students.Visibility = Visibility.Collapsed;
                 courses.Visibility = Visibility.Collapsed;
 
-                if(ApplicationA.AdminDataLoaded == false && ApplicationA.EmployeeDataLoaded == false)
+                if (ApplicationA.AdminDataLoaded == false && ApplicationA.EmployeeDataLoaded == false)
                 {
                     if (!ApplicationA.LoadAllDataAdministrator())
                     {

@@ -1,10 +1,5 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System;
 using POP_SF7.Helpers;
 
 namespace POP_SF7.Windows
@@ -64,7 +59,6 @@ namespace POP_SF7.Windows
                 {
                     dataGrid.ItemsSource = ApplicationA.Instance.Courses;
                 }
-                
             }
             else
             {

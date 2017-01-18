@@ -2,8 +2,6 @@
 using POP_SF7.Helpers;
 using POP_SF7.Windows;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -30,9 +28,10 @@ namespace POP_SF7
         private void setupWindow()
         {
             view = CollectionViewSource.GetDefaultView(ApplicationA.Instance.Payments);
-
             paymentsdg.ItemsSource = view;
             paymentsdg.IsSynchronizedWithCurrentItem = true;
+
+            searchdatePicker.SelectedDate = DateTime.Today;
         }
 
         private void addbtn_Click(object sender, RoutedEventArgs e)
@@ -133,6 +132,11 @@ namespace POP_SF7
             return c.Student.Id == SearchStudent.Id && c.Course.Id == SearchCourse.Id;
         }
 
+        private bool dateSearchCondition(object s)
+        {
+            Payment c = s as Payment;
+            return c.Date == searchdatePicker.SelectedDate;
+        }
 
         private void searchbtn_Click(object sender, RoutedEventArgs e)
         {
@@ -186,7 +190,7 @@ namespace POP_SF7
         private void paymentsdg_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Payment selectedPayment = view.CurrentItem as Payment;
-            try
+            if(selectedPayment != null)
             {
                 if (selectedPayment.Student.FirstName == null)
                 {
@@ -197,7 +201,24 @@ namespace POP_SF7
                     selectedPayment.Course.CourseType = ApplicationA.Instance.CourseTypes[selectedPayment.Course.CourseType.Id - 1];
                 }
             }
-            catch(NullReferenceException a) { Console.WriteLine(a.StackTrace); }
+        }
+
+        private void search2btn_Click(object sender, RoutedEventArgs e)
+        {
+            view.Filter = new Predicate<object>(dateSearchCondition);
+        }
+
+        private void takeStudentbtn_Click(object sender, RoutedEventArgs e)
+        {
+            if(SearchStudent != null)
+            {
+                PaymentAddEdit addEdit = new PaymentAddEdit(new Payment(), SearchStudent);
+                addEdit.Show();
+            }
+            else
+            {
+                MessageBox.Show("Morate da odaberete ucenika kako biste ga preuzeli i kreirali novu uplatu za njega!");
+            }
         }
     }
 }

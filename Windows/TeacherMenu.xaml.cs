@@ -2,8 +2,6 @@
 using POP_SF7.Helpers;
 using POP_SF7.Windows;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,16 +18,11 @@ namespace POP_SF7
     public partial class TeacherMenu : Window
     {
         public ICollectionView TeachersView { get; set; }
-        public ICollectionView CoursesView { get; set; }
-        public ICollectionView LanguagesView { get; set; }
-
-        public List<int> DeletedLanguagesForTeacher { get; set; }
 
         public TeacherMenu()
         {
             InitializeComponent();
             TeachersView = CollectionViewSource.GetDefaultView(ApplicationA.Instance.Teachers);
-            DeletedLanguagesForTeacher = new List<int>();
 
             teachersdg.ItemsSource = TeachersView;
             teachersdg.IsSynchronizedWithCurrentItem = true;
@@ -38,7 +31,7 @@ namespace POP_SF7
         private void addbtn_Click(object sender, RoutedEventArgs e)
         {
             Teacher newTeacher = new Teacher();
-            TeacherAddEdit addUser = new TeacherAddEdit(newTeacher, Decider.ADD, null);
+            TeacherAddEdit addUser = new TeacherAddEdit(newTeacher, Decider.ADD);
             addUser.Show();
         }
 
@@ -52,7 +45,7 @@ namespace POP_SF7
             else
             {
                 Teacher backup = (Teacher)selectedTeacher.Clone();
-                TeacherAddEdit edit = new TeacherAddEdit(selectedTeacher, Decider.EDIT, DeletedLanguagesForTeacher);
+                TeacherAddEdit edit = new TeacherAddEdit(selectedTeacher, Decider.EDIT);
                 if(edit.ShowDialog() != true)
                 {
                     int index = ApplicationA.Instance.Teachers.IndexOf(selectedTeacher);
@@ -153,36 +146,6 @@ namespace POP_SF7
             }
         }
 
-        private void usersdg_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if(DeletedLanguagesForTeacher.Count != 0)
-            {
-                DeletedLanguagesForTeacher.Clear();
-            }
-
-            Teacher selectedTeacher = TeachersView.CurrentItem as Teacher;
-            if(selectedTeacher != null)
-            {
-                LanguagesView = CollectionViewSource.GetDefaultView(selectedTeacher.ListOfLanguages);
-                languagesdg.ItemsSource = LanguagesView;
-                languagesdg.IsSynchronizedWithCurrentItem = true;
-
-                CoursesView = CollectionViewSource.GetDefaultView(selectedTeacher.ListOfCourses);
-                coursesdg.ItemsSource = CoursesView;
-                coursesdg.IsSynchronizedWithCurrentItem = true;
-            }
-            else
-            {
-                LanguagesView = CollectionViewSource.GetDefaultView(new ObservableCollection<Language>());
-                languagesdg.ItemsSource = LanguagesView;
-                languagesdg.IsSynchronizedWithCurrentItem = true;
-
-                CoursesView = CollectionViewSource.GetDefaultView(new ObservableCollection<Course>());
-                coursesdg.ItemsSource = CoursesView;
-                coursesdg.IsSynchronizedWithCurrentItem = true;
-            }
-        }
-
         private void cancelSearchbtn_Click(object sender, RoutedEventArgs e)
         {
             TeachersView.Filter = null;
@@ -205,19 +168,10 @@ namespace POP_SF7
 
         private void coursesdg_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            /*if(CoursesView == null)
+            Course selectedCourse = coursesdg.SelectedItem as Course;
+            if(selectedCourse != null)
             {
-                Teacher selectedTeacher = TeachersView.CurrentItem as Teacher;
-                Teacher selectedTeacherTwo = ApplicationA.Instance.Teachers[selectedTeacher.Id - 1];
-
-                CoursesView = CollectionViewSource.GetDefaultView(selectedTeacherTwo.ListOfCourses);
-                coursesdg.ItemsSource = CoursesView;
-                coursesdg.IsSynchronizedWithCurrentItem = true;
-            }*/
-            if(CoursesView != null)
-            {
-                Course selectedCourse = CoursesView.CurrentItem as Course;
-                if (selectedCourse != null && selectedCourse.Language == null)
+                if(selectedCourse.Language.Name == "")
                 {
                     selectedCourse.Language = ApplicationA.Instance.Languages[selectedCourse.Language.Id - 1];
                     selectedCourse.CourseType = ApplicationA.Instance.CourseTypes[selectedCourse.CourseType.Id - 1];

@@ -2,8 +2,6 @@
 using POP_SF7.Helpers;
 using POP_SF7.Windows;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -37,6 +35,22 @@ namespace POP_SF7
             InitializeComponent();
             SelectedPayment = payment;
             Decider = decider;
+
+            paidtb.DataContext = Paid;
+            lefttb.DataContext = LeftToPay;
+
+            DataContext = SelectedPayment;
+            descriptionlbl.Text = (payment == null) ? labelAddPayment : labelEditPayment;
+            setupCourseAndStudent();
+        }
+
+        public PaymentAddEdit(Payment payment, Student student)
+        {
+            InitializeComponent();
+            SelectedPayment = payment;
+            Decider = Decider.ADD;
+            Student = student;
+            studenttb.Text = Student.FirstName + " " + Student.LastName;
 
             paidtb.DataContext = Paid;
             lefttb.DataContext = LeftToPay;
@@ -131,7 +145,7 @@ namespace POP_SF7
                 {
                     if(PaymentDAO.Edit(SelectedPayment))
                     {
-                        this.DialogResult = true;
+                        DialogResult = true;
                     }
                     else
                     {
@@ -215,7 +229,7 @@ namespace POP_SF7
 
         private void cancelbtn_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = false;
+            DialogResult = false;
             Close();
         }
     }

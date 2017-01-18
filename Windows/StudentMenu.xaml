@@ -78,13 +78,13 @@
         
         <!--#region Courses-->
         <GroupBox x:Name="coursesgb" Header="Kursevi" HorizontalAlignment="Left" Height="171" Margin="9,339,0,0" VerticalAlignment="Top" Width="414">
-            <DataGrid x:Name="coursesdg" SelectionChanged="coursesdg_SelectionChanged" IsReadOnly="True" AutoGeneratingColumn="coursesdg_AutoGeneratingColumn" ItemsSource="{Binding ElementName=studentsdg, Path=SelectedItem.ListOfCourses}" Margin="5"/>
+            <DataGrid x:Name="coursesdg" ItemsSource="{Binding ElementName=studentsdg, Path=SelectedItem.ListOfCourses}" SelectionChanged="coursesdg_SelectionChanged" IsReadOnly="True" AutoGeneratingColumn="coursesdg_AutoGeneratingColumn" Margin="5"/>
         </GroupBox>
         <!--#endregion-->
 
         <!--#region Payments-->
         <GroupBox x:Name="paymentsgb" Header="Uplate" HorizontalAlignment="Left" Height="171" Margin="431,339,0,0" VerticalAlignment="Top" Width="348">
-            <DataGrid x:Name="paymentsdg" SelectionChanged="paymentsdg_SelectionChanged" IsReadOnly="True" AutoGeneratingColumn="paymentsdg_AutoGeneratingColumn" ItemsSource="{Binding ElementName=studentsdg, Path=SelectedItem.ListOfPayments}" Margin="5"/>
+            <DataGrid x:Name="paymentsdg" ItemsSource="{Binding ElementName=studentsdg, Path=SelectedItem.ListOfPayments}" SelectionChanged="paymentsdg_SelectionChanged" IsReadOnly="True" AutoGeneratingColumn="paymentsdg_AutoGeneratingColumn" Margin="5"/>
         </GroupBox>
         <!--#endregion -->
 

@@ -1,7 +1,6 @@
 ﻿using POP_SF7.DB;
 using POP_SF7.Helpers;
 using POP_SF7.Windows;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -53,27 +52,17 @@ namespace POP_SF7
             descriptionlbl.Text = (Decider == Decider.ADD) ? labelCourseAdd : labelCourseEdit;
 
             languagecb.ItemsSource = ApplicationA.Instance.Languages;
-            languagecb.DisplayMemberPath = "Name";
-            languagecb.SelectedValuePath = "Id";
-            languagecb.SelectedIndex = 0;
+            setupComboBox(languagecb, "Name");
 
             courseTypecb.ItemsSource = ApplicationA.Instance.CourseTypes;
-            courseTypecb.DisplayMemberPath = "Name";
-            courseTypecb.SelectedValuePath = "Id";
-            courseTypecb.SelectedIndex = 0;
+            setupComboBox(courseTypecb, "Name");
 
             teachercb.ItemsSource = FilteredTeachers;
-            teachercb.DisplayMemberPath = "FullName";
-            teachercb.SelectedValuePath = "Id";
-            teachercb.SelectedIndex = 0;
+            setupComboBox(teachercb, "FullName");
 
-            StudentsView = CollectionViewSource.GetDefaultView(Course.ListOfStudents);
-            studentsdg.ItemsSource = StudentsView;
-            studentsdg.IsSynchronizedWithCurrentItem = true;
-
-            DeletedStudentsView = CollectionViewSource.GetDefaultView(Course.ListOfDeletedStudents);
-            deletedStudentsdg.ItemsSource = DeletedStudentsView;
-            deletedStudentsdg.IsSynchronizedWithCurrentItem = true;
+            setupGrid(StudentsView, Course.ListOfStudents, studentsdg);
+            
+            setupGrid(DeletedStudentsView, Course.ListOfDeletedStudents, deletedStudentsdg);
 
             if (Decider == Decider.ADD)
             {
@@ -81,11 +70,17 @@ namespace POP_SF7
             }
         }
 
-        private int setTeacherComboBoxEDIT()
+        private void setupGrid(ICollectionView view, ObservableCollection<Student> collection, DataGrid dg)
         {
-            int index = FilteredTeachers.IndexOf(Course.Teacher);
+            view = CollectionViewSource.GetDefaultView(collection);
+            dg.ItemsSource = view;
+            dg.IsSynchronizedWithCurrentItem = true;
+        }
 
-            return index;
+        private void setupComboBox(ComboBox cb, string memberPath)
+        {
+            cb.DisplayMemberPath = memberPath;
+            cb.SelectedValuePath = "Id";
         }
 
         private void okbtn_Click(object sender, RoutedEventArgs e)

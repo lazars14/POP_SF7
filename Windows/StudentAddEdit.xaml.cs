@@ -1,13 +1,13 @@
 ﻿using POP_SF7.Windows;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
-using System;
 using POP_SF7.Helpers;
 using System.ComponentModel;
 using System.Windows.Data;
 using POP_SF7.DB;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Windows.Controls;
 
 namespace POP_SF7
 {
@@ -48,13 +48,16 @@ namespace POP_SF7
             DataContext = StudentS;
             personInfo.descriptionlbl.Text = (Decider == Decider.ADD) ? labelAddStudent : labelEditStudent;
 
-            CoursesView = CollectionViewSource.GetDefaultView(StudentS.ListOfCourses);
-            coursesdg.ItemsSource = CoursesView;
-            coursesdg.IsSynchronizedWithCurrentItem = true;
+            setupGrid(CoursesView, StudentS.ListOfCourses, coursesdg);
 
-            DeletedCoursesView = CollectionViewSource.GetDefaultView(StudentS.ListOfDeletedCourses);
-            deletedCoursesdg.ItemsSource = DeletedCoursesView;
-            deletedCoursesdg.IsSynchronizedWithCurrentItem = true;
+            setupGrid(DeletedCoursesView, StudentS.ListOfDeletedCourses, deletedCoursesdg);
+        }
+
+        private void setupGrid(ICollectionView view, ObservableCollection<Course> collection, DataGrid dataGrid)
+        {
+            view = CollectionViewSource.GetDefaultView(collection);
+            dataGrid.ItemsSource = view;
+            dataGrid.IsSynchronizedWithCurrentItem = true;
         }
 
         private void okbtn_Click(object sender, RoutedEventArgs e)
@@ -77,7 +80,7 @@ namespace POP_SF7
                 {
                     if (StudentDAO.Edit(StudentS) && saveCourses())
                     {
-                        this.DialogResult = true;
+                        DialogResult = true;
                     }
                     else
                     {
@@ -117,7 +120,7 @@ namespace POP_SF7
 
         private void cancelbtn_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = false;
+            DialogResult = false;
             Close();
         }
 

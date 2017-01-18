@@ -2,8 +2,6 @@
 using POP_SF7.Helpers;
 using POP_SF7.Windows;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,21 +25,21 @@ namespace POP_SF7
         private void setupWindow()
         {
             CoursesView = CollectionViewSource.GetDefaultView(ApplicationA.Instance.Courses);
-
             coursesdg.ItemsSource = CoursesView;
             coursesdg.IsSynchronizedWithCurrentItem = true;
 
             languagecb.ItemsSource = ApplicationA.Instance.Languages;
-            languagecb.DisplayMemberPath = "Name";
-            languagecb.SelectedValuePath = "Id";
-            languagecb.SelectedIndex = 0;
+            setupComboBox(languagecb);
 
             courseTypecb.ItemsSource = ApplicationA.Instance.CourseTypes;
-            courseTypecb.DisplayMemberPath = "Name";
-            courseTypecb.SelectedValuePath = "Id";
-            courseTypecb.SelectedIndex = 0;
+            setupComboBox(courseTypecb);
+        }
 
-            studentsdg.IsSynchronizedWithCurrentItem = true;
+        private void setupComboBox(ComboBox cb)
+        {
+            cb.DisplayMemberPath = "Name";
+            cb.SelectedValuePath = "Id";
+            cb.SelectedIndex = 0;
         }
 
         private void addbtn_Click(object sender, RoutedEventArgs e)
@@ -211,7 +209,7 @@ namespace POP_SF7
             LoadColumnsHelper.LoadCourse(e);
         }
 
-        private void showCoursesbtn_Click(object sender, RoutedEventArgs e)
+        private void completedCoursesrb_Checked(object sender, RoutedEventArgs e)
         {
             Predicate<object> finishedCoursesPredicate = new Predicate<object>(finishedCoursesSearchCondition);
             Predicate<object> ongoingCoursesPredicate = new Predicate<object>(ongoingCoursesSearchCondition);
@@ -220,9 +218,19 @@ namespace POP_SF7
             bool finishedCourses = completedCoursesrb.IsChecked ?? false;
             bool ongoingCourses = ongoingCoursesrb.IsChecked ?? false;
 
-            if(allCourses) CoursesView.Filter = null;
-            else if(finishedCourses) CoursesView.Filter = finishedCoursesPredicate;
-            else if(ongoingCourses) CoursesView.Filter = ongoingCoursesSearchCondition;
+            RadioButton rb = sender as RadioButton;
+            switch(rb.Name)
+            {
+                case "allCoursesrb":
+                    CoursesView.Filter = null;
+                    break;
+                case "completedCoursesrb":
+                    CoursesView.Filter = finishedCoursesPredicate;
+                    break;
+                case "ongoingCoursesrb":
+                    CoursesView.Filter = ongoingCoursesSearchCondition;
+                    break;
+            }
         }
     }
 }

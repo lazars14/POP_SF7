@@ -1,7 +1,6 @@
 ﻿using POP_SF7.DB;
 using POP_SF7.Helpers;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;

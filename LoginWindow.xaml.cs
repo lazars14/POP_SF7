@@ -1,6 +1,5 @@
 ﻿using POP_SF7.DB;
 using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 

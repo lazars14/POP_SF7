@@ -10,7 +10,7 @@
         <TextBlock x:Name="teacherstb" HorizontalAlignment="Left" Height="23" Margin="9,10,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="Nastavnici" VerticalAlignment="Top" Width="770"/>
 
         <!--#region DataGrid-->
-        <DataGrid x:Name="teachersdg" IsReadOnly="True" AutoGeneratingColumn="teachersdg_AutoGeneratingColumn" HorizontalAlignment="Left" Height="149" Margin="9,38,0,0" VerticalAlignment="Top" Width="697" SelectionChanged="usersdg_SelectionChanged"/>
+        <DataGrid x:Name="teachersdg" IsReadOnly="True" AutoGeneratingColumn="teachersdg_AutoGeneratingColumn" HorizontalAlignment="Left" Height="149" Margin="9,38,0,0" VerticalAlignment="Top" Width="697"/>
         <StackPanel HorizontalAlignment="Left" Height="149" Margin="723,37,0,0" VerticalAlignment="Top" Width="58">
             <Button x:Name="addbtn" Content="Dodaj" Height="30" Margin="0,20,0,0" Click="addbtn_Click"/>
             <Button x:Name="editbtn" Content="Izmeni" Height="30" Margin="0,10" Click="editbtn_Click"/>
@@ -22,10 +22,10 @@
         <GroupBox x:Name="coursegb_Copy" Header="Selektovani kurs" HorizontalAlignment="Left" Height="60" Margin="10,481,0,0" VerticalAlignment="Top" Width="697">
             <StackPanel Orientation="Horizontal" Margin="5">
                 <Label x:Name="courseLanguagelbl1" Content="Jezik"/>
-                <TextBlock x:Name="courseLanguagetb1" Text="{Binding SelectedItem.Language.Name, ElementName=coursesdg}" Margin="50,0,0,0" Width="200"/>
+                <TextBlock x:Name="courseLanguagetb1" Text="{Binding Path=SelectedItem.Language.Name, ElementName=coursesdg}" Margin="50,0,0,0" Width="200"/>
 
                 <Label x:Name="courseCourseTypelbl1" Content="Tip kursa" Margin="50,0,0,0"/>
-                <TextBlock x:Name="courseCourseTypetb1" Text="{Binding SelectedItem.CourseType.Name, ElementName=coursesdg}" Margin="50,0,0,0" Width="200"/>
+                <TextBlock x:Name="courseCourseTypetb1" Text="{Binding Path=SelectedItem.CourseType.Name, ElementName=coursesdg}" Margin="50,0,0,0" Width="200"/>
             </StackPanel>
         </GroupBox>
         <!--#endregion-->
@@ -89,13 +89,13 @@
 
         <!--#region Courses-->
         <GroupBox x:Name="coursesgb" Header="Kursevi" HorizontalAlignment="Left" Height="150" Margin="10,331,0,0" VerticalAlignment="Top" Width="414">
-            <DataGrid x:Name="coursesdg" SelectionChanged="coursesdg_SelectionChanged" IsReadOnly="True" AutoGeneratingColumn="coursesdg_AutoGeneratingColumn" ItemsSource="{Binding ElementName=teachersdg, Path=SelectedItem.ListOfCourses}" Margin="5"/>
+            <DataGrid x:Name="coursesdg" ItemsSource="{Binding Path=SelectedItem.ListOfCourses, ElementName=teachersdg}" SelectionChanged="coursesdg_SelectionChanged" IsReadOnly="True" AutoGeneratingColumn="coursesdg_AutoGeneratingColumn" Margin="5"/>
         </GroupBox>
         <!--#endregion-->
 
         <!--#region Languages-->
         <GroupBox x:Name="languagesgb" Header="Jezici" HorizontalAlignment="Left" Height="150" Margin="436,331,0,0" VerticalAlignment="Top" Width="348">
-            <DataGrid x:Name="languagesdg" IsReadOnly="True" AutoGeneratingColumn="languagesdg_AutoGeneratingColumn" ItemsSource="{Binding ElementName=teachersdg, Path=SelectedItem.ListOfLanguages}" Margin="5"/>
+            <DataGrid x:Name="languagesdg" ItemsSource="{Binding Path=SelectedItem.ListOfLanguages, ElementName=teachersdg}" IsReadOnly="True" AutoGeneratingColumn="languagesdg_AutoGeneratingColumn" Margin="5"/>
         </GroupBox>
         <!--#endregion-->
 
