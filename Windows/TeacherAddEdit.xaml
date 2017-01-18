@@ -6,34 +6,42 @@
         xmlns:local="clr-namespace:POP_SF7"
         mc:Ignorable="d"
         xmlns:userControls="clr-namespace:POP_SF7.UserControls"
-        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="647.933" Width="346.008" ResizeMode="NoResize">
-    <Grid Margin="10">
+        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="847.883" Width="346.008" ResizeMode="NoResize">
+    <Grid Margin="10,10,10,4">
         <Grid.RowDefinitions>
             <RowDefinition Height="350"/>
-            <RowDefinition Height="200"/>
+            <RowDefinition Height="400"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         <userControls:PersonUserControl x:Name="personInfo" Grid.Row="0"/>
 
         <!--#region Tab-->
-        
+
         <TabControl x:Name="tabControl" TabStripPlacement="Top" Grid.Row="1" Margin="10,10,1,10">
             <TabItem x:Name="languagesTabItem" Header="Jezici">
                 <Grid>
-                    <DataGrid x:Name="languagesdg" IsReadOnly="True" LoadingRow="languagesdg_LoadingRow" AutoGeneratingColumn="languagesdg_AutoGeneratingColumn" HorizontalAlignment="Left" Height="110" Margin="10,10,0,0" VerticalAlignment="Top" Width="283"/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="33" Margin="10,120,0,0" VerticalAlignment="Center" Width="275">
-                        <Button x:Name="addLanguagebtn" Content="Dodaj" Width="75" Margin="20,5,5,5" Click="addLanguagebtn_Click"/>
-                        <Button x:Name="undeleteLanguagebtn" Content="Povrati" Width="75" Margin="5" Click="undeleteLanguagebtn_Click"/>
+                    <DataGrid x:Name="languagesdg" IsReadOnly="True" AutoGeneratingColumn="languagesdg_AutoGeneratingColumn" HorizontalAlignment="Left" Height="110" Margin="10,10,0,0" VerticalAlignment="Top" Width="283"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="33" Margin="10,310,0,10" VerticalAlignment="Center" Width="275">
+                        <Button x:Name="undeleteLanguagebtn" Content="Povrati" Width="75" Margin="100,5,5,5" Click="undeleteLanguagebtn_Click"/>
+                    </StackPanel>
+
+                    <DataGrid x:Name="deletedLanguagesdg" IsReadOnly="True" AutoGeneratingColumn="languagesdg_AutoGeneratingColumn" HorizontalAlignment="Left" Height="110" Margin="10,195,0,0" VerticalAlignment="Top" Width="283"/>
+                    <Label x:Name="label" Content="Obrisani jezici" HorizontalAlignment="Left" Height="25" Margin="88,165,0,0" VerticalAlignment="Top" Width="94"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="33" Margin="10,127,0,193" VerticalAlignment="Center" Width="275">
+                        <Button x:Name="addLanguagebtn" Content="Dodaj" Width="75" Margin="65,5,5,5" Click="addLanguagebtn_Click"/>
                         <Button x:Name="deleteLanguagebtn" Content="Obrisi" Width="75" Margin="5" Click="deleteLanguagebtn_Click"/>
                     </StackPanel>
                 </Grid>
             </TabItem>
             <TabItem x:Name="coursesTabItem" Header="Kursevi" IsSelected="True">
                 <Grid>
-                    <DataGrid x:Name="coursesdg" IsReadOnly="True" AutoGeneratingColumn="languagesdg_AutoGeneratingColumn" HorizontalAlignment="Left" Height="133" Margin="10,10,0,0" VerticalAlignment="Top" Width="283"/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="33" Margin="10,120,0,0" VerticalAlignment="Center" Width="275"/>
+                    <DataGrid x:Name="coursesdg" IsReadOnly="True" AutoGeneratingColumn="languagesdg_AutoGeneratingColumn" HorizontalAlignment="Left" Height="134" Margin="10,10,0,0" VerticalAlignment="Top" Width="283"/>
+                    <Label x:Name="label1" Content="Obrisani kursevi" Width="136" Margin="100,166,67,161"/>
+                    <DataGrid x:Name="deletedCoursesdg" IsReadOnly="True" AutoGeneratingColumn="languagesdg_AutoGeneratingColumn" HorizontalAlignment="Left" Height="134" VerticalAlignment="Top" Width="283" Margin="10,197,0,0"/>
                 </Grid>
             </TabItem>
+
+
         </TabControl>
         <!--#endregion-->
 

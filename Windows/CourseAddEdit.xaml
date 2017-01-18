@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:resources="clr-namespace:POP_SF7.Properties"
         mc:Ignorable="d"
-        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="646.227" Width="337.21" ResizeMode="NoResize">
+        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="846.227" Width="337.21" ResizeMode="NoResize">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
@@ -21,6 +21,7 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
+            <RowDefinition Height="200"/>
             <RowDefinition Height="200"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
@@ -52,9 +53,17 @@
             <Grid>
                 <DataGrid x:Name="studentsdg" IsReadOnly="True" AutoGeneratingColumn="studentsdg_AutoGeneratingColumn" ItemsSource="{Binding ListOfStudents}" HorizontalAlignment="Left" Height="130" Margin="10,10,0,0" VerticalAlignment="Top" Width="270"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="33" Margin="10,145,0,0" VerticalAlignment="Center" Width="275">
-                    <Button x:Name="addStudentbtn" Content="Dodaj" Width="75" Margin="10,5,5,5" Click="addStudentbtn_Click"/>
-                    <Button x:Name="undeleteStudentbtn" Content="Povrati" Width="75" Margin="5" Click="undeleteStudentbtn_Click"/>
+                    <Button x:Name="addStudentbtn" Content="Dodaj" Width="75" Margin="65,5,5,5" Click="addStudentbtn_Click"/>
                     <Button x:Name="deleteStudentbtn" Content="Obrisi" Width="75" Margin="5" Click="deleteStudentbtn_Click"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="Obrisani Ucenici" Grid.ColumnSpan="2" Grid.Row="10">
+            <Grid>
+                <DataGrid x:Name="deletedStudentsdg" IsReadOnly="True" AutoGeneratingColumn="studentsdg_AutoGeneratingColumn" ItemsSource="{Binding ListOfStudents}" HorizontalAlignment="Left" Height="130" Margin="10,10,0,0" VerticalAlignment="Top" Width="270"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="33" Margin="10,145,0,0" VerticalAlignment="Center" Width="275">
+                    <Button x:Name="undeleteStudentbtn" Content="Povrati" Width="75" Margin="100,5,5,5" Click="undeleteStudentbtn_Click"/>
                 </StackPanel>
             </Grid>
         </GroupBox>

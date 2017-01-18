@@ -7,7 +7,6 @@ using System.ComponentModel;
 using System.Windows.Data;
 using System.Windows.Controls;
 using POP_SF7.Helpers;
-using POP_SF7.School;
 using System.Collections.Generic;
 using System.Windows.Media;
 using POP_SF7.DB;
@@ -19,11 +18,12 @@ namespace POP_SF7
     /// </summary>
     public partial class TeacherAddEdit : Window
     {
-        public ICollectionView CoursesView { get; set; }
         public ICollectionView LanguagesView { get; set; }
+        public ICollectionView DeletedLanguagesView { get; set; }
 
-        public List<int> DeletedIndexes { get; set; }
-        public static SolidColorBrush Red = new SolidColorBrush(Colors.Red);
+        public List<Language> AddedLanguages { get; set; }
+        public List<Language> EditedLanguages { get; set; }
+        public List<Language> DeletedLanguages { get; set; }
 
         public Teacher TeacherT { get; set; }
         public Decider Decider { get; set; }
@@ -37,23 +37,14 @@ namespace POP_SF7
         {
             TeacherT = teacher;
             Decider = decider;
-            DeletedIndexes = deletedIndexes;
+
+            AddedLanguages = new List<Language>();
+            EditedLanguages = new List<Language>();
+            DeletedLanguages = new List<Language>();
 
             InitializeComponent();
 
             setupWindow();
-        }
-
-        private void languagesdg_LoadingRow(object sender, DataGridRowEventArgs e)
-        {
-            int rowIndex = e.Row.GetIndex();
-            if(Decider == Decider.EDIT)
-            {
-                if(DeletedIndexes.Contains(rowIndex))
-                {
-                    e.Row.Background = Red;
-                }
-            }
         }
 
         private void setupWindow()
@@ -61,13 +52,19 @@ namespace POP_SF7
             DataContext = TeacherT;
             personInfo.descriptionlbl.Text = (Decider == Decider.ADD) ? labelAddTeacher : labelEditTeacher;
 
-            CoursesView = CollectionViewSource.GetDefaultView(TeacherT.ListOfCourses);
-            coursesdg.ItemsSource = CoursesView;
+            coursesdg.ItemsSource = TeacherT.ListOfCourses;
             coursesdg.IsSynchronizedWithCurrentItem = true;
+
+            deletedCoursesdg.ItemsSource = TeacherT.ListOfDeletedCourses;
+            deletedCoursesdg.IsSynchronizedWithCurrentItem = true;
 
             LanguagesView = CollectionViewSource.GetDefaultView(TeacherT.ListOfLanguages);
             languagesdg.ItemsSource = LanguagesView;
             languagesdg.IsSynchronizedWithCurrentItem = true;
+
+            DeletedLanguagesView = CollectionViewSource.GetDefaultView(TeacherT.ListOfDeletedLanguages);
+            deletedLanguagesdg.ItemsSource = DeletedLanguagesView;
+            deletedLanguagesdg.IsSynchronizedWithCurrentItem = true;
         }
 
         private void okbtn_Click(object sender, RoutedEventArgs e)
@@ -80,17 +77,18 @@ namespace POP_SF7
             {
                 if (Decider == Decider.ADD)
                 {
-                    if (TeacherDAO.Add(TeacherT))
-                    {
-                        TeacherT.Id = ApplicationA.Instance.Teachers.Count() + 1;
+                    TeacherT.Id = ApplicationA.Instance.Teachers.Count() + 1;
+
+                    if (TeacherDAO.Add(TeacherT) && saveLanguages())
+                    {    
                         ApplicationA.Instance.Teachers.Add(TeacherT);
                     }
                 }
                 else
                 {
-                    if (TeacherDAO.Edit(TeacherT))
+                    if (TeacherDAO.Edit(TeacherT) && saveLanguages())
                     {
-                        this.DialogResult = true;
+                        DialogResult = true;
                     }
                     else
                     {
@@ -101,49 +99,51 @@ namespace POP_SF7
             }
         }
 
-        private void languagesdg_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        private bool saveLanguages()
         {
-            DataGrid dg = sender as DataGrid;
-            if(dg.Name.Equals("languagesdg"))
-            {
-                LoadColumnsHelper.LoadLanguage(e);
-            }
-            else
-            {
-                LoadColumnsHelper.LoadCourse(e);
-            }
-        }
+            bool valid = true;
 
-        private bool Deleted(int rowIndex)
-        {
-            bool valid = false;
-
-            foreach(DataGridRow row in LanguagesView)
+            foreach (Language lang in AddedLanguages)
             {
-                int index = row.GetIndex();
-                if(DeletedIndexes.Contains(index))
-                {
-                    valid = true;
-                }
+                valid = TeacherTeachesLanguageDAO.Add(TeacherT.Id, lang.Id);
+            }
+
+            foreach (Language lang in EditedLanguages)
+            {
+                valid = TeacherTeachesLanguageDAO.UnDelete(TeacherT.Id, lang.Id);
+            }
+
+            foreach (Language lang in DeletedLanguages)
+            {
+                valid = TeacherTeachesLanguageDAO.Delete(TeacherT.Id, lang.Id);
             }
 
             return valid;
         }
 
-        private void changeColor(int rowForDeletion, SolidColorBrush brush)
+        private void languagesdg_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            foreach (DataGridRow row in LanguagesView)
+            DataGrid dg = sender as DataGrid;
+            switch(dg.Name)
             {
-                if (row.GetIndex() == rowForDeletion)
-                {
-                    row.Background = brush;
-                }
+                case "languagesdg":
+                    LoadColumnsHelper.LoadLanguage(e);
+                    break;
+                case "deletedLanguagesdg":
+                    LoadColumnsHelper.LoadLanguage(e);
+                    break;
+                case "coursesdg":
+                    LoadColumnsHelper.LoadCourse(e);
+                    break;
+                case "deletedCoursesdg":
+                    LoadColumnsHelper.LoadCourse(e);
+                    break;
             }
         }
 
         private void cancelbtn_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = false;
+            DialogResult = false;
             Close();
         }
 
@@ -155,35 +155,25 @@ namespace POP_SF7
 
         private void undeleteLanguagebtn_Click(object sender, RoutedEventArgs e)
         {
-            Language selectedLanguage = LanguagesView.CurrentItem as Language;
+            Language selectedLanguage = DeletedLanguagesView.CurrentItem as Language;
             if (selectedLanguage == null)
             {
                 MessageBox.Show("Morate da selektujete jezik da biste ga povratili!");
             }
             else
             {
-                if (!Deleted(LanguagesView.CurrentPosition)) // ovde ide provera na osnovu boje
+                var result = MessageBox.Show("Da li ste sigurni da hocete da povratite dati jezik za ovog nastavnika?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.Yes)
                 {
-                    MessageBox.Show("Selektovani jezik nije obrisan!");
-                }
-                else
-                {
-                    var result = MessageBox.Show("Da li ste sigurni da hocete da povratite dati jezik za ovog nastavnika?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                    if (result == MessageBoxResult.Yes)
+                    if (DeletedLanguages.Contains(selectedLanguage))
                     {
-                        foreach (TeacherTeachesLanguage ttl in ApplicationA.Instance.TeacherTeachesLanguageCollection)
-                        {
-                            if (ttl.TeacherId == TeacherT.Id && ttl.LanguageId == selectedLanguage.Id)
-                            {
-                                if (TeacherTeachesLanguageDAO.UnDelete(ttl))
-                                {
-                                    ttl.Deleted = false;
-                                    changeColor(LanguagesView.CurrentPosition, null);
-                                    // boja - default
-                                }
-                            }
-                        }
+                        DeletedLanguages.Remove(selectedLanguage);
                     }
+
+                    EditedLanguages.Add(selectedLanguage);
+
+                    TeacherT.ListOfLanguages.Add(selectedLanguage);
+                    TeacherT.ListOfDeletedLanguages.Remove(selectedLanguage);
                 }
             }
         }
@@ -197,32 +187,29 @@ namespace POP_SF7
             }
             else
             {
-                if(Deleted(LanguagesView.CurrentPosition)) // ovde ide provera na osnovu boje
+                var result = MessageBox.Show("Da li ste sigurni da hocete da obrisete dati jezik za ovog nastavnika?\n" + WarningMessage, "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.Yes)
                 {
-                    MessageBox.Show("Selektovani jezik je vec obrisan!");
-                }
-                else
-                {
-                    var result = MessageBox.Show("Da li ste sigurni da hocete da obrisete dati jezik za ovog nastavnika?\n" + WarningMessage, "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                    if (result == MessageBoxResult.Yes)
-                    {
-                        foreach (TeacherTeachesLanguage ttl in ApplicationA.Instance.TeacherTeachesLanguageCollection)
-                        {
-                            if(ttl.TeacherId == TeacherT.Id && ttl.LanguageId == selectedLanguage.Id)
-                            {
-                                if(TeacherTeachesLanguageDAO.Delete(ttl))
-                                {
-                                    ttl.Deleted = true;
-                                    changeColor(LanguagesView.CurrentPosition, Red);
-                                    // boja - crvena
-                                }
-                            }
-                        }
-                    }
+                    checkIfLanguageAddedOrDeleted(selectedLanguage);
                 }
             }
         }
 
-        
+        private void checkIfLanguageAddedOrDeleted(Language language)
+        {
+            if (AddedLanguages.Contains(language))
+            {
+                AddedLanguages.Remove(language);
+            }
+            else if (EditedLanguages.Contains(language))
+            {
+                EditedLanguages.Remove(language);
+            }
+
+            DeletedLanguages.Add(language);
+
+            TeacherT.ListOfDeletedLanguages.Add(language);
+            TeacherT.ListOfLanguages.Remove(language);
+        }
     }
 }

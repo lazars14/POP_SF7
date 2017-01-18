@@ -85,9 +85,6 @@
     <Compile Include="School\ApplicationA.cs" />
     <Compile Include="School\Payment.cs" />
     <Compile Include="School\School.cs" />
-    <Compile Include="School\StudentAttendsCourse.cs" />
-    <Compile Include="School\TeacherTeachesCourse.cs" />
-    <Compile Include="School\TeacherTeachesLanguage.cs" />
     <Compile Include="UserControls\LanguageCourseTypeUserControl.xaml.cs">
       <DependentUpon>LanguageCourseTypeUserControl.xaml</DependentUpon>
     </Compile>

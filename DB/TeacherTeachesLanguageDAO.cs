@@ -1,5 +1,4 @@
-﻿using POP_SF7.School;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -33,13 +32,22 @@ namespace POP_SF7.DB
 
                     foreach (DataRow row in dataSet.Tables["TeacherTeachesLanguage"].Rows)
                     {
-                        int id = (int)row["Teaches_Id"];
                         int teacherId = (int)row["Teaches_TeacherId"];
-                        int languageId = (int)row["Teaches_LanguageId"];
-                        bool deleted = (bool)row["Teaches_Deleted"];
-                        TeacherTeachesLanguage teach = new TeacherTeachesLanguage(id, teacherId, languageId, deleted);
+                        Teacher t = ApplicationA.Instance.Teachers[teacherId - 1];
 
-                        ApplicationA.Instance.TeacherTeachesLanguageCollection.Add(teach);
+                        int languageId = (int)row["Teaches_LanguageId"];
+                        Language l = ApplicationA.Instance.Languages[languageId - 1];
+
+                        bool deleted = (bool)row["Teaches_Deleted"];
+                        
+                        if(!deleted)
+                        {
+                            t.ListOfLanguages.Add(l);
+                        }
+                        else
+                        {
+                            t.ListOfDeletedLanguages.Add(l);
+                        }
                     }
 
                     valid = true;
@@ -70,7 +78,7 @@ namespace POP_SF7.DB
 
         }
 
-        public static bool Add(TeacherTeachesLanguage teach)
+        public static bool Add(int teacherId, int languageId)
         {
             using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
             {
@@ -79,13 +87,12 @@ namespace POP_SF7.DB
                 connection.Open();
 
                 SqlCommand command = connection.CreateCommand();
-                command.CommandText = @"Insert Into TeacherTeachesLanguage Values(@TeacherId,@LanguageId,@Deleted);";
+                command.CommandText = @"Insert Into TeacherTeachesLanguage Values(@TeacherId,@LanguageId,0);";
 
                 try
                 {
-                    command.Parameters.Add(new SqlParameter("@TeacherId", teach.TeacherId));
-                    command.Parameters.Add(new SqlParameter("@LanguageId", teach.LanguageId));
-                    command.Parameters.Add(new SqlParameter("@Deleted", teach.Deleted));
+                    command.Parameters.Add(new SqlParameter("@TeacherId", teacherId));
+                    command.Parameters.Add(new SqlParameter("@LanguageId", languageId));
 
                     command.ExecuteNonQuery();
 
@@ -116,7 +123,7 @@ namespace POP_SF7.DB
             }
         }
 
-        public static bool Delete(TeacherTeachesLanguage teach)
+        public static bool Delete(int teacherId, int languageId)
         {
             using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
             {
@@ -125,11 +132,12 @@ namespace POP_SF7.DB
                 connection.Open();
 
                 SqlCommand command = connection.CreateCommand();
-                command.CommandText = @"Update TeacherTeachesLanguage Set Teaches_Deleted=1 Where Teaches_Id=@Id;";
+                command.CommandText = @"Update TeacherTeachesLanguage Set Teaches_Deleted=1 Where Teaches_TeacherId=@TeacherId And Teaches_LanguageId=@LanguageId;";
 
                 try
                 {
-                    command.Parameters.Add(new SqlParameter("@Id", teach.Id));
+                    command.Parameters.Add(new SqlParameter("@TeacherId", teacherId));
+                    command.Parameters.Add(new SqlParameter("@LanguageId", languageId));
 
                     command.ExecuteNonQuery();
 
@@ -160,7 +168,7 @@ namespace POP_SF7.DB
             }
         }
 
-        public static bool UnDelete(TeacherTeachesLanguage teach)
+        public static bool UnDelete(int teacherId, int languageId)
         {
             using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
             {
@@ -169,11 +177,12 @@ namespace POP_SF7.DB
                 connection.Open();
 
                 SqlCommand command = connection.CreateCommand();
-                command.CommandText = @"Update TeacherTeachesLanguage Set Teaches_Deleted=0 Where Teaches_Id=@Id;";
+                command.CommandText = @"Update TeacherTeachesLanguage Set Teaches_Deleted=0 Where Teaches_TeacherId=@TeacherId And Teaches_LanguageId=@LanguageId;";
 
                 try
                 {
-                    command.Parameters.Add(new SqlParameter("@Id", teach.Id));
+                    command.Parameters.Add(new SqlParameter("@TeacherId", teacherId));
+                    command.Parameters.Add(new SqlParameter("@LanguageId", languageId));
 
                     command.ExecuteNonQuery();
 

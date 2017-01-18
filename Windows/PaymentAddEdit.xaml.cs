@@ -1,6 +1,5 @@
 ﻿using POP_SF7.DB;
 using POP_SF7.Helpers;
-using POP_SF7.School;
 using POP_SF7.Windows;
 using System;
 using System.Collections.Generic;
@@ -18,6 +17,7 @@ namespace POP_SF7
     public partial class PaymentAddEdit : Window
     {
         public ICollectionView PaymentsView { get; set; }
+
         public double Paid { get; set; }
         public double LeftToPay { get; set; }
 
@@ -29,6 +29,8 @@ namespace POP_SF7
 
         public string labelAddPayment = "Dodavanje nove uplate";
         public string labelEditPayment = "Izmena postojece uplate";
+
+        public bool paymentsLoaded = false;
 
         public PaymentAddEdit(Payment payment, Decider decider)
         {
@@ -46,12 +48,14 @@ namespace POP_SF7
 
         private void setupCourseAndStudent()
         {
-            PaymentsView = CollectionViewSource.GetDefaultView(ApplicationA.Instance.Payments);
-            paymentsdg.ItemsSource = PaymentsView;
-            paymentsdg.IsSynchronizedWithCurrentItem = true;
-
             if (Decider == Decider.EDIT)
-            { 
+            {
+                paymentsLoaded = true;
+
+                PaymentsView = CollectionViewSource.GetDefaultView(ApplicationA.Instance.Payments);
+                paymentsdg.ItemsSource = PaymentsView;
+                paymentsdg.IsSynchronizedWithCurrentItem = true;
+
                 Course = ApplicationA.Instance.Courses[SelectedPayment.Course.Id - 1];
                 Student = ApplicationA.Instance.Students[SelectedPayment.Student.Id - 1];
 
@@ -62,6 +66,7 @@ namespace POP_SF7
             else
             {
                 coursebtn.IsEnabled = false;
+                paymentsLoaded = false;
             }
         }
 
@@ -151,32 +156,24 @@ namespace POP_SF7
 
         private void studenttb_SelectionChanged(object sender, RoutedEventArgs e)
         {
+            if(!paymentsLoaded)
+            {
+                PaymentsView = CollectionViewSource.GetDefaultView(ApplicationA.Instance.Payments);
+                paymentsdg.ItemsSource = PaymentsView;
+                paymentsdg.IsSynchronizedWithCurrentItem = true;
+            }
             try
             {
-                if(Student.ListOfCourses.Count == 0)
+                if (Student.ListOfCourses.Count == 0)
                 {
-                    foreach (StudentAttendsCourse sac in ApplicationA.Instance.StudentAttendsCourseCollection)
-                    {
-                        if (sac.StudentId == Student.Id && sac.Deleted == false)
-                        {
-                            Course c = ApplicationA.Instance.Courses[sac.CourseId - 1];
-                            if(c.Deleted == false)
-                            {
-                                Student.ListOfCourses.Add(c);
-                            }
-                        }
-                    }
-                    if (Student.ListOfCourses.Count == 0)
-                    {
-                        MessageBox.Show("Izabrani student ne pohadja nijedan kurs!");
-                        studenttb.Text = "";
-                        coursebtn.IsEnabled = false;
-                    }
-                    else
-                    {
-                        coursebtn.IsEnabled = true;
-                        coursetb.Text = "";
-                    }
+                    MessageBox.Show("Izabrani student ne pohadja nijedan kurs!");
+                    studenttb.Text = "";
+                    coursebtn.IsEnabled = false;
+                }
+                else
+                {
+                    coursebtn.IsEnabled = true;
+                    coursetb.Text = "";
                 }
                 PaymentsView.Filter = new Predicate<object>(studentSearchCondition);
                 paidtb.Text = "";

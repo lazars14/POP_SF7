@@ -1,6 +1,5 @@
 ﻿using POP_SF7.DB;
 using POP_SF7.Helpers;
-using POP_SF7.School;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -82,7 +81,7 @@ namespace POP_SF7.Windows
             List<Student> FilteredStudents = new List<Student>();
             foreach(Student student in ApplicationA.Instance.Students)
             {
-                if(!CourseWindow.ListOfStudents.Contains(student))
+                if(!CourseWindow.Course.ListOfStudents.Contains(student) && !CourseWindow.Course.ListOfDeletedStudents.Contains(student))
                 {
                     FilteredStudents.Add(student);
                 }
@@ -104,7 +103,7 @@ namespace POP_SF7.Windows
             List<Language> FilteredLanguages = new List<Language>();
             foreach(Language language in ApplicationA.Instance.Languages)
             {
-                if(!TeacherWindow.TeacherT.ListOfLanguages.Contains(language))
+                if(!TeacherWindow.TeacherT.ListOfLanguages.Contains(language) && !TeacherWindow.TeacherT.ListOfDeletedLanguages.Contains(language))
                 {
                     FilteredLanguages.Add(language);
                 }
@@ -126,7 +125,7 @@ namespace POP_SF7.Windows
             List<Course> FilteredCourses = new List<Course>();
             foreach(Course course in ApplicationA.Instance.Courses)
             {
-                if(!StudentWindow.StudentS.ListOfCourses.Contains(course))
+                if(!StudentWindow.StudentS.ListOfCourses.Contains(course) && !StudentWindow.StudentS.ListOfDeletedCourses.Contains(course))
                 {
                     FilteredCourses.Add(course);
                 }
@@ -158,6 +157,7 @@ namespace POP_SF7.Windows
                     foreach (Course c in dataGrid.SelectedItems)
                     {
                         StudentWindow.StudentS.ListOfCourses.Add(c);
+                        StudentWindow.AddedCourses.Add(c);
                     }
                     Close();
                 }
@@ -165,18 +165,6 @@ namespace POP_SF7.Windows
                 {
                     MessageBox.Show("Morate da selektujete kurs kako biste ga dodali na ucenika!");
                 }
-                /*else
-                {
-                    int nextId = ApplicationA.Instance.StudentAttendsCourseCollection.Count() + 1;
-                    StudentAttendsCourse toAdd = new StudentAttendsCourse(nextId, selectedCourse.Id, StudentWindow.StudentS.Id, false);
-
-                    if (StudentAttendsCourseDAO.Add(toAdd))
-                    {
-                        ApplicationA.Instance.StudentAttendsCourseCollection.Add(toAdd);
-                        StudentWindow.StudentS.ListOfCourses.Add(selectedCourse);
-                    }
-                    Close();
-                }*/
             }
             else if(CourseWindow == null && StudentWindow == null)
             {
@@ -186,19 +174,13 @@ namespace POP_SF7.Windows
                     foreach (Language lang in dataGrid.SelectedItems)
                     {
                         TeacherWindow.TeacherT.ListOfLanguages.Add(lang);
+                        TeacherWindow.AddedLanguages.Add(lang);
                     }
                     Close();
                 }
                 else
                 {
                     MessageBox.Show("Morate da selektujete jezik kako biste ga dodali na nastavnika!");
-                    /*int nextId = ApplicationA.Instance.Languages.Count() + 1;
-                    TeacherTeachesLanguage toAdd = new TeacherTeachesLanguage(nextId, TeacherWindow.TeacherT.Id, selectedLanguage.Id, false);
-                    if(TeacherTeachesLanguageDAO.Add(toAdd))
-                    {
-                        ApplicationA.Instance.TeacherTeachesLanguageCollection.Add(toAdd);
-                        TeacherWindow.TeacherT.ListOfLanguages.Add(selectedLanguage);
-                    }*/
                 }
             }
             else
@@ -208,7 +190,7 @@ namespace POP_SF7.Windows
                 {
                     foreach (Student selectedStudent in dataGrid.SelectedItems)
                     {
-                        CourseWindow.ListOfStudents.Add(selectedStudent);
+                        CourseWindow.Course.ListOfStudents.Add(selectedStudent);
                         CourseWindow.AddedStudents.Add(selectedStudent);
                     }
                     Close();
@@ -217,17 +199,6 @@ namespace POP_SF7.Windows
                 {
                     MessageBox.Show("Morate da selektujete ucenika kako biste ga preuzeli!");
                 }
-                /*
-                else
-                {
-                    StudentAttendsCourse toAdd = new StudentAttendsCourse(0, CourseWindow.Course.Id, selectedStudent.Id, false);
-                    if(StudentAttendsCourseDAO.Add(toAdd))
-                    {
-                        ApplicationA.Instance.StudentAttendsCourseCollection.Add(toAdd);
-                        CourseWindow.ListOfStudents.Add(selectedStudent);
-                    }
-                    Close();
-                }*/
             }
         }
 

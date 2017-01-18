@@ -9,6 +9,7 @@ namespace POP_SF7
     public class Student : Person, ICloneable
     {
         public ObservableCollection<Course> ListOfCourses { get; set; }
+        public ObservableCollection<Course> ListOfDeletedCourses { get; set; }
 
         public Student()
         {
@@ -17,6 +18,7 @@ namespace POP_SF7
             Address = ApplicationA.FILL_FIELD;
             Jmbg = "1234567890123";
             ListOfCourses = new ObservableCollection<Course>();
+            ListOfDeletedCourses = new ObservableCollection<Course>();
         }
 
         public Student(int id) { Id = id; }
@@ -24,6 +26,7 @@ namespace POP_SF7
         public Student(int id, string firstName, string lastName, string jmbg, string personAddress, bool deleted) : base(id, firstName, lastName, jmbg, personAddress, deleted)
         {
             ListOfCourses = new ObservableCollection<Course>();
+            ListOfDeletedCourses = new ObservableCollection<Course>();
         }
 
         #region ICloneable
@@ -38,6 +41,7 @@ namespace POP_SF7
             studentCopy.Address = Address;
             studentCopy.Deleted = Deleted;
             studentCopy.ListOfCourses = ListOfCourses;
+            studentCopy.ListOfDeletedCourses = ListOfDeletedCourses;
 
             return studentCopy;
         }

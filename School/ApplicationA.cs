@@ -1,5 +1,4 @@
 ﻿using POP_SF7.DB;
-using POP_SF7.School;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -36,9 +35,6 @@ namespace POP_SF7
         public ObservableCollection<Teacher> Teachers { get; set; }
         public ObservableCollection<User> Users { get; set; }
         public ObservableCollection<Student> Students { get; set; }
-        public ObservableCollection<TeacherTeachesLanguage> TeacherTeachesLanguageCollection { get; set; }
-        public ObservableCollection<StudentAttendsCourse> StudentAttendsCourseCollection { get; set; }
-        public ObservableCollection<TeacherTeachesCourse> TeacherTeachesCourseCollection { get; set; }
 
         private static ApplicationA instance = new ApplicationA();
 
@@ -62,9 +58,6 @@ namespace POP_SF7
             Payments = new ObservableCollection<Payment>();
             Teachers = new ObservableCollection<Teacher>();
             Students = new ObservableCollection<Student>();
-            TeacherTeachesLanguageCollection = new ObservableCollection<TeacherTeachesLanguage>();
-            StudentAttendsCourseCollection = new ObservableCollection<StudentAttendsCourse>();
-            TeacherTeachesCourseCollection = new ObservableCollection<TeacherTeachesCourse>();
         }
 
         public static void WriteToLog(string stackTrace)
@@ -98,8 +91,6 @@ namespace POP_SF7
             MessageBox.Show(ApplicationA.Instance.CourseTypes.Count.ToString() + " Tipovi kurseva");
             MessageBox.Show(ApplicationA.Instance.Courses.Count.ToString() + " Kursevi");
             MessageBox.Show(ApplicationA.Instance.Teachers.Count.ToString() + " Nastavnici");
-            MessageBox.Show(ApplicationA.Instance.TeacherTeachesLanguageCollection.Count.ToString() + " TTL");
-            MessageBox.Show(ApplicationA.Instance.TeacherTeachesCourseCollection.Count.ToString() + " TTC");
             */
         }
 
@@ -128,9 +119,6 @@ namespace POP_SF7
             MessageBox.Show(ApplicationA.Instance.Students.Count.ToString() + " Ucenici");
             MessageBox.Show(ApplicationA.Instance.Payments.Count.ToString() + " Uplate");
             MessageBox.Show(ApplicationA.Instance.Courses.Count.ToString() + " Kursevi");
-            MessageBox.Show(ApplicationA.Instance.TeacherTeachesLanguageCollection.Count.ToString() + " TTL");
-            MessageBox.Show(ApplicationA.Instance.StudentAttendsCourseCollection.Count.ToString() + " SAC");
-            MessageBox.Show(ApplicationA.Instance.TeacherTeachesCourseCollection.Count.ToString() + " TTC");
             */
         }
 

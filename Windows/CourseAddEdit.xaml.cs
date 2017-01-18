@@ -1,6 +1,5 @@
 ﻿using POP_SF7.DB;
 using POP_SF7.Helpers;
-using POP_SF7.School;
 using POP_SF7.Windows;
 using System;
 using System.Collections.Generic;
@@ -21,8 +20,8 @@ namespace POP_SF7
         public Course Course { get; set; }
         public Decider Decider { get; set; }
 
-        public ObservableCollection<Student> ListOfStudents { get; set; }
         public ICollectionView StudentsView { get; set; }
+        public ICollectionView DeletedStudentsView { get; set; }
 
         public List<Student> AddedStudents { get; set; }
         public List<Student> EditedStudents { get; set; }
@@ -33,13 +32,16 @@ namespace POP_SF7
         public string labelCourseAdd = "Dodavanje novog kursa";
         public string labelCourseEdit = "Izmena postojeceg kursa";
 
-        public CourseAddEdit(Course course, Decider decider, ObservableCollection<Student> listOfStudents)
+        public CourseAddEdit(Course course, Decider decider)
         {
             InitializeComponent();
             Course = course;
             Decider = decider;
-            ListOfStudents = listOfStudents;
             FilteredTeachers = new ObservableCollection<Teacher>();
+
+            AddedStudents = new List<Student>();
+            EditedStudents = new List<Student>();
+            DeletedStudents = new List<Student>();
 
             setupWindow();
         }
@@ -65,15 +67,15 @@ namespace POP_SF7
             teachercb.SelectedValuePath = "Id";
             teachercb.SelectedIndex = 0;
 
-            if(Decider == Decider.ADD && ListOfStudents.Count != 0)
-            {
-                ListOfStudents.Clear();
-            }
-            StudentsView = CollectionViewSource.GetDefaultView(ListOfStudents);
+            StudentsView = CollectionViewSource.GetDefaultView(Course.ListOfStudents);
             studentsdg.ItemsSource = StudentsView;
             studentsdg.IsSynchronizedWithCurrentItem = true;
 
-            if(Decider == Decider.ADD)
+            DeletedStudentsView = CollectionViewSource.GetDefaultView(Course.ListOfDeletedStudents);
+            deletedStudentsdg.ItemsSource = DeletedStudentsView;
+            deletedStudentsdg.IsSynchronizedWithCurrentItem = true;
+
+            if (Decider == Decider.ADD)
             {
                 teachercb.IsEnabled = false;
             }
@@ -96,17 +98,18 @@ namespace POP_SF7
             {
                 if (Decider == Decider.ADD)
                 {
-                    if (CourseDAO.Add(Course))
+                    Course.Id = ApplicationA.Instance.Courses.Count() + 1;
+
+                    if (CourseDAO.Add(Course) && saveStudents())
                     {
-                        Course.Id = ApplicationA.Instance.Courses.Count() + 1;
                         ApplicationA.Instance.Courses.Add(Course);
                     }
                 }
                 else
                 {
-                    if (CourseDAO.Edit(Course))
+                    if (CourseDAO.Edit(Course) && saveStudents())
                     {
-                        this.DialogResult = true;
+                        DialogResult = true;
                     }
                     else
                     {
@@ -117,6 +120,28 @@ namespace POP_SF7
             }
         }
 
+        private bool saveStudents()
+        {
+            bool valid = true;
+
+            foreach(Student s in AddedStudents)
+            {
+                valid = StudentAttendsCourseDAO.Add(s.Id, Course.Id);
+            }
+
+            foreach (Student s in EditedStudents)
+            {
+                valid = StudentAttendsCourseDAO.UnDelete(s.Id, Course.Id);
+            }
+
+            foreach (Student s in DeletedStudents)
+            {
+                valid = StudentAttendsCourseDAO.Delete(s.Id, Course.Id);
+            }
+
+            return valid;
+        }
+
         private void studentsdg_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             LoadColumnsHelper.LoadStudent(e);
@@ -124,20 +149,15 @@ namespace POP_SF7
 
         private void languagecb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            int languageId = 0;
-
             if (FilteredTeachers.Count != 0) FilteredTeachers.Clear();
 
             if(languagecb.SelectedItem != null)
             {
-                languageId = (int)languagecb.SelectedValue;
-
-                foreach (TeacherTeachesLanguage ttl in ApplicationA.Instance.TeacherTeachesLanguageCollection)
+                foreach (Teacher t in ApplicationA.Instance.Teachers)
                 {
-                    if (ttl.LanguageId == languageId && ttl.Deleted == false)
+                    if (t.ListOfLanguages.Contains(languagecb.SelectedItem))
                     {
-                        Teacher teach = ApplicationA.Instance.Teachers[ttl.TeacherId - 1];
-                        FilteredTeachers.Add(teach);
+                        FilteredTeachers.Add(t);
                     }
                 }
 
@@ -166,68 +186,34 @@ namespace POP_SF7
             }
             else
             {
-                if (selectedStudent.Deleted == true) // ovde ide provera na osnovu boje
+                var result = MessageBox.Show("Da li ste sigurni da hocete da obrisete datog ucenika za ovaj kurs?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.Yes)
                 {
-                    MessageBox.Show("Selektovani ucenik je obrisan!");
-                }
-                else
-                {
-                    var result = MessageBox.Show("Da li ste sigurni da hocete da obrisete datog ucenika za ovaj kurs?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                    if (result == MessageBoxResult.Yes)
-                    {
-                        /*foreach (StudentAttendsCourse sac in ApplicationA.Instance.StudentAttendsCourseCollection)
-                        {
-                            if (sac.CourseId == Course.Id && sac.StudentId == selectedStudent.Id)
-                            {
-                                if (StudentAttendsCourseDAO.UnDelete(sac))
-                                {
-                                    sac.Deleted = true;
-                                    // boja - crvena
-                                }
-                            }
-                        }*/
-                        checkIfStudentAddedOrDeleted(selectedStudent);
-                    }
+                    checkIfStudentAddedOrDeleted(selectedStudent);
                 }
             }
         }
 
         private void undeleteStudentbtn_Click(object sender, RoutedEventArgs e)
         {
-            Student selectedStudent = StudentsView.CurrentItem as Student;
+            Student selectedStudent = DeletedStudentsView.CurrentItem as Student;
             if (selectedStudent == null)
             {
                 MessageBox.Show("Morate da selektujete ucenika da biste ga povratili!");
             }
             else
             {
-                if (selectedStudent.Deleted == false) // ovde ide provera na osnovu boje
+                var result = MessageBox.Show("Da li ste sigurni da hocete da povratite datog ucenika za ovog kurs?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.Yes)
                 {
-                    MessageBox.Show("Selektovani ucenik nije obrisan!");
-                }
-                else
-                {
-                    var result = MessageBox.Show("Da li ste sigurni da hocete da povratite datog ucenika za ovog kurs?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                    if (result == MessageBoxResult.Yes)
+                    if(DeletedStudents.Contains(selectedStudent))
                     {
-                        /*
-                        foreach (StudentAttendsCourse sac in ApplicationA.Instance.StudentAttendsCourseCollection)
-                        {
-                            if (sac.CourseId == Course.Id && sac.StudentId == selectedStudent.Id)
-                            {
-                                if (StudentAttendsCourseDAO.UnDelete(sac))
-                                {
-                                    sac.Deleted = false;
-                                    // boja - default
-                                }
-                            }
-                        }
-                        */
-                        if (DeletedStudents.Contains(selectedStudent))
-                        {
-                            DeletedStudents.Remove(selectedStudent);
-                        }
+                        DeletedStudents.Remove(selectedStudent);
                     }
+                    EditedStudents.Add(selectedStudent);
+
+                    Course.ListOfStudents.Add(selectedStudent);
+                    Course.ListOfDeletedStudents.Remove(selectedStudent);
                 }
             }
         }
@@ -242,7 +228,11 @@ namespace POP_SF7
             {
                 EditedStudents.Remove(student);
             }
+
             DeletedStudents.Add(student);
+
+            Course.ListOfDeletedStudents.Add(student);
+            Course.ListOfStudents.Remove(student);
         }
     }
 }

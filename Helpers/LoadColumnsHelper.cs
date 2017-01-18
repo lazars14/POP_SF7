@@ -105,6 +105,12 @@ namespace POP_SF7.Helpers
                 case "Deleted":
                     e.Column.Header = "Obrisan";
                     break;
+                case "ListOfStudents":
+                    e.Cancel = true;
+                    break;
+                case "ListOfDeletedStudents":
+                    e.Cancel = true;
+                    break;
                 case "Error":
                     e.Cancel = true;
                     break;
@@ -176,6 +182,12 @@ namespace POP_SF7.Helpers
                 case "ListOfCourses":
                     e.Cancel = true;
                     break;
+                case "ListOfDeletedLanguages":
+                    e.Cancel = true;
+                    break;
+                case "ListOfDeletedCourses":
+                    e.Cancel = true;
+                    break;
                 case "Error":
                     e.Cancel = true;
                     break;
@@ -207,7 +219,7 @@ namespace POP_SF7.Helpers
                 case "Deleted":
                     e.Column.Header = "Obrisan";
                     break;
-                case "ListOfPayments":
+                case "ListOfDeletedCourses":
                     e.Cancel = true;
                     break;
                 case "ListOfCourses":

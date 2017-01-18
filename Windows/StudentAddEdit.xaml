@@ -6,10 +6,11 @@
         xmlns:local="clr-namespace:POP_SF7"
         mc:Ignorable="d"
         xmlns:userControls="clr-namespace:POP_SF7.UserControls"
-        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="651.933" Width="348.008" ResizeMode="NoResize">
+        Title="The Language School" Icon="/POP_SF7;component/Images/logoIcon16.png" Height="848.933" Width="348.008" ResizeMode="NoResize">
     <Grid Margin="10,10,10,9">
         <Grid.RowDefinitions>
             <RowDefinition Height="350"/>
+            <RowDefinition Height="200"/>
             <RowDefinition Height="200"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
@@ -20,8 +21,7 @@
             <Grid>
                 <DataGrid x:Name="coursesdg" AutoGeneratingColumn="coursesdg_AutoGeneratingColumn" IsReadOnly="True" HorizontalAlignment="Left" Height="110" Margin="10,10,0,0" VerticalAlignment="Top" Width="290"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="33" Margin="10,120,0,0" VerticalAlignment="Center" Width="275">
-                    <Button x:Name="addCoursebtn" Content="Dodaj" Width="75" Margin="25,5,5,5" Click="addCoursebtn_Click"/>
-                    <Button x:Name="undeleteCoursebtn" Content="Povrati" Width="75" Margin="5" Click="undeleteCoursebtn_Click"/>
+                    <Button x:Name="addCoursebtn" Content="Dodaj" Width="75" Margin="60,5,5,5" Click="addCoursebtn_Click"/>
                     <Button x:Name="deleteCoursebtn" Content="Obrisi" Width="75" Margin="5" Click="deleteCoursebtn_Click"/>
                 </StackPanel>
             </Grid>
@@ -29,7 +29,19 @@
         
         <!--#endregion-->
 
-        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,10,0,0">
+        <!--#region DeletedCourses-->
+        <GroupBox Header="Obrisani kursevi" Grid.Row="2">
+            <Grid>
+                <DataGrid x:Name="deletedCoursesdg" AutoGeneratingColumn="coursesdg_AutoGeneratingColumn" IsReadOnly="True" HorizontalAlignment="Left" Height="110" Margin="10,10,0,0" VerticalAlignment="Top" Width="290"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="33" Margin="10,120,0,0" VerticalAlignment="Center" Width="275">
+                    <Button x:Name="undeleteCoursebtn" Content="Povrati" Width="75" Margin="100,5,5,5" Click="undeleteCoursebtn_Click"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+
+        <!--#endregion-->
+
+        <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,10,0,0">
             <Button x:Name="okbtn" Content="OK" Width="70" Height="30" Click="okbtn_Click"/>
             <Button x:Name="cancelbtn" IsCancel="True" Content="Cancel" Width="70" Height="30" Margin="30,0,0,0" Click="cancelbtn_Click"/>
         </StackPanel>

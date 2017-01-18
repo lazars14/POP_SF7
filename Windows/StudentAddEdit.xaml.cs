@@ -6,8 +6,8 @@ using System;
 using POP_SF7.Helpers;
 using System.ComponentModel;
 using System.Windows.Data;
-using POP_SF7.School;
 using POP_SF7.DB;
+using System.Collections.Generic;
 
 namespace POP_SF7
 {
@@ -17,6 +17,11 @@ namespace POP_SF7
     public partial class StudentAddEdit : Window
     {
         public ICollectionView CoursesView { get; set; }
+        public ICollectionView DeletedCoursesView { get; set; }
+
+        public List<Course> AddedCourses { get; set; }
+        public List<Course> EditedCourses { get; set; }
+        public List<Course> DeletedCourses { get; set; }
 
         public Student StudentS { get; set; }
         public Decider Decider { get; set; }
@@ -31,6 +36,10 @@ namespace POP_SF7
             StudentS = student;
             Decider = decider;
 
+            AddedCourses = new List<Course>();
+            EditedCourses = new List<Course>();
+            DeletedCourses = new List<Course>();
+
             setupWindow();
         }
 
@@ -42,6 +51,10 @@ namespace POP_SF7
             CoursesView = CollectionViewSource.GetDefaultView(StudentS.ListOfCourses);
             coursesdg.ItemsSource = CoursesView;
             coursesdg.IsSynchronizedWithCurrentItem = true;
+
+            DeletedCoursesView = CollectionViewSource.GetDefaultView(StudentS.ListOfDeletedCourses);
+            deletedCoursesdg.ItemsSource = DeletedCoursesView;
+            deletedCoursesdg.IsSynchronizedWithCurrentItem = true;
         }
 
         private void okbtn_Click(object sender, RoutedEventArgs e)
@@ -54,15 +67,15 @@ namespace POP_SF7
             {
                 if (Decider == Decider.ADD)
                 {
-                    if (StudentDAO.Add(StudentS))
+                    StudentS.Id = ApplicationA.Instance.Students.Count() + 1;
+                    if (StudentDAO.Add(StudentS) && saveCourses())
                     {
-                        StudentS.Id = ApplicationA.Instance.Students.Count() + 1;
                         ApplicationA.Instance.Students.Add(StudentS);
                     }
                 }
                 else
                 {
-                    if (StudentDAO.Edit(StudentS))
+                    if (StudentDAO.Edit(StudentS) && saveCourses())
                     {
                         this.DialogResult = true;
                     }
@@ -73,6 +86,28 @@ namespace POP_SF7
                 }
                 Close();
             }
+        }
+
+        private bool saveCourses()
+        {
+            bool valid = true;
+
+            foreach (Course c in AddedCourses)
+            {
+                valid = StudentAttendsCourseDAO.Add(StudentS.Id, c.Id);
+            }
+
+            foreach (Course c in EditedCourses)
+            {
+                valid = StudentAttendsCourseDAO.UnDelete(StudentS.Id, c.Id);
+            }
+
+            foreach (Course c in DeletedCourses)
+            {
+                valid = StudentAttendsCourseDAO.Delete(StudentS.Id, c.Id);
+            }
+
+            return valid;
         }
 
         private void coursesdg_AutoGeneratingColumn(object sender, System.Windows.Controls.DataGridAutoGeneratingColumnEventArgs e)
@@ -94,34 +129,25 @@ namespace POP_SF7
 
         private void undeleteCoursebtn_Click(object sender, RoutedEventArgs e)
         {
-            Course selectedCourse = CoursesView.CurrentItem as Course;
+            Course selectedCourse = DeletedCoursesView.CurrentItem as Course;
             if (selectedCourse == null)
             {
-                MessageBox.Show("Morate da selektujete kurs koji zelite da obrisete!");
+                MessageBox.Show("Morate da selektujete kurs koji zelite da povratite!");
             }
             else
             {
-                if (selectedCourse.Deleted == false) // ovde ide provera na osnovu boje
+                var result = MessageBox.Show("Da li ste sigurni da hocete da povratite dati kurs za ovog ucenika?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.Yes)
                 {
-                    MessageBox.Show("Izabrani kurs nije obrisan!");
-                }
-                else
-                {
-                    var result = MessageBox.Show("Da li ste sigurni da hocete da povratite dati kurs za ovog ucenika?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                    if (result == MessageBoxResult.Yes)
+                    if (DeletedCourses.Contains(selectedCourse))
                     {
-                        foreach (StudentAttendsCourse sac in ApplicationA.Instance.StudentAttendsCourseCollection)
-                        {
-                            if (sac.StudentId == StudentS.Id && sac.CourseId == selectedCourse.Id)
-                            {
-                                if (StudentAttendsCourseDAO.UnDelete(sac))
-                                {
-                                    sac.Deleted = false;
-                                    // boja - default
-                                }
-                            }
-                        }
+                        DeletedCourses.Remove(selectedCourse);
                     }
+
+                    EditedCourses.Add(selectedCourse);
+
+                    StudentS.ListOfCourses.Add(selectedCourse);
+                    StudentS.ListOfDeletedCourses.Remove(selectedCourse);
                 }
             }
         }
@@ -129,35 +155,35 @@ namespace POP_SF7
         private void deleteCoursebtn_Click(object sender, RoutedEventArgs e)
         {
             Course selectedCourse = CoursesView.CurrentItem as Course;
-            if(selectedCourse == null)
+            if (selectedCourse == null)
             {
                 MessageBox.Show("Morate da selektujete kurs koji zelite da obrisete!");
             }
             else
             {
-                if(selectedCourse.Deleted == true) // ovde ide provera na osnovu boje
+                var result = MessageBox.Show("Da li ste sigurni da hocete da obrisete dati kurs za ovog ucenika?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.Yes)
                 {
-                    MessageBox.Show("Izabrani kurs je vec obrisan!");
-                }
-                else
-                {
-                    var result = MessageBox.Show("Da li ste sigurni da hocete da obrisete dati kurs za ovog ucenika?", "Upozorenje", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                    if (result == MessageBoxResult.Yes)
-                    {
-                        foreach(StudentAttendsCourse sac in ApplicationA.Instance.StudentAttendsCourseCollection)
-                        {
-                            if(sac.StudentId == StudentS.Id && sac.CourseId == selectedCourse.Id)
-                            {
-                                if(StudentAttendsCourseDAO.Delete(sac))
-                                {
-                                    sac.Deleted = true;
-                                    //boja - crvena
-                                }
-                            }
-                        }
-                    }
+                    checkIfCourseAddedOrDeleted(selectedCourse);
                 }
             }
+        }
+
+        private void checkIfCourseAddedOrDeleted(Course course)
+        {
+            if (AddedCourses.Contains(course))
+            {
+                AddedCourses.Remove(course);
+            }
+            else if (EditedCourses.Contains(course))
+            {
+                EditedCourses.Remove(course);
+            }
+
+            DeletedCourses.Add(course);
+
+            StudentS.ListOfDeletedCourses.Add(course);
+            StudentS.ListOfCourses.Remove(course);
         }
     }
 }

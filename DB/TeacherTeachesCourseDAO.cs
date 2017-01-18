@@ -1,5 +1,4 @@
-﻿using POP_SF7.School;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -33,13 +32,22 @@ namespace POP_SF7.DB
 
                     foreach (DataRow row in dataSet.Tables["TeacherTeachesCourse"].Rows)
                     {
-                        int id = (int)row["TCourse_Id"];
                         int teacherId = (int)row["TCourse_TeacherId"];
-                        int courseId = (int)row["TCourse_CourseId"];
-                        bool deleted = (bool)row["TCourse_Deleted"];
-                        TeacherTeachesCourse teach = new TeacherTeachesCourse(id, teacherId, courseId, deleted);
+                        Teacher t = ApplicationA.Instance.Teachers[teacherId - 1];
 
-                        ApplicationA.Instance.TeacherTeachesCourseCollection.Add(teach);
+                        int courseId = (int)row["TCourse_CourseId"];
+                        Course c = ApplicationA.Instance.Courses[courseId];
+
+                        bool deleted = (bool)row["TCourse_Deleted"];
+
+                        if(!deleted)
+                        {
+                            t.ListOfCourses.Add(c);
+                        }
+                        else
+                        {
+                            t.ListOfDeletedCourses.Add(c);
+                        }
                     }
 
                     valid = true;
@@ -69,7 +77,7 @@ namespace POP_SF7.DB
             }
         }
 
-        public static bool Add(TeacherTeachesCourse teaches)
+        public static bool Add(int teacherId, int courseId)
         {
             using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
             {
@@ -78,13 +86,12 @@ namespace POP_SF7.DB
                 connection.Open();
 
                 SqlCommand command = connection.CreateCommand();
-                command.CommandText = @"Insert Into TeacherTeachesCourse Values(@TeacherId,@CourseId,@Deleted);";
+                command.CommandText = @"Insert Into TeacherTeachesCourse Values(@TeacherId,@CourseId,0);";
 
                 try
                 {
-                    command.Parameters.Add(new SqlParameter("@TeacherId", teaches.TeacherId));
-                    command.Parameters.Add(new SqlParameter("@CourseId", teaches.CourseId));
-                    command.Parameters.Add(new SqlParameter("@Deleted", teaches.Deleted));
+                    command.Parameters.Add(new SqlParameter("@TeacherId", teacherId));
+                    command.Parameters.Add(new SqlParameter("@CourseId", courseId));
 
                     command.ExecuteNonQuery();
 
@@ -115,7 +122,7 @@ namespace POP_SF7.DB
             }
         }
 
-        public static bool Delete(TeacherTeachesCourse teaches)
+        public static bool Delete(int teacherId, int courseId)
         {
             using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
             {
@@ -124,11 +131,12 @@ namespace POP_SF7.DB
                 connection.Open();
 
                 SqlCommand command = connection.CreateCommand();
-                command.CommandText = @"Update TeacherTeachesCourse Set TCourse_Deleted=1 Where TCourse_Id=@Id;";
+                command.CommandText = @"Update TeacherTeachesCourse Set TCourse_Deleted=1 Where TCourse_TeacherId=@TeacherId And TCourse_CourseId=@CourseId;";
 
                 try
                 {
-                    command.Parameters.Add(new SqlParameter("@Id", teaches.Id));
+                    command.Parameters.Add(new SqlParameter("@TeacherId", teacherId));
+                    command.Parameters.Add(new SqlParameter("@CourseId", courseId));
 
                     command.ExecuteNonQuery();
 
@@ -159,7 +167,7 @@ namespace POP_SF7.DB
             }
         }
 
-        public static bool UnDelete(TeacherTeachesCourse teaches)
+        public static bool UnDelete(int teacherId, int courseId)
         {
             using (SqlConnection connection = new SqlConnection(ApplicationA.CONNECTION_STRING))
             {
@@ -168,11 +176,12 @@ namespace POP_SF7.DB
                 connection.Open();
 
                 SqlCommand command = connection.CreateCommand();
-                command.CommandText = @"Update TeacherTeachesCourse Set TCourse_Deleted=0 Where TCourse_Id=@Id;";
+                command.CommandText = @"Update TeacherTeachesCourse Set TCourse_Deleted=0 Where TCourse_TeacherId=@TeacherId And TCourse_CourseId=@CourseId;";
 
                 try
                 {
-                    command.Parameters.Add(new SqlParameter("@Id", teaches.Id));
+                    command.Parameters.Add(new SqlParameter("@TeacherId", teacherId));
+                    command.Parameters.Add(new SqlParameter("@CourseId", courseId));
 
                     command.ExecuteNonQuery();
 

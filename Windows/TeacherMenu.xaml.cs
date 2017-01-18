@@ -1,6 +1,5 @@
 ﻿using POP_SF7.DB;
 using POP_SF7.Helpers;
-using POP_SF7.School;
 using POP_SF7.Windows;
 using System;
 using System.Collections.Generic;
@@ -161,48 +160,16 @@ namespace POP_SF7
                 DeletedLanguagesForTeacher.Clear();
             }
 
-            int deletedNextIndex = 0;
-
             Teacher selectedTeacher = TeachersView.CurrentItem as Teacher;
             if(selectedTeacher != null)
             {
-                int selectedTeacherId = selectedTeacher.Id;
-                Teacher selectedTeacherTwo = ApplicationA.Instance.Teachers[selectedTeacherId - 1];
-                if (selectedTeacherTwo.ListOfCourses.Count == 0)  // ovde ako student ne slusa nijedan kurs proverice svaki put...
-                {
-                    foreach (TeacherTeachesCourse ttc in ApplicationA.Instance.TeacherTeachesCourseCollection)
-                    {
-                        if (ttc.TeacherId == selectedTeacherId)
-                        {
-                            Course course = ApplicationA.Instance.Courses[ttc.CourseId - 1];
-                            selectedTeacherTwo.ListOfCourses.Add(course);
-                            if (ttc.Deleted == true)
-                            {
-                                DeletedLanguagesForTeacher.Add(deletedNextIndex);
-                                deletedNextIndex += 1;
-                            }
-                        }
-                    }
+                LanguagesView = CollectionViewSource.GetDefaultView(selectedTeacher.ListOfLanguages);
+                languagesdg.ItemsSource = LanguagesView;
+                languagesdg.IsSynchronizedWithCurrentItem = true;
 
-                    foreach (TeacherTeachesLanguage ttl in ApplicationA.Instance.TeacherTeachesLanguageCollection)
-                    {
-                        if (ttl.TeacherId == selectedTeacherId)
-                        {
-                            Language lang = ApplicationA.Instance.Languages[ttl.LanguageId - 1];
-                            selectedTeacherTwo.ListOfLanguages.Add(lang);
-                        }
-                    }
-                }
-                else
-                {
-                    LanguagesView = CollectionViewSource.GetDefaultView(selectedTeacherTwo.ListOfLanguages);
-                    languagesdg.ItemsSource = LanguagesView;
-                    languagesdg.IsSynchronizedWithCurrentItem = true;
-
-                    CoursesView = CollectionViewSource.GetDefaultView(selectedTeacherTwo.ListOfCourses);
-                    coursesdg.ItemsSource = CoursesView;
-                    coursesdg.IsSynchronizedWithCurrentItem = true;
-                }
+                CoursesView = CollectionViewSource.GetDefaultView(selectedTeacher.ListOfCourses);
+                coursesdg.ItemsSource = CoursesView;
+                coursesdg.IsSynchronizedWithCurrentItem = true;
             }
             else
             {

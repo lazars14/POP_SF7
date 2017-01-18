@@ -1,6 +1,5 @@
 ﻿using POP_SF7.DB;
 using POP_SF7.Helpers;
-using POP_SF7.School;
 using POP_SF7.Windows;
 using System;
 using System.Collections.ObjectModel;
@@ -192,31 +191,7 @@ namespace POP_SF7
             Student selectedStudent = StudentsView.CurrentItem as Student;
             if(selectedStudent != null)
             {
-                int selectedStudentId = selectedStudent.Id;
-
-                try
-                {
-                    Predicate<object> studentIdPredicate = new Predicate<object>(selectedStudentIdSearchCondition);
-                    PaymentsView.Filter = studentIdPredicate;
-                }
-                catch(NullReferenceException a)
-                {
-                    Console.WriteLine(a.StackTrace);
-                }
-
-                Student selectedStudentTwo = ApplicationA.Instance.Students[selectedStudentId - 1];
-                if (selectedStudentTwo.ListOfCourses.Count == 0) // ovde ako student ne slusa nijedan kurs proverice svaki put...
-                {
-                    foreach (StudentAttendsCourse sac in ApplicationA.Instance.StudentAttendsCourseCollection)
-                    {
-                        if (sac.StudentId == selectedStudentId)
-                        {
-                            Course course = ApplicationA.Instance.Courses[sac.StudentId - 1];
-                            selectedStudentTwo.ListOfCourses.Add(course);
-                        }
-                    }
-                }
-                CoursesView = CollectionViewSource.GetDefaultView(selectedStudentTwo.ListOfCourses);
+                CoursesView = CollectionViewSource.GetDefaultView(selectedStudent.ListOfCourses);
                 coursesdg.ItemsSource = CoursesView;
                 coursesdg.IsSynchronizedWithCurrentItem = true;
             }
@@ -226,44 +201,6 @@ namespace POP_SF7
                 coursesdg.ItemsSource = CoursesView;
                 coursesdg.IsSynchronizedWithCurrentItem = true;
             }
-
-            // verzija gde uzima prvog iz tabele ako nijedan nije selektovan
-
-            /*Student selectedStudent = StudentsView.CurrentItem as Student;
-            if(selectedStudent == null)
-            {
-                StudentsView.MoveCurrentToFirst();
-                selectedStudent = StudentsView.CurrentItem as Student;
-            }
-            else
-            {
-                selectedStudentId = selectedStudent.Id;
-            }
-
-            try
-            {
-                PaymentsView.Refresh();
-            }
-            catch(NullReferenceException a)
-            {
-                Console.WriteLine(a.StackTrace);
-            }
-
-            Student selectedStudentTwo = ApplicationA.Instance.Students[selectedStudentId - 1];
-            if(selectedStudentTwo.ListOfCourses.Count == 0)
-            {
-                foreach (StudentAttendsCourse sac in ApplicationA.Instance.StudentAttendsCourseCollection)
-                {
-                    if (sac.StudentId == selectedStudentId)
-                    {
-                        Course course = ApplicationA.Instance.Courses[sac.StudentId - 1];
-                        selectedStudentTwo.ListOfCourses.Add(course);
-                    }
-                }
-            }
-            CoursesView = CollectionViewSource.GetDefaultView(selectedStudentTwo.ListOfCourses);
-            coursesdg.ItemsSource = CoursesView;
-            coursesdg.IsSynchronizedWithCurrentItem = true;*/
         }
 
         private void cancelSearchbtn_Click(object sender, RoutedEventArgs e)

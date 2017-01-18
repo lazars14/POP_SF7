@@ -68,7 +68,10 @@ namespace POP_SF7
             set { deleted = value; OnPropertyChanged("Deleted"); }
         }
 
-        public Course() { Price = 0; StartDate = DateTime.Today; EndDate = DateTime.Today.AddDays(7); }
+        public ObservableCollection<Student> ListOfStudents { get; set; }
+        public ObservableCollection<Student> ListOfDeletedStudents { get; set; }
+
+        public Course() { Price = 0; StartDate = DateTime.Today; EndDate = DateTime.Today.AddDays(7); ListOfStudents = new ObservableCollection<Student>(); ListOfDeletedStudents = new ObservableCollection<Student>(); }
 
         public Course(int id) { Id = id; }
 
@@ -82,6 +85,8 @@ namespace POP_SF7
             StartDate = startDate;
             EndDate = endDate;
             Deleted = deleted;
+            ListOfStudents = new ObservableCollection<Student>();
+            ListOfDeletedStudents = new ObservableCollection<Student>();
         }
 
         #region IDataErrorInfo
@@ -142,6 +147,8 @@ namespace POP_SF7
             courseCopy.StartDate = StartDate;
             courseCopy.EndDate = EndDate;
             courseCopy.Deleted = Deleted;
+            courseCopy.ListOfStudents = ListOfStudents;
+            courseCopy.ListOfDeletedStudents = ListOfDeletedStudents;
 
             return courseCopy;
         }

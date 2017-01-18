@@ -19,10 +19,9 @@
         <!--#endregion-->
 
         <!--#region SelectedTeacher-->
-        <GroupBox x:Name="teachergb" Header="Nastavnik" HorizontalAlignment="Left" Height="144" Margin="10,192,0,0" VerticalAlignment="Top" Width="280">
+        <GroupBox x:Name="teachergb" Header="Nastavnik" HorizontalAlignment="Left" Height="103" Margin="10,192,0,0" VerticalAlignment="Top" Width="280">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
@@ -30,20 +29,18 @@
                     <ColumnDefinition Width="100"/>
                     <ColumnDefinition Width="150"/>
                 </Grid.ColumnDefinitions>
-                <Label x:Name="teacheridlbl" Content="Id" Grid.Row="0" Grid.Column="0" Margin="10,5,0,10"/>
-                <TextBlock x:Name="teacheridtb" Text="{Binding ElementName=coursesdg, Path=SelectedItem.Teacher.Id}" Grid.Row="0" Grid.Column="1" Margin="0,10,0,5"/>
 
-                <Label x:Name="teacherLastnamelbl" Content="Prezime" Grid.Row="1" Grid.Column="0" Margin="10,5,0,10"/>
-                <TextBlock x:Name="teacherLastnametb" Text="{Binding ElementName=coursesdg, Path=SelectedItem.Teacher.LastName}" Grid.Row="1" Grid.Column="1" Margin="0,10,0,5"/>
+                <Label x:Name="teacherLastnamelbl" Content="Prezime" Grid.Row="0" Grid.Column="0" Margin="10,5,0,10"/>
+                <TextBlock x:Name="teacherLastnametb" Text="{Binding ElementName=coursesdg, Path=SelectedItem.Teacher.LastName}" Grid.Row="0" Grid.Column="1" Margin="0,10,0,5"/>
 
-                <Label x:Name="teacherFirstNamelbl" Content="Ime" Grid.Row="2" Grid.Column="0" Margin="10,5,0,10"/>
-                <TextBlock x:Name="teacherFirstNametb" Text="{Binding ElementName=coursesdg, Path=SelectedItem.Teacher.FirstName}" Grid.Row="2" Grid.Column="1" Margin="0,10,0,5"/>
+                <Label x:Name="teacherFirstNamelbl" Content="Ime" Grid.Row="1" Grid.Column="0" Margin="10,5,0,10"/>
+                <TextBlock x:Name="teacherFirstNametb" Text="{Binding ElementName=coursesdg, Path=SelectedItem.Teacher.FirstName}" Grid.Row="1" Grid.Column="1" Margin="0,10,0,5"/>
             </Grid>
         </GroupBox>
         <!--#endregion-->
 
         <!--#region SelectedCourse-->
-        <GroupBox x:Name="coursegb" Header="Opsti podaci o kursu" HorizontalAlignment="Left" Height="144" Margin="295,192,0,0" VerticalAlignment="Top" Width="300">
+        <GroupBox x:Name="coursegb" Header="Opsti podaci o kursu" HorizontalAlignment="Left" Height="103" Margin="295,192,0,0" VerticalAlignment="Top" Width="300">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>

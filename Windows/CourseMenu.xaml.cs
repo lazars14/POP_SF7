@@ -1,6 +1,5 @@
 ﻿using POP_SF7.DB;
 using POP_SF7.Helpers;
-using POP_SF7.School;
 using POP_SF7.Windows;
 using System;
 using System.Collections.Generic;
@@ -18,9 +17,6 @@ namespace POP_SF7
     public partial class CourseMenu : Window
     {
         public ICollectionView CoursesView { get; set; }
-        public ICollectionView StudentsView { get; set; }
-
-        public ObservableCollection<Student> StudentsForSelectedCourse = new ObservableCollection<Student>();
 
         public CourseMenu()
         {
@@ -45,15 +41,13 @@ namespace POP_SF7
             courseTypecb.SelectedValuePath = "Id";
             courseTypecb.SelectedIndex = 0;
 
-            StudentsView = CollectionViewSource.GetDefaultView(StudentsForSelectedCourse);
-            studentsdg.ItemsSource = StudentsView;
             studentsdg.IsSynchronizedWithCurrentItem = true;
         }
 
         private void addbtn_Click(object sender, RoutedEventArgs e)
         {
             Course newCourse = new Course();
-            CourseAddEdit add = new CourseAddEdit(newCourse, Decider.ADD, StudentsForSelectedCourse);
+            CourseAddEdit add = new CourseAddEdit(newCourse, Decider.ADD);
             add.Show();
         }
 
@@ -66,29 +60,12 @@ namespace POP_SF7
             }
             else
             {
-                // provera da li je jezik datog kursa obrisan za nastavnika
-                bool valid = true;
-                foreach(TeacherTeachesLanguage ttl in ApplicationA.Instance.TeacherTeachesLanguageCollection)
+                Course backup = (Course)selectedCourse.Clone();
+                CourseAddEdit edit = new CourseAddEdit(selectedCourse, Decider.EDIT);
+                if (edit.ShowDialog() != true)
                 {
-                    if(ttl.LanguageId == selectedCourse.Language.Id && ttl.TeacherId == selectedCourse.Teacher.Id && ttl.Deleted == true)
-                    {
-                        valid = false;
-                    }
-                }
-
-                if(!valid)
-                {
-                    MessageBox.Show("Jezik " + selectedCourse.Language.Name + " je obrisan za nastavnika " + selectedCourse.Teacher.LastName + " " + selectedCourse.Teacher.FirstName + ". Da biste mogli da izmenite ovaj kurs morate da povratite ovaj jezik za datog nastavnika!");
-                }
-                else
-                {
-                    Course backup = (Course)selectedCourse.Clone();
-                    CourseAddEdit edit = new CourseAddEdit(selectedCourse, Decider.EDIT, StudentsForSelectedCourse);
-                    if (edit.ShowDialog() != true)
-                    {
-                        int index = ApplicationA.Instance.Courses.IndexOf(selectedCourse);
-                        ApplicationA.Instance.Courses[index] = backup;
-                    }
+                    int index = ApplicationA.Instance.Courses.IndexOf(selectedCourse);
+                    ApplicationA.Instance.Courses[index] = backup;
                 }
             }
         }
@@ -215,21 +192,7 @@ namespace POP_SF7
                     selectedCourse.Teacher = ApplicationA.Instance.Teachers[selectedCourse.Teacher.Id - 1];
                 }
 
-                // students
-                if (StudentsForSelectedCourse.Count != 0) StudentsForSelectedCourse.Clear();
-
-                foreach (StudentAttendsCourse sac in ApplicationA.Instance.StudentAttendsCourseCollection)
-                {
-                    if (sac.CourseId == selectedCourseId)
-                    {
-                        Student s = ApplicationA.Instance.Students[sac.StudentId - 1];
-                        StudentsForSelectedCourse.Add(s);
-                    }
-                }
-            }
-            else
-            {
-                if (StudentsForSelectedCourse.Count != 0) StudentsForSelectedCourse.Clear();
+                studentsdg.ItemsSource = selectedCourse.ListOfStudents;
             }
         }
 
