@@ -2,9 +2,6 @@
 using POP_SF7.Validations;
 using System;
 using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Windows;
 using System.Windows.Controls;
 
 namespace POP_SF7
