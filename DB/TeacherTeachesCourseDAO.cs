@@ -32,7 +32,7 @@ namespace POP_SF7.DB
                         Teacher t = ApplicationA.Instance.Teachers[teacherId - 1];
 
                         int courseId = (int)row["TCourse_CourseId"];
-                        Course c = ApplicationA.Instance.Courses[courseId];
+                        Course c = ApplicationA.Instance.Courses[courseId - 1];
 
                         bool deleted = (bool)row["TCourse_Deleted"];
 
